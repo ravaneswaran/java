@@ -3,7 +3,8 @@ package rave.code.quartz.scheduler;
 import org.quartz.*;
 import rave.code.quartz.enums.CronExpression;
 import rave.code.quartz.enums.*;
-import rave.code.quartz.job.moneycontrol.misc.StockBaseJob;
+import rave.code.quartz.job.stockbase.StockBaseEntityMakerJob;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ public class ScheduleJobsAt_4_PM_FromMondayToFriday extends AbstractQuartzSchedu
     @Override
     public void scheduleJob() {
 
-        JobDetail stockBaseJobDetail = newJob(StockBaseJob.class)
+        JobDetail stockBaseJobDetail = newJob(StockBaseEntityMakerJob.class)
                 .withIdentity(JobName.BSE_STOCK_BASE_JOB_NAME.get(), Group.STOCK_BASE.toString())
                 .build();
 

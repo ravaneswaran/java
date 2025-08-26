@@ -2,11 +2,11 @@ package rave.code.quartz.job.moneycontrol.trading;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import rave.code.quartz.job.moneycontrol.AbstractEntityMakerJob;
+import rave.code.quartz.job.moneycontrol.AbstractMoneyControlEntityMakerJob;
 
 import java.util.List;
 
-public abstract class AbstractTradingEntityMakerJob<S, T> extends AbstractEntityMakerJob<S, T> {
+public abstract class AbstractTradingEntityMakerJob<S, T> extends AbstractMoneyControlEntityMakerJob<S, T> {
 
     public abstract List<S> getDataFromSource();
 

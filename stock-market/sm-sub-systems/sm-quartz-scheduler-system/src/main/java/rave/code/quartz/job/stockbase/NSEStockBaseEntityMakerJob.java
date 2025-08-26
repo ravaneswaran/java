@@ -1,9 +1,8 @@
-package rave.code.quartz.job.moneycontrol.misc;
+package rave.code.quartz.job.stockbase;
 
 import rave.code.quartz.enums.ASCIIColorCodes;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEClassification;
-import rave.code.quartz.job.AbstractStockMarketEntityMakerJob;
 import rave.code.stockmarket.entity.NSEStockBaseEntity;
 import rave.code.stockmarket.entity.StockBaseEntity;
 import rave.code.stockmarket.repository.StockBaseRepository;
@@ -22,18 +21,18 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class NSEStockBaseJob extends AbstractStockMarketEntityMakerJob<List<String>, List<StockBaseEntity>> {
+class NSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<String>, List<StockBaseEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(NSEStockBaseJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(NSEStockBaseEntityMakerJob.class.getName());
 
     private StockBaseRepository stockBaseRepository = new StockBaseRepository();
     private Date date;
 
-    public NSEStockBaseJob() {
+    public NSEStockBaseEntityMakerJob() {
         this(new Date());
     }
 
-    public NSEStockBaseJob(Date date) {
+    public NSEStockBaseEntityMakerJob(Date date) {
         this.date = date;
     }
 
@@ -159,7 +158,7 @@ class NSEStockBaseJob extends AbstractStockMarketEntityMakerJob<List<String>, Li
         Map<String, StockBaseEntity> mappedStockBaseEntities = this.stockBaseRepository.findBySource(source);
 
         if (mappedStockBaseEntities.size() == 0) {
-            LOGGER.log(Level.INFO, String.format("%sLoading fresh set of stocks into the repository...", ASCIIColorCodes.WHITE.get()));
+            LOGGER.log(Level.INFO, String.format("%sLoading fresh set of NSE stocks into the repository...", ASCIIColorCodes.WHITE.get()));
             this.stockBaseRepository.bulkUpsert(transformedData);
         } else {
             List<StockBaseEntity> stockBaseEntities = new ArrayList<>();

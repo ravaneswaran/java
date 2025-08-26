@@ -1,4 +1,4 @@
-package rave.code.quartz.job.moneycontrol.history;
+package rave.code.quartz.job.history;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;

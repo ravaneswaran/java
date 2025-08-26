@@ -1,4 +1,4 @@
-package rave.code.quartz.job.moneycontrol.history;
+package rave.code.quartz.job.history;
 
 import rave.code.stockmarket.repository.StockMarketHistoryEnabledRepository;
 import rave.code.stockmarket.entity.BSEActive100Entity;

@@ -3,7 +3,7 @@ package rave.code.quartz.job.manual;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import rave.code.quartz.job.AbstractQuartzJob;
-import rave.code.quartz.job.moneycontrol.misc.StockBaseJob;
+import rave.code.quartz.job.stockbase.StockBaseEntityMakerJob;
 import rave.code.stockmarket.entity.HolidayEntity;
 import rave.code.stockmarket.repository.HolidayRepository;
 import rave.code.stockmarket.repository.StockBaseRepository;
@@ -40,7 +40,7 @@ public class HistoricalDailyPriceListDownloadJob extends AbstractQuartzJob {
         this.stockBaseRepository.deleteAll();
         List<Date> dates = this.getHistoricalDates(this.noOfDaysInPast);
         for (Date date: dates){
-            StockBaseJob stockBaseJob = new StockBaseJob(date);
+            StockBaseEntityMakerJob stockBaseJob = new StockBaseEntityMakerJob(date);
             stockBaseJob.execute(jobExecutionContext);
         }
     }

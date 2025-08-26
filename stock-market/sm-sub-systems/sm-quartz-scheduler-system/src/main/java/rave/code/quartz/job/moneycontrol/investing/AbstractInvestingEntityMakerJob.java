@@ -1,10 +1,10 @@
 package rave.code.quartz.job.moneycontrol.investing;
 
-import rave.code.quartz.job.moneycontrol.AbstractEntityMakerJob;
+import rave.code.quartz.job.moneycontrol.AbstractMoneyControlEntityMakerJob;
 
 import java.util.List;
 
-public abstract class AbstractInvestingEntityMakerJob<S, T> extends AbstractEntityMakerJob<S, T> {
+public abstract class AbstractInvestingEntityMakerJob<S, T> extends AbstractMoneyControlEntityMakerJob<S, T> {
 
     public abstract List<S> getDataFromSource();
 

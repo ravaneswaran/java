@@ -1,4 +1,4 @@
-package rave.code.quartz.job.moneycontrol.misc;
+package rave.code.quartz.job.stockbase;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -9,22 +9,22 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class StockBaseJob extends AbstractQuartzJob {
+public class StockBaseEntityMakerJob extends AbstractQuartzJob {
 
     protected Date date;
 
-    public StockBaseJob() {
+    public StockBaseEntityMakerJob() {
         this(new Date());
     }
 
-    public StockBaseJob(Date date) {
+    public StockBaseEntityMakerJob(Date date) {
         this.date = date;
     }
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        new NSEStockBaseJob(this.date).execute(jobExecutionContext);
-        new BSEStockBaseJob(this.date).execute(jobExecutionContext);
+        new NSEStockBaseEntityMakerJob(this.date).execute(jobExecutionContext);
+        new BSEStockBaseEntityMakerJob(this.date).execute(jobExecutionContext);
     }
 
     public static void main(String[] args) throws JobExecutionException {
@@ -38,7 +38,7 @@ public class StockBaseJob extends AbstractQuartzJob {
 
         //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
 
-        StockBaseJob stockBaseJob = new StockBaseJob(yesterDate);
+        StockBaseEntityMakerJob stockBaseJob = new StockBaseEntityMakerJob(yesterDate);
         stockBaseJob.execute(null);
     }
 }

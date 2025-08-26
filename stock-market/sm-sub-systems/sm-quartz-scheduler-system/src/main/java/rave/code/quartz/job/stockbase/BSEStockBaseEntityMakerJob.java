@@ -1,9 +1,8 @@
-package rave.code.quartz.job.moneycontrol.misc;
+package rave.code.quartz.job.stockbase;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.quartz.enums.ASCIIColorCodes;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
-import rave.code.quartz.job.AbstractStockMarketEntityMakerJob;
 import rave.code.stockmarket.entity.BSEStockBaseEntity;
 import rave.code.stockmarket.entity.StockBaseEntity;
 import rave.code.stockmarket.repository.StockBaseRepository;
@@ -21,18 +20,18 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class BSEStockBaseJob extends AbstractStockMarketEntityMakerJob<List<CSVRecord>, List<StockBaseEntity>> {
+class BSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CSVRecord>, List<StockBaseEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(BSEStockBaseJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSEStockBaseEntityMakerJob.class.getName());
 
     private StockBaseRepository stockBaseRepository = new StockBaseRepository();
     private Date date;
 
-    public BSEStockBaseJob() {
+    public BSEStockBaseEntityMakerJob() {
         this(new Date());
     }
 
-    public BSEStockBaseJob(Date date) {
+    public BSEStockBaseEntityMakerJob(Date date) {
         this.date = date;
     }
 
