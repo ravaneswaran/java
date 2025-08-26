@@ -4,12 +4,12 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code</groupId>
+        <groupId>rave.code.java</groupId>
         <artifactId>utilities</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>rave.code.utilities</groupId>
+    <groupId>rave.code.java.utilities</groupId>
     <artifactId>java-image</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>java-image</name>

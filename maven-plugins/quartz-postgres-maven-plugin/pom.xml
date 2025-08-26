@@ -5,11 +5,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code</groupId>
+        <groupId>rave.code.java</groupId>
         <artifactId>maven-plugins</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>rave.code.maven-plugins</groupId>
+    <groupId>rave.code.java.maven-plugins</groupId>
     <artifactId>quartz-postgres-maven-plugin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>

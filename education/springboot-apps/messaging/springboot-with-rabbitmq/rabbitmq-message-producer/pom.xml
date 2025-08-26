@@ -9,10 +9,10 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>rave.code.education.springboot-apps.messaging.springboot-with-rabbitmq</groupId>
-    <artifactId>rabbitmq-message-producer</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <name>rabbitmq-message-producer</name>
+    <artifactId>rabbitmq-message-producer</artifactId>
+    <groupId>rave.code.java.education.springboot-apps.messaging.springboot-with-rabbitmq</groupId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

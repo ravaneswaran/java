@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>csv-file-readers</artifactId>
-        <groupId>rave.code.utilities.file-readers</groupId>
+        <groupId>rave.code.java.utilities.file-readers</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <name>open-csv-file-reader</name>
     <artifactId>open-csv-file-reader</artifactId>
-    <groupId>rave.code.utilities.file-readers.csv-file-readers</groupId>
+    <groupId>rave.code.java.utilities.file-readers.csv-file-readers</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -40,13 +40,13 @@
         </dependency>
 
         <dependency>
-            <groupId>rave.code.utilities</groupId>
+            <groupId>rave.code.java.utilities</groupId>
             <artifactId>file-downloader</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>rave.code.utilities.file-readers</groupId>
+            <groupId>rave.code.java.utilities.file-readers</groupId>
             <artifactId>zip-file-reader</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>

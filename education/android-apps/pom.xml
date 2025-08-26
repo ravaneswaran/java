@@ -4,13 +4,13 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code</groupId>
+        <groupId>rave.code.java</groupId>
         <artifactId>education</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <packaging>pom</packaging>
-    <groupId>rave.code.education</groupId>
+    <groupId>rave.code.java.education</groupId>
     <artifactId>android-apps</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>android-apps</name>

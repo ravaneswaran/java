@@ -4,14 +4,14 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code.stock-market</groupId>
+        <groupId>rave.code.java.stock-market</groupId>
         <artifactId>sm-sub-systems</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <name>sm-email-system</name>
     <artifactId>sm-email-system</artifactId>
-    <groupId>rave.code.stock-market.sm-sub-systems</groupId>
+    <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

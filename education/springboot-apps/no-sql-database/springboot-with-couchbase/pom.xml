@@ -9,10 +9,10 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>rave.code.education.springboot-apps.no-sql-database</groupId>
-    <artifactId>springboot-with-couchbase</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <name>springboot-with-couchbase</name>
+    <artifactId>springboot-with-couchbase</artifactId>
+    <groupId>rave.code.java.education.springboot-apps.no-sql-database</groupId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

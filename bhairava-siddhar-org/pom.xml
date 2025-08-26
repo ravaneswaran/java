@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>bhairava-siddhar-org</name>
     <artifactId>bhairava-siddhar-org</artifactId>
-    <groupId>rave.code</groupId>
+    <groupId>rave.code.java</groupId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 

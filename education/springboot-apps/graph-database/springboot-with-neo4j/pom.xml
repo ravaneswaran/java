@@ -9,7 +9,7 @@
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>rave.code.education.springboot-apps.graph-database</groupId>
+    <groupId>rave.code.java.education.springboot-apps.graph-database</groupId>
     <artifactId>springboot-with-neo4j</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>springboot-with-neo4j</name>

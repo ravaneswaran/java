@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>log-decors</artifactId>
-        <groupId>rave.code.utilities</groupId>
+        <groupId>rave.code.java.utilities</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <name>java-util-log-decor</name>
     <artifactId>java-util-log-decor</artifactId>
-    <groupId>rave.code.utilities.log-decors</groupId>
+    <groupId>rave.code.java.utilities.log-decors</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

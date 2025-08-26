@@ -4,14 +4,14 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code.utilities</groupId>
+        <groupId>rave.code.java.utilities</groupId>
         <artifactId>file-readers</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <name>simple-file-reader</name>
     <artifactId>simple-file-reader</artifactId>
-    <groupId>rave.code.utilities.file-readers</groupId>
+    <groupId>rave.code.java.utilities.file-readers</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>

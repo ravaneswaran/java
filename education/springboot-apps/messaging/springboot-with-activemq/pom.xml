@@ -4,13 +4,13 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code.education.springboot-apps</groupId>
+        <groupId>rave.code.java.education.springboot-apps</groupId>
         <artifactId>messaging</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <packaging>pom</packaging>
-    <groupId>rave.code.education.springboot-apps.messaging</groupId>
+    <groupId>rave.code.java.education.springboot-apps.messaging</groupId>
     <artifactId>springboot-with-activemq</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>springboot-with-activemq</name>

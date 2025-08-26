@@ -9,12 +9,11 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>rave.code.education.springboot-apps.payment-gateways</groupId>
+    <name>paytm</name>
     <artifactId>paytm</artifactId>
+    <groupId>rave.code.java.education.springboot-apps.payment-gateways</groupId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>paytm</name>
-    <description>paytm</description>
 
     <properties>
         <java.version>17</java.version>

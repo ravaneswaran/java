@@ -4,14 +4,14 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>rave.code.stock-market</groupId>
+        <groupId>rave.code.java.stock-market</groupId>
         <artifactId>sm-sub-systems</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <name>sm-quartz-scheduler-system</name>
     <artifactId>sm-quartz-scheduler-system</artifactId>
-    <groupId>rave.code.stock-market.sm-sub-systems</groupId>
+    <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -52,42 +52,42 @@
             <version>2.5.0</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.stock-market.sm-sub-systems</groupId>
+            <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-data-parser-system</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.stock-market.sm-sub-systems</groupId>
+            <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-repository-system</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.stock-market.sm-sub-systems</groupId>
+            <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-email-system</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.utilities</groupId>
+            <groupId>rave.code.java.utilities</groupId>
             <artifactId>file-downloader</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.utilities.file-readers</groupId>
+            <groupId>rave.code.java.utilities.file-readers</groupId>
             <artifactId>simple-file-reader</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.utilities.file-readers.csv-file-readers</groupId>
+            <groupId>rave.code.java.utilities.file-readers.csv-file-readers</groupId>
             <artifactId>apache-commons-csv-file-reader</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.utilities.file-readers</groupId>
+            <groupId>rave.code.java.utilities.file-readers</groupId>
             <artifactId>zip-file-reader</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>rave.code.utilities.log-decors</groupId>
+            <groupId>rave.code.java.utilities.log-decors</groupId>
             <artifactId>java-util-log-decor</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

@@ -8,7 +8,7 @@
         <groupId>rave.code</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>rave.code</groupId>
+    <groupId>rave.code.java</groupId>
     <artifactId>utilities</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>

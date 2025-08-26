@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>pdf-maker</artifactId>
-        <groupId>rave.code.utilities</groupId>
+        <groupId>rave.code.java.utilities</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>rave.code.utilities.pdf-maker</groupId>
+    <groupId>rave.code.java.utilities.pdf-maker</groupId>
     <artifactId>itext-pdf-maker</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>itext-pdf-maker</name>
