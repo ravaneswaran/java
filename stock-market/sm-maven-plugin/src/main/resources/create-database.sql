@@ -1,3 +1,3 @@
-CREATE DATABASE stock_market;
+CREATE DATABASE IF NOT EXISTS  stock_market;
 
 COMMIT;

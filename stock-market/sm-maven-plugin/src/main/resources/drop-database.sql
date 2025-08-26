@@ -1,3 +1,3 @@
-DROP DATABASE stock_market;
+DROP DATABASE IF EXISTS stock_market;
 
 COMMIT;
