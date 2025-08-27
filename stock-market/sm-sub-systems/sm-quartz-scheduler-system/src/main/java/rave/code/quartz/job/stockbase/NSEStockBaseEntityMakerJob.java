@@ -2,7 +2,7 @@ package rave.code.quartz.job.stockbase;
 
 import rave.code.quartz.enums.ASCIIColorCodes;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
-import rave.code.quartz.enums.NSEClassification;
+import rave.code.quartz.enums.NSEStockClassification;
 import rave.code.stockmarket.entity.NSEStockBaseEntity;
 import rave.code.stockmarket.entity.StockBaseEntity;
 import rave.code.stockmarket.repository.StockBaseRepository;
@@ -83,43 +83,7 @@ class NSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<St
             }
 
             String series = lineDetails[1].trim();
-            if ("".equals(series)) {
-                series = "Empty";
-            }
-
-            switch (series) {
-                case "Empty":
-                    series = NSEClassification.EMPTY.getClassification();
-                    break;
-                case "EQ":
-                    series = NSEClassification.EQ.getClassification();
-                    break;
-                case "SM":
-                    series = NSEClassification.SM.getClassification();
-                    break;
-                case "IV":
-                    series = NSEClassification.IV.getClassification();
-                    break;
-                case "RR":
-                    series = NSEClassification.RR.getClassification();
-                    break;
-                case "T0":
-                    series = NSEClassification.T0.getClassification();
-                    break;
-                case "E1":
-                    series = NSEClassification.E1.getClassification();
-                    break;
-                case "BE":
-                    series = NSEClassification.BE.getClassification();
-                    break;
-                case "BZ":
-                    series = NSEClassification.BZ.getClassification();
-                    break;
-
-                default:
-                    series = NSEClassification.DEFAULT.getClassification();
-                    break;
-            }
+            series = NSEStockClassification.getClassification(series).getSeriesCode();
 
             StockBaseEntity stockBaseEntity = new NSEStockBaseEntity();
             stockBaseEntity.setMkt(lineDetails[0].trim());
