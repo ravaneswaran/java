@@ -57,7 +57,7 @@ public class HolidayMailerJob extends AbstractQuartzJob {
                 try {
                     LOGGER.log(Level.INFO, "SENDING MAIL....");
                     ElectronicMail electronicMail = new ElectronicMail();
-                    electronicMail.connect("smtp.gmail.com", "587", "ravaneswaran@gmail.com", "xxpn zrnn ijjz ohcy");
+                    electronicMail.connect("smtp.gmail.com", "587", "ravaneswaran@gmail.com", "test");
                     electronicMail.sendMail("noreply@stockmarket.com", "ravaneswaran@gmail.com", "Stock Market Holiday Remainder", mailContent);
                 } catch (MessagingException messagingException) {
                     LOGGER.log(Level.SEVERE, messagingException.getMessage(), messagingException);
