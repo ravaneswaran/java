@@ -350,10 +350,10 @@ public enum NSEStockClassification {
         return this.description;
     }
 
-    public static final NSEStockClassification getClassification(String classification){
+    public static final NSEStockClassification getClassification(String seriesCode){
         NSEStockClassification[] nseStockClassifications = NSEStockClassification.values();
         for (NSEStockClassification nseStockClassification: nseStockClassifications) {
-            if(classification.equals(nseStockClassification.getSeriesCode())){
+            if(seriesCode.equals(nseStockClassification.getSeriesCode())){
                 return nseStockClassification;
             }
         }
