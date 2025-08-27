@@ -13,7 +13,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class ScheduleJobsAt_8_45_AM_FromMondayToFriday extends AbstractQuartzScheduler {
 
-    public static final Logger LOGGER = Logger.getLogger(ScheduleJobsAt_4_PM_FromMondayToFriday.class.toString());
+    public static final Logger LOGGER = Logger.getLogger(ScheduleJobsAt_8_45_AM_FromMondayToFriday.class.toString());
 
     private Scheduler scheduler;
 

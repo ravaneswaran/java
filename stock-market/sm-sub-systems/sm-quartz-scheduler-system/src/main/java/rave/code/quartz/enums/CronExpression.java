@@ -13,6 +13,7 @@ public enum CronExpression {
     EVERY_5TH_MINUTE_OF_THE_CLOCK_FROM_MONDAY_TO_FRIDAY_BETWEEN_10AM_TO_4PM("* */5 10-16 ? * MON-FRI"),
     AT_8AM_MONDAY_TO_FRIDAY("0 0 8 ? * MON-FRI"),
     AT_4PM_MONDAY_TO_FRIDAY("0 0 16 ? * MON-FRI"),
+    AT_6PM_MONDAY_TO_FRIDAY("0 0 18 ? * MON-FRI"),
     AT_8_45_AM_MONDAY_TO_FRIDAY("0 45 8 ? * MON-FRI"); // moving the entries to history
 
     private String cronExpression;
