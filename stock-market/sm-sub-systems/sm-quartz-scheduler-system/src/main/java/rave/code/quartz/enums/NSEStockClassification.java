@@ -333,12 +333,8 @@ public enum NSEStockClassification {
     private String seriesCode;
     private String description;
 
-    private NSEStockClassification(String classification){
-        this.seriesCode = classification;
-    }
-
-    private NSEStockClassification(String classification, String description) {
-        this.seriesCode = classification;
+    private NSEStockClassification(String seriesCode, String description) {
+        this.seriesCode = seriesCode;
         this.description = description;
     }
 

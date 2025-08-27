@@ -24,7 +24,7 @@ public class StockBaseEntityMakerJob extends AbstractQuartzJob {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         new NSEStockBaseEntityMakerJob(this.date).execute(jobExecutionContext);
-        //new BSEStockBaseEntityMakerJob(this.date).execute(jobExecutionContext);
+        new BSEStockBaseEntityMakerJob(this.date).execute(jobExecutionContext);
     }
 
     public static void main(String[] args) throws JobExecutionException {

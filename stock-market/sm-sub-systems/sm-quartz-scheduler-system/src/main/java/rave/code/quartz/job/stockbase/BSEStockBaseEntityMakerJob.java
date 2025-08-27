@@ -63,11 +63,11 @@ class BSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CS
             BSEStockBaseEntity bseStockBaseEntity = new BSEStockBaseEntity();
 
             bseStockBaseEntity.setMkt(csvRecord.get(2));
-            bseStockBaseEntity.setSeries(csvRecord.get(3));
             bseStockBaseEntity.setFinancialInstrumentType(csvRecord.get(4));
             bseStockBaseEntity.setFinancialInstrumentId(csvRecord.get(5));
             bseStockBaseEntity.setISIN(csvRecord.get(6));
             bseStockBaseEntity.setStockSymbol(csvRecord.get(7));
+            bseStockBaseEntity.setSeries(csvRecord.get(8));
             bseStockBaseEntity.setStockName(csvRecord.get(13));
             bseStockBaseEntity.setOpenPrice(csvRecord.get(14));
             bseStockBaseEntity.setHighPrice(csvRecord.get(15));
