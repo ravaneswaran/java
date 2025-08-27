@@ -40,7 +40,7 @@ public class StockBaseRepository extends StockMarketRepository<StockBaseEntity> 
         entityTransaction.commit();
     }
 
-    public Map<String, StockBaseEntity> findBySource(String source){
+    public Map<String, StockBaseEntity> findBySource(String source) {
         Class sourceType = null;
         switch (source) {
             case "NSE":
@@ -61,15 +61,20 @@ public class StockBaseRepository extends StockMarketRepository<StockBaseEntity> 
         LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), stockBaseEntities.size()));
 
         Map<String, StockBaseEntity> mappedStockBaseEntity = new HashMap<>();
-        for (StockBaseEntity stockBaseEntity: stockBaseEntities) {
-            String key = String.format("%s:%s:%s:%s:%s", source, stockBaseEntity.getMkt(), stockBaseEntity.getSeries(), stockBaseEntity.getStockSymbol(), stockBaseEntity.getStockName());
+        for (StockBaseEntity stockBaseEntity : stockBaseEntities) {
+            String key = null;
+            if ("NSE".equals(source)) {
+                key = String.format("%s:%s:%s:%s:%s", source, stockBaseEntity.getMkt(), stockBaseEntity.getSeries(), stockBaseEntity.getStockSymbol(), stockBaseEntity.getStockName());
+            } else {
+                key = String.format("%s:%s:%s:%s:%s", source, stockBaseEntity.getISIN(), stockBaseEntity.getSeries(), stockBaseEntity.getStockSymbol(), stockBaseEntity.getStockName());
+            }
             mappedStockBaseEntity.put(key, stockBaseEntity);
         }
 
         return mappedStockBaseEntity;
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         EntityManager entityManager = this.getEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();

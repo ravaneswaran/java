@@ -54,6 +54,7 @@ class NSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<St
             LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", url));
             LOGGER.log(Level.SEVERE, "Possibly could be the following reason(s)...");
             LOGGER.log(Level.SEVERE, String.format("the day the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY)", sdf.format(this.date)));
+            LOGGER.log(Level.SEVERE, String.format("the system expects the file now but will be made available only after 6:00 PM..", sdf.format(this.date)));
         } catch (IOException ioException) {
             LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         }

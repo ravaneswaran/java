@@ -49,7 +49,8 @@ class BSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CS
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", url));
             LOGGER.log(Level.SEVERE, "Possibly could be the following reason(s)...");
-            LOGGER.log(Level.SEVERE, String.format("the day which the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY)", sdf.format(this.date)));
+            LOGGER.log(Level.SEVERE, String.format("the day which the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY) or...", sdf.format(this.date)));
+            LOGGER.log(Level.SEVERE, String.format("the system expects the file now but will be made available only after 6:00 PM..", sdf.format(this.date)));
         } catch (IOException ioException) {
             LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         }
@@ -59,7 +60,16 @@ class BSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CS
     @Override
     public List<StockBaseEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<StockBaseEntity> bseStockBaseEntities = new ArrayList<>();
+        int lineNumber = 1;
+
         for (CSVRecord csvRecord : sourceData) {
+            if (1 == lineNumber) {
+                LOGGER.log(Level.INFO, "skipping the header... ");
+                LOGGER.log(Level.INFO, "<<<<< paring indexes... >>>>>");
+                lineNumber = lineNumber + 1;
+                continue;
+            }
+
             BSEStockBaseEntity bseStockBaseEntity = new BSEStockBaseEntity();
 
             bseStockBaseEntity.setMkt(csvRecord.get(2));
@@ -105,7 +115,7 @@ class BSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CS
             List<StockBaseEntity> stockBaseEntities = new ArrayList<>();
             for (StockBaseEntity stockBaseEntity : transformedData) {
                 if (mappedStockBaseEntities.size() > 0) {
-                    String key = String.format("%s:%s:%s:%s:%s", source, stockBaseEntity.getMkt(), stockBaseEntity.getSeries(), stockBaseEntity.getStockSymbol(), stockBaseEntity.getStockName());
+                    String key = String.format("%s:%s:%s:%s:%s", source, stockBaseEntity.getISIN(), stockBaseEntity.getSeries(), stockBaseEntity.getStockSymbol(), stockBaseEntity.getStockName());
                     StockBaseEntity mappedStockBaseEntity = mappedStockBaseEntities.get(key);
                     if (null != mappedStockBaseEntity) {
                         LOGGER.log(Level.INFO, String.format("[%s] - Stock is already available in the repository hence updating it...", key));
