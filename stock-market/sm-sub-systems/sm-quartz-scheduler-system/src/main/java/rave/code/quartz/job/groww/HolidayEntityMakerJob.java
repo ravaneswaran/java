@@ -11,10 +11,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class HolidayJob extends AbstractGrowWEntityMakerJob<HolidayModel, HolidayEntity> {
+public class HolidayEntityMakerJob extends AbstractGrowWEntityMakerJob<HolidayModel, HolidayEntity> {
 
     public static void main(String[] args) throws JobExecutionException {
-        new HolidayJob().execute(null);
+        new HolidayEntityMakerJob().execute(null);
     }
 
     @Override

@@ -12,6 +12,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.search.FlagTerm;
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 
@@ -38,9 +41,10 @@ public class ElectronicMail implements Mail {
         Properties props = new Properties();
         props.put(MAIL_HOST_PROPERTY, host);
         props.put("mail.smtp.port", port);
-        props.put("mail.smtp.starttls.enable", "false");
+        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.ssl.trust", host);
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         this.session = Session.getInstance(props,
                 new Authenticator() {
@@ -83,7 +87,7 @@ public class ElectronicMail implements Mail {
         mimeMessage.setSubject(subject);
         BodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setHeader("Content-Type", "text/html; charset=utf-8");
-        mimeBodyPart.setText(message);
+        mimeBodyPart.setContent(message, "text/html; charset=utf-8");
         Multipart mimeMultipart = new MimeMultipart();
         mimeMultipart.addBodyPart(mimeBodyPart);
 

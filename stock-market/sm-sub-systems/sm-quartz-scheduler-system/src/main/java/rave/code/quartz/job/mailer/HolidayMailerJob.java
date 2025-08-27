@@ -6,6 +6,7 @@ import rave.code.mail.java.ElectronicMail;
 import rave.code.quartz.job.AbstractQuartzJob;
 import rave.code.stockmarket.repository.HolidayRepository;
 import rave.code.stockmarket.entity.HolidayEntity;
+import rave.code.utility.log.JavaUtilLogDecor;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class HolidayMailerJob extends AbstractQuartzJob {
     private static final Logger LOGGER = Logger.getLogger(HolidayMailerJob.class.getName());
 
     public static void main(String[] args) throws JobExecutionException {
+        JavaUtilLogDecor.setupLogDecor();
         HolidayMailerJob holidayMailerJob = new HolidayMailerJob();
         holidayMailerJob.execute(null);
     }
@@ -56,7 +58,7 @@ public class HolidayMailerJob extends AbstractQuartzJob {
                     LOGGER.log(Level.INFO, "SENDING MAIL....");
                     ElectronicMail electronicMail = new ElectronicMail();
                     electronicMail.connect("smtp.gmail.com", "587", "ravaneswaran@gmail.com", "xxpn zrnn ijjz ohcy");
-                    electronicMail.sendMail("noreply@stockmarket.com", "ravaneswaran@gmail.com", "Holiday Remainder", mailContent);
+                    electronicMail.sendMail("noreply@stockmarket.com", "ravaneswaran@gmail.com", "Stock Market Holiday Remainder", mailContent);
                 } catch (MessagingException messagingException) {
                     LOGGER.log(Level.SEVERE, messagingException.getMessage(), messagingException);
                 }
