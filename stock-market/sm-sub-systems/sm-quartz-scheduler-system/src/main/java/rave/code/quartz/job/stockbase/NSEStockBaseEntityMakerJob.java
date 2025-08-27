@@ -82,11 +82,15 @@ class NSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<St
                 continue;
             }
 
+            String mkt = lineDetails[0].trim();
             String series = lineDetails[1].trim();
-            series = NSEStockClassification.getClassification(series).getSeriesCode();
+            NSEStockClassification nseStockClassification = NSEStockClassification.getClassification(series);
+            if(mkt.equalsIgnoreCase("Y") && NSEStockClassification.DEFAULT.equals(nseStockClassification)){
+                series = NSEStockClassification.getClassification("Index").getSeriesCode();
+            }
 
             StockBaseEntity stockBaseEntity = new NSEStockBaseEntity();
-            stockBaseEntity.setMkt(lineDetails[0].trim());
+            stockBaseEntity.setMkt(mkt);
             stockBaseEntity.setSeries(series);
             stockBaseEntity.setStockSymbol(lineDetails[2].trim());
             stockBaseEntity.setStockName(lineDetails[3].trim());
