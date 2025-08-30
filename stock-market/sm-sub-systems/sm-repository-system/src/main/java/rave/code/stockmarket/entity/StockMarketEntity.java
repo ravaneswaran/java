@@ -1,12 +1,13 @@
 package rave.code.stockmarket.entity;
 
+import rave.code.entity.AbstractEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 
 @MappedSuperclass
-public abstract class StockMarketEntity extends AbstractStockEntity {
+public abstract class StockMarketEntity extends AbstractEntity {
 
     protected String stockName;
 

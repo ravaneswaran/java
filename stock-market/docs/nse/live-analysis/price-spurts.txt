@@ -1,0 +1,2 @@
+https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecGtr20
+https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&keySecLwr20

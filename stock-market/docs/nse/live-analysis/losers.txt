@@ -1,0 +1,7 @@
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=allSec
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=NIFTY
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=BANKNIFTY
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=NIFTYNEXT50
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=SecGtr20
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=SecLwr20
+https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=FOSec

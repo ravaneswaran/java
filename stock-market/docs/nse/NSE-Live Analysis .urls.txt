@@ -1,0 +1,122 @@
+https://www.nseindia.com/market-data/top-gainers-losers
+
+RestAPI Calls
+-------------
+
+    Gainers/Losers
+    --------------
+        Gainers
+        -------
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=allSec
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=NIFTY
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=BANKNIFTY
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=NIFTYNEXT50
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecGtr20
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&keySecLwr20
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&keyFOSec
+
+        Losers
+        -------
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=allSec
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=NIFTY
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=BANKNIFTY
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=NIFTYNEXT50
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=SecGtr20
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=SecLwr20
+            https://www.nseindia.com/api/live-analysis-variations?index=losers&type=mae&key=FOSec
+
+    MostActiveEquities
+    ------------------
+        MainBoard
+        ---------
+            https://www.nseindia.com/api/live-analysis-most-active-securities?index=volume
+            https://www.nseindia.com/api/live-analysis-most-active-securities?index=value
+        SME
+        ---
+            https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=volume
+            https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=value
+        ETFs
+        ----
+            https://www.nseindia.com/api/live-analysis-most-active-etf-csv?index=volume
+            https://www.nseindia.com/api/live-analysis-most-active-etf-csv?index=value
+
+        Price Spurts
+        ------------
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecGtr20
+            https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&keySecLwr20
+
+        Volume Spurts
+        -------------
+            https://www.nseindia.com/api/live-analysis-volume-gainers
+
+    Index Performances
+    ------------------
+        All Indices
+        --------------------
+            https://www.nseindia.com/api/allIndices?mode=mae
+
+        Broad Market Indices
+        --------------------
+            https://www.nseindia.com/api/allIndices?type=BROAD MARKET INDICES&mode=mae
+
+        Sectoral Indices
+        ----------------
+            https://www.nseindia.com/api/allIndices?type=SECTORAL INDICES&mode=mae
+
+        STRATEGY INDICES
+        ----------------
+            https://www.nseindia.com/api/allIndices?type=STRATEGY INDICES&mode=mae
+
+        FIXED INCOME INDICES
+        --------------------
+            https://www.nseindia.com/api/allIndices?type=FIXED INCOME INDICES&mode=mae
+
+
+    Price Band Hitters -> Upper Band, Lower Band & Both
+    ----------------------------------------------------
+        https://www.nseindia.com//api/live-analysis-price-band-hitter?mode-mae
+
+
+    Volume Gainers
+    --------------
+        https://www.nseindia.com/api/live-analysis-volume-gainers?mode=laVolumeGainer
+
+
+    52-Week-High/Low
+    ----------------
+        52-Week-High
+        ------------
+            https://www.nseindia.com/api/live-analysis-data-52weekhighstock
+
+        52-Week-Low
+        -----------
+            https://www.nseindia.com/api/live-analysis-data-52weeklowstock
+
+    Large Deals
+    -----------
+        Bulk Deals
+        ----------
+            https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=BULK_DEALS_DATA&fileName=BULK
+
+        Block Deals
+        -----------
+            https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=BLOCK_DEALS_DATA&fileName=BLOCK
+
+        ShortDeals
+        ----------
+            https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=SHORT_DEALS_DATA&fileName=
+
+
+    Advances & Declines
+    -------------------
+        Advance
+        --------
+            https://www.nseindia.com/api/live-analysis-advance
+
+        Decine
+        ------
+            https://www.nseindia.com/api/live-analysis-decline
+
+    Stocks Traded(Collection of Advance, Decline and Unchanged)
+    -----------------------------------------------------------
+        https://www.nseindia.com/api/live-analysis-stocksTraded

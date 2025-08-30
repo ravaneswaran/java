@@ -20,7 +20,9 @@
     <include relativeToChangelogFile="true" file="bse-volume-shockers-history-changelog.xml"/>
     <include relativeToChangelogFile="true" file="holidays-changelog.xml"/>
     <include relativeToChangelogFile="true" file="bse-sensex-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="stock-base-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="stock-base-10-changelog.xml"/>
+
+    <include relativeToChangelogFile="true" file="nse-stock-base-changelog.xml"/>
 
     <!--<include relativeToChangelogFile="true" file="quartz-scheduler-changelog.xml"/>-->
 </databaseChangeLog>
