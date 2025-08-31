@@ -23,6 +23,8 @@
         <module>file-readers</module>
         <module>file-downloader</module>
         <module>log-decors</module>
+        <module>proxy-server</module>
+        <module>sub-processor</module>
     </modules>
 
 </project>

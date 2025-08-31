@@ -120,5 +120,7 @@ utilities/file-readers/csv-file-readers/open-csv-file-reader/target/
 utilities/file-readers/simple-file-reader/target/
 utilities/file-readers/zip-file-reader/target
 utilities/log-decors/java-util-log-decor/target/
+utilities/proxy-server/target/
+utilities/sub-processor/target/
 
 
