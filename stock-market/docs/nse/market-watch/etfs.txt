@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/etf
+https://www.nseindia.com/api/etf&csv=true

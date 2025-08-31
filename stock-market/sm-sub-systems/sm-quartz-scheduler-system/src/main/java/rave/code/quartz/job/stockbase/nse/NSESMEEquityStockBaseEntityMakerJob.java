@@ -1,0 +1,73 @@
+package rave.code.quartz.job.stockbase.nse;
+
+import org.apache.commons.csv.CSVRecord;
+import rave.code.entity.stockbase.nse.NSEStockBaseEntity;
+import rave.code.utility.log.JavaUtilLogDecor;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class NSESMEEquityStockBaseEntityMakerJob extends AbstractEquityStockBaseEntityMakerJob {
+
+    private static final Logger LOGGER = Logger.getLogger(NSESMEEquityStockBaseEntityMakerJob.class.getName());
+
+    public NSESMEEquityStockBaseEntityMakerJob() {
+        super("https://nsearchives.nseindia.com/emerge/corporates/content/SME_EQUITY_L.csv");
+    }
+
+    @Override
+    public List<NSEStockBaseEntity> transformSourceData(List<CSVRecord> sourceData) {
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
+        int lineNumber = 1;
+
+        for (CSVRecord csvRecord : sourceData) {
+            if (1 == lineNumber) {
+                LOGGER.log(Level.INFO, "Skipping the header... ");
+                lineNumber = lineNumber + 1;
+                continue;
+            }
+
+            NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();
+
+            nseStockBaseEntity.setSymbol(csvRecord.get(0));
+            nseStockBaseEntity.setCompanyName(csvRecord.get(1));
+            nseStockBaseEntity.setSeries(csvRecord.get(2));
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+            try {
+                Date dateOfListing = simpleDateFormat.parse(csvRecord.get(3));
+                nseStockBaseEntity.setDateOfListing(dateOfListing);
+            } catch (ParseException parseException) {
+                LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+            }
+            try {
+                int paidUpValue = Integer.parseInt(csvRecord.get(4));
+                nseStockBaseEntity.setPaidUpValue(paidUpValue);
+            } catch (NumberFormatException numberFormatException) {
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+            }
+            nseStockBaseEntity.setMarketLot(0);
+            nseStockBaseEntity.setISINumber(csvRecord.get(5));
+            try {
+                int faceValue = Integer.parseInt(csvRecord.get(6));
+                nseStockBaseEntity.setMarketLot(faceValue);
+            } catch (NumberFormatException numberFormatException) {
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+            }
+
+            nseStockBaseEntities.add(nseStockBaseEntity);
+        }
+        return nseStockBaseEntities;
+    }
+
+    public static void main(String[] args) {
+        JavaUtilLogDecor.setupLogDecor();
+
+        NSESMEEquityStockBaseEntityMakerJob nseSMEEquityStockBaseEntityMakerJob = new NSESMEEquityStockBaseEntityMakerJob();
+        nseSMEEquityStockBaseEntityMakerJob.saveTransformedData(nseSMEEquityStockBaseEntityMakerJob.transformSourceData(nseSMEEquityStockBaseEntityMakerJob.getDataFromSource()));
+    }
+}

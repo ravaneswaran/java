@@ -21,13 +21,17 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
+public class AbstractEquityStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
 
-    private String downloadUrl = "https://nsearchives.nseindia.com/content/equities/EQUITY_L.csv";
-    private Date toDate = new Date();
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    protected String downloadUrl;
+    protected Date toDate = new Date();
+    protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
-    private static final Logger LOGGER = Logger.getLogger(NSEStockBaseEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractEquityStockBaseEntityMakerJob.class.getName());
+
+    public AbstractEquityStockBaseEntityMakerJob(String downloadUrl){
+        this.downloadUrl = downloadUrl;
+    }
 
     @Override
     public List<CSVRecord> getDataFromSource() {
@@ -127,7 +131,7 @@ public class NSEStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
 
-        NSEStockBaseEntityMakerJob nseStockBaseEntityMakerJob = new NSEStockBaseEntityMakerJob();
+        NSEEquityStockBaseEntityMakerJob nseStockBaseEntityMakerJob = new NSEEquityStockBaseEntityMakerJob();
         nseStockBaseEntityMakerJob.saveTransformedData(nseStockBaseEntityMakerJob.transformSourceData(nseStockBaseEntityMakerJob.getDataFromSource()));
     }
 }

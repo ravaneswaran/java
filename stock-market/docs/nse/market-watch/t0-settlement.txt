@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/equity-stockIndices?index=T0 SETTLEMENT
+https://www.nseindia.com/api/equity-stockIndices?index=T0 SETTLEMENT&csv=true

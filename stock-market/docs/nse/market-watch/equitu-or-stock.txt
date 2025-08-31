@@ -1,125 +1,125 @@
 Indices eligible in derivatives
 -------------------------------
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20NEXT 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY BANK
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FINANCIAL SERVICES
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20MIDCAP SELECT
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20NEXT 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY BANK&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FINANCIAL SERVICES&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%20MIDCAP SELECT&csv=true
 
 Broad Market Indices
 --------------------
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP 100
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP 150
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP 100
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP 250
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALLCAP 400
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 100
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 200
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP 50:25:25
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY LARGEMIDCAP 250
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOTAL MARKET
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MICROCAP 250
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 500
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY LARGEMIDSMALL EQUAL-CAP WEIGHTED
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP 100&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP 150&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP 100&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP 250&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALLCAP 400&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 100&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 200&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP 50:25:25&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY LARGEMIDCAP 250&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOTAL MARKET&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MICROCAP 250&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 500&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY LARGEMIDSMALL EQUAL-CAP WEIGHTED&csv=true
 
 Sectoral Indices
 ----------------
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY AUTO
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FINANCIAL SERVICES 25/50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FMCG
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MEDIA
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY METAL
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PHARMA
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PSU BANK
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY REALTY
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PRIVATE BANK
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY HEALTHCARE INDEX
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY CONSUMER DURABLES
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY OIL & GAS
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL HEALTHCARE
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FINANCIAL SERVICES EX-BANK
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL FINANCIAL SERVCIES
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL IT & TELECOM
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY AUTO&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FINANCIAL SERVICES 25/50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FMCG&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MEDIA&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY METAL&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PHARMA&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PSU BANK&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY REALTY&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PRIVATE BANK&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY HEALTHCARE INDEX&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY CONSUMER DURABLES&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY OIL & GAS&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL HEALTHCARE&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY FINANCIAL SERVICES EX-BANK&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL FINANCIAL SERVCIES&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL IT & TELECOM&csv=true
 
 Thematic Indices
 ----------------
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY COMMODITIES
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA CONSUMPTION
-https://www.nseindia.com/api/equity-stockIndices?index=NIFY CPSE
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ENERGY
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INFRASTRUCTURE
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MNC
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PSE
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SERVICES SECTOR
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 100 LIQUID 15
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA DIGITAL
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 ESG
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA MANUFACTURING
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA CORPORATE GROUP INDEX - TATA GROUP 25%
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP INDIA MANUFACTURING 50:30:20
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP INFRASTRUCTURE 50:30:20
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA DEFENCE
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA TOURISM
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY CAPITAL MARKETS
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY EV & NEW AGE AUTOMOTIVE
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA NEW AGE CONSUMPTION
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA SELECT 5 CORPORATE GROUPS (MAATR)
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MOBILITY
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 ENHANCED ESG
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY CORE HOUSING
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY HOUSING
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY IPO
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL INDIA CONSUMPTION
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY NON-CYCLICAL CONSUMER
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY RURAL
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SHARIAH 25
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TRANSPORTATION & LOGISTICS
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY50 SHARIAH
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 SHARIAH
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY COMMODITIES&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA CONSUMPTION&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFY CPSE&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ENERGY&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INFRASTRUCTURE&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MNC&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY PSE&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SERVICES SECTOR&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY 100 LIQUID 15&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA DIGITAL&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 ESG&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA MANUFACTURING&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA CORPORATE GROUP INDEX - TATA GROUP 25%&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP INDIA MANUFACTURING 50:30:20&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP INFRASTRUCTURE 50:30:20&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA DEFENCE&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA TOURISM&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY CAPITAL MARKETS&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY EV & NEW AGE AUTOMOTIVE&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA NEW AGE CONSUMPTION&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY INDIA SELECT 5 CORPORATE GROUPS (MAATR)&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MOBILITY&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 ENHANCED ESG&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY CORE HOUSING&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY HOUSING&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY IPO&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALL INDIA CONSUMPTION&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY NON-CYCLICAL CONSUMER&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY RURAL&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SHARIAH 25&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TRANSPORTATION & LOGISTICS&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY50 SHARIAH&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 SHARIAH&csv=true
 
 Strategy Indices
 ----------------
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY DIVIDEND OPPERTUNITIES 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY GROWTH SECTORS 15
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY50 VALUE 20
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 QUALITY 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY50 EQUAL WEIGHT
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 EQUAL WEIGHT
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 LOW VOLATILITY 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 QUALITY 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA LOW-VOLATILITY 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 MOMENTUM 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP150 QUALITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 ALPHA 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP150 MOMENTUM 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MOMENTUM 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALLCAP400 MOMENTUM QUALITY 100
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP250 MOMENTUM QUALITY 100
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOP 10 EQUAL WEIGHT
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA QUALITY LOW-VOLATILITY 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA QUALITY VALUE LOW-VOLATILITY 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY HIGH BETA 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY LOW VOLATILITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY QUALITY LOW VOLATILITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP250 QUALITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOP 15 EQUAL WEIGHT
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 ALPHA 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 VALUE 30
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 EQUAL WEIGHT
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP MOMENTUM QUALITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 VALUE 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOP 20 EQUAL WEIGHT
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 QUALITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 LOW VOLATILITY 50
-https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTIFACTOR MQVLV 50
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY DIVIDEND OPPERTUNITIES 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY GROWTH SECTORS 15&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY50 VALUE 20&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 QUALITY 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY50 EQUAL WEIGHT&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 EQUAL WEIGHT&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 LOW VOLATILITY 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 QUALITY 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA LOW-VOLATILITY 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 MOMENTUM 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP150 QUALITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 ALPHA 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDCAP150 MOMENTUM 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MOMENTUM 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY MIDSMALLCAP400 MOMENTUM QUALITY 100&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP250 MOMENTUM QUALITY 100&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOP 10 EQUAL WEIGHT&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA QUALITY LOW-VOLATILITY 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY ALPHA QUALITY VALUE LOW-VOLATILITY 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY HIGH BETA 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY LOW VOLATILITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY QUALITY LOW VOLATILITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY SMALLCAP250 QUALITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOP 15 EQUAL WEIGHT&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY100 ALPHA 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY200 VALUE 30&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 EQUAL WEIGHT&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTICAP MOMENTUM QUALITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 VALUE 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY TOP 20 EQUAL WEIGHT&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 QUALITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 LOW VOLATILITY 50&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=NIFTY500 MULTIFACTOR MQVLV 50&csv=true
 
 Others
 ------
-https://www.nseindia.com/api/equity-stockIndices?index=Securites In F&O
-https://www.nseindia.com/api/equity-stockIndices?index=Permitted to Trade
+https://www.nseindia.com/api/equity-stockIndices?index=Securites In F&O&csv=true
+https://www.nseindia.com/api/equity-stockIndices?index=Permitted to Trade&csv=true
 
 
 

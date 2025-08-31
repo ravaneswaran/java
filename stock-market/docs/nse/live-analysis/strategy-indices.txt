@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/allIndices?type=STRATEGY INDICES&mode=mae
+https://www.nseindia.com/api/allIndices?type=STRATEGY INDICES&mode=mae&csv=true

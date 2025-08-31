@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/live-analysis-advance
+https://www.nseindia.com/api/live-analysis-advance&csv=true

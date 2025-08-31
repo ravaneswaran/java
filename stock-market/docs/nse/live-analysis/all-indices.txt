@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/allIndices?mode=mae
+https://www.nseindia.com/api/allIndices?mode=mae&csv=true

@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/allIndices?type=BROAD MARKET INDICES&mode=mae
+https://www.nseindia.com/api/allIndices?type=BROAD MARKET INDICES&mode=mae&csv=true

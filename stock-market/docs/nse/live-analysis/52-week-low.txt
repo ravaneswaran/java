@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/live-analysis-data-52weeklowstock
+https://www.nseindia.com/api/live-analysis-data-52weeklowstock&csv=true

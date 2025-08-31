@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/live-analysis-volume-gainers?mode=laVolumeGainer
+https://www.nseindia.com/api/live-analysis-volume-gainers?mode=laVolumeGainer&csv=true

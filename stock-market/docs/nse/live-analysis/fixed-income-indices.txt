@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/allIndices?type=FIXED INCOME INDICES&mode=mae
+https://www.nseindia.com/api/allIndices?type=FIXED INCOME INDICES&mode=mae&csv=true

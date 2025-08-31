@@ -1,2 +1,2 @@
-https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=volume
-https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=value
+https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=volume&csv=true
+https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=value&csv=true

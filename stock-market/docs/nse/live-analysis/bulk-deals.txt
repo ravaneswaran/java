@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=BULK_DEALS_DATA&fileName=BULK
+https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=BULK_DEALS_DATA&fileName=BULK&csv=true

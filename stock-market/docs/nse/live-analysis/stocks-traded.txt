@@ -1,1 +1,1 @@
-https://www.nseindia.com/api/live-analysis-stocksTraded
+https://www.nseindia.com/api/live-analysis-stocksTraded&csv=true

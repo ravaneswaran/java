@@ -1,1 +1,1 @@
-https://www.nseindia.com//api/live-analysis-price-band-hitter?mode-mae
+https://www.nseindia.com//api/live-analysis-price-band-hitter?mode-mae&csv=true
