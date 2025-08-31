@@ -17,10 +17,10 @@
         <class>rave.code.stockmarket.entity.BSETopDividendEntity</class>
         <class>rave.code.stockmarket.entity.StockBase10Entity</class>
 
-        <class>rave.code.entity.stockbase.nse.NSEStockBaseEntity</class>
-        <class>rave.code.entity.stockbase.nse.csv.NSE1DayPriceDetailEntity</class>
+        <class>rave.code.entity.nse.csv.NSEStockBaseEntity</class>
+        <class>rave.code.entity.nse.csv.NSEDayPriceDetailEntity</class>
 
-        <class>rave.code.entity.stockbase.bse.BSEStockBaseEntity</class>
+        <class>rave.code.entity.bse.BSEStockBaseEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

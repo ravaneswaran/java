@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class BSEStockBase10EntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CSVRecord>, List<StockBase10Entity>> {
+class BSEStockBase10EntityMakerJob extends AbstractEntityMakerJob<List<CSVRecord>, List<StockBase10Entity>> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEStockBase10EntityMakerJob.class.getName());
 
@@ -38,7 +38,7 @@ class BSEStockBase10EntityMakerJob extends AbstractStockBaseEntityMakerJob<List<
     @Override
     public List<CSVRecord> getDataFromSource() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        String url = String.format(DailyPriceListDownloadLink.DAILY_PRICE_LIST_DOWNLOAD_LINK_BSE.get(), simpleDateFormat.format(this.date));
+        String url = String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_BSE.get(), simpleDateFormat.format(this.date));
         LOGGER.log(Level.INFO, String.format("Downloading file... %s", url));
         FileDownloader fileDownloader = new FileDownloader();
         List<CSVRecord> csvRecords = new ArrayList<>();

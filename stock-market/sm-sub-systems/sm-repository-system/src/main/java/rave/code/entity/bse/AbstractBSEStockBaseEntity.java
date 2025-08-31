@@ -1,4 +1,4 @@
-package rave.code.entity.stockbase.bse;
+package rave.code.entity.bse;
 
 public class AbstractBSEStockBaseEntity {
 }

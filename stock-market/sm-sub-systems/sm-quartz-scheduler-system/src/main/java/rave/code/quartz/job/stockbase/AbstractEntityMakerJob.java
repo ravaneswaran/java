@@ -4,7 +4,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import rave.code.quartz.job.AbstractQuartzJob;
 
-public abstract class AbstractStockBaseEntityMakerJob<S, T> extends AbstractQuartzJob {
+public abstract class AbstractEntityMakerJob<S, T> extends AbstractQuartzJob {
 
     public abstract S getDataFromSource();
 

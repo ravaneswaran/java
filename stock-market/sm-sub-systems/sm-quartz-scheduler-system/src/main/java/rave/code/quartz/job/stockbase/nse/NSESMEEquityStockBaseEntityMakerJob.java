@@ -1,7 +1,7 @@
 package rave.code.quartz.job.stockbase.nse;
 
 import org.apache.commons.csv.CSVRecord;
-import rave.code.entity.stockbase.nse.NSEStockBaseEntity;
+import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.text.ParseException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSESMEEquityStockBaseEntityMakerJob extends AbstractEquityStockBaseEntityMakerJob {
+public class NSESMEEquityStockBaseEntityMakerJob extends NSEStockBaseEntityMakerJob {
 
     private static final Logger LOGGER = Logger.getLogger(NSESMEEquityStockBaseEntityMakerJob.class.getName());
 

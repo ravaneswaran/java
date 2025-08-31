@@ -1,4 +1,4 @@
-package rave.code.entity.stockbase.bse.csv;
+package rave.code.entity.bse.csv;
 
 public class AbstractBSEStockBaseCSVEntity {
 }

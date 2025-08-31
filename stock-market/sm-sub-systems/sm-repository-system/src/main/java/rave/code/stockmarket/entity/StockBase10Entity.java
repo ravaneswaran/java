@@ -1,6 +1,6 @@
 package rave.code.stockmarket.entity;
 
-import rave.code.entity.AbstractEntity;
+import rave.code.entity.AbstractTestEntity;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "source", discriminatorType = DiscriminatorType.STRING)
 @Access(AccessType.PROPERTY)
-public class StockBase10Entity extends AbstractEntity {
+public class StockBase10Entity extends AbstractTestEntity {
 
     private String id;
     private String financialInstrumentId;

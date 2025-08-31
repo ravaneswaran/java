@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class NSEStockBase10EntityMakerJob extends AbstractStockBaseEntityMakerJob<List<String>, List<StockBase10Entity>> {
+class NSEStockBase10EntityMakerJob extends AbstractEntityMakerJob<List<String>, List<StockBase10Entity>> {
 
     private static final Logger LOGGER = Logger.getLogger(NSEStockBase10EntityMakerJob.class.getName());
 
@@ -40,7 +40,7 @@ class NSEStockBase10EntityMakerJob extends AbstractStockBaseEntityMakerJob<List<
     public List<String> getDataFromSource() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
         String formattedDate = simpleDateFormat.format(this.date);
-        String url = String.format(DailyPriceListDownloadLink.DAILY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate);
+        String url = String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate);
         LOGGER.log(Level.INFO, String.format("Downloading file... %s", url));
         FileDownloader fileDownloader = new FileDownloader();
         String zipEntryFileName = String.format("Pd%s.csv", formattedDate);

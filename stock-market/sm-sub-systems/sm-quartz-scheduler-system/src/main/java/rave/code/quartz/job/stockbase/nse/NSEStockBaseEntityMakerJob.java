@@ -1,13 +1,12 @@
 package rave.code.quartz.job.stockbase.nse;
 
 import org.apache.commons.csv.CSVRecord;
-import rave.code.entity.stockbase.nse.NSEStockBaseEntity;
+import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.ASCIIColorCodes;
-import rave.code.quartz.job.stockbase.AbstractStockBaseEntityMakerJob;
-import rave.code.repository.stockbase.nse.NSEStockBaseRepository;
+import rave.code.quartz.job.stockbase.AbstractEntityMakerFromCSVJob;
+import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.download.FileDownloader;
-import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,15 +20,16 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AbstractEquityStockBaseEntityMakerJob extends AbstractStockBaseEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
+public abstract class NSEStockBaseEntityMakerJob extends AbstractEntityMakerFromCSVJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
 
     protected String downloadUrl;
     protected Date toDate = new Date();
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
-    private static final Logger LOGGER = Logger.getLogger(AbstractEquityStockBaseEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractEntityMakerFromCSVJob.class.getName());
 
-    public AbstractEquityStockBaseEntityMakerJob(String downloadUrl){
+    public NSEStockBaseEntityMakerJob(String downloadUrl) {
+        super(downloadUrl);
         this.downloadUrl = downloadUrl;
     }
 
@@ -126,12 +126,5 @@ public class AbstractEquityStockBaseEntityMakerJob extends AbstractStockBaseEnti
             }
             this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         }
-    }
-
-    public static void main(String[] args) {
-        JavaUtilLogDecor.setupLogDecor();
-
-        NSEEquityStockBaseEntityMakerJob nseStockBaseEntityMakerJob = new NSEEquityStockBaseEntityMakerJob();
-        nseStockBaseEntityMakerJob.saveTransformedData(nseStockBaseEntityMakerJob.transformSourceData(nseStockBaseEntityMakerJob.getDataFromSource()));
     }
 }

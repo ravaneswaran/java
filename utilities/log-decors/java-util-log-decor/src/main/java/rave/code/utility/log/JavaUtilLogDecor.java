@@ -2,10 +2,7 @@ package rave.code.utility.log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Formatter;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 /**
  * Hello world!
@@ -63,6 +60,7 @@ public class JavaUtilLogDecor extends Formatter {
 
     public static void setupLogDecor() {
         Logger rootLogger = Logger.getLogger("");
+        rootLogger.setLevel(Level.INFO);
         Handler[] handlers = rootLogger.getHandlers();
         for (Handler h : handlers) {
             h.setFormatter(new JavaUtilLogDecor());

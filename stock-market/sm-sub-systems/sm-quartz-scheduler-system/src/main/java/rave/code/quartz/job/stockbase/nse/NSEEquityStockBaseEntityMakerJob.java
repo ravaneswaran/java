@@ -1,10 +1,11 @@
 package rave.code.quartz.job.stockbase.nse;
 
+
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.util.logging.Logger;
 
-public class NSEEquityStockBaseEntityMakerJob extends AbstractEquityStockBaseEntityMakerJob {
+public class NSEEquityStockBaseEntityMakerJob extends NSEStockBaseEntityMakerJob {
 
     private static final Logger LOGGER = Logger.getLogger(NSEEquityStockBaseEntityMakerJob.class.getName());
 
