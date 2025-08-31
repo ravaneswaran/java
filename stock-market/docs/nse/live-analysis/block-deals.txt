@@ -1,0 +1,1 @@
+https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=BLOCK_DEALS_DATA&fileName=BLOCK

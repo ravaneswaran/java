@@ -1,0 +1,1 @@
+https://www.nseindia.com/api/snapshot-capital-market-largedeal?objName=SHORT_DEALS_DATA&fileName=
