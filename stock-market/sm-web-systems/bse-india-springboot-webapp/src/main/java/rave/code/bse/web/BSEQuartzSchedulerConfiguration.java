@@ -2,7 +2,7 @@ package rave.code.bse.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import rave.code.entity.quartz.scheduler.BSEQuartzScheduler;
+import rave.code.quartz.scheduler.BSEQuartzScheduler;
 
 @Configuration
 public class BSEQuartzSchedulerConfiguration {

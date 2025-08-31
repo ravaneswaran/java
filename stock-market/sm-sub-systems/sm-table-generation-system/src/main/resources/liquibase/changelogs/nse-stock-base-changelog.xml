@@ -14,7 +14,7 @@
             <column name="symbol" type="varchar2(100)"/>
             <column name="company_name" type="varchar2(100)"/>
             <column name="series" type="varchar2(100)"/>
-            <column name="data_of_listing" type="datetime"/>
+            <column name="date_of_listing" type="datetime"/>
             <column name="paid_up_value" type="int"/>
             <column name="face_value" type="int"/>
             <column name="market_lot" type="int"/>

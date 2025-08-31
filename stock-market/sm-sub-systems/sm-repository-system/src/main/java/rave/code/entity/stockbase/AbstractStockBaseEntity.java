@@ -25,6 +25,11 @@ public class AbstractStockBaseEntity implements Serializable {
 
     public AbstractStockBaseEntity(){
         this.setId(UUID.randomUUID().toString());
+        Date now = new Date();
+        this.setCreatedDate(now);
+        this.setModifiedDate(now);
+        this.setCreatedBy("SYSTEM");
+        this.setModifiedBy("SYSTEM");
         this.setNewEntity(true);
     }
 
@@ -38,4 +43,15 @@ public class AbstractStockBaseEntity implements Serializable {
         this.newEntity = newEntity;
     }
 
+    public Date getCreatedDate() {return createdDate;}
+    public void setCreatedDate(Date createdDate) {this.createdDate = createdDate;}
+
+    public Date getModifiedDate() {return modifiedDate;}
+    public void setModifiedDate(Date modifiedDate) {this.modifiedDate = modifiedDate;}
+
+    public String getCreatedBy() {return createdBy;}
+    public void setCreatedBy(String createdBy) {this.createdBy = createdBy;}
+
+    public String getModifiedBy() {return modifiedBy;}
+    public void setModifiedBy(String modifiedBy) {this.modifiedBy = modifiedBy;}
 }
