@@ -5,7 +5,10 @@ public abstract class AbstractEntityMakerFromCSVJob<S, T> extends AbstractEntity
     protected String downloadUrl;
 
     public AbstractEntityMakerFromCSVJob(String downloadUrl) {
-        this.downloadUrl = downloadUrl;
+        this.setDownloadUrl(downloadUrl);
     }
 
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
 }

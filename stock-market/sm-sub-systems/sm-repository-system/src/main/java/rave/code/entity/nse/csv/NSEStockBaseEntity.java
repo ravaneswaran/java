@@ -29,12 +29,18 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     @Column(name = "market_lot")
     private int marketLot;
 
-    public List<NSEDayPriceDetailEntity> getNseDayPriceDetailEntities() {return nseDayPriceDetailEntities;}
+    public List<NSEDayPriceDetailEntity> getNseDayPriceDetailEntities() {
+        return nseDayPriceDetailEntities;
+    }
+
     public void setNseDayPriceDetailEntities(List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities) {
         this.nseDayPriceDetailEntities = nseDayPriceDetailEntities;
     }
 
-    public String getISINumber() {return ISINumber;}
+    public String getISINumber() {
+        return ISINumber;
+    }
+
     public void setISINumber(String ISINumber) {
         this.ISINumber = ISINumber;
     }
@@ -42,6 +48,7 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public String getSymbol() {
         return symbol;
     }
+
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
@@ -49,6 +56,7 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public String getCompanyName() {
         return companyName;
     }
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
@@ -56,6 +64,7 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public String getSeries() {
         return series;
     }
+
     public void setSeries(String series) {
         this.series = series;
     }
@@ -63,6 +72,7 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public Date getDateOfListing() {
         return dateOfListing;
     }
+
     public void setDateOfListing(Date dateOfListing) {
         this.dateOfListing = dateOfListing;
     }
@@ -70,6 +80,7 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public int getPaidUpValue() {
         return paidUpValue;
     }
+
     public void setPaidUpValue(int paidUpValue) {
         this.paidUpValue = paidUpValue;
     }
@@ -77,6 +88,7 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public int getFaceValue() {
         return faceValue;
     }
+
     public void setFaceValue(int faceValue) {
         this.faceValue = faceValue;
     }
@@ -84,13 +96,14 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     public int getMarketLot() {
         return marketLot;
     }
+
     public void setMarketLot(int marketLot) {
         this.marketLot = marketLot;
     }
 
-    public static NSEStockBaseEntity newInstance(String symbol, String companyName, String series, Date dateOfListing, int paidUpValue, int faceValue, int marketLot){
+    public static NSEStockBaseEntity newInstance(String symbol, String companyName, String series, Date dateOfListing, int paidUpValue, int faceValue, int marketLot) {
         NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();
-        nseStockBaseEntity.setSymbol(symbol);
+        nseStockBaseEntity.setSymbol(returnValidOrHyphenSymbol(symbol));
         nseStockBaseEntity.setCompanyName(companyName);
         nseStockBaseEntity.setSeries(series);
         nseStockBaseEntity.setISINumber("-");
@@ -99,6 +112,10 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
         nseStockBaseEntity.setFaceValue(faceValue);
         nseStockBaseEntity.setMarketLot(marketLot);
         return nseStockBaseEntity;
+    }
+
+    public static String returnValidOrHyphenSymbol(String symbol) {
+        return (null == symbol || "".equals(symbol.trim())) ? "-" : symbol;
     }
 
 }

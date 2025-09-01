@@ -43,7 +43,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractEntityMakerFromCSVJ
         this.date = date;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
         String formattedDate = simpleDateFormat.format(this.date);
-        this.downloadUrl = String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate);
+        this.setDownloadUrl(String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate));
     }
 
     @Override
@@ -150,10 +150,12 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractEntityMakerFromCSVJ
             NSEStockBaseEntity nseStockBaseEntity = mappedStockBaseEntities.get(key);
             if (null != nseStockBaseEntity) {
                 LOGGER.log(Level.INFO, String.format("%s : stock base entity exists...", key));
+                nseStockBaseEntity.setSymbol(NSEStockBaseEntity.returnValidOrHyphenSymbol(nseStockBaseEntity.getSymbol()));
                 nseDayPriceDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not exists...", key));
                 NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseDayPriceDetailEntity.getSymbol(), nseDayPriceDetailEntity.getCompanyName(), nseDayPriceDetailEntity.getSeries(), null, -1, -1, -1);
+                nseStockBaseEntityToCreate.setSymbol(NSEStockBaseEntity.returnValidOrHyphenSymbol(nseStockBaseEntityToCreate.getSymbol()));
                 nseStockBaseEntities.add(nseStockBaseEntityToCreate);
                 nseDayPriceDetailEntity.setNseStockBaseEntity(nseStockBaseEntityToCreate);
             }
@@ -167,7 +169,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractEntityMakerFromCSVJ
         JavaUtilLogDecor.setupLogDecor();
         LocalDate today = LocalDate.now();
         List<Date> dates = new ArrayList<>();
-        for (int index = 60; index >= 1; index--) {
+        for (int index = 10; index >= 1; index--) {
             LocalDate pastLocalDate = today.minusDays(index);
             Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             dates.add(pastDate);
