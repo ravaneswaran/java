@@ -30,6 +30,7 @@ public class JavaUtilLogDecor extends Formatter {
                 color = RED;
                 break;
             case "WARN":
+            case "WARNING":
                 color = YELLOW;
                 break;
             case "INFO":
