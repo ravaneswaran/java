@@ -4,7 +4,7 @@ import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
-import rave.code.quartz.job.stockbase.AbstractEntityMakerFromCSVJob;
+import rave.code.quartz.job.stockbase.AbstractCSVEntityMakerJob;
 import rave.code.repository.nse.NSEDayPriceDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utilities.file.SimpleFileReader;
@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSEDayPriceDetailEntityMakerJob extends AbstractEntityMakerFromCSVJob<List<String>, List<NSEDayPriceDetailEntity>> {
+public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<List<String>, List<NSEDayPriceDetailEntity>> {
 
     private static final Logger LOGGER = Logger.getLogger(NSEDayPriceDetailEntityMakerJob.class.getName());
 
@@ -150,12 +150,10 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractEntityMakerFromCSVJ
             NSEStockBaseEntity nseStockBaseEntity = mappedStockBaseEntities.get(key);
             if (null != nseStockBaseEntity) {
                 LOGGER.log(Level.INFO, String.format("%s : stock base entity exists...", key));
-                nseStockBaseEntity.setSymbol(NSEStockBaseEntity.returnValidOrHyphenSymbol(nseStockBaseEntity.getSymbol()));
                 nseDayPriceDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not exists...", key));
                 NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseDayPriceDetailEntity.getSymbol(), nseDayPriceDetailEntity.getCompanyName(), nseDayPriceDetailEntity.getSeries(), null, -1, -1, -1);
-                nseStockBaseEntityToCreate.setSymbol(NSEStockBaseEntity.returnValidOrHyphenSymbol(nseStockBaseEntityToCreate.getSymbol()));
                 nseStockBaseEntities.add(nseStockBaseEntityToCreate);
                 nseDayPriceDetailEntity.setNseStockBaseEntity(nseStockBaseEntityToCreate);
             }

@@ -3,7 +3,7 @@ package rave.code.quartz.job.stockbase.nse;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.ASCIIColorCodes;
-import rave.code.quartz.job.stockbase.AbstractEntityMakerFromCSVJob;
+import rave.code.quartz.job.stockbase.AbstractCSVEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.download.FileDownloader;
@@ -20,15 +20,15 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class NSEStockBaseEntityMakerJob extends AbstractEntityMakerFromCSVJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
+public abstract class NSEStockBaseCSVEntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
 
     protected String downloadUrl;
     protected Date toDate = new Date();
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
-    private static final Logger LOGGER = Logger.getLogger(AbstractEntityMakerFromCSVJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractCSVEntityMakerJob.class.getName());
 
-    public NSEStockBaseEntityMakerJob(String downloadUrl) {
+    public NSEStockBaseCSVEntityMakerJob(String downloadUrl) {
         super(downloadUrl);
         this.downloadUrl = downloadUrl;
     }
