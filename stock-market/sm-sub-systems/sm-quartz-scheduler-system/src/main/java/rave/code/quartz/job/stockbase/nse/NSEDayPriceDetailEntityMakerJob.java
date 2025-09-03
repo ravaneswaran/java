@@ -43,7 +43,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         this.date = date;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
         String formattedDate = simpleDateFormat.format(this.date);
-        this.setDownloadUrl(String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate));
+        this.setUrl(String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate));
     }
 
     @Override

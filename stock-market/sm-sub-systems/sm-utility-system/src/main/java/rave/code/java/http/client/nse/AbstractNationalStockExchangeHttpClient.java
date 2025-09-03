@@ -9,7 +9,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -19,54 +18,53 @@ import java.util.logging.Logger;
 public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHttpClient {
 
     private String homePageUrl = "https://www.nseindia.com";
-    private String downloadPageUrl;
+    private String downloadLinkAvailablePageUrl;
     private HttpClient client;
     private HttpResponse<String> response;
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNationalStockExchangeHttpClient.class.getName());
 
-    public AbstractNationalStockExchangeHttpClient(String downloadPageUrl) {
-        this("https://www.nseindia.com", downloadPageUrl);
+    public AbstractNationalStockExchangeHttpClient(String downloadLinkAvailablePageUrl) {
+        this("https://www.nseindia.com", downloadLinkAvailablePageUrl);
     }
 
-    public AbstractNationalStockExchangeHttpClient(String homePageUrl, String downloadPageUrl) {
+    public AbstractNationalStockExchangeHttpClient(String homePageUrl, String downloadLinkAvailablePageUrl) {
         this.homePageUrl = homePageUrl;
-        this.downloadPageUrl = downloadPageUrl;
+        this.downloadLinkAvailablePageUrl = downloadLinkAvailablePageUrl;
         this.client = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.ALWAYS)
                 .cookieHandler(new CookieManager())
                 .build();
     }
 
-    public AbstractNationalStockExchangeHttpClient browseHomePage() throws IOException, InterruptedException {
+    public AbstractNationalStockExchangeHttpClient gotoHomePage() throws IOException, InterruptedException {
         HttpRequest request = this.buildHttpRequest(this.homePageUrl);
         this.response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
         LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), this.homePageUrl));
         return this;
     }
 
-    public AbstractNationalStockExchangeHttpClient browseDownloadPage() throws IOException, InterruptedException {
-        HttpRequest request = this.buildHttpRequest(this.downloadPageUrl);
+    public AbstractNationalStockExchangeHttpClient gotoDownloadLinkAvailablePage() throws IOException, InterruptedException {
+        HttpRequest request = this.buildHttpRequest(this.downloadLinkAvailablePageUrl);
         this.response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), this.downloadPageUrl));
+        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), this.downloadLinkAvailablePageUrl));
         return this;
     }
 
-    public byte[] getResponseContent(String url) throws IOException, InterruptedException {
+    public byte[] byteArrayResponseOf(String url) throws IOException, InterruptedException {
         HttpRequest request = this.buildHttpRequest(url);
         this.response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
         LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), url));
         if (200 == this.response.statusCode()) {
-            return this.response.body().getBytes(StandardCharsets.UTF_8);
+            return this.response.body().getBytes();
         } else {
             return new byte[0];
         }
     }
 
-    public File writeResponseContentToFile(String url) throws IOException, InterruptedException {
-        String fileAbsolutePath = String.format("/tmp/downloaded-file-%s.csv", new Date().getTime());
+    public File fileResponseOf(String url) throws IOException, InterruptedException {
+        String fileAbsolutePath = String.format("downloaded-file-%s.csv", new Date().getTime());
         Path destination = Paths.get(fileAbsolutePath);
-        url = String.format("%s&csv=true", url);
 
         HttpRequest request = this.buildHttpRequest(url);
         HttpResponse<Path> resp = this.client.send(request, HttpResponse.BodyHandlers.ofFile(destination));
@@ -82,7 +80,6 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHt
                 .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                 .header("Accept-Language", "en-US,en;q=0.9")
                 .header("Referer", "https://www.nseindia.com/")
-                //.headers(getCookies(this.response))
                 .GET()
                 .build();
     }
