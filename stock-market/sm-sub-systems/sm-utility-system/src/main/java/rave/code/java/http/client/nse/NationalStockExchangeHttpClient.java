@@ -1,4 +1,4 @@
-package rave.code.java.http.nse;
+package rave.code.java.http.client.nse;
 
 import rave.code.utility.log.JavaUtilLogDecor;
 
@@ -15,7 +15,7 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
         NationalStockExchangeHttpClient nationalStockExchangeHttpClient = new NationalStockExchangeHttpClient("https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market");
         nationalStockExchangeHttpClient.browseHomePage().waitFor(0).browseDownloadPage().waitFor(0);
 
-        nationalStockExchangeHttpClient.writeContentToFile("https://www.nseindia.com/api/market-data-pre-open?key=NIFTY");
+        nationalStockExchangeHttpClient.writeResponseContentToFile("https://www.nseindia.com/api/market-data-pre-open?key=NIFTY");
 
         //byte[] contentInBytes = nationalStockExchangeHttpClient.getResponseContent("https://www.nseindia.com/api/market-data-pre-open?key=ALL");
         //String content = new String(contentInBytes);

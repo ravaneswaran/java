@@ -1,7 +1,8 @@
-package rave.code.java.http.nse;
+package rave.code.java.http.client.nse;
 
-import rave.code.java.http.AbstractHttpClient;
+import rave.code.java.http.client.AbstractHttpClient;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.CookieManager;
 import java.net.URI;
@@ -12,8 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,36 +63,15 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHt
         }
     }
 
-    public AbstractNationalStockExchangeHttpClient writeContentToFile(String url) throws IOException, InterruptedException {
+    public File writeResponseContentToFile(String url) throws IOException, InterruptedException {
+        String fileAbsolutePath = String.format("/tmp/downloaded-file-%s.csv", new Date().getTime());
+        Path destination = Paths.get(fileAbsolutePath);
         url = String.format("%s&csv=true", url);
-        Path destination = Paths.get(String.format("downloaded-file-%s.csv", new Date().getTime()));
+
         HttpRequest request = this.buildHttpRequest(url);
         HttpResponse<Path> resp = this.client.send(request, HttpResponse.BodyHandlers.ofFile(destination));
-        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), url));
-        return this;
-    }
-
-    public String[] getCookies(HttpResponse<String> response) {
-        if(response!= null){
-            Map<String, List<String>> responseHeaderMap = response.headers().map();
-            String[] cookieHeaderArray = new String[2];
-            for (String key : responseHeaderMap.keySet()) {
-                if ("set-cookie".equalsIgnoreCase(key)) {
-                    List<String> values = responseHeaderMap.get(key);
-                    StringBuffer valueBuffer = new StringBuffer();
-                    for (String value : values) {
-                        valueBuffer.append(value).append(";");
-                    }
-                    String valueString = valueBuffer.toString();
-                    String value = valueString.substring(0, valueString.length() - 1);
-                    cookieHeaderArray[0] = key;
-                    cookieHeaderArray[1] = value;
-                }
-            }
-            return cookieHeaderArray;
-        } else {
-            return null;
-        }
+        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", resp.statusCode(), url));
+        return resp.body().getFileName().toFile();
     }
 
     public HttpRequest buildHttpRequest(String url) {
@@ -105,18 +83,6 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHt
                 .header("Accept-Language", "en-US,en;q=0.9")
                 .header("Referer", "https://www.nseindia.com/")
                 //.headers(getCookies(this.response))
-                .GET()
-                .build();
-    }
-
-    public HttpRequest buildNoCookieHttpRequest(String url) {
-        return HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-                .header("Accept-Encoding", "gzip, deflate, br, zstd")
-                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                .header("Accept-Language", "en-US,en;q=0.9")
-                .header("Referer", "https://www.nseindia.com/")
                 .GET()
                 .build();
     }
