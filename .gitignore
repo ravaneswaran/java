@@ -106,6 +106,7 @@ stock-market/sm-sub-systems/sm-quartz-scheduler-system/target/
 stock-market/sm-sub-systems/sm-data-model-system/target/
 stock-market/sm-sub-systems/sm-data-parser-system/target/
 stock-market/sm-sub-systems/sm-technical-analysis-system/target/
+stock-market/sm-sub-systems/sm-utility-system/target/
 
 utilities/utilities.iml
 utilities/google-zxing-qrcode/target/

@@ -26,6 +26,7 @@
         <module>sm-quartz-scheduler-system</module>
         <module>sm-ai-system</module>
         <module>sm-technical-analysis-system</module>
+        <module>sm-utility-system</module>
     </modules>
 
 </project>

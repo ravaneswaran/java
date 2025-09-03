@@ -51,4 +51,21 @@ public class NSEStockBaseRepository extends AbstractNSERepository<NSEStockBaseEn
 
         return mappedStockBaseEntity;
     }
+
+    public Map<String, NSEStockBaseEntity> getEntityMapForPreOpenMarketDetails() {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
+        Query query = this.getEntityManager().createQuery(queryBuilder.toString());
+
+        List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
+        LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+
+        Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
+        for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
+            String key = String.format("%s", nseStockBaseEntity.getSymbol());
+            mappedStockBaseEntity.put(key, nseStockBaseEntity);
+        }
+
+        return mappedStockBaseEntity;
+    }
 }
