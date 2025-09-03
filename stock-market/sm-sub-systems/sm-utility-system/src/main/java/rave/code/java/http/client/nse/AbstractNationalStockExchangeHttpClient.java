@@ -40,21 +40,21 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHt
     public AbstractNationalStockExchangeHttpClient gotoHomePage() throws IOException, InterruptedException {
         HttpRequest request = this.buildHttpRequest(this.homePageUrl);
         this.response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), this.homePageUrl));
+        LOGGER.log(Level.INFO, String.format("HomePage(%s) : HTTP[%s]", this.homePageUrl, this.response.statusCode()));
         return this;
     }
 
     public AbstractNationalStockExchangeHttpClient gotoDownloadLinkAvailablePage() throws IOException, InterruptedException {
         HttpRequest request = this.buildHttpRequest(this.downloadLinkAvailablePageUrl);
         this.response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), this.downloadLinkAvailablePageUrl));
+        LOGGER.log(Level.INFO, String.format("DownloadLinkAvailablePage(%s) : HTTP[%s]", this.downloadLinkAvailablePageUrl, this.response.statusCode()));
         return this;
     }
 
     public byte[] byteArrayResponseOf(String url) throws IOException, InterruptedException {
         HttpRequest request = this.buildHttpRequest(url);
         this.response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", this.response.statusCode(), url));
+        LOGGER.log(Level.INFO, String.format("ContentUrl(%s) : HTTP[%s]", url, this.response.statusCode()));
         if (200 == this.response.statusCode()) {
             return this.response.body().getBytes();
         } else {
@@ -68,7 +68,7 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHt
 
         HttpRequest request = this.buildHttpRequest(url);
         HttpResponse<Path> resp = this.client.send(request, HttpResponse.BodyHandlers.ofFile(destination));
-        LOGGER.log(Level.INFO, String.format("Http Status : %s (%s)", resp.statusCode(), url));
+        LOGGER.log(Level.INFO, String.format("FileDownloadUrl(%s) : HTTP[%s]", url, resp.statusCode()));
         return resp.body().getFileName().toFile();
     }
 
