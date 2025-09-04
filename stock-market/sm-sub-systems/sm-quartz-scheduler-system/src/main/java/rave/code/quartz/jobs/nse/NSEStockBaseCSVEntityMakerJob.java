@@ -1,4 +1,4 @@
-package rave.code.quartz.job.stockbase.nse;
+package rave.code.quartz.jobs.nse;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;

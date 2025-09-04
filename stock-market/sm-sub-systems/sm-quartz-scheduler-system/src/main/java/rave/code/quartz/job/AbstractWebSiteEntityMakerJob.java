@@ -2,6 +2,7 @@ package rave.code.quartz.job;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import rave.code.quartz.jobs.AbstractQuartzJob;
 
 import java.util.List;
 

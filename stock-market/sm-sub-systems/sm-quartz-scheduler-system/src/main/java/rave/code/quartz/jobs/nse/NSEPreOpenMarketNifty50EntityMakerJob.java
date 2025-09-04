@@ -1,4 +1,4 @@
-package rave.code.quartz.job.stockbase.nse;
+package rave.code.quartz.jobs.nse;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
@@ -62,7 +62,7 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMake
 
         int size = lines.size();
         StringBuffer lineBuffer = new StringBuffer();
-        for(int index = 10; index < size; index++){
+        for (int index = 10; index < size; index++) {
             lineBuffer.append(lines.get(index)).append("\n");
         }
 
@@ -153,20 +153,6 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMake
     public void saveTransformedData(List<NSEPreOpenMarketDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.getEntityMapForPreOpenMarketDetails();
         List<NSEPreOpenMarketDetailEntity> properNsePreOpenMarketDetailEntities = new ArrayList<>();
-         /* NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity = transformedData.get(0);
-
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getSymbol());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getPreviousClose());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getIndicativeEquilibriumPrice());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getChange());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getPercentageChange());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getFinalPrice());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getFinalQuantity());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getValueInCrores());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getFreeFloatMarketCapitalization());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getNewMarket52WeekHigh());
-        System.out.println("----------------->>>>>> "+nsePreOpenMarketDetailEntity.getNewMarket52WeekLow());*/
-
 
         for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity : transformedData) {
             String key = nsePreOpenMarketDetailEntity.getKey();

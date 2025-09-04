@@ -1,4 +1,4 @@
-package rave.code.quartz.job;
+package rave.code.quartz.jobs;
 
 import org.quartz.Job;
 

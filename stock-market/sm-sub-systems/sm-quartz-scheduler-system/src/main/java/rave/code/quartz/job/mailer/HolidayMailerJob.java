@@ -3,7 +3,7 @@ package rave.code.quartz.job.mailer;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import rave.code.mail.java.ElectronicMail;
-import rave.code.quartz.job.AbstractQuartzJob;
+import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.stockmarket.entity.HolidayEntity;
 import rave.code.stockmarket.repository.HolidayRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
