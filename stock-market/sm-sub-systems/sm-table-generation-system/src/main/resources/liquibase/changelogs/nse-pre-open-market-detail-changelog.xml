@@ -15,8 +15,8 @@
             <column name="symbol" type="varchar2(100)"/>
             <column name="previous_close" type="double"/>
             <column name="indicative_equilibrium_price" type="double"/>
-            <column name="change" type="double"/>
-            <column name="percentage_change" type="double"/>
+            <column name="price_change" type="double"/>
+            <column name="price_percentage_change" type="double"/>
             <column name="final_price" type="double"/>
             <column name="final_quantity" type="double"/>
             <column name="value_in_crores" type="decimal(20, 2)"/>

@@ -2,6 +2,7 @@ package rave.code.entity.nse.csv;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "nse_pre_open_market_detail")
@@ -11,16 +12,18 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
     @ManyToOne
     @JoinColumn(name = "stock_base_id", nullable=false)
     private NSEStockBaseEntity nseStockBaseEntity;
+    @Column(name = "business_date")
+    protected Date businessDate;
     @Column(name = "symbol")
     private String symbol;
     @Column(name = "previous_close")
     private double previousClose;
     @Column(name = "indicative_equilibrium_price")
     private double indicativeEquilibriumPrice;
-    @Column(name = "change")
-    private double change;
-    @Column(name = "percentage_change")
-    private double percentageChange;
+    @Column(name = "price_change")
+    private double priceChange;
+    @Column(name = "price_percentage_change")
+    private double pricePercentageChange;
     @Column(name = "final_price")
     private double finalPrice;
     @Column(name = "final_quantity")
@@ -34,12 +37,24 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
     @Column(name = "new_market_52_week_low")
     private double newMarket52WeekLow;
 
+    public NSEPreOpenMarketDetailEntity(){
+        this.setBusinessDate(new Date());
+    }
+
     public NSEStockBaseEntity getNseStockBaseEntity() {
         return nseStockBaseEntity;
     }
 
     public void setNseStockBaseEntity(NSEStockBaseEntity nseStockBaseEntity) {
         this.nseStockBaseEntity = nseStockBaseEntity;
+    }
+
+    public Date getBusinessDate() {
+        return businessDate;
+    }
+
+    public void setBusinessDate(Date businessDate) {
+        this.businessDate = businessDate;
     }
 
     public String getSymbol() {
@@ -66,20 +81,20 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
         this.indicativeEquilibriumPrice = indicativeEquilibriumPrice;
     }
 
-    public double getChange() {
-        return change;
+    public double getPriceChange() {
+        return priceChange;
     }
 
-    public void setChange(double change) {
-        this.change = change;
+    public void setPriceChange(double priceChange) {
+        this.priceChange = priceChange;
     }
 
-    public double getPercentageChange() {
-        return percentageChange;
+    public double getPricePercentageChange() {
+        return pricePercentageChange;
     }
 
-    public void setPercentageChange(double percentageChange) {
-        this.percentageChange = percentageChange;
+    public void setPricePercentageChange(double pricePercentageChange) {
+        this.pricePercentageChange = pricePercentageChange;
     }
 
     public double getFinalPrice() {

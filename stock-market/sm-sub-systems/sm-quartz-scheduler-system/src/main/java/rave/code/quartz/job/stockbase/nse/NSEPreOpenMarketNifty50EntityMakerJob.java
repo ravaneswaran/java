@@ -97,16 +97,16 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMake
                 nsePreOpenMarketDetailEntity.setIndicativeEquilibriumPrice(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setChange(Double.parseDouble(csvRecord.get(3).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setPriceChange(Double.parseDouble(csvRecord.get(3).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("Change of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
-                nsePreOpenMarketDetailEntity.setChange(0.00);
+                nsePreOpenMarketDetailEntity.setPriceChange(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setPercentageChange(Double.parseDouble(csvRecord.get(4).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setPricePercentageChange(Double.parseDouble(csvRecord.get(4).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("PercentageChange of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
-                nsePreOpenMarketDetailEntity.setPercentageChange(0.00);
+                nsePreOpenMarketDetailEntity.setPricePercentageChange(0.00);
             }
             try {
                 nsePreOpenMarketDetailEntity.setFinalPrice(Double.parseDouble(csvRecord.get(5).replaceAll(",", "")));
