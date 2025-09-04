@@ -1,75 +1,59 @@
 package rave.code.java.http.client.nse;
 
-import rave.code.java.http.client.AbstractHttpClient;
+import org.brotli.dec.BrotliInputStream;
+import rave.code.java.http.client.AbstractStockMarketHttpClient;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.CookieManager;
+import java.io.InputStream;
 import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
 
-public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHttpClient {
+public abstract class AbstractNationalStockExchangeHttpClient extends AbstractStockMarketHttpClient {
 
     private String homePageUrl = "https://www.nseindia.com";
-    private String downloadLinkAvailablePageUrl;
-    private HttpClient client;
-    private HttpResponse<String> response;
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNationalStockExchangeHttpClient.class.getName());
 
-    public AbstractNationalStockExchangeHttpClient(String downloadLinkAvailablePageUrl) {
-        this("https://www.nseindia.com", downloadLinkAvailablePageUrl);
+    public AbstractNationalStockExchangeHttpClient() {
+        super();
+        this.homePageUrl = "https://www.nseindia.com";
     }
 
-    public AbstractNationalStockExchangeHttpClient(String homePageUrl, String downloadLinkAvailablePageUrl) {
-        this.homePageUrl = homePageUrl;
-        this.downloadLinkAvailablePageUrl = downloadLinkAvailablePageUrl;
-        this.client = HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.ALWAYS)
-                .cookieHandler(new CookieManager())
-                .build();
-    }
-
-    public AbstractNationalStockExchangeHttpClient gotoHomePage() throws IOException, InterruptedException {
+    public HttpResponse<String> gotoHomePage() throws IOException, InterruptedException {
         HttpRequest request = this.buildHttpRequest(this.homePageUrl);
-        this.response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("HomePage(%s) : HTTP[%s]", this.homePageUrl, this.response.statusCode()));
-        return this;
+        return this.stringResponseOf(this.homePageUrl);
     }
 
-    public AbstractNationalStockExchangeHttpClient gotoDownloadLinkAvailablePage() throws IOException, InterruptedException {
-        HttpRequest request = this.buildHttpRequest(this.downloadLinkAvailablePageUrl);
-        this.response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("DownloadLinkAvailablePage(%s) : HTTP[%s]", this.downloadLinkAvailablePageUrl, this.response.statusCode()));
-        return this;
-    }
+    public File getFile(String url) throws IOException, InterruptedException {
+        String fileName = String.format("downloaded-file-%s.csv", new Date().getTime());
+        HttpResponse<InputStream> response = this.inputStreamResponseOf(url);
+        if (response.statusCode() == 200) {
+            byte[] body = response.body().readAllBytes();
 
-    public byte[] byteArrayResponseOf(String url) throws IOException, InterruptedException {
-        HttpRequest request = this.buildHttpRequest(url);
-        this.response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
-        LOGGER.log(Level.INFO, String.format("ContentUrl(%s) : HTTP[%s]", url, this.response.statusCode()));
-        if (200 == this.response.statusCode()) {
-            return this.response.body().getBytes();
-        } else {
-            return new byte[0];
+            // If gzip-encoded, decompress
+            String encoding = response.headers().firstValue("Content-Encoding").orElse("");
+            if ("gzip".equalsIgnoreCase(encoding)) {
+                try (GZIPInputStream gis = new GZIPInputStream(new ByteArrayInputStream(body))) {
+                    body = gis.readAllBytes();
+                }
+            }
+            if ("br".equalsIgnoreCase(encoding)) {
+                try (BrotliInputStream bis =
+                             new BrotliInputStream(new ByteArrayInputStream(body))) {
+                    body = bis.readAllBytes();
+                }
+            }
+            return Files.write(Path.of(fileName), body).toFile();
         }
-    }
-
-    public File fileResponseOf(String url) throws IOException, InterruptedException {
-        String fileAbsolutePath = String.format("downloaded-file-%s.csv", new Date().getTime());
-        Path destination = Paths.get(fileAbsolutePath);
-
-        HttpRequest request = this.buildHttpRequest(url);
-        HttpResponse<Path> resp = this.client.send(request, HttpResponse.BodyHandlers.ofFile(destination));
-        LOGGER.log(Level.INFO, String.format("FileDownloadUrl(%s) : HTTP[%s]", url, resp.statusCode()));
-        return resp.body().getFileName().toFile();
+        return null;
     }
 
     public HttpRequest buildHttpRequest(String url) {
@@ -84,13 +68,9 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractHt
                 .build();
     }
 
-    public HttpResponse<String> getResponse() {
-        return this.response;
-    }
-
-    public AbstractNationalStockExchangeHttpClient waitFor(int noOfSeconds) throws InterruptedException {
-        Thread.sleep(noOfSeconds * 1000);
-        return this;
+    public String customizeHttpStatus(HttpResponse<?> response) {
+        int statusCode = response.statusCode();
+        return (200 == statusCode) ? String.format("%s OK", statusCode) : String.format("%s", statusCode);
     }
 }
 
