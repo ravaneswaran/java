@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSESMEEquityStockBaseEntityMakerJob extends NSEStockBaseCSVEntityMakerJob {
+public class NSESMEEquityStockBaseEntityMakerJob extends AbstractNSEStockBaseCSVEntityMakerJob {
 
     private static final Logger LOGGER = Logger.getLogger(NSESMEEquityStockBaseEntityMakerJob.class.getName());
 

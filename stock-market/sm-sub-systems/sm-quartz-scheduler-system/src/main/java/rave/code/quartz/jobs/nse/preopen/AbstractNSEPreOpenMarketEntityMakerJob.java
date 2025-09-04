@@ -27,6 +27,7 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractCSV
     private NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
 
     protected String downloadPageUrl;
+    protected String preOpenType;
 
     public AbstractNSEPreOpenMarketEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);
@@ -80,6 +81,7 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractCSV
         List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = new ArrayList<>();
         for (CSVRecord csvRecord : sourceData) {
             NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity = new NSEPreOpenMarketDetailEntity();
+            nsePreOpenMarketDetailEntity.setPreOpenType(this.preOpenType);
             String symbol = csvRecord.get(0);
             nsePreOpenMarketDetailEntity.setSymbol(symbol);
             try {

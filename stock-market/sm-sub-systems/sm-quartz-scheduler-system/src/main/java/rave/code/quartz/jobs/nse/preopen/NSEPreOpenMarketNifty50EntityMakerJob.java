@@ -11,6 +11,7 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractNSEPreOpenMar
 
     public NSEPreOpenMarketNifty50EntityMakerJob() {
         super("https://www.nseindia.com/api/market-data-pre-open?key=NIFTY&csv=true");
+        this.preOpenType = "NIFTY";
     }
 
     public static void main(String[] args) {

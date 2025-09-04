@@ -20,29 +20,27 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class NSEStockBaseCSVEntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
+public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
 
-    protected String downloadUrl;
     protected Date toDate = new Date();
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
     private static final Logger LOGGER = Logger.getLogger(AbstractCSVEntityMakerJob.class.getName());
 
-    public NSEStockBaseCSVEntityMakerJob(String downloadUrl) {
-        super(downloadUrl);
-        this.downloadUrl = downloadUrl;
+    public AbstractNSEStockBaseCSVEntityMakerJob(String csvDownloadUrl) {
+        super(csvDownloadUrl);
     }
 
     @Override
     public List<CSVRecord> getDataFromSource() {
         FileDownloader fileDownloader = new FileDownloader();
         List<CSVRecord> csvRecords = new ArrayList<>();
-        try (InputStream inputStream = fileDownloader.downloadFile(this.downloadUrl)) {
+        try (InputStream inputStream = fileDownloader.downloadFile(this.csvDownloadUrl)) {
             ApacheCommonsCSVFileReader apacheCommonsCSVReader = new ApacheCommonsCSVFileReader();
             csvRecords = apacheCommonsCSVReader.read(inputStream);
         } catch (FileNotFoundException fileNotFoundException) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", this.downloadUrl));
+            LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", this.csvDownloadUrl));
             LOGGER.log(Level.SEVERE, "Possibly could be the following reason(s)...");
             LOGGER.log(Level.SEVERE, String.format("the day which the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY) or...", sdf.format(this.toDate)));
             LOGGER.log(Level.SEVERE, String.format("the system expects the file now but will be made available only after 6:00 PM..", sdf.format(this.toDate)));

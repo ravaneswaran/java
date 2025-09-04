@@ -12,6 +12,7 @@
             </column>
             <column name="stock_base_id" type="varchar2(100)"/>
             <column name="business_date" type="datetime"/>
+            <column name="pre_open_type" type="varchar2(30)"/>
             <column name="symbol" type="varchar2(100)"/>
             <column name="previous_close" type="double"/>
             <column name="indicative_equilibrium_price" type="double"/>

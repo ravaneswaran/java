@@ -11,6 +11,7 @@ public class NSEPreOpenMarketFOEntityMakerJob extends AbstractNSEPreOpenMarketEn
 
     public NSEPreOpenMarketFOEntityMakerJob() {
         super("https://www.nseindia.com/api/market-data-pre-open?key=FO&csv=true");
+        this.preOpenType = "FO";
     }
 
     public static void main(String[] args) {

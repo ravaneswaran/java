@@ -13,7 +13,9 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
     @JoinColumn(name = "stock_base_id", nullable=false)
     private NSEStockBaseEntity nseStockBaseEntity;
     @Column(name = "business_date")
-    protected Date businessDate;
+    private Date businessDate;
+    @Column(name = "pre_open_type")
+    private String preOpenType;
     @Column(name = "symbol")
     private String symbol;
     @Column(name = "previous_close")
@@ -47,6 +49,14 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
 
     public void setNseStockBaseEntity(NSEStockBaseEntity nseStockBaseEntity) {
         this.nseStockBaseEntity = nseStockBaseEntity;
+    }
+
+    public String getPreOpenType() {
+        return preOpenType;
+    }
+
+    public void setPreOpenType(String preOpenType) {
+        this.preOpenType = preOpenType;
     }
 
     public Date getBusinessDate() {
