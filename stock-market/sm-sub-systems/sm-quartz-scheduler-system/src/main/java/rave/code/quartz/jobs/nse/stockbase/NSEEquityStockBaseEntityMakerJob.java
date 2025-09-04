@@ -1,4 +1,4 @@
-package rave.code.quartz.jobs.nse;
+package rave.code.quartz.jobs.nse.stockbase;
 
 
 import rave.code.utility.log.JavaUtilLogDecor;

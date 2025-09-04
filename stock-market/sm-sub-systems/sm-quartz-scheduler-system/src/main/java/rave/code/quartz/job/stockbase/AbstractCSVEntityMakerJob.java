@@ -2,13 +2,13 @@ package rave.code.quartz.job.stockbase;
 
 public abstract class AbstractCSVEntityMakerJob<S, T> extends AbstractEntityMakerJob<S, T> {
 
-    protected String url;
+    protected String csvDownloadUrl;
 
-    public AbstractCSVEntityMakerJob(String url) {
-        this.setUrl(url);
+    public AbstractCSVEntityMakerJob(String csvDownloadUrl) {
+        this.setCsvDownloadUrl(csvDownloadUrl);
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCsvDownloadUrl(String csvDownloadUrl) {
+        this.csvDownloadUrl = csvDownloadUrl;
     }
 }

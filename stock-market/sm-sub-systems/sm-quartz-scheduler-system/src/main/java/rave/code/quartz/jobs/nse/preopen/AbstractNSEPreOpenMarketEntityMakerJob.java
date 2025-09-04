@@ -1,4 +1,4 @@
-package rave.code.quartz.jobs.nse;
+package rave.code.quartz.jobs.nse.preopen;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
@@ -9,7 +9,6 @@ import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utilities.file.SimpleFileReader;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
-import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -20,19 +19,18 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEPreOpenMarketDetailEntity>> {
+public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEPreOpenMarketDetailEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(NSEPreOpenMarketNifty50EntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractNSEPreOpenMarketEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
 
-    public NSEPreOpenMarketNifty50EntityMakerJob() {
-        this("https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market");
-    }
+    protected String downloadPageUrl;
 
-    public NSEPreOpenMarketNifty50EntityMakerJob(String url) {
-        super(url);
+    public AbstractNSEPreOpenMarketEntityMakerJob(String csvDownloadUrl) {
+        super(csvDownloadUrl);
+        this.downloadPageUrl = "https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market";
     }
 
     @Override
@@ -41,8 +39,8 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMake
         NationalStockExchangeHttpClient nationalStockExchangeHttpClient = new NationalStockExchangeHttpClient();
         try {
             nationalStockExchangeHttpClient.gotoHomePage();
-            nationalStockExchangeHttpClient.stringResponseOf(this.url);
-            downloadedFile = nationalStockExchangeHttpClient.getFile("https://www.nseindia.com/api/market-data-pre-open?key=NIFTY&csv=true");
+            nationalStockExchangeHttpClient.stringResponseOf(this.downloadPageUrl);
+            downloadedFile = nationalStockExchangeHttpClient.getFile(this.csvDownloadUrl);
         } catch (IOException ioException) {
             LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         } catch (InterruptedException interruptedException) {
@@ -99,7 +97,7 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMake
             try {
                 nsePreOpenMarketDetailEntity.setPriceChange(Double.parseDouble(csvRecord.get(3).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("Change of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("change of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setPriceChange(0.00);
             }
             try {
@@ -168,10 +166,4 @@ public class NSEPreOpenMarketNifty50EntityMakerJob extends AbstractCSVEntityMake
         this.nsePreOpenMarketDetailRepository.bulkUpsert(properNsePreOpenMarketDetailEntities);
     }
 
-    public static void main(String[] args) {
-        JavaUtilLogDecor.setupLogDecor();
-
-        NSEPreOpenMarketNifty50EntityMakerJob nsePreOpenMarketEntityMakeJob = new NSEPreOpenMarketNifty50EntityMakerJob();
-        nsePreOpenMarketEntityMakeJob.saveTransformedData(nsePreOpenMarketEntityMakeJob.transformSourceData(nsePreOpenMarketEntityMakeJob.getDataFromSource()));
-    }
 }
