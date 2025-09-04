@@ -1,10 +1,10 @@
-package rave.code.quartz.jobs.nse.preopen;
+package rave.code.quartz.jobs.nse.csv.preopen;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.java.http.client.nse.NationalStockExchangeHttpClient;
-import rave.code.quartz.job.stockbase.AbstractCSVEntityMakerJob;
+import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utilities.file.SimpleFileReader;

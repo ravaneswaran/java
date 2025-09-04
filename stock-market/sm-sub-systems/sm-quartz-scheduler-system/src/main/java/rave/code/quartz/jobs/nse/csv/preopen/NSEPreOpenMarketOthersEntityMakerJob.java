@@ -1,4 +1,4 @@
-package rave.code.quartz.jobs.nse.preopen;
+package rave.code.quartz.jobs.nse.csv.preopen;
 
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;

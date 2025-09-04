@@ -1,9 +1,9 @@
-package rave.code.quartz.jobs.nse.stockbase;
+package rave.code.quartz.jobs.nse.csv.stockbase;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.ASCIIColorCodes;
-import rave.code.quartz.job.stockbase.AbstractCSVEntityMakerJob;
+import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.download.FileDownloader;

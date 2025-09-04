@@ -1,10 +1,10 @@
-package rave.code.quartz.jobs.nse.bhavcopy;
+package rave.code.quartz.jobs.nse.csv.bhavcopy;
 
 import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
-import rave.code.quartz.job.stockbase.AbstractCSVEntityMakerJob;
+import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
 import rave.code.repository.nse.NSEDayPriceDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utilities.file.SimpleFileReader;
