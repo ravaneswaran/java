@@ -1,9 +1,10 @@
 package rave.code.entity.nse.csv;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "nse_day_price_detail")
+@Table(name = "nse_pre_open_market_detail")
 @Access(AccessType.FIELD)
 public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
 
@@ -25,9 +26,9 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
     @Column(name = "final_quantity")
     private int finalQuantity;
     @Column(name = "value_in_crores")
-    private String valueInCrores;
+    private BigDecimal valueInCrores;
     @Column(name = "free_float_market_capitalization")
-    private String freeFloatMarketCapitalization;
+    private BigDecimal freeFloatMarketCapitalization;
     @Column(name = "new_market_52_week_high")
     private double newMarket52WeekHigh;
     @Column(name = "new_market_52_week_low")
@@ -97,19 +98,19 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
         this.finalQuantity = finalQuantity;
     }
 
-    public String getValueInCrores() {
+    public BigDecimal getValueInCrores() {
         return valueInCrores;
     }
 
-    public void setValueInCrores(String valueInCrores) {
+    public void setValueInCrores(BigDecimal valueInCrores) {
         this.valueInCrores = valueInCrores;
     }
 
-    public String getFreeFloatMarketCapitalization() {
+    public BigDecimal getFreeFloatMarketCapitalization() {
         return freeFloatMarketCapitalization;
     }
 
-    public void setFreeFloatMarketCapitalization(String freeFloatMarketCapitalization) {
+    public void setFreeFloatMarketCapitalization(BigDecimal freeFloatMarketCapitalization) {
         this.freeFloatMarketCapitalization = freeFloatMarketCapitalization;
     }
 
