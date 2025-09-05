@@ -1,8 +1,7 @@
-package rave.code.quartz.job.stockbase;
+package rave.code.quartz.jobs;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import rave.code.quartz.jobs.AbstractQuartzJob;
 
 public abstract class AbstractEntityMakerJob<S, T> extends AbstractQuartzJob {
 

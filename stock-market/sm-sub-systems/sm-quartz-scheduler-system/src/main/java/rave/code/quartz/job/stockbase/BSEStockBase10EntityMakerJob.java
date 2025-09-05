@@ -3,6 +3,7 @@ package rave.code.quartz.job.stockbase;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.quartz.enums.ASCIIColorCodes;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
+import rave.code.quartz.jobs.AbstractEntityMakerJob;
 import rave.code.stockmarket.entity.BSEStockBase10Entity;
 import rave.code.stockmarket.entity.StockBase10Entity;
 import rave.code.stockmarket.repository.StockBase10Repository;
