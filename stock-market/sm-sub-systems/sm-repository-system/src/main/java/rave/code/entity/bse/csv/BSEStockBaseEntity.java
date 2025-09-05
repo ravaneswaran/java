@@ -1,12 +1,18 @@
 package rave.code.entity.bse.csv;
 
+import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "bse_stock_base")
 @Access(AccessType.FIELD)
 public class BSEStockBaseEntity extends AbstractBSECSVEntity {
 
+    @OneToMany(mappedBy = "bseStockBaseEntity")
+    private List<BSEDayPriceDetailEntity> bseDayPriceDetailEntities = new ArrayList<>();
     @Column(name = "scrip_code")
     private String scripCode;
     @Column(name = "scrip_name")
@@ -17,6 +23,14 @@ public class BSEStockBaseEntity extends AbstractBSECSVEntity {
     private String scripType;
     @Column(name = "isi_number")
     private String ISINumber;
+
+    public List<BSEDayPriceDetailEntity> getBseDayPriceDetailEntities() {
+        return bseDayPriceDetailEntities;
+    }
+
+    public void setBseDayPriceDetailEntities(List<BSEDayPriceDetailEntity> bseDayPriceDetailEntities) {
+        this.bseDayPriceDetailEntities = bseDayPriceDetailEntities;
+    }
 
     public String getScripCode() {
         return scripCode;
@@ -56,5 +70,17 @@ public class BSEStockBaseEntity extends AbstractBSECSVEntity {
 
     public void setISINumber(String ISINumber) {
         this.ISINumber = ISINumber;
+    }
+
+
+
+    public static BSEStockBaseEntity newInstance(String financialInstrumentId, String financialInstrumentName, String securitySeries, String isiNumber) {
+        BSEStockBaseEntity bseStockBaseEntity = new BSEStockBaseEntity();
+        bseStockBaseEntity.setScripCode(financialInstrumentId);
+        bseStockBaseEntity.setScripName(financialInstrumentName);
+        bseStockBaseEntity.setScripGroup(securitySeries);
+        bseStockBaseEntity.setISINumber(isiNumber);
+
+        return bseStockBaseEntity;
     }
 }

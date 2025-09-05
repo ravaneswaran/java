@@ -1,5 +1,7 @@
 package rave.code.entity.bse.csv;
 
+import rave.code.entity.nse.csv.NSEStockBaseEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,6 +10,9 @@ import java.util.Date;
 @Access(AccessType.FIELD)
 public class BSEDayPriceDetailEntity extends AbstractBSECSVEntity {
 
+    @ManyToOne
+    @JoinColumn(name = "stock_base_id", nullable=false)
+    private BSEStockBaseEntity bseStockBaseEntity;
     @Column(name = "traded_date")
     private Date tradedDate;
     @Column(name = "business_date")
@@ -64,6 +69,14 @@ public class BSEDayPriceDetailEntity extends AbstractBSECSVEntity {
     private String sessionId;
     @Column(name = "new_board_lot_quantity")
     private String newBoardLotQuantity;
+
+    public BSEStockBaseEntity getBseStockBaseEntity() {
+        return bseStockBaseEntity;
+    }
+
+    public void setBseStockBaseEntity(BSEStockBaseEntity bseStockBaseEntity) {
+        this.bseStockBaseEntity = bseStockBaseEntity;
+    }
 
     public Date getTradedDate() {
         return tradedDate;

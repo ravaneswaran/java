@@ -3,7 +3,7 @@ package rave.code.quartz.job.stockbase;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import rave.code.quartz.jobs.AbstractQuartzJob;
-import rave.code.quartz.jobs.bse.csv.bhavcopy.BSEDailyPriceDetailEntityMakerJob;
+import rave.code.quartz.jobs.bse.csv.bhavcopy.BSEDayPriceDetailEntityMakerJob;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.time.LocalDate;
@@ -25,7 +25,7 @@ public class StockBase10EntityMakerJob extends AbstractQuartzJob {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         new NSEStockBase10EntityMakerJob(this.date).execute(jobExecutionContext);
-        new BSEDailyPriceDetailEntityMakerJob(this.date).execute(jobExecutionContext);
+        new BSEDayPriceDetailEntityMakerJob(this.date).execute(jobExecutionContext);
     }
 
     public static void main(String[] args) throws JobExecutionException {
