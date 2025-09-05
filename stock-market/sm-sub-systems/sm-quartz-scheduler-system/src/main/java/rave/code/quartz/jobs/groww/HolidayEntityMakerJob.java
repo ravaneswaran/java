@@ -1,9 +1,10 @@
-package rave.code.quartz.job.groww;
+package rave.code.quartz.jobs.groww;
 
 import org.quartz.JobExecutionException;
 import rave.code.data.parser.html.groww.HolidayListParser;
-import rave.code.stockmarket.repository.HolidayRepository;
+import rave.code.quartz.jobs.AbstractWebPageEntityMakerJob;
 import rave.code.stockmarket.entity.HolidayEntity;
+import rave.code.stockmarket.repository.HolidayRepository;
 import rave.code.website.data.model.groww.HolidayModel;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class HolidayEntityMakerJob extends AbstractGrowWEntityMakerJob<HolidayModel, HolidayEntity> {
+public class HolidayEntityMakerJob extends AbstractWebPageEntityMakerJob<HolidayModel, HolidayEntity> {
 
     public static void main(String[] args) throws JobExecutionException {
         new HolidayEntityMakerJob().execute(null);

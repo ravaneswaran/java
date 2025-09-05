@@ -1,12 +1,11 @@
-package rave.code.quartz.job;
+package rave.code.quartz.jobs;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import rave.code.quartz.jobs.AbstractQuartzJob;
 
 import java.util.List;
 
-public abstract class AbstractWebSiteEntityMakerJob<S, T> extends AbstractQuartzJob {
+public abstract class AbstractWebPageEntityMakerJob<S, T> extends AbstractQuartzJob {
 
     public abstract List<S> getDataFromSource();
 

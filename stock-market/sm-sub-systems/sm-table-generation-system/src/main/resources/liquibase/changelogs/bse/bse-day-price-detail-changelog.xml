@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Ravaneswaran Chinnasamy">
+        <createTable tableName="bse_day_price_detail">
+            <column name="id" type="varchar2(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="stock_base_id" type="varchar2(100)"/>
+            <column name="traded_date" type="datetime"/>
+            <column name="business_date" type="datetime"/>
+            <column name="segment" type="varchar2(100)"/>
+            <column name="financial_instrument_type" type="varchar2(100)"/>
+            <column name="financial_instrument_id" type="varchar2(100)"/>
+            <column name="isi_number" type="varchar2(100)"/>
+            <column name="ticker_symbol" type="varchar2(100)"/>
+            <column name="security_series" type="varchar2(100)"/>
+            <column name="expiry_date" type="datetime"/>
+            <column name="financial_instrument_actual_expiry_date" type="datetime"/>
+            <column name="strike_price" type="double"/>
+            <column name="option_type" type="varchar2(100)"/>
+            <column name="financial_instrument_name" type="varchar2(100)"/>
+            <column name="open_price" type="double"/>
+            <column name="high_price" type="double"/>
+            <column name="low_price" type="double"/>
+            <column name="close_price" type="double"/>
+            <column name="last_price" type="double"/>
+            <column name="previous_close_price" type="double"/>
+            <column name="underlying_price" type="double"/>
+            <column name="settlement_price" type="double"/>
+            <column name="open_interest" type="double"/>
+            <column name="change_in_open_interest" type="varchar2(100)"/>
+            <column name="total_traded_volume" type="double"/>
+            <column name="total_traded_value" type="double"/>
+            <column name="total_number_of_transaction_executed" type="int"/>
+            <column name="session_id" type="varchar2(100)"/>
+            <column name="new_board_lot_quantity" type="varchar2(100)"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="created_by" type="varchar2(100)"/>
+            <column name="modified_by" type="varchar2(100)"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="bse_day_price_detail"
+                baseColumnNames="stock_base_id"
+                constraintName="fk_bse_day_price_detail_bse_stock_base"
+                referencedTableName="bse_stock_base"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

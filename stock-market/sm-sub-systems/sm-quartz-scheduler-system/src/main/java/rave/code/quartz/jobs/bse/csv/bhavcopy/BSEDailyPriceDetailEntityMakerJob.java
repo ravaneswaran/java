@@ -1,4 +1,4 @@
-package rave.code.quartz.job.stockbase;
+package rave.code.quartz.jobs.bse.csv.bhavcopy;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.quartz.enums.ASCIIColorCodes;
@@ -21,18 +21,18 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class BSEStockBase10EntityMakerJob extends AbstractEntityMakerJob<List<CSVRecord>, List<StockBase10Entity>> {
+public class BSEDailyPriceDetailEntityMakerJob extends AbstractEntityMakerJob<List<CSVRecord>, List<StockBase10Entity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(BSEStockBase10EntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSEDailyPriceDetailEntityMakerJob.class.getName());
 
     private StockBase10Repository stockBaseRepository = new StockBase10Repository();
     private Date date;
 
-    public BSEStockBase10EntityMakerJob() {
+    public BSEDailyPriceDetailEntityMakerJob() {
         this(new Date());
     }
 
-    public BSEStockBase10EntityMakerJob(Date date) {
+    public BSEDailyPriceDetailEntityMakerJob(Date date) {
         this.date = date;
     }
 

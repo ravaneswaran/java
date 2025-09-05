@@ -25,7 +25,7 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractCSVE
     protected Date toDate = new Date();
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
-    private static final Logger LOGGER = Logger.getLogger(AbstractCSVEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractNSEStockBaseCSVEntityMakerJob.class.getName());
 
     public AbstractNSEStockBaseCSVEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);

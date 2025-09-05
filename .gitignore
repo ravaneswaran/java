@@ -97,6 +97,7 @@ stock-market/sm-sub-systems/sm-ai-system/sm-ai-system.iml
 stock-market/sm-sub-systems/sm-email-system/sm-email-system.iml
 stock-market/sm-sub-systems/sm-technical-analysis-system/sm-technical-analysis-system.iml
 stock-market/sm-web-systems/sm-web-systems.iml
+stock-market/.username-and-passwords
 stock-market/sm-maven-plugin/target
 stock-market/sm-sub-systems/sm-ai-system/target/
 stock-market/sm-sub-systems/sm-repository-system/target/
