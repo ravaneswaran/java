@@ -6,15 +6,17 @@ import rave.code.mail.java.ElectronicMail;
 import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.stockmarket.entity.HolidayEntity;
 import rave.code.stockmarket.repository.HolidayRepository;
+import rave.code.utilities.file.UserCredentialsFileReader;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import javax.mail.MessagingException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,11 +58,21 @@ public class HolidayMailerJob extends AbstractQuartzJob {
 
                 mailContent = String.format(mailContent, entity.getHoliday(), entity.getDescription());
 
+                UserCredentialsFileReader userCredentialsFileReader = new UserCredentialsFileReader();
+                Path filePath = Paths.get("stock-market/.username-and-passwords");
+                File file = filePath.toFile();
+                Map<String, String> keyValuePairs = new HashMap<>();
+                try {
+                    keyValuePairs = userCredentialsFileReader.read(file);
+                } catch (IOException ioException) {
+                    LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
+                }
+
                 try {
                     LOGGER.log(Level.INFO, "SENDING MAIL....");
                     ElectronicMail electronicMail = new ElectronicMail();
-                    electronicMail.connect(quartzResourceBundle.getString("smtp.mail.host"), quartzResourceBundle.getString("smtp.mail.port"), quartzResourceBundle.getString("smtp.mail.username"), quartzResourceBundle.getString("smtp.mail.password"));
-                    electronicMail.sendMail(quartzResourceBundle.getString("smtp.mail.from"), quartzResourceBundle.getString("smtp.mail.to"), quartzResourceBundle.getString("holiday.mail.remainder.subject"), mailContent);
+                    electronicMail.connect(quartzResourceBundle.getString("smtp.mail.host"), quartzResourceBundle.getString("smtp.mail.port"), keyValuePairs.get("smtp.mail.username"), keyValuePairs.get("smtp.mail.password"));
+                    electronicMail.sendMail(quartzResourceBundle.getString("smtp.mail.from"), keyValuePairs.get("smtp.mail.username"), quartzResourceBundle.getString("holiday.mail.remainder.subject"), mailContent);
                 } catch (MessagingException messagingException) {
                     LOGGER.log(Level.SEVERE, messagingException.getMessage(), messagingException);
                 }
