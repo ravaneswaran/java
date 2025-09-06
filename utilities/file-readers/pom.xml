@@ -19,6 +19,7 @@
         <module>csv-file-readers</module>
         <module>zip-file-reader</module>
         <module>simple-file-reader</module>
+        <module>user-credentials-file-reader</module>
     </modules>
 
 </project>
