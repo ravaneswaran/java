@@ -20,7 +20,7 @@ public class BSEQuartzScheduler extends AbstractQuartzScheduler {
 
             new ScheduleJobsAt_8_45_AM_FromMondayToFriday(scheduler).scheduleJob();
             new ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_4PM_With3MinuteFrequency(scheduler).scheduleJob();
-            new ScheduleJobsAt_6_PM_FromMondayToFriday(scheduler).scheduleJob();
+            new ScheduleJobs_At_6_PM_From_Monday_To_Friday(scheduler).scheduleJob();
 
             scheduler.start();
             //scheduler.shutdown(true);

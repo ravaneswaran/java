@@ -1,0 +1,15 @@
+package rave.code.quartz.jobs.history;
+
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import rave.code.quartz.jobs.AbstractQuartzJob;
+
+public abstract class AbstractHistoryEntityMakerJob<S, T> extends AbstractQuartzJob {
+
+    public abstract void loadHistoryAndClearSource();
+
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        this.loadHistoryAndClearSource();
+    }
+}

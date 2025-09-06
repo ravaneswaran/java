@@ -2,6 +2,8 @@ package rave.code.repository.bse;
 
 import rave.code.entity.bse.csv.BSEDayPriceDetailEntity;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.HashMap;
 import java.util.List;
@@ -33,5 +35,15 @@ public class BSEDayPriceDetailRepository extends AbstractBSERepository<BSEDayPri
         }
 
         return dayPriceDetailEntityMap;
+    }
+
+    public void deleteAll() {
+        EntityManager entityManager = this.getEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        Query query = this.getEntityManager().createQuery("DELETE FROM BSEDayPriceDetailEntity bseDayPriceDetailEntity");
+        int noOfRowsAffected = query.executeUpdate();
+        entityTransaction.commit();
+        LOGGER.log(Level.INFO, String.format("%s rows have been deleted from bse_day_price_detail table...", noOfRowsAffected));
     }
 }

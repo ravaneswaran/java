@@ -3,11 +3,11 @@ package rave.code.quartz.scheduler;
 import org.quartz.*;
 import rave.code.quartz.enums.*;
 import rave.code.quartz.enums.CronExpression;
-import rave.code.quartz.job.moneycontrol.investing.BSEMidCapGainerJob;
-import rave.code.quartz.job.moneycontrol.investing.BSESmallCapGainerJob;
-import rave.code.quartz.job.moneycontrol.investing.BSETopDividendJob;
-import rave.code.quartz.job.moneycontrol.misc.BSESensexJob;
-import rave.code.quartz.job.moneycontrol.trading.*;
+import rave.code.quartz.jobs.moneycontrol.investing.BSEMidCapGainerJob;
+import rave.code.quartz.jobs.moneycontrol.investing.BSESmallCapGainerJob;
+import rave.code.quartz.jobs.moneycontrol.investing.BSETopDividendJob;
+import rave.code.quartz.jobs.moneycontrol.misc.BSESensexJob;
+import rave.code.quartz.jobs.moneycontrol.trading.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
