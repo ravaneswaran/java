@@ -151,7 +151,7 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractCSV
 
     @Override
     public void saveTransformedData(List<NSEPreOpenMarketDetailEntity> transformedData) {
-        Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.getEntityMapForPreOpenMarketDetails();
+        Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.getEntityMapForPreOpenAndLiveMarketDetails();
         List<NSEPreOpenMarketDetailEntity> properNsePreOpenMarketDetailEntities = new ArrayList<>();
 
         for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity : transformedData) {

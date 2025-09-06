@@ -167,7 +167,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         JavaUtilLogDecor.setupLogDecor();
         LocalDate today = LocalDate.now();
         List<Date> dates = new ArrayList<>();
-        for (int index = 10; index >= 1; index--) {
+        for (int index = 3; index >= 1; index--) {
             LocalDate pastLocalDate = today.minusDays(index);
             Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             dates.add(pastDate);
