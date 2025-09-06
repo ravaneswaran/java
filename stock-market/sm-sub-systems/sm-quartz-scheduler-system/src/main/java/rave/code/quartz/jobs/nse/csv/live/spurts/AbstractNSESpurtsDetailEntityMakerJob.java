@@ -1,12 +1,11 @@
-package rave.code.quartz.jobs.nse.csv.live;
+package rave.code.quartz.jobs.nse.csv.live.spurts;
 
 import org.apache.commons.csv.CSVRecord;
-import org.quartz.JobExecutionException;
 import rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.quartz.jobs.nse.csv.live.AbstractNSELiveMarketEntityMakerJob;
 import rave.code.repository.nse.NSEPriceSpurtsDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
-import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,15 +15,19 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSEPriceSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEPriceSpurtsDetailEntity>> {
+public abstract class AbstractNSESpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEPriceSpurtsDetailEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtsDetailEntityMakerJob.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(AbstractNSESpurtsDetailEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSEPriceSpurtsDetailRepository nsePriceSpurtsDetailRepository = new NSEPriceSpurtsDetailRepository();
 
-    public NSEPriceSpurtsDetailEntityMakerJob() {
-        super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecGtr20&csv=true");
+    protected String spurtsType;
+
+    public AbstractNSESpurtsDetailEntityMakerJob(String csvDownloadUrl) {
+        super(csvDownloadUrl);
+        this.spurtsType = "STOCK-PRICE>20";
     }
 
     @Override
@@ -40,7 +43,7 @@ public class NSEPriceSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEnt
                 continue;
             }
 
-            NSEPriceSpurtsDetailEntity nsePriceSpurtsDetailEntity = new NSEPriceSpurtsDetailEntity();
+            rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity nsePriceSpurtsDetailEntity = new rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity();
             String symbol = csvRecord.get(0).trim();
             nsePriceSpurtsDetailEntity.setSymbol(symbol);
             try {
@@ -111,13 +114,5 @@ public class NSEPriceSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEnt
             }
         }
         this.nsePriceSpurtsDetailRepository.bulkUpsert(nsePriceSpurtsDetailEntities);
-    }
-
-    public static void main(String[] args) throws JobExecutionException {
-        JavaUtilLogDecor.setupLogDecor();
-
-        NSEPriceSpurtsDetailEntityMakerJob nsePriceSpurtsDetailEntityMakerJob = new NSEPriceSpurtsDetailEntityMakerJob();
-        nsePriceSpurtsDetailEntityMakerJob.saveTransformedData(nsePriceSpurtsDetailEntityMakerJob.transformSourceData(nsePriceSpurtsDetailEntityMakerJob.getDataFromSource()));
-
     }
 }
