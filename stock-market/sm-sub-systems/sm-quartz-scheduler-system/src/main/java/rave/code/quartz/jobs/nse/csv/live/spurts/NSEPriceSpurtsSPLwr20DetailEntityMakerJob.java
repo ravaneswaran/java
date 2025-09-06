@@ -5,7 +5,7 @@ import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.util.logging.Logger;
 
-public class NSEPriceSpurtsSPLwr20DetailEntityMakerJob extends AbstractNSESpurtsDetailEntityMakerJob {
+public class NSEPriceSpurtsSPLwr20DetailEntityMakerJob extends AbstractNSEPriceSpurtsDetailEntityMakerJob {
 
     private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtsSPLwr20DetailEntityMakerJob.class.getName());
 

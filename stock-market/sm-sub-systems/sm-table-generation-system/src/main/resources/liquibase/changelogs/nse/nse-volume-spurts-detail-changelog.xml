@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Ravaneswaran Chinnasamy">
+        <createTable tableName="nse_volume_spurts_detail">
+            <column name="id" type="varchar2(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="stock_base_id" type="varchar2(100)"/>
+            <column name="symbol" type="varchar2(100)"/>
+            <column name="volume" type="int"/>
+            <column name="one_week_average_volume" type="int"/>
+            <column name="no_of_times" type="double"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="created_by" type="varchar2(100)"/>
+            <column name="modified_by" type="varchar2(100)"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="nse_volume_spurts_detail"
+                baseColumnNames="stock_base_id"
+                constraintName="fk_nse_volume_spurts_detail_nse_stock_base"
+                referencedTableName="nse_stock_base"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

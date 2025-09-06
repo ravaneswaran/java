@@ -7,7 +7,6 @@ import rave.code.utilities.file.SimpleFileReader;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -49,16 +48,10 @@ public abstract class AbstractNSELiveMarketEntityMakerJob<T> extends AbstractCSV
             }
         }
 
-        int size = lines.size();
-        StringBuffer lineBuffer = new StringBuffer();
-        for (int index = 0; index < size; index++) {
-            lineBuffer.append(lines.get(index)).append("\n");
-        }
-
         ApacheCommonsCSVFileReader apacheCommonsCSVFileReader = new ApacheCommonsCSVFileReader();
         List<CSVRecord> records = new ArrayList<>();
         try {
-            records = apacheCommonsCSVFileReader.read(new ByteArrayInputStream(lineBuffer.toString().getBytes(StandardCharsets.UTF_8)));
+            records = apacheCommonsCSVFileReader.read(new FileInputStream(downloadedFile));
         } catch (IOException ioException) {
             LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         }

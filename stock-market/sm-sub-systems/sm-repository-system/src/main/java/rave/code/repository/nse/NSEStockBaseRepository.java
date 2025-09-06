@@ -52,7 +52,7 @@ public class NSEStockBaseRepository extends AbstractNSERepository<NSEStockBaseEn
         return mappedStockBaseEntity;
     }
 
-    public Map<String, NSEStockBaseEntity> getEntityMapForPreOpenAndLiveMarketDetails() {
+    public Map<String, NSEStockBaseEntity> mapSymbolToStockBaseEntities() {
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Query query = this.getEntityManager().createQuery(queryBuilder.toString());

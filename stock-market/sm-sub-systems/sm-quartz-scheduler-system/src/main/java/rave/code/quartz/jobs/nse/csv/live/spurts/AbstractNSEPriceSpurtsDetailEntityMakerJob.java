@@ -15,17 +15,16 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AbstractNSESpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEPriceSpurtsDetailEntity>> {
+public abstract class AbstractNSEPriceSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEPriceSpurtsDetailEntity>> {
 
-
-    private static final Logger LOGGER = Logger.getLogger(AbstractNSESpurtsDetailEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractNSEPriceSpurtsDetailEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSEPriceSpurtsDetailRepository nsePriceSpurtsDetailRepository = new NSEPriceSpurtsDetailRepository();
 
     protected String spurtsType;
 
-    public AbstractNSESpurtsDetailEntityMakerJob(String csvDownloadUrl) {
+    public AbstractNSEPriceSpurtsDetailEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);
         this.spurtsType = "STOCK-PRICE>20";
     }
@@ -99,7 +98,7 @@ public abstract class AbstractNSESpurtsDetailEntityMakerJob extends AbstractNSEL
 
     @Override
     public void saveTransformedData(List<NSEPriceSpurtsDetailEntity> transformedData) {
-        Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.getEntityMapForPreOpenAndLiveMarketDetails();
+        Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEPriceSpurtsDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
 
         for (NSEPriceSpurtsDetailEntity nsePriceSpurtsDetailEntity : transformedData) {
