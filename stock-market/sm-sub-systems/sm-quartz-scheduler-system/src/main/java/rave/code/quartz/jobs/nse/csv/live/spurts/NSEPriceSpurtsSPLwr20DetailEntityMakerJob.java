@@ -11,7 +11,7 @@ public class NSEPriceSpurtsSPLwr20DetailEntityMakerJob extends AbstractNSEPriceS
 
     public NSEPriceSpurtsSPLwr20DetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecLwr20&csv=true");
-        this.spurtsType = "STOCK-PRICE>20";
+        this.spurtsType = "STOCK-PRICE<20";
     }
 
     public static void main(String[] args) throws JobExecutionException {

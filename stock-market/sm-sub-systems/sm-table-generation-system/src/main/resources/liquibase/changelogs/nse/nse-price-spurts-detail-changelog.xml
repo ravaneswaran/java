@@ -34,4 +34,12 @@
                 referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="002" author="Ravaneswaran Chinnasamy">
+        <sql>
+            ALTER TABLE nse_price_spurts_detail
+            ADD spurts_type VARCHAR(50)
+            AFTER stock_base_id;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

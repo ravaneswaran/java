@@ -11,6 +11,8 @@ public class NSEPriceSpurtsDetailEntity extends AbstractNSECSVEntity{
     @ManyToOne
     @JoinColumn(name = "stock_base_id", nullable=false)
     private NSEStockBaseEntity nseStockBaseEntity;
+    @Column(name = "spurts_type")
+    private String spurtsType;
     @Column(name = "symbol")
     private String symbol;
     @Column(name = "open_price")
@@ -38,6 +40,14 @@ public class NSEPriceSpurtsDetailEntity extends AbstractNSECSVEntity{
 
     public void setNseStockBaseEntity(NSEStockBaseEntity nseStockBaseEntity) {
         this.nseStockBaseEntity = nseStockBaseEntity;
+    }
+
+    public String getSpurtsType() {
+        return spurtsType;
+    }
+
+    public void setSpurtsType(String spurtsType) {
+        this.spurtsType = spurtsType;
     }
 
     public String getSymbol() {

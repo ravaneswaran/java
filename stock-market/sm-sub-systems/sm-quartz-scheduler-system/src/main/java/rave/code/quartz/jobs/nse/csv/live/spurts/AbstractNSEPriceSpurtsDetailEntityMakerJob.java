@@ -43,6 +43,7 @@ public abstract class AbstractNSEPriceSpurtsDetailEntityMakerJob extends Abstrac
             }
 
             rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity nsePriceSpurtsDetailEntity = new rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity();
+            nsePriceSpurtsDetailEntity.setSpurtsType(this.spurtsType);
             String symbol = csvRecord.get(0).trim();
             nsePriceSpurtsDetailEntity.setSymbol(symbol);
             try {
@@ -88,7 +89,7 @@ public abstract class AbstractNSEPriceSpurtsDetailEntityMakerJob extends Abstrac
             try {
                 nsePriceSpurtsDetailEntity.setCA(simpleDateFormat.parse(csvRecord.get(9).trim()));
             } catch (ParseException parseException) {
-                LOGGER.log(Level.SEVERE, String.format("CA of %s has raised NumberFormatException(%s)", symbol, parseException.getMessage()), parseException);
+                LOGGER.log(Level.SEVERE, String.format("CA of %s has raised ParseException(%s)", symbol, parseException.getMessage()), parseException);
             }
             nsePriceSpurtsDetailEntities.add(nsePriceSpurtsDetailEntity);
         }
