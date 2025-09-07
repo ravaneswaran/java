@@ -31,6 +31,7 @@
     <include relativeToChangelogFile="true" file="nse/nse-price-spurts-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-volume-spurts-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-sme-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-main-board-detail-changelog.xml"/>
 
     <!--<include relativeToChangelogFile="true" file="quartz/quartz-scheduler-changelog.xml"/>-->
 </databaseChangeLog>
