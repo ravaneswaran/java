@@ -13,6 +13,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 
@@ -66,6 +67,19 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
                 .header("Referer", "https://www.nseindia.com/")
                 .GET()
                 .build();
+    }
+
+    public HttpResponse<String> retry(String url) throws IOException, InterruptedException {
+        this.gotoHomePage();
+        return this.stringResponseOf(url);
+    }
+
+    public void logHttpErrorMessage(HttpResponse<?> response, String url){
+        int httpStatusCode = response.statusCode();
+        if (!(200 == httpStatusCode)) {
+            String message = String.format("ERROR => %s : HTTP[%s]...trying again from the start.", url, httpStatusCode);
+            LOGGER.log(Level.SEVERE, message);
+        }
     }
 
     public String customizeHttpStatus(HttpResponse<?> response) {

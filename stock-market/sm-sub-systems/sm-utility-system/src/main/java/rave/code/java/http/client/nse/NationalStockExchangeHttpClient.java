@@ -21,8 +21,10 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
     public HttpResponse<String> stringResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<String> response = super.stringResponseOf(url);
         LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        if (!(200 == response.statusCode())) {
-            throw new RuntimeException("Hmm just thinking now....");
+        int httpStatusCode = response.statusCode();
+        if (!(200 == httpStatusCode)) {
+            this.logHttpErrorMessage(response, url);
+            this.retry(url);
         }
         return response;
     }
@@ -31,8 +33,10 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
     public HttpResponse<Path> pathResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<Path> response = super.pathResponseOf(url);
         LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        if (!(200 == response.statusCode())) {
-            throw new RuntimeException("Hmm just thinking now....");
+        int httpStatusCode = response.statusCode();
+        if (!(200 == httpStatusCode)) {
+            this.logHttpErrorMessage(response, url);
+            this.retry(url);
         }
         return response;
     }
@@ -41,8 +45,10 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
     public HttpResponse<InputStream> inputStreamResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<InputStream> response = super.inputStreamResponseOf(url);
         LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        if (!(200 == response.statusCode())) {
-            throw new RuntimeException("Hmm just thinking now....");
+        int httpStatusCode = response.statusCode();
+        if (!(200 == httpStatusCode)) {
+            this.logHttpErrorMessage(response, url);
+            this.retry(url);
         }
         return response;
     }
@@ -50,8 +56,10 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
     public HttpResponse<byte[]> byteArrayResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<byte[]> response = super.byteArrayResponseOf(url);
         LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        if (!(200 == response.statusCode())) {
-            throw new RuntimeException("Hmm just thinking now....");
+        int httpStatusCode = response.statusCode();
+        if (!(200 == httpStatusCode)) {
+           this.logHttpErrorMessage(response, url);
+           this.retry(url);
         }
         return response;
     }
