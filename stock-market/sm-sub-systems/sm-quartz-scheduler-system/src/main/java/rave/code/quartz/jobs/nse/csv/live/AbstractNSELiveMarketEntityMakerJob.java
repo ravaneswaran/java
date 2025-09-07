@@ -48,4 +48,38 @@ public abstract class AbstractNSELiveMarketEntityMakerJob<T> extends AbstractCSV
 
         return records;
     }
+
+    public List<CSVRecord> getDataFromSource(boolean needHeaderCleansing) {
+        if(needHeaderCleansing){
+            File downloadedFile = null;
+            NationalStockExchangeHttpClient nationalStockExchangeHttpClient = new NationalStockExchangeHttpClient();
+            try {
+                nationalStockExchangeHttpClient.gotoHomePage();
+                nationalStockExchangeHttpClient.stringResponseOf(this.downloadPageUrl);
+                downloadedFile = nationalStockExchangeHttpClient.getFile(this.csvDownloadUrl);
+            } catch (IOException ioException) {
+                LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
+            } catch (InterruptedException interruptedException) {
+                LOGGER.log(Level.SEVERE, interruptedException.getMessage(), interruptedException);
+            }
+
+            try {
+                this.cleanseCsvHeader(downloadedFile);
+            } catch (IOException ioException) {
+                LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
+            }
+
+            ApacheCommonsCSVFileReader apacheCommonsCSVFileReader = new ApacheCommonsCSVFileReader();
+            List<CSVRecord> records = new ArrayList<>();
+            try {
+                records = apacheCommonsCSVFileReader.read(new FileInputStream(downloadedFile));
+            } catch (IOException ioException) {
+                LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
+            }
+
+            return records;
+        } else {
+            return this.getDataFromSource();
+        }
+    }
 }

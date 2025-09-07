@@ -8,12 +8,12 @@ import rave.code.java.http.client.nse.NationalStockExchangeHttpClient;
 import rave.code.quartz.jobs.nse.csv.live.AbstractNSELiveMarketEntityMakerJob;
 import rave.code.repository.nse.NSEExchangeTradedFundDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
-import rave.code.utilities.file.SimpleFileReader;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.log.JavaUtilLogDecor;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,27 +45,16 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
             LOGGER.log(Level.SEVERE, interruptedException.getMessage(), interruptedException);
         }
 
-        List<String> lines = new ArrayList<>();
-        if (null != downloadedFile) {
-            try (InputStream inputStream = new FileInputStream(downloadedFile)) {
-                lines = new SimpleFileReader().read(inputStream);
-            } catch (FileNotFoundException fileNotFoundException) {
-                LOGGER.log(Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
-            } catch (IOException ioException) {
-                LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-            }
-        }
-
-        int size = lines.size();
-        StringBuffer lineBuffer = new StringBuffer();
-        for (int index = 10; index < size; index++) {
-            lineBuffer.append(lines.get(index)).append("\n");
+        try {
+            this.cleanseCsvHeader(downloadedFile);
+        } catch (IOException ioException) {
+            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         }
 
         ApacheCommonsCSVFileReader apacheCommonsCSVFileReader = new ApacheCommonsCSVFileReader();
         List<CSVRecord> records = new ArrayList<>();
         try {
-            records = apacheCommonsCSVFileReader.read(new ByteArrayInputStream(lineBuffer.toString().getBytes(StandardCharsets.UTF_8)));
+            records = apacheCommonsCSVFileReader.read(new FileInputStream(downloadedFile));
         } catch (IOException ioException) {
             LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         }
@@ -76,8 +65,14 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
     @Override
     public List<NSEExchangeTradedFundDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEExchangeTradedFundDetailEntity> nseExchangeTradedFundDetailEntities = new ArrayList<>();
-
+        int lineNumber = 1;
         for (CSVRecord csvRecord : sourceData) {
+            if (1 == lineNumber) {
+                LOGGER.log(Level.INFO, "skipping the header... ");
+                lineNumber = lineNumber + 1;
+                continue;
+            }
+
             NSEExchangeTradedFundDetailEntity nseExchangeTradedFundDetailEntity = new NSEExchangeTradedFundDetailEntity();
 
             String symbol = csvRecord.get(0).trim();
@@ -150,7 +145,6 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
 
     public static void main(String[] args) throws JobExecutionException {
         JavaUtilLogDecor.setupLogDecor();
-
         NSEExchangeTradedFundDetailEntityMakerJob nseExchangeTradedFundDetailEntityMakerJob = new NSEExchangeTradedFundDetailEntityMakerJob();
         nseExchangeTradedFundDetailEntityMakerJob.saveTransformedData(nseExchangeTradedFundDetailEntityMakerJob.transformSourceData(nseExchangeTradedFundDetailEntityMakerJob.getDataFromSource()));
     }
