@@ -69,22 +69,20 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
                 .build();
     }
 
-    public HttpResponse<String> retry(String url) throws IOException, InterruptedException {
+    public HttpResponse<String> retryDownloadLinkAvailablePage(String url) throws IOException, InterruptedException {
         this.gotoHomePage();
         return this.stringResponseOf(url);
     }
 
-    public void logHttpErrorMessage(HttpResponse<?> response, String url){
-        int httpStatusCode = response.statusCode();
+    public void logHttpErrorMessage(int httpStatusCode, String url){
         if (!(200 == httpStatusCode)) {
             String message = String.format("ERROR => %s : HTTP[%s]...trying again from the start.", url, httpStatusCode);
             LOGGER.log(Level.SEVERE, message);
         }
     }
 
-    public String customizeHttpStatus(HttpResponse<?> response) {
-        int statusCode = response.statusCode();
-        return (200 == statusCode) ? String.format("%s OK", statusCode) : String.format("%s", statusCode);
+    public String customizeHttpStatus200() {
+        return String.format("%s OK", 200);
     }
 }
 

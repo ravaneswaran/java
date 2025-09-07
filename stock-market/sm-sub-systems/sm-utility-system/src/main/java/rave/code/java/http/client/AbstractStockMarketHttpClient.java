@@ -43,10 +43,5 @@ public abstract class AbstractStockMarketHttpClient {
         return this.client.send(request, HttpResponse.BodyHandlers.ofByteArray());
     }
 
-    public String customizeHttpStatus(HttpResponse<?> response) {
-        int statusCode = response.statusCode();
-        return (200 == statusCode) ? String.format("%s OK", statusCode) : String.format("%s", statusCode);
-    }
-
     public abstract HttpRequest buildHttpRequest(String url);
 }

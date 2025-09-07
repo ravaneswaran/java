@@ -20,46 +20,33 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
 
     public HttpResponse<String> stringResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<String> response = super.stringResponseOf(url);
-        LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        int httpStatusCode = response.statusCode();
-        if (!(200 == httpStatusCode)) {
-            this.logHttpErrorMessage(response, url);
-            this.retry(url);
-        }
-        return response;
+        return (HttpResponse<String>) this.logMessageAndRetry(response, url);
     }
 
     @Override
     public HttpResponse<Path> pathResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<Path> response = super.pathResponseOf(url);
-        LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        int httpStatusCode = response.statusCode();
-        if (!(200 == httpStatusCode)) {
-            this.logHttpErrorMessage(response, url);
-            this.retry(url);
-        }
-        return response;
+        return (HttpResponse<Path>) this.logMessageAndRetry(response, url);
     }
 
     @Override
     public HttpResponse<InputStream> inputStreamResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<InputStream> response = super.inputStreamResponseOf(url);
-        LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
-        int httpStatusCode = response.statusCode();
-        if (!(200 == httpStatusCode)) {
-            this.logHttpErrorMessage(response, url);
-            this.retry(url);
-        }
-        return response;
+        return (HttpResponse<InputStream>) this.logMessageAndRetry(response, url);
     }
 
     public HttpResponse<byte[]> byteArrayResponseOf(String url) throws IOException, InterruptedException {
         HttpResponse<byte[]> response = super.byteArrayResponseOf(url);
-        LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus(response)));
+        return (HttpResponse<byte[]>) this.logMessageAndRetry(response, url);
+    }
+
+    public HttpResponse<?> logMessageAndRetry(HttpResponse<?> response, String url) throws IOException, InterruptedException {
         int httpStatusCode = response.statusCode();
-        if (!(200 == httpStatusCode)) {
-           this.logHttpErrorMessage(response, url);
-           this.retry(url);
+        if (200 == httpStatusCode) {
+            LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus200()));
+        } else {
+            this.logHttpErrorMessage(httpStatusCode, url);
+            this.retryDownloadLinkAvailablePage(url);
         }
         return response;
     }
