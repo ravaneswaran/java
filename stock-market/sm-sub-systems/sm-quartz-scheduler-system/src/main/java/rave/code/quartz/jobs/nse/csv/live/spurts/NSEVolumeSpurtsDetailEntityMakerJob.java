@@ -3,10 +3,10 @@ package rave.code.quartz.jobs.nse.csv.live.spurts;
 import org.apache.commons.csv.CSVRecord;
 import org.quartz.JobExecutionException;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.entity.nse.csv.NSEVolumeSpurtsDetailEntity;
+import rave.code.entity.nse.csv.NSEVolumeSpurtDetailEntity;
 import rave.code.quartz.jobs.nse.csv.live.AbstractNSELiveMarketEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
-import rave.code.repository.nse.NSEVolumeSpurtsDetailRepository;
+import rave.code.repository.nse.NSEVolumeSpurtDetailRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.util.ArrayList;
@@ -15,20 +15,20 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEVolumeSpurtsDetailEntity>> {
+public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEVolumeSpurtDetailEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtsSPLwr20DetailEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEVolumeSpurtsDetailRepository nseVolumeSpurtsDetailRepository = new NSEVolumeSpurtsDetailRepository();
+    private NSEVolumeSpurtDetailRepository nseVolumeSpurtsDetailRepository = new NSEVolumeSpurtDetailRepository();
 
     public NSEVolumeSpurtsDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-volume-gainers?csv=true");
     }
 
     @Override
-    public List<NSEVolumeSpurtsDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
-        List<NSEVolumeSpurtsDetailEntity> nseVolumeSpurtsDetailEntities = new ArrayList<>();
+    public List<NSEVolumeSpurtDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
+        List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtsDetailEntities = new ArrayList<>();
         int lineNumber = 1;
 
         for (CSVRecord csvRecord : sourceData) {
@@ -38,7 +38,7 @@ public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEn
                 continue;
             }
 
-            NSEVolumeSpurtsDetailEntity nseVolumeSpurtsDetailEntity = new NSEVolumeSpurtsDetailEntity();
+            NSEVolumeSpurtDetailEntity nseVolumeSpurtsDetailEntity = new NSEVolumeSpurtDetailEntity();
             String symbol = csvRecord.get(0).trim();
             nseVolumeSpurtsDetailEntity.setSymbol(symbol);
             try {
@@ -64,11 +64,11 @@ public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEn
     }
 
     @Override
-    public void saveTransformedData(List<NSEVolumeSpurtsDetailEntity> transformedData) {
+    public void saveTransformedData(List<NSEVolumeSpurtDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
-        List<NSEVolumeSpurtsDetailEntity> nseVolumeSpurtsDetailEntities = new ArrayList<>();
+        List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtsDetailEntities = new ArrayList<>();
 
-        for (NSEVolumeSpurtsDetailEntity nseVolumeSpurtsDetailEntity : transformedData) {
+        for (NSEVolumeSpurtDetailEntity nseVolumeSpurtsDetailEntity : transformedData) {
             String key = nseVolumeSpurtsDetailEntity.getKey();
             NSEStockBaseEntity nseStockBaseEntity = mappedStockBaseEntities.get(key);
             if (null != nseStockBaseEntity) {

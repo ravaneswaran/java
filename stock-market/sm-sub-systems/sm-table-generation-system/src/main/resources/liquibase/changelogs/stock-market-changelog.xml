@@ -28,8 +28,8 @@
     <include relativeToChangelogFile="true" file="nse/nse-stock-base-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-day-price-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-pre-open-market-detail-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="nse/nse-price-spurts-detail-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="nse/nse-volume-spurts-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-price-spurt-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-volume-spurt-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-sme-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-main-board-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-etf-detail-changelog.xml"/>

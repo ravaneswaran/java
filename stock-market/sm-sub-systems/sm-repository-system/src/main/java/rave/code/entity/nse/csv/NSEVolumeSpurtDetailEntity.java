@@ -3,9 +3,9 @@ package rave.code.entity.nse.csv;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "nse_volume_spurts_detail")
+@Table(name = "nse_volume_spurt_detail")
 @Access(AccessType.FIELD)
-public class NSEVolumeSpurtsDetailEntity extends AbstractNSECSVEntity {
+public class NSEVolumeSpurtDetailEntity extends AbstractNSECSVEntity {
 
     @ManyToOne
     @JoinColumn(name = "stock_base_id", nullable=false)

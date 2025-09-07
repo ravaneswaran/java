@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "nse_price_spurts_detail")
+@Table(name = "nse_price_spurt_detail")
 @Access(AccessType.FIELD)
-public class NSEPriceSpurtsDetailEntity extends AbstractNSECSVEntity{
+public class NSEPriceSpurtDetailEntity extends AbstractNSECSVEntity{
 
     @ManyToOne
     @JoinColumn(name = "stock_base_id", nullable=false)
     private NSEStockBaseEntity nseStockBaseEntity;
-    @Column(name = "spurts_type")
-    private String spurtsType;
+    @Column(name = "spurt_type")
+    private String spurtType;
     @Column(name = "symbol")
     private String symbol;
     @Column(name = "open_price")
@@ -42,12 +42,12 @@ public class NSEPriceSpurtsDetailEntity extends AbstractNSECSVEntity{
         this.nseStockBaseEntity = nseStockBaseEntity;
     }
 
-    public String getSpurtsType() {
-        return spurtsType;
+    public String getSpurtType() {
+        return spurtType;
     }
 
-    public void setSpurtsType(String spurtsType) {
-        this.spurtsType = spurtsType;
+    public void setSpurtType(String spurtType) {
+        this.spurtType = spurtType;
     }
 
     public String getSymbol() {

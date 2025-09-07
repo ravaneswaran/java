@@ -5,19 +5,19 @@ import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.util.logging.Logger;
 
-public class NSEPriceSpurtsSPLwr20DetailEntityMakerJob extends AbstractNSEPriceSpurtsDetailEntityMakerJob {
+public class NSEPriceSpurtSPLwr20DetailEntityMakerJob extends AbstractNSEPriceSpurtDetailEntityMakerJob {
 
-    private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtsSPLwr20DetailEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class.getName());
 
-    public NSEPriceSpurtsSPLwr20DetailEntityMakerJob() {
+    public NSEPriceSpurtSPLwr20DetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecLwr20&csv=true");
-        this.spurtsType = "STOCK-PRICE<20";
+        this.spurtType = "STOCK-PRICE<20";
     }
 
     public static void main(String[] args) throws JobExecutionException {
         JavaUtilLogDecor.setupLogDecor();
 
-        NSEPriceSpurtsSPLwr20DetailEntityMakerJob nsePriceSpurtsSPLwr20DetailEntityMakerJob = new NSEPriceSpurtsSPLwr20DetailEntityMakerJob();
+        NSEPriceSpurtSPLwr20DetailEntityMakerJob nsePriceSpurtsSPLwr20DetailEntityMakerJob = new NSEPriceSpurtSPLwr20DetailEntityMakerJob();
         nsePriceSpurtsSPLwr20DetailEntityMakerJob.saveTransformedData(nsePriceSpurtsSPLwr20DetailEntityMakerJob.transformSourceData(nsePriceSpurtsSPLwr20DetailEntityMakerJob.getDataFromSource()));
     }
 }

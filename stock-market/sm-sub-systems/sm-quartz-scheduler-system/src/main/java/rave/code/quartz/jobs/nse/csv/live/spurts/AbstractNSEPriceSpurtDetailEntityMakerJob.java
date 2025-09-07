@@ -1,10 +1,10 @@
 package rave.code.quartz.jobs.nse.csv.live.spurts;
 
 import org.apache.commons.csv.CSVRecord;
-import rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity;
+import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.jobs.nse.csv.live.AbstractNSELiveMarketEntityMakerJob;
-import rave.code.repository.nse.NSEPriceSpurtsDetailRepository;
+import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 
 import java.text.ParseException;
@@ -15,23 +15,23 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AbstractNSEPriceSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEPriceSpurtsDetailEntity>> {
+public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends AbstractNSELiveMarketEntityMakerJob<List<NSEPriceSpurtDetailEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(AbstractNSEPriceSpurtsDetailEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AbstractNSEPriceSpurtDetailEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEPriceSpurtsDetailRepository nsePriceSpurtsDetailRepository = new NSEPriceSpurtsDetailRepository();
+    private NSEPriceSpurtDetailRepository nsePriceSpurtsDetailRepository = new NSEPriceSpurtDetailRepository();
 
-    protected String spurtsType;
+    protected String spurtType;
 
-    public AbstractNSEPriceSpurtsDetailEntityMakerJob(String csvDownloadUrl) {
+    public AbstractNSEPriceSpurtDetailEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);
-        this.spurtsType = "STOCK-PRICE>20";
+        this.spurtType = "STOCK-PRICE>20";
     }
 
     @Override
-    public List<NSEPriceSpurtsDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
-        List<NSEPriceSpurtsDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
+    public List<NSEPriceSpurtDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
+        List<NSEPriceSpurtDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
         int lineNumber = 1;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
@@ -42,8 +42,8 @@ public abstract class AbstractNSEPriceSpurtsDetailEntityMakerJob extends Abstrac
                 continue;
             }
 
-            rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity nsePriceSpurtsDetailEntity = new rave.code.entity.nse.csv.NSEPriceSpurtsDetailEntity();
-            nsePriceSpurtsDetailEntity.setSpurtsType(this.spurtsType);
+            NSEPriceSpurtDetailEntity nsePriceSpurtsDetailEntity = new NSEPriceSpurtDetailEntity();
+            nsePriceSpurtsDetailEntity.setSpurtType(this.spurtType);
             String symbol = csvRecord.get(0).trim();
             nsePriceSpurtsDetailEntity.setSymbol(symbol);
             try {
@@ -98,11 +98,11 @@ public abstract class AbstractNSEPriceSpurtsDetailEntityMakerJob extends Abstrac
     }
 
     @Override
-    public void saveTransformedData(List<NSEPriceSpurtsDetailEntity> transformedData) {
+    public void saveTransformedData(List<NSEPriceSpurtDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
-        List<NSEPriceSpurtsDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
+        List<NSEPriceSpurtDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
 
-        for (NSEPriceSpurtsDetailEntity nsePriceSpurtsDetailEntity : transformedData) {
+        for (NSEPriceSpurtDetailEntity nsePriceSpurtsDetailEntity : transformedData) {
             String key = nsePriceSpurtsDetailEntity.getKey();
             NSEStockBaseEntity nseStockBaseEntity = mappedStockBaseEntities.get(key);
             if (null != nseStockBaseEntity) {
