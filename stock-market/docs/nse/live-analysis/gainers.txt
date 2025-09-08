@@ -3,5 +3,5 @@ https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key
 https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=BANKNIFTY&csv=true
 https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=NIFTYNEXT50&csv=true
 https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecGtr20&csv=true
-https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&keySecLwr20&csv=true
-https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&keyFOSec&csv=true
+https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecLwr20&csv=true
+https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=FOSec&csv=true
