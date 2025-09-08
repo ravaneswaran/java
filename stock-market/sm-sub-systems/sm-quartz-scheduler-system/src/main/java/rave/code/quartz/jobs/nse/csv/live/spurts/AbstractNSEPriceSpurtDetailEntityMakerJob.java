@@ -32,17 +32,13 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
     @Override
     public List<NSEPriceSpurtDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
-        int lineNumber = 1;
+        CSVRecord header = sourceData.remove(0);
+        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
         for (CSVRecord csvRecord : sourceData) {
-            if (1 == lineNumber) {
-                LOGGER.log(Level.INFO, "Skipping the header... ");
-                lineNumber = lineNumber + 1;
-                continue;
-            }
-
             NSEPriceSpurtDetailEntity nsePriceSpurtsDetailEntity = new NSEPriceSpurtDetailEntity();
+
             nsePriceSpurtsDetailEntity.setSpurtType(this.spurtType);
             String symbol = csvRecord.get(0).trim();
             nsePriceSpurtsDetailEntity.setSymbol(symbol);

@@ -3,82 +3,41 @@ package rave.code.quartz.jobs.nse.csv.preopen;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.java.http.client.nse.NationalStockExchangeHttpClient;
-import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
+import rave.code.quartz.jobs.nse.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
-import rave.code.utilities.file.SimpleFileReader;
-import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 
-import java.io.*;
 import java.math.BigDecimal;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEPreOpenMarketDetailEntity>> {
+public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSECSVEntityMakerJob<List<NSEPreOpenMarketDetailEntity>> {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNSEPreOpenMarketEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
 
-    protected String downloadPageUrl;
     protected String preOpenType;
 
     public AbstractNSEPreOpenMarketEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);
-        this.downloadPageUrl = "https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market";
+        super.setDownloadPageUrl("https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market");
     }
 
     @Override
     public List<CSVRecord> getDataFromSource() {
-        File downloadedFile = null;
-        NationalStockExchangeHttpClient nationalStockExchangeHttpClient = new NationalStockExchangeHttpClient();
-        try {
-            nationalStockExchangeHttpClient.gotoHomePage();
-            nationalStockExchangeHttpClient.stringResponseOf(this.downloadPageUrl);
-            downloadedFile = nationalStockExchangeHttpClient.getFile(this.csvDownloadUrl);
-        } catch (IOException ioException) {
-            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-        } catch (InterruptedException interruptedException) {
-            LOGGER.log(Level.SEVERE, interruptedException.getMessage(), interruptedException);
-        }
-
-        List<String> lines = new ArrayList<>();
-        if (null != downloadedFile) {
-            try (InputStream inputStream = new FileInputStream(downloadedFile)) {
-                lines = new SimpleFileReader().read(inputStream);
-            } catch (FileNotFoundException fileNotFoundException) {
-                LOGGER.log(Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
-            } catch (IOException ioException) {
-                LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-            }
-        }
-
-        int size = lines.size();
-        StringBuffer lineBuffer = new StringBuffer();
-        for (int index = 10; index < size; index++) {
-            lineBuffer.append(lines.get(index)).append("\n");
-        }
-
-        ApacheCommonsCSVFileReader apacheCommonsCSVFileReader = new ApacheCommonsCSVFileReader();
-        List<CSVRecord> records = new ArrayList<>();
-        try {
-            records = apacheCommonsCSVFileReader.read(new ByteArrayInputStream(lineBuffer.toString().getBytes(StandardCharsets.UTF_8)));
-        } catch (IOException ioException) {
-            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-        }
-
-        return records;
+        return this.getDataFromSource(true);
     }
 
     @Override
     public List<NSEPreOpenMarketDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = new ArrayList<>();
+        CSVRecord header = sourceData.remove(0);
+        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
         for (CSVRecord csvRecord : sourceData) {
             NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity = new NSEPreOpenMarketDetailEntity();
             nsePreOpenMarketDetailEntity.setPreOpenType(this.preOpenType);

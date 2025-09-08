@@ -7,11 +7,7 @@ public abstract class AbstractCSVEntityMakerJob<S, T> extends AbstractEntityMake
 
     protected String csvDownloadUrl;
 
-    public AbstractCSVEntityMakerJob(String csvDownloadUrl) {
-        this.setCsvDownloadUrl(csvDownloadUrl);
-    }
-
-    public void setCsvDownloadUrl(String csvDownloadUrl) {
+    public AbstractCSVEntityMakerJob(String csvDownloadUrl){
         this.csvDownloadUrl = csvDownloadUrl;
     }
 
@@ -33,5 +29,9 @@ public abstract class AbstractCSVEntityMakerJob<S, T> extends AbstractEntityMake
         outputStream.close();
 
         return downloadedFile;
+    }
+
+    public void setCsvDownloadUrl(String csvDownloadUrl) {
+        this.csvDownloadUrl = csvDownloadUrl;
     }
 }

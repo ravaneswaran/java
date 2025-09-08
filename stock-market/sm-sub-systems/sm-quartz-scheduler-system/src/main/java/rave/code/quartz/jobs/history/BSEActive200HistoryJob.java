@@ -1,8 +1,8 @@
 package rave.code.quartz.jobs.history;
 
-import rave.code.stockmarket.repository.StockMarketHistoryEnabledRepository;
 import rave.code.stockmarket.entity.BSEActive200Entity;
 import rave.code.stockmarket.entity.BSEActive200HistoryEntity;
+import rave.code.stockmarket.repository.StockMarketHistoryEnabledRepository;
 
 public class BSEActive200HistoryJob extends AbstractHistoryEntityMakerJob<BSEActive200Entity, BSEActive200HistoryEntity> {
 

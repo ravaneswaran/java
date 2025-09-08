@@ -2,8 +2,8 @@ package rave.code.quartz.jobs.moneycontrol.trading;
 
 import org.quartz.DisallowConcurrentExecution;
 import rave.code.data.parser.html.moneycontrol.BSEActive500Parser;
-import rave.code.stockmarket.repository.BSEActive500Repository;
 import rave.code.stockmarket.entity.BSEActive500Entity;
+import rave.code.stockmarket.repository.BSEActive500Repository;
 import rave.code.website.data.model.moneycontrol.BSEGenericActiveModel;
 
 import java.text.NumberFormat;

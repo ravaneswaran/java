@@ -1,8 +1,8 @@
 package rave.code.quartz.jobs.moneycontrol.trading;
 
 import rave.code.data.parser.html.moneycontrol.BSEPriceShockersParser;
-import rave.code.stockmarket.repository.BSEPriceShockerRepository;
 import rave.code.stockmarket.entity.BSEPriceShockerEntity;
+import rave.code.stockmarket.repository.BSEPriceShockerRepository;
 import rave.code.website.data.model.moneycontrol.PriceShockerModel;
 
 import java.text.NumberFormat;

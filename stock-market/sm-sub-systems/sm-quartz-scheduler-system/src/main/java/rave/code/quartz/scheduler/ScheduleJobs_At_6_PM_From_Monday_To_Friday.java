@@ -1,11 +1,8 @@
 package rave.code.quartz.scheduler;
 
-import org.quartz.*;
-
+import org.quartz.Scheduler;
 
 import java.util.logging.Logger;
-
-import static org.quartz.JobBuilder.newJob;
 
 public class ScheduleJobs_At_6_PM_From_Monday_To_Friday extends AbstractQuartzScheduler {
 

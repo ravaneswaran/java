@@ -4,16 +4,11 @@ import org.apache.commons.csv.CSVRecord;
 import org.quartz.JobExecutionException;
 import rave.code.entity.nse.csv.NSESMEDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.java.http.client.nse.NationalStockExchangeHttpClient;
 import rave.code.quartz.jobs.nse.csv.live.AbstractNSELiveMarketEntityMakerJob;
 import rave.code.repository.nse.NSESMEDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
-import rave.code.utilities.file.SimpleFileReader;
-import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.log.JavaUtilLogDecor;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,50 +28,15 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
 
     @Override
     public List<CSVRecord> getDataFromSource() {
-        File downloadedFile = null;
-        NationalStockExchangeHttpClient nationalStockExchangeHttpClient = new NationalStockExchangeHttpClient();
-        try {
-            nationalStockExchangeHttpClient.gotoHomePage();
-            nationalStockExchangeHttpClient.stringResponseOf(this.downloadPageUrl);
-            downloadedFile = nationalStockExchangeHttpClient.getFile(this.csvDownloadUrl);
-        } catch (IOException ioException) {
-            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-        } catch (InterruptedException interruptedException) {
-            LOGGER.log(Level.SEVERE, interruptedException.getMessage(), interruptedException);
-        }
-
-        List<String> lines = new ArrayList<>();
-        if (null != downloadedFile) {
-            try (InputStream inputStream = new FileInputStream(downloadedFile)) {
-                lines = new SimpleFileReader().read(inputStream);
-            } catch (FileNotFoundException fileNotFoundException) {
-                LOGGER.log(Level.SEVERE, fileNotFoundException.getMessage(), fileNotFoundException);
-            } catch (IOException ioException) {
-                LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-            }
-        }
-
-        int size = lines.size();
-        StringBuffer lineBuffer = new StringBuffer();
-        for (int index = 10; index < size; index++) {
-            lineBuffer.append(lines.get(index)).append("\n");
-        }
-
-        ApacheCommonsCSVFileReader apacheCommonsCSVFileReader = new ApacheCommonsCSVFileReader();
-        List<CSVRecord> records = new ArrayList<>();
-        try {
-            records = apacheCommonsCSVFileReader.read(new ByteArrayInputStream(lineBuffer.toString().getBytes(StandardCharsets.UTF_8)));
-        } catch (IOException ioException) {
-            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-        }
-
-        return records;
+        return this.getDataFromSource(true);
     }
 
 
     @Override
     public List<NSESMEDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSESMEDetailEntity> nseSmeDetailEntities = new ArrayList<>();
+        CSVRecord header = sourceData.remove(0);
+        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
 
         for (CSVRecord csvRecord : sourceData) {
 

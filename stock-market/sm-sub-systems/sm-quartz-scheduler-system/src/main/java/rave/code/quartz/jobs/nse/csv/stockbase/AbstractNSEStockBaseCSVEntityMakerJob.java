@@ -3,7 +3,7 @@ package rave.code.quartz.jobs.nse.csv.stockbase;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.ASCIIColorCodes;
-import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
+import rave.code.quartz.jobs.nse.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.download.FileDownloader;
@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractCSVEntityMakerJob<List<CSVRecord>, List<NSEStockBaseEntity>> {
+public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSECSVEntityMakerJob<List<NSEStockBaseEntity>> {
 
     protected Date toDate = new Date();
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
@@ -53,15 +53,10 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractCSVE
     @Override
     public List<NSEStockBaseEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
-        int lineNumber = 1;
+        CSVRecord header = sourceData.remove(0);
+        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
 
         for (CSVRecord csvRecord : sourceData) {
-            if (1 == lineNumber) {
-                LOGGER.log(Level.INFO, "Skipping the header... ");
-                lineNumber = lineNumber + 1;
-                continue;
-            }
-
             NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();
 
             nseStockBaseEntity.setSymbol(csvRecord.get(0));
