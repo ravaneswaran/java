@@ -53,8 +53,10 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSEC
     @Override
     public List<NSEStockBaseEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
-        CSVRecord header = sourceData.remove(0);
-        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
+        if(sourceData.size() > 0) {
+            CSVRecord header = sourceData.remove(0);
+            LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
+        }
 
         for (CSVRecord csvRecord : sourceData) {
             NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();

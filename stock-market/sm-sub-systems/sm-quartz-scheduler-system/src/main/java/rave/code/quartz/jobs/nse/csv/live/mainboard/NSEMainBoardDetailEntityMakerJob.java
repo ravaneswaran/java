@@ -36,8 +36,10 @@ public class NSEMainBoardDetailEntityMakerJob extends AbstractNSELiveMarketEntit
     @Override
     public List<NSEMainBoardDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEMainBoardDetailEntity> nseMainBoardDetailEntities = new ArrayList<>();
-        CSVRecord header = sourceData.remove(0);
-        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
+        if(sourceData.size() > 0) {
+            CSVRecord header = sourceData.remove(0);
+            LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
+        }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
