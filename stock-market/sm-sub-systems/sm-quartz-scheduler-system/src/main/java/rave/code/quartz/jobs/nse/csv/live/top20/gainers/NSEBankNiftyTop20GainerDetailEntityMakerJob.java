@@ -6,7 +6,7 @@ public class NSEBankNiftyTop20GainerDetailEntityMakerJob extends AbstractNSETop2
 
     public NSEBankNiftyTop20GainerDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=BANKNIFTY&csv=true");
-        this.setTop20Type("BANKNIFTY");
+        super.setTop20SubType("BANKNIFTY");
     }
 
     public static void main(String[] args) {

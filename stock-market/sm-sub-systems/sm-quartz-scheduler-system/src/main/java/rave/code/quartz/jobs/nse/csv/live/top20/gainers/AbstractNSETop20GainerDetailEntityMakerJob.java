@@ -6,5 +6,8 @@ public class AbstractNSETop20GainerDetailEntityMakerJob extends AbstractNSETop20
 
     public AbstractNSETop20GainerDetailEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);
+        super.setTop20Type("Gainer");
+        super.setTop20SubType(this.top20SubType);
     }
+
 }

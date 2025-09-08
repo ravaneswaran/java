@@ -6,7 +6,7 @@ public class NSESecLwr20Top20GainerDetailEntityMakerJob extends AbstractNSETop20
 
     public NSESecLwr20Top20GainerDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=SecLwr20&csv=true");
-        this.setTop20Type("SEVURITY<20");
+        super.setTop20SubType("SECURITY<20");
     }
 
     public static void main(String[] args) {

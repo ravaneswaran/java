@@ -13,6 +13,8 @@ public class NSETop20DetailEntity extends AbstractNSECSVEntity{
     private NSEStockBaseEntity nseStockBaseEntity;
     @Column(name = "top20_type")
     private String top20Type;
+    @Column(name = "top20_sub_type")
+    private String top20SubType;
     @Column(name = "symbol")
     private String symbol;
     @Column(name = "open_price")
@@ -48,6 +50,14 @@ public class NSETop20DetailEntity extends AbstractNSECSVEntity{
 
     public void setTop20Type(String top20Type) {
         this.top20Type = top20Type;
+    }
+
+    public String getTop20SubType() {
+        return top20SubType;
+    }
+
+    public void setTop20SubType(String top20SubType) {
+        this.top20SubType = top20SubType;
     }
 
     public String getSymbol() {

@@ -21,7 +21,8 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
-    private String top20Type;
+    protected String top20Type;
+    protected String top20SubType;
 
     public AbstractNSETop20DetailEntityMakerJob(String csvDownloadUrl) {
         super(csvDownloadUrl);
@@ -30,6 +31,10 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
 
     public void setTop20Type(String top20Type) {
         this.top20Type = top20Type;
+    }
+
+    public void setTop20SubType(String top20SubType) {
+        this.top20SubType = top20SubType;
     }
 
     @Override
@@ -45,6 +50,7 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
         for (CSVRecord csvRecord : sourceData) {
             NSETop20DetailEntity nseTop20DetailEntity = new NSETop20DetailEntity();
             nseTop20DetailEntity.setTop20Type(this.top20Type);
+            nseTop20DetailEntity.setTop20SubType(this.top20SubType);
 
             String symbol = csvRecord.get(0).trim();
             nseTop20DetailEntity.setSymbol(symbol);

@@ -6,7 +6,7 @@ public class NSEFuturesAndOptionTop20GainerDetailEntityMakerJob extends Abstract
 
     public NSEFuturesAndOptionTop20GainerDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=FOSec&csv=true");
-        this.setTop20Type("FOSecurity");
+        super.setTop20SubType("FOSecurity");
     }
 
     public static void main(String[] args) {

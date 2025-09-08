@@ -35,4 +35,12 @@
                 referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="002" author="Ravaneswaran Chinnasamy">
+        <sql>
+            ALTER TABLE nse_top20_detail
+            ADD top20_sub_type VARCHAR(50)
+            AFTER top20_type;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

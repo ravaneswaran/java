@@ -6,7 +6,7 @@ public class NSENiftyNext50Top20GainerDetailEntityMakerJob extends AbstractNSETo
 
     public NSENiftyNext50Top20GainerDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-variations?index=gainers&type=mae&key=NIFTYNEXT50&csv=true");
-        this.setTop20Type("NIFTYNEXT50");
+        super.setTop20SubType("NIFTYNEXT50");
     }
 
     public static void main(String[] args) {
