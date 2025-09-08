@@ -3,7 +3,7 @@ package rave.code.quartz.jobs.nse.csv.stockbase;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.enums.ASCIIColorCodes;
-import rave.code.quartz.jobs.nse.AbstractNSECSVEntityMakerJob;
+import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 import rave.code.utility.download.FileDownloader;
@@ -54,7 +54,7 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSEC
     public List<NSEStockBaseEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
         CSVRecord header = sourceData.remove(0);
-        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
+        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
 
         for (CSVRecord csvRecord : sourceData) {
             NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();

@@ -1,4 +1,4 @@
-package rave.code.quartz.jobs.nse;
+package rave.code.quartz.jobs.nse.csv;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.java.http.client.nse.NationalStockExchangeHttpClient;

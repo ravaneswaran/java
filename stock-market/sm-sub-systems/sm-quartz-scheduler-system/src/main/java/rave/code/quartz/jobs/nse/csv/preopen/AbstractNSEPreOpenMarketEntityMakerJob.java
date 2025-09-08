@@ -3,7 +3,7 @@ package rave.code.quartz.jobs.nse.csv.preopen;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.quartz.jobs.nse.AbstractNSECSVEntityMakerJob;
+import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 
@@ -37,7 +37,7 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
     public List<NSEPreOpenMarketDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = new ArrayList<>();
         CSVRecord header = sourceData.remove(0);
-        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
+        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         for (CSVRecord csvRecord : sourceData) {
             NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity = new NSEPreOpenMarketDetailEntity();
             nsePreOpenMarketDetailEntity.setPreOpenType(this.preOpenType);

@@ -29,15 +29,10 @@ public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEn
     @Override
     public List<NSEVolumeSpurtDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtsDetailEntities = new ArrayList<>();
-        int lineNumber = 1;
+        CSVRecord header = sourceData.remove(0);
+        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
 
         for (CSVRecord csvRecord : sourceData) {
-            if (1 == lineNumber) {
-                LOGGER.log(Level.INFO, "Skipping the header... ");
-                lineNumber = lineNumber + 1;
-                continue;
-            }
-
             NSEVolumeSpurtDetailEntity nseVolumeSpurtsDetailEntity = new NSEVolumeSpurtDetailEntity();
             String symbol = csvRecord.get(0).trim();
             nseVolumeSpurtsDetailEntity.setSymbol(symbol);

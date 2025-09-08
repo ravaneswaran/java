@@ -36,7 +36,7 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
     public List<NSESMEDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSESMEDetailEntity> nseSmeDetailEntities = new ArrayList<>();
         CSVRecord header = sourceData.remove(0);
-        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
+        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
 
         for (CSVRecord csvRecord : sourceData) {
 

@@ -79,14 +79,16 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(simpleDateFormat.format(this.date), formatter);
         Date businessDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-
+        if(sourceData.size() > 0) {
+            String header = sourceData.remove(0);
+            LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
+        }
         int lineNumber = 1;
 
         for (String line : sourceData) {
             String[] lineDetails = line.split(",");
 
             if (1 == lineNumber) {
-                LOGGER.log(Level.INFO, "skipping the header... ");
                 LOGGER.log(Level.INFO, "<<<<< paring indexes... >>>>>");
                 lineNumber = lineNumber + 1;
                 continue;
@@ -167,7 +169,8 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         JavaUtilLogDecor.setupLogDecor();
         LocalDate today = LocalDate.now();
         List<Date> dates = new ArrayList<>();
-        for (int index = 3; index >= 1; index--) {
+        int noOfDays = 5;
+        for (int index = noOfDays; index >= 1; index--) {
             LocalDate pastLocalDate = today.minusDays(index);
             Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             dates.add(pastDate);

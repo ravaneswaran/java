@@ -24,7 +24,7 @@ public class NSESMEEquityStockBaseEntityMakerJob extends AbstractNSEStockBaseCSV
     public List<NSEStockBaseEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
         CSVRecord header = sourceData.remove(0);
-        LOGGER.log(Level.INFO, "Skipping the header[%s]... ", header.toString());
+        LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
 
         for (CSVRecord csvRecord : sourceData) {
             NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();
