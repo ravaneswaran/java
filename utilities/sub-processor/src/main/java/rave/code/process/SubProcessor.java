@@ -10,20 +10,18 @@ import java.util.logging.Logger;
 /**
  * Hello world!
  */
-public class SubProcessor<T> {
+public class SubProcessor {
 
     private static final Logger LOGGER = Logger.getLogger(SubProcessor.class.getName());
 
-    public T createSubProcess(Class<T> program, String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        return (T) program.getDeclaredConstructor(String[].class).newInstance((Object) args);
+    public static AbstractSubProcess createSubProcess(Class program) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        return (AbstractSubProcess)program.getDeclaredConstructor().newInstance();
     }
 
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
         try {
-            String[] arguments = {"hello"};
-            SubProcessor<TestSubProcess> testSubProcessor = new SubProcessor<>();
-            testSubProcessor.createSubProcess(TestSubProcess.class, arguments).setUp().start().action().exit();
+            SubProcessor.createSubProcess(TestSubProcess.class).setUp().start().action().exit();
         } catch (InterruptedException interruptedException) {
             LOGGER.log(Level.SEVERE, interruptedException.getMessage(), interruptedException);
         } catch (IOException ioException) {

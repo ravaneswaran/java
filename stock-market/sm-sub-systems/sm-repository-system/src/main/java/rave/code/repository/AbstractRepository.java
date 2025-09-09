@@ -9,9 +9,9 @@ import java.util.List;
 public abstract class AbstractRepository <T> {
 
     private static final String PERSISTENCE_UNIT_NAME = "stock_market";
-    private static EntityManagerFactory factory;
 
-    private EntityManager entityManager;
+    private static EntityManagerFactory factory;
+    private static EntityManager entityManager;
 
     private Class<T> type;
 
@@ -23,51 +23,42 @@ public abstract class AbstractRepository <T> {
     }
 
     protected EntityManager getEntityManager() {
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        if (null == this.entityManager) {
-            this.entityManager = factory.createEntityManager();
-        } else {
-            if (!this.entityManager.isOpen()) {
-                this.entityManager = factory.createEntityManager();
-            }
-        }
-        return this.entityManager;
+        return entityManager;
     }
 
     protected void closeEntityManager() {
-        if (null != this.entityManager && this.entityManager.isOpen()) {
-            this.entityManager.close();
+        if (null != entityManager && entityManager.isOpen()) {
+            entityManager.close();
         }
     }
 
     public T findBy(String primaryKey) {
-        return this.entityManager.find(this.type, primaryKey);
+        return entityManager.find(this.type, primaryKey);
     }
 
     public T save(T entity) {
-        this.entityManager.getTransaction().begin();
-        this.entityManager.persist(entity);
-        this.entityManager.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.persist(entity);
+        entityManager.getTransaction().commit();
         return entity;
     }
 
     public T delete(T entity) {
-        this.entityManager.getTransaction().begin();
-        this.entityManager.remove(entity);
-        this.entityManager.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.remove(entity);
+        entityManager.getTransaction().commit();
         return entity;
     }
 
     public T update(T entity) {
-        this.entityManager.getTransaction().begin();
-        this.entityManager.merge(entity);
-        this.entityManager.getTransaction().commit();
+        entityManager.getTransaction().begin();
+        entityManager.merge(entity);
+        entityManager.getTransaction().commit();
         return entity;
     }
 
     // method introduced specially to move the data to the history tables...
     public List<T> findAll() {
-        EntityManager entityManager = this.getEntityManager();
         String queryString = "from ? entity".replace("?", this.type.getName());
         Query query = entityManager.createQuery(queryString, this.type);
         return query.getResultList();
@@ -75,4 +66,15 @@ public abstract class AbstractRepository <T> {
 
     public abstract void bulkUpsert(List<T> entities);
 
+    public static EntityManager createEntityManager(){
+        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+        if (null == entityManager) {
+            entityManager = factory.createEntityManager();
+        } else {
+            if (!entityManager.isOpen()) {
+                entityManager = factory.createEntityManager();
+            }
+        }
+        return entityManager;
+    }
 }

@@ -2,6 +2,7 @@ package rave.code.quartz.jobs.nse.csv.bhavcopy;
 
 import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.process.SubProcess;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
 import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
@@ -19,10 +20,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,12 +32,18 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
     private NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
+    List<Date> dates = new ArrayList<>();
+
     public NSEDayPriceDetailEntityMakerJob() {
         this(new Date());
     }
 
     public NSEDayPriceDetailEntityMakerJob(Date date) {
         super("");
+        this.initialize(date);
+    }
+
+    private void initialize(Date date){
         this.date = date;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
         String formattedDate = simpleDateFormat.format(this.date);
@@ -79,7 +83,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(simpleDateFormat.format(this.date), formatter);
         Date businessDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        if(sourceData.size() > 0) {
+        if (sourceData.size() > 0) {
             String header = sourceData.remove(0);
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
@@ -165,19 +169,20 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         this.nseDayPriceDetailRepository.bulkUpsert(transformedData);
     }
 
+    public void setDates(List<Date> dates) {
+        this.dates = dates;
+    }
+
+    @Override
+    public SubProcess action() throws IOException {
+        for (Date date : this.dates) {
+            this.initialize(date);
+            this.saveTransformedData(this.transformSourceData(this.getDataFromSource()));
+        }
+        return this;
+    }
+
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
-        LocalDate today = LocalDate.now();
-        List<Date> dates = new ArrayList<>();
-        int noOfDays = 5;
-        for (int index = noOfDays; index >= 1; index--) {
-            LocalDate pastLocalDate = today.minusDays(index);
-            Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            dates.add(pastDate);
-        }
-        for (Date date : dates) {
-            NSEDayPriceDetailEntityMakerJob nseDayPriceDetailEntityMakerJob = new NSEDayPriceDetailEntityMakerJob(date);
-            nseDayPriceDetailEntityMakerJob.saveTransformedData(nseDayPriceDetailEntityMakerJob.transformSourceData(nseDayPriceDetailEntityMakerJob.getDataFromSource()));
-        }
     }
 }
