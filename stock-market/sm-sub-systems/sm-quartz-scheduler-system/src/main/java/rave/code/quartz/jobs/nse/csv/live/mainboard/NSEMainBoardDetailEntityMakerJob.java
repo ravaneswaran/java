@@ -112,7 +112,7 @@ public class NSEMainBoardDetailEntityMakerJob extends AbstractNSELiveMarketEntit
                 nseMainBoardDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nseMainBoardDetailEntities.add(nseMainBoardDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nseMainBoardDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseMainBoardDetailEntity.getSymbol()));
             }
         }
         this.nseMainBoardDetailRepository.bulkUpsert(nseMainBoardDetailEntities);

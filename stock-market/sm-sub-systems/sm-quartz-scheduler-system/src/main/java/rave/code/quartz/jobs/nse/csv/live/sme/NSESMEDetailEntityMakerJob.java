@@ -105,7 +105,7 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
                 nseSmeDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nseSmeDetailEntities.add(nseSmeDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nseSmeDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("\"%s : stock base entity for(%s) does not exists...hence creating it.", key, nseSmeDetailEntity.getSymbol()));
             }
         }
         this.nseSmeDetailRepository.bulkUpsert(nseSmeDetailEntities);

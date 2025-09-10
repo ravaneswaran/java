@@ -104,7 +104,7 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
                 nseExchangeTradedFundDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nseExchangeTradedFundDetailEntities.add(nseExchangeTradedFundDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nseExchangeTradedFundDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseExchangeTradedFundDetailEntity.getSymbol()));
             }
         }
         this.nseExchangeTradedFundDetailRepository.bulkUpsert(nseExchangeTradedFundDetailEntities);

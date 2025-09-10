@@ -108,7 +108,7 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
                 nsePriceSpurtsDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nsePriceSpurtsDetailEntities.add(nsePriceSpurtsDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nsePriceSpurtsDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nsePriceSpurtsDetailEntity.getSymbol()));
             }
         }
         this.nsePriceSpurtsDetailRepository.bulkUpsert(nsePriceSpurtsDetailEntities);

@@ -1,4 +1,4 @@
-package rave.code;
+package rave.code.quartz;
 
 import org.junit.jupiter.api.Test;
 

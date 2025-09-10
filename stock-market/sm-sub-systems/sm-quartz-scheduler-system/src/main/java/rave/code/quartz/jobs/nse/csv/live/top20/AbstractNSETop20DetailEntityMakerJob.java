@@ -118,7 +118,7 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
                 nseTop20DetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nseTop20DetailEntities.add(nseTop20DetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nseTop20DetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseTop20DetailEntity.getSymbol()));
             }
         }
         this.nseTop20DetailRepository.bulkUpsert(nseTop20DetailEntities);

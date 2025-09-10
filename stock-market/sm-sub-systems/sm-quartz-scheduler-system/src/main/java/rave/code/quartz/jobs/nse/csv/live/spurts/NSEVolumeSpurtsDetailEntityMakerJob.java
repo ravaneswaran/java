@@ -73,7 +73,7 @@ public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEn
                 nseVolumeSpurtsDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nseVolumeSpurtsDetailEntities.add(nseVolumeSpurtsDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nseVolumeSpurtsDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseVolumeSpurtsDetailEntity.getSymbol()));
             }
         }
         this.nseVolumeSpurtsDetailRepository.bulkUpsert(nseVolumeSpurtsDetailEntities);
