@@ -123,7 +123,7 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
                 nsePreOpenMarketDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 properNsePreOpenMarketDetailEntities.add(nsePreOpenMarketDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not for(%s) exists...", key, nsePreOpenMarketDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("stock base entity for(%s) does not exists...hence creating it.", key, nsePreOpenMarketDetailEntity.getSymbol()));
             }
         }
         this.nsePreOpenMarketDetailRepository.bulkUpsert(properNsePreOpenMarketDetailEntities);

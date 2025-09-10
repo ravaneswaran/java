@@ -110,11 +110,11 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSEC
                     String key = String.format("%s:%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries(), nseStockBaseEntity.getISINumber());
                     NSEStockBaseEntity mappedStockBaseEntity = mappedStockBaseEntities.get(key);
                     if (null != mappedStockBaseEntity) {
-                        LOGGER.log(Level.INFO, String.format("[%s] - Stock entry is already available in the repository hence updating it...", key));
+                        LOGGER.log(Level.INFO, String.format("[%s] - Stock base entity is already available in the repository... hence updating it.", key));
                         nseStockBaseEntity.setNewEntity(false);
                         nseStockBaseEntities.add(mappedStockBaseEntity);
                     } else {
-                        LOGGER.log(Level.INFO, String.format("%s[%s]%s - Stock entry is not available in the repository hence creating it...", ASCIIColorCodes.WHITE.get(), key, ASCIIColorCodes.GREEN.get()));
+                        LOGGER.log(Level.INFO, String.format("%s[%s]%s - Stock base entity is not available in the repository...hence creating it.", ASCIIColorCodes.WHITE.get(), key, ASCIIColorCodes.GREEN.get()));
                         nseStockBaseEntities.add(nseStockBaseEntity);
                     }
                 }
