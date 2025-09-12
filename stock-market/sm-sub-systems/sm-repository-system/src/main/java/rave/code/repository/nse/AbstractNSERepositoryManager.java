@@ -1,12 +1,12 @@
 package rave.code.repository.nse;
 
-import rave.code.repository.AbstractStockBaseRepository;
+import rave.code.repository.AbstractRepositoryManager;
 
 import java.util.Map;
 
-public abstract class AbstractNSERepository<T> extends AbstractStockBaseRepository<T> {
+public abstract class AbstractNSERepositoryManager<T> extends AbstractRepositoryManager<T> {
 
-    public AbstractNSERepository(Class<T> type) {
+    public AbstractNSERepositoryManager(Class<T> type) {
         super(type);
     }
 

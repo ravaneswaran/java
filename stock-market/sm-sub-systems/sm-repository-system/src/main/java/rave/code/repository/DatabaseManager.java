@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-public abstract class AbstractRepository <T> {
+public abstract class DatabaseManager<T> {
 
     private static final String PERSISTENCE_UNIT_NAME = "stock_market";
 
@@ -15,7 +15,7 @@ public abstract class AbstractRepository <T> {
 
     private Class<T> type;
 
-    public AbstractRepository(Class<T> type) {
+    public DatabaseManager(Class<T> type) {
         this.type = type;
 
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -63,8 +63,6 @@ public abstract class AbstractRepository <T> {
         Query query = entityManager.createQuery(queryString, this.type);
         return query.getResultList();
     }
-
-    public abstract void bulkUpsert(List<T> entities);
 
     public static EntityManager createEntityManager(){
         factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);

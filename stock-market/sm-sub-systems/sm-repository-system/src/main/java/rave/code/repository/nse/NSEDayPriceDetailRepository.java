@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class NSEDayPriceDetailRepository extends AbstractNSERepository<NSEDayPriceDetailEntity> {
+public class NSEDayPriceDetailRepository extends AbstractNSERepositoryManager<NSEDayPriceDetailEntity> {
 
     private static final Logger LOGGER = Logger.getLogger(NSEDayPriceDetailRepository.class.getName());
 

@@ -1,7 +1,6 @@
-package rave.code.stockmarket.bse.dataaccess;
+package rave.code.stockmarket.repository;
 
 import junit.framework.TestCase;
-import rave.code.stockmarket.repository.BSEVolumeShockerRepository;
 import rave.code.stockmarket.entity.BSEVolumeShockerEntity;
 
 import java.util.Date;

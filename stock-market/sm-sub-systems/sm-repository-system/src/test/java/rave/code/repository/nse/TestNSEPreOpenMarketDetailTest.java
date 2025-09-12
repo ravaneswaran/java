@@ -1,4 +1,4 @@
-package rave.code.stockmarket.bse.dataaccess;
+package rave.code.repository.nse;
 
 import junit.framework.TestCase;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;

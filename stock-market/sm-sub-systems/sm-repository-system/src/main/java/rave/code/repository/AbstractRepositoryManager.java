@@ -1,20 +1,19 @@
 package rave.code.repository;
 
 import rave.code.entity.AbstractEntity;
-import rave.code.repository.AbstractRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractStockBaseRepository<T> extends AbstractRepository<T> {
+public abstract class AbstractRepositoryManager<T> extends DatabaseManager<T> {
 
-    public AbstractStockBaseRepository(Class<T> type) {
+    public AbstractRepositoryManager(Class<T> type) {
         super(type);
     }
 
-    @Override
     public void bulkUpsert(List<T> entities) {
         EntityManager entityManager = this.getEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -28,6 +27,10 @@ public abstract class AbstractStockBaseRepository<T> extends AbstractRepository<
             }
         }
         entityTransaction.commit();
+    }
+
+    public List<T> executeQuery(Query query){
+        return query.getResultList();
     }
 
     public abstract Map<String, T> getEntityMap();

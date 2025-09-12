@@ -34,6 +34,8 @@
     <include relativeToChangelogFile="true" file="nse/nse-main-board-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-etf-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-top20-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-day-block-deal-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-day-bulk-deal-detail-changelog.xml"/>
 
     <!--<include relativeToChangelogFile="true" file="quartz/quartz-scheduler-changelog.xml"/>-->
 </databaseChangeLog>
