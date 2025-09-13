@@ -1,44 +1,32 @@
-package rave.code.quartz.jobs.nse.csv.bulk;
+package rave.code.quartz.jobs.nse.csv.largetrade.bulk;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEDayBulkDealDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
+import rave.code.quartz.jobs.nse.csv.largetrade.AbstractNSECSVLargeTradeEntityMakerJob;
 import rave.code.repository.nse.NSEDayBulkDealDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
+import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AbstractNSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVEntityMakerJob<List<NSEDayBulkDealDetailEntity>> {
+public class NSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVLargeTradeEntityMakerJob<List<NSEDayBulkDealDetailEntity>> {
 
-    private static final Logger LOGGER = Logger.getLogger(AbstractNSEDayBulkDealDetailEntityMakerJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(NSEDayBulkDealDetailEntityMakerJob.class.getName());
 
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSEDayBulkDealDetailRepository nseDayBulkDealDetailRepository = new NSEDayBulkDealDetailRepository();
 
-    public AbstractNSEDayBulkDealDetailEntityMakerJob(String csvDownloadUrl) {
-        super(csvDownloadUrl);
+    public NSEDayBulkDealDetailEntityMakerJob() {
+        super("https://www.nseindia.com/api/historicalOR/bulk-block-short-deals?csv=true&optionType=bulk_deals&from=%s&to=%s");
         this.setDownloadPageUrl("https://www.nseindia.com/report-detail/display-bulk-and-block-deals");
-        this.initialize();
-    }
-
-    private void initialize(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate toLocalDate = LocalDate.parse(simpleDateFormat.format(new Date()), formatter);
-        Date toDate = Date.from(toLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        String toDateStr = simpleDateFormat.format(toDate);
-        this.setCsvDownloadUrl(String.format(this.csvDownloadUrl, toDateStr, toDateStr));
+        this.reconstructCsvDownloadUrl();
     }
 
     @Override
@@ -98,5 +86,12 @@ public class AbstractNSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVEn
             }
         }
         this.nseDayBulkDealDetailRepository.bulkUpsert(nseDayBulkDealDetailEntities);
+    }
+
+    public static void main(String[] args) {
+        JavaUtilLogDecor.setupLogDecor();
+
+        NSEDayBulkDealDetailEntityMakerJob nseDayBulkDealEntityMakerJob = new NSEDayBulkDealDetailEntityMakerJob();
+        nseDayBulkDealEntityMakerJob.saveTransformedData(nseDayBulkDealEntityMakerJob.transformSourceData(nseDayBulkDealEntityMakerJob.getDataFromSource()));
     }
 }

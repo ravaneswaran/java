@@ -4,7 +4,6 @@ import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEDayShortSellDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
-import rave.code.quartz.jobs.nse.csv.block.NSEDayBlockDealDetailEntityMakerJob;
 import rave.code.repository.nse.NSEDayShortSellDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
