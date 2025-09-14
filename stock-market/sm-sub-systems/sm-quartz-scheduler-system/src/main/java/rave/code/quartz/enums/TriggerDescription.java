@@ -10,14 +10,18 @@ public enum TriggerDescription {
     BSE_TOP_DIVIDEND("BSE Top Dividend trigger..."),
     BSE_MID_CAP_GAINER("BSE Mid Cap Gainer trigger..."),
     BSE_SMALL_CAP_GAINER("BSE Small Cap Gainer trigger..."),
-
     SENSEX("Sensex Trigger..."),
     STOCK_BASE("Stock Base Trigger"),
     BSE_ACTIVE_100_HISTORY("Triggers the job that moves BSE Active 100 entries to the history table..."),
     BSE_ACTIVE_200_HISTORY("Triggers the job that moves BSE Active 200 entries to the history table..."),
     BSE_ACTIVE_500_HISTORY("Triggers the job that moves BSE Active 500 entries to the history table..."),
     BSE_PRICE_SHOCKER_HISTORY("Triggers the job that moves BSE Price Shocker entries to the history table..."),
-    BSE_VOLUME_SHOCKER_HISTORY("Triggers the job that moves BSE Volume Shocker entries to the history table...");
+    BSE_VOLUME_SHOCKER_HISTORY("Triggers the job that moves BSE Volume Shocker entries to the history table..."),
+
+
+    POST_MARKET_CLOSE("Runs at end of the market business day....after 4:30 PM."),
+    PRE_OPEN_MARKET_REGULAR_SESSION("Runs between 09:00-09:08 AM"),
+    BLOCK_DEAL_SESSION("Runs between 08:45-09:00 AM and 02:05-02-20 PM.");
 
     private String description;
 

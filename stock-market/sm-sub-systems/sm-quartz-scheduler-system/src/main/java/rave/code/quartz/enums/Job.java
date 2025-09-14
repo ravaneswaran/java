@@ -1,6 +1,6 @@
 package rave.code.quartz.enums;
 
-public enum JobName {
+public enum Job {
 
     BSE_ACTIVE_100_JOB_NAME("BSEActive100Job"),
     BSE_ACTIVE_200_JOB_NAME("BSEActive200Job"),
@@ -19,15 +19,22 @@ public enum JobName {
     BSE_ACTIVE_200_HISTORY_JOB_NAME("BSEActive200HistoryJob"),
     BSE_ACTIVE_500_HISTORY_JOB_NAME("BSEActive500HistoryJob"),
     BSE_ACTIVE_PRICE_SHOCKER_HISTORY_JOB_NAME("BSEPriceShockerHistoryJob"),
-    BSE_ACTIVE_VOLUME_SHOCKER_HISTORY_JOB_NAME("BSEVolumeShockerHistoryJob");
+    BSE_ACTIVE_VOLUME_SHOCKER_HISTORY_JOB_NAME("BSEVolumeShockerHistoryJob"),
+
+    NSE_FIRST_BLOCK_DEAL_SESSION(""),
+    NSE_SECOND_BLOCK_DEAL_SESSION(""),
+    NSE_PRE_OPEN_REGULAR_SESSION(""),
+    NSE_PRE_OPEN_SPECIAL_SESSION(""),
+    NSE_POST_MARKET_CLOSE(""),
+    NSE_T_PLUS_0_SESSION("");
 
     private String name;
 
-    private JobName(String name){
+    private Job(String name){
         this.name = name;
     }
 
-    public String get(){
+    public String getName(){
         return this.name;
     }
 }

@@ -19,7 +19,12 @@ public enum TriggerName {
     BSE_ACTIVE_200_HISTORY_TRIGGER_NAME("BSEActive200HistoryTrigger"),
     BSE_ACTIVE_500_HISTORY_TRIGGER_NAME("BSEActive500HistoryTrigger"),
     BSE_PRICE_SHOCKER_HISTORY_TRIGGER_NAME("BSEPriceShockerHistoryTrigger"),
-    BSE_VOLUME_SHOCKER_HISTORY_TRIGGER_NAME("BSEVolumeShockerHistoryTrigger");
+    BSE_VOLUME_SHOCKER_HISTORY_TRIGGER_NAME("BSEVolumeShockerHistoryTrigger"),
+
+    NSE_POST_MARKET_CLOSE_TRIGGER("PostMarketCloseTrigger"),
+    NSE_BLOCK_DEAL_SESSION_TRIGGER("NSEBlockDealSessionTrigger"),
+    NSE_PRE_MARKET_REGULAR_SESSION_TRIGGER("NSEPreMarketRegularSessionTrigger"),
+    NSE_PRE_MARKET_SPECIAL_SESSION_TRIGGER("NSEPreMarketSpecialSessionTrigger");
 
     private String name;
 
