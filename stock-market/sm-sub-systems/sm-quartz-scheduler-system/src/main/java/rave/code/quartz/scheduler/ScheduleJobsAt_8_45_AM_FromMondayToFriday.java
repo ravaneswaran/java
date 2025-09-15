@@ -44,27 +44,27 @@ public class ScheduleJobsAt_8_45_AM_FromMondayToFriday extends AbstractQuartzSch
 
         org.quartz.Trigger bseActive100HistoryJobDetailTrigger = newTrigger()
                 .withIdentity(TriggerName.BSE_ACTIVE_100_HISTORY_TRIGGER_NAME.get(), Group.HISTORY.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BSE_ACTIVE_100_HISTORY.get())
                 .build();
         org.quartz.Trigger bseActive200HistoryJobDetailTrigger = newTrigger()
                 .withIdentity(TriggerName.BSE_ACTIVE_200_HISTORY_TRIGGER_NAME.get(), Group.HISTORY.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BSE_ACTIVE_200_HISTORY.get())
                 .build();
         org.quartz.Trigger bseActive500HistoryJobDetailTrigger = newTrigger()
                 .withIdentity(TriggerName.BSE_ACTIVE_500_HISTORY_TRIGGER_NAME.get(), Group.HISTORY.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BSE_ACTIVE_500_HISTORY.get())
                 .build();
         org.quartz.Trigger bsePriceShockerHistoryJobDetailTrigger = newTrigger()
                 .withIdentity(TriggerName.BSE_PRICE_SHOCKER_HISTORY_TRIGGER_NAME.get(), Group.HISTORY.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BSE_PRICE_SHOCKER_HISTORY.get())
                 .build();
         org.quartz.Trigger bseVolumeShockerHistoryJobDetailTrigger = newTrigger()
                 .withIdentity(TriggerName.BSE_VOLUME_SHOCKER_HISTORY_TRIGGER_NAME.get(), Group.HISTORY.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BSE_VOLUME_SHOCKER_HISTORY.get())
                 .build();
 

@@ -13,13 +13,13 @@ import java.util.logging.Logger;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-public class NSERegularPreOpenMarketScheduler extends AbstractQuartzScheduler {
+public class NSERegularPreOpenSessionScheduler extends AbstractQuartzScheduler {
 
-    public static final Logger LOGGER = Logger.getLogger(NSERegularPreOpenMarketScheduler.class.toString());
+    public static final Logger LOGGER = Logger.getLogger(NSERegularPreOpenSessionScheduler.class.toString());
 
     private Scheduler scheduler;
 
-    public NSERegularPreOpenMarketScheduler(Scheduler scheduler) {
+    public NSERegularPreOpenSessionScheduler(Scheduler scheduler) {
         this.scheduler = scheduler;
     }
 
@@ -43,8 +43,8 @@ public class NSERegularPreOpenMarketScheduler extends AbstractQuartzScheduler {
                 .build();
 
         Trigger preOpenMarketRegularSessionTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_PRE_MARKET_REGULAR_SESSION_TRIGGER.get(), Group.PRE_OPEN_REGULAR_SESSION.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
+                .withIdentity(TriggerName.NSE_PRE_OPEN_REGULAR_SESSION_TRIGGER.get(), Group.PRE_OPEN_REGULAR_SESSION.toString())
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 

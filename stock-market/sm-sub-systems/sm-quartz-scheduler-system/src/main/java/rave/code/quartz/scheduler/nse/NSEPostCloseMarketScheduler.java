@@ -32,7 +32,7 @@ public class NSEPostCloseMarketScheduler extends AbstractQuartzScheduler {
 
         Trigger stockBaseJobTrigger = newTrigger()
                 .withIdentity(TriggerName.NSE_POST_MARKET_CLOSE_TRIGGER.get(), Group.POST_MARKET_CLOSE.toString())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.AT_06_PM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_POST_MARKET_CLOSE_AT_06_PM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.POST_MARKET_CLOSE.get())
                 .build();
 

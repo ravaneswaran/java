@@ -25,8 +25,8 @@ public enum Job {
     NSE_SECOND_BLOCK_DEAL_SESSION(""),
     NSE_PRE_OPEN_REGULAR_SESSION(""),
     NSE_PRE_OPEN_SPECIAL_SESSION(""),
-    NSE_POST_MARKET_CLOSE(""),
-    NSE_T_PLUS_0_SESSION("");
+    NSE_T_PLUS_0_LIVE_SESSION(""),
+    NSE_POST_MARKET_CLOSE("");
 
     private String name;
 

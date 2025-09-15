@@ -23,8 +23,9 @@ public enum TriggerName {
 
     NSE_POST_MARKET_CLOSE_TRIGGER("PostMarketCloseTrigger"),
     NSE_BLOCK_DEAL_SESSION_TRIGGER("NSEBlockDealSessionTrigger"),
-    NSE_PRE_MARKET_REGULAR_SESSION_TRIGGER("NSEPreMarketRegularSessionTrigger"),
-    NSE_PRE_MARKET_SPECIAL_SESSION_TRIGGER("NSEPreMarketSpecialSessionTrigger");
+    NSE_PRE_OPEN_REGULAR_SESSION_TRIGGER("NSEPreMarketRegularSessionTrigger"),
+    NSE_T_PLUS_0_LIVE_SESSION_TRIGGER("NSE T+0 LiveSessionTrigger"),
+    NSE_PRE_OPEN_SPECIAL_SESSION_TRIGGER("NSEPreMarketSpecialSessionTrigger");
 
     private String name;
 
