@@ -18,7 +18,6 @@ public class BSEQuartzScheduler extends AbstractQuartzScheduler {
 
     @Override
     public void scheduleJobs() {
-        System.out.println("scheduler ==================>>>>>>> " + this.scheduler);
 
         new ScheduleJobsAt_8_45_AM_FromMondayToFriday(this.scheduler).scheduleJobs();
         new ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_4PM_With3MinuteFrequency(this.scheduler).scheduleJobs();

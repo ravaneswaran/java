@@ -17,8 +17,6 @@ public class BSEQuartzSchedulerConfiguration {
             SchedulerFactory schedulerFactory = new StdSchedulerFactory();
             Scheduler scheduler = schedulerFactory.getScheduler();
 
-            System.out.println("-------------------->>>>>>>>> "+scheduler);
-
             new BSEQuartzScheduler(scheduler).scheduleJobs();
             scheduler.start();
         } catch (SchedulerException exception) {
