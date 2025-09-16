@@ -21,30 +21,26 @@ public class ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_4PM_With3MinuteFre
 
     public static final Logger LOGGER = Logger.getLogger(ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_4PM_With3MinuteFrequency.class.toString());
 
-    private Scheduler scheduler;
-
     public ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_4PM_With3MinuteFrequency(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob() {
-        new ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_10_AM_With3MinuteFrequency(this.scheduler).scheduleJob();
-        new ScheduleJobsFromMondayToFridayBetween_10_AM_To_4_PM_With3MinuteFrequency(this.scheduler).scheduleJob();
+    public void scheduleJobs() {
+        new ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_10_AM_With3MinuteFrequency(this.scheduler).scheduleJobs();
+        new ScheduleJobsFromMondayToFridayBetween_10_AM_To_4_PM_With3MinuteFrequency(this.scheduler).scheduleJobs();
     }
 
     private class ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_10_AM_With3MinuteFrequency extends AbstractQuartzScheduler {
 
         public static final Logger LOGGER = Logger.getLogger(ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_10_AM_With3MinuteFrequency.class.toString());
 
-        private Scheduler scheduler;
-
         public ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_10_AM_With3MinuteFrequency(Scheduler scheduler) {
-            this.scheduler = scheduler;
+            super(scheduler);
         }
 
         @Override
-        public void scheduleJob() {
+        public void scheduleJobs() {
 
             JobDetail bseActive100JobDetail = newJob(BSEActive100Job.class)
                     .withIdentity(Job.BSE_ACTIVE_100_JOB_NAME.getName(), Group.TRADING_BATCH_1.toString()).storeDurably()
@@ -191,14 +187,12 @@ public class ScheduleJobsFromMondayToFridayBetween_9_15_AM_To_4PM_With3MinuteFre
 
         public static final Logger LOGGER = Logger.getLogger(ScheduleJobsFromMondayToFridayBetween_10_AM_To_4_PM_With3MinuteFrequency.class.toString());
 
-        private Scheduler scheduler;
-
         public ScheduleJobsFromMondayToFridayBetween_10_AM_To_4_PM_With3MinuteFrequency(Scheduler scheduler) {
-            this.scheduler = scheduler;
+            super(scheduler);
         }
 
         @Override
-        public void scheduleJob() {
+        public void scheduleJobs() {
 
             JobDetail bseActive100JobDetail = newJob(BSEActive100Job.class)
                     .withIdentity(Job.BSE_ACTIVE_100_JOB_NAME.getName(), Group.TRADING_BATCH_2.toString()).storeDurably()

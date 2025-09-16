@@ -21,12 +21,12 @@ public enum Job {
     BSE_ACTIVE_PRICE_SHOCKER_HISTORY_JOB_NAME("BSEPriceShockerHistoryJob"),
     BSE_ACTIVE_VOLUME_SHOCKER_HISTORY_JOB_NAME("BSEVolumeShockerHistoryJob"),
 
-    NSE_FIRST_BLOCK_DEAL_SESSION(""),
-    NSE_SECOND_BLOCK_DEAL_SESSION(""),
-    NSE_PRE_OPEN_REGULAR_SESSION(""),
+    NSE_FIRST_BLOCK_DEAL_SESSION("NSE First Block Deal Session"),
+    NSE_SECOND_BLOCK_DEAL_SESSION("NSE Second Block Deal Session"),
+    NSE_PRE_OPEN_REGULAR_SESSION("NSE Pre Open Regular Session"),
     NSE_PRE_OPEN_SPECIAL_SESSION(""),
-    NSE_T_PLUS_0_LIVE_SESSION(""),
-    NSE_POST_MARKET_CLOSE("");
+    NSE_T_PLUS_0_LIVE_SESSION("NSE T+0 Live Session"),
+    NSE_POST_MARKET_CLOSE("NSE Post Market Close");
 
     private String name;
 

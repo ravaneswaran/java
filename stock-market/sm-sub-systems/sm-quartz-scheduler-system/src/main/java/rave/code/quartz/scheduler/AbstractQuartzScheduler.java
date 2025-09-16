@@ -1,7 +1,15 @@
 package rave.code.quartz.scheduler;
 
+import org.quartz.Scheduler;
+
 public abstract class AbstractQuartzScheduler {
 
-    public abstract void scheduleJob();
+    protected Scheduler scheduler;
+
+    public abstract void scheduleJobs();
+
+    public AbstractQuartzScheduler(Scheduler scheduler){
+        this.scheduler = scheduler;
+    }
 
 }

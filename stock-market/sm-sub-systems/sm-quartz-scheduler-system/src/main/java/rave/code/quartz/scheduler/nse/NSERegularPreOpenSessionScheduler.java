@@ -17,14 +17,12 @@ public class NSERegularPreOpenSessionScheduler extends AbstractQuartzScheduler {
 
     public static final Logger LOGGER = Logger.getLogger(NSERegularPreOpenSessionScheduler.class.toString());
 
-    private Scheduler scheduler;
-
     public NSERegularPreOpenSessionScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} {
+    public void scheduleJobs(){} {
 
         JobDetail nsePreOpenMarketNifty50EntityMakerJob = newJob(NSEPreOpenMarketNifty50EntityMakerJob.class)
                 .withIdentity(Job.NSE_PRE_OPEN_REGULAR_SESSION.getName(), Group.PRE_OPEN_REGULAR_SESSION.name())

@@ -17,14 +17,13 @@ public class ScheduleJobsAt_8_45_AM_FromMondayToFriday extends AbstractQuartzSch
 
     public static final Logger LOGGER = Logger.getLogger(ScheduleJobsAt_8_45_AM_FromMondayToFriday.class.toString());
 
-    private Scheduler scheduler;
-
     public ScheduleJobsAt_8_45_AM_FromMondayToFriday(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
+        System.out.println("============= "+this.scheduler);
     }
 
     @Override
-    public void scheduleJob() {
+    public void scheduleJobs() {
 
         JobDetail bseActive100HistoryJobDetail = newJob(BSEActive100HistoryJob.class)
                 .withIdentity(Job.BSE_ACTIVE_100_HISTORY_JOB_NAME.getName(), Group.HISTORY.toString())

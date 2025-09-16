@@ -25,14 +25,12 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
 
     public static final Logger LOGGER = Logger.getLogger(NSELiveSessionScheduler.class.toString());
 
-    private Scheduler scheduler;
-
     public NSELiveSessionScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} {
+    public void scheduleJobs(){} {
 
         JobDetail nseExchangeTradedFundDetailEntityMakerJob = newJob(NSEExchangeTradedFundDetailEntityMakerJob.class)
                 .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())

@@ -8,14 +8,12 @@ public class ScheduleJobs_At_6_PM_From_Monday_To_Friday extends AbstractQuartzSc
 
     public static final Logger LOGGER = Logger.getLogger(ScheduleJobs_At_6_PM_From_Monday_To_Friday.class.toString());
 
-    private Scheduler scheduler;
-
     public ScheduleJobs_At_6_PM_From_Monday_To_Friday(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} /*{
+    public void scheduleJobs(){} /*{
 
         JobDetail stockBaseJobDetail = newJob(NSESTock.class)
                 .withIdentity(JobName.BSE_STOCK_BASE_JOB_NAME.get(), Group.STOCK_BASE.toString())

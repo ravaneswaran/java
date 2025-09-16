@@ -17,14 +17,12 @@ public class NSEPostCloseMarketScheduler extends AbstractQuartzScheduler {
 
     public static final Logger LOGGER = Logger.getLogger(NSEPostCloseMarketScheduler.class.toString());
 
-    private Scheduler scheduler;
-
     public NSEPostCloseMarketScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} {
+    public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJob = newJob(NSEDayPriceDetailEntityMakerJob.class)
                 .withIdentity(Job.NSE_POST_MARKET_CLOSE.getName(), Group.POST_MARKET_CLOSE.name())

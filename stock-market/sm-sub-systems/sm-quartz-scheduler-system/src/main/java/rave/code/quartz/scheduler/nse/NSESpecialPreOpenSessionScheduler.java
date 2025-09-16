@@ -9,13 +9,11 @@ public class NSESpecialPreOpenSessionScheduler extends AbstractQuartzScheduler {
 
     public static final Logger LOGGER = Logger.getLogger(NSESpecialPreOpenSessionScheduler.class.toString());
 
-    private Scheduler scheduler;
-
     public NSESpecialPreOpenSessionScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} {
+    public void scheduleJobs(){} {
     }
 }

@@ -17,14 +17,12 @@ public class NSESecondBlockDealSessionScheduler extends AbstractQuartzScheduler 
 
     public static final Logger LOGGER = Logger.getLogger(NSESecondBlockDealSessionScheduler.class.toString());
 
-    private Scheduler scheduler;
-
     public NSESecondBlockDealSessionScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} {
+    public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJob = newJob(NSEDayBlockDealDetailEntityMakerJob.class)
                 .withIdentity(Job.NSE_SECOND_BLOCK_DEAL_SESSION.getName(), Group.BLOCK_DEAL_SESSION.name())

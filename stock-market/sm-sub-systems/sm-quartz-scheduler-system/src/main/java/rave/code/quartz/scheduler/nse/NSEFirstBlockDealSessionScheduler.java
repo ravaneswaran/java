@@ -17,27 +17,26 @@ public class NSEFirstBlockDealSessionScheduler extends AbstractQuartzScheduler {
 
     public static final Logger LOGGER = Logger.getLogger(NSEFirstBlockDealSessionScheduler.class.toString());
 
-    private Scheduler scheduler;
 
     public NSEFirstBlockDealSessionScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
+        super(scheduler);
     }
 
     @Override
-    public void scheduleJob(){} {
+    public void scheduleJobs(){} {
 
         JobDetail nseDayBlockDealDetailEntityMakerJob = newJob(NSEDayBlockDealDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_FIRST_BLOCK_DEAL_SESSION.getName(), Group.BLOCK_DEAL_SESSION.name())
+                .withIdentity(Job.NSE_FIRST_BLOCK_DEAL_SESSION.getName(), Group.BLOCK_DEAL_SESSION.toString())
                 .build();
 
-        Trigger stockBaseJobTrigger = newTrigger()
+        Trigger nseDayBlockDealDetailEntityMakerTrigger = newTrigger()
                 .withIdentity(TriggerName.NSE_BLOCK_DEAL_SESSION_TRIGGER.get(), Group.BLOCK_DEAL_SESSION.toString())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BLOCK_DEAL_SESSION.get())
                 .build();
 
         try {
-            this.scheduler.scheduleJob(nseDayBlockDealDetailEntityMakerJob, stockBaseJobTrigger);
+            this.scheduler.scheduleJob(nseDayBlockDealDetailEntityMakerJob, nseDayBlockDealDetailEntityMakerTrigger);
         } catch (ObjectAlreadyExistsException objectAlreadyExistsException) {
             LOGGER.log(Level.INFO, objectAlreadyExistsException.getMessage());
         } catch (SchedulerException schedulerException) {

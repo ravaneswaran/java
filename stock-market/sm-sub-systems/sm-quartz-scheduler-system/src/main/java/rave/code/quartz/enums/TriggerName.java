@@ -21,7 +21,7 @@ public enum TriggerName {
     BSE_PRICE_SHOCKER_HISTORY_TRIGGER_NAME("BSEPriceShockerHistoryTrigger"),
     BSE_VOLUME_SHOCKER_HISTORY_TRIGGER_NAME("BSEVolumeShockerHistoryTrigger"),
 
-    NSE_POST_MARKET_CLOSE_TRIGGER("PostMarketCloseTrigger"),
+    NSE_POST_MARKET_CLOSE_TRIGGER("NSEPostMarketCloseTrigger"),
     NSE_BLOCK_DEAL_SESSION_TRIGGER("NSEBlockDealSessionTrigger"),
     NSE_PRE_OPEN_REGULAR_SESSION_TRIGGER("NSEPreMarketRegularSessionTrigger"),
     NSE_T_PLUS_0_LIVE_SESSION_TRIGGER("NSE T+0 LiveSessionTrigger"),
