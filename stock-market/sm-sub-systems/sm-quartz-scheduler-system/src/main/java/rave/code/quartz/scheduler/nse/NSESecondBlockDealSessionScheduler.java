@@ -25,7 +25,7 @@ public class NSESecondBlockDealSessionScheduler extends AbstractQuartzScheduler 
     public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJob = newJob(NSEDayBlockDealDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_SECOND_BLOCK_DEAL_SESSION.getName(), Group.NSE_BLOCK_DEAL_SESSION.name()).storeDurably()
+                .withIdentity(Job.NSE_SECOND_BLOCK_DEAL_SESSION_JOB.getName(), Group.NSE_BLOCK_DEAL_SESSION.name()).storeDurably()
                 .build();
 
         Trigger stockBaseJobTrigger = newTrigger()
