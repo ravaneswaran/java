@@ -25,13 +25,13 @@ public class NSESecondBlockDealSessionScheduler extends AbstractQuartzScheduler 
     public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJob = newJob(NSEDayBlockDealDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_SECOND_BLOCK_DEAL_SESSION.getName(), Group.BLOCK_DEAL_SESSION.name())
+                .withIdentity(Job.NSE_SECOND_BLOCK_DEAL_SESSION.getName(), Group.NSE_BLOCK_DEAL_SESSION.name()).storeDurably()
                 .build();
 
         Trigger stockBaseJobTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_BLOCK_DEAL_SESSION_TRIGGER.get(), Group.BLOCK_DEAL_SESSION.toString())
+                .withIdentity(TriggerName.NSE_FIRST_BLOCK_DEAL_SESSION_TRIGGER.get(), Group.NSE_BLOCK_DEAL_SESSION.toString())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_SECOND_SESSION_BETWEEN_02_05_TO_02_20_PM_MONDAY_TO_FRIDAY.toString()))
-                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.BLOCK_DEAL_SESSION.get())
+                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_BLOCK_DEAL_SESSION.get())
                 .build();
 
         try {

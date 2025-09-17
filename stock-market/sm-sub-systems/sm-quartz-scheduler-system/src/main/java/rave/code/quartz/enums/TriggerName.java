@@ -21,11 +21,19 @@ public enum TriggerName {
     BSE_PRICE_SHOCKER_HISTORY_TRIGGER_NAME("BSEPriceShockerHistoryTrigger"),
     BSE_VOLUME_SHOCKER_HISTORY_TRIGGER_NAME("BSEVolumeShockerHistoryTrigger"),
 
-    NSE_POST_MARKET_CLOSE_TRIGGER("NSEPostMarketCloseTrigger"),
-    NSE_BLOCK_DEAL_SESSION_TRIGGER("NSEBlockDealSessionTrigger"),
-    NSE_PRE_OPEN_REGULAR_SESSION_TRIGGER("NSEPreMarketRegularSessionTrigger"),
-    NSE_T_PLUS_0_LIVE_SESSION_TRIGGER("NSE T+0 LiveSessionTrigger"),
-    NSE_PRE_OPEN_SPECIAL_SESSION_TRIGGER("NSEPreMarketSpecialSessionTrigger");
+    NSE_POST_MARKET_CLOSE_TRIGGER("NSE Post Market CloseTrigger"),
+    NSE_FIRST_BLOCK_DEAL_SESSION_TRIGGER("NSE Block Deal Session Trigger"),
+
+    NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_TRIGGER("NSE Nifty-50 Pre Open Market Regular Session Trigger"),
+    NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_TRIGGER("NSE Bank Nifty Pre Open Market Regular Session Trigger"),
+    NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_TRIGGER("NSE SME Pre Open Market Regular Session Trigger"),
+    NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_TRIGGER("NSE FO Pre Open Market Regular Session Trigger"),
+    NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_TRIGGER("NSE Others Pre Open Market Regular Session Trigger"),
+
+    NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_TRIGGER("NSE T+0 Slot-1 Live Session Trigger"),
+    NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_TRIGGER("NSE T+0 Slot-2 Live Session Trigger"),
+    NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_TRIGGER("NSE T+0 Slot-3 Live Session Trigger"),
+    NSE_PRE_OPEN_SPECIAL_SESSION_TRIGGER("NSE Pre Market Special Session Trigger");
 
     private String name;
 

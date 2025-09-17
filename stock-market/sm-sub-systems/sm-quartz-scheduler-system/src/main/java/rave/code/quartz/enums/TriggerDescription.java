@@ -19,10 +19,10 @@ public enum TriggerDescription {
     BSE_VOLUME_SHOCKER_HISTORY("Triggers the job that moves BSE Volume Shocker entries to the history table..."),
 
 
-    POST_MARKET_CLOSE("Runs at end of the market business day....after 4:30 PM."),
-    PRE_OPEN_MARKET_REGULAR_SESSION("Runs between 09:00-09:08 AM"),
-    BLOCK_DEAL_SESSION("Runs between 08:45-09:00 AM and 02:05-02-20 PM."),
-    T_PLUS_0_LIVE_SESSION("Runs between 09:15 AM - 01:30 PM.");
+    NSE_POST_MARKET_CLOSE("Runs at end of the market business day....after 4:30 PM."),
+    NSE_PRE_OPEN_MARKET_REGULAR_SESSION("Runs between 09:00-09:08 AM"),
+    NSE_BLOCK_DEAL_SESSION("Runs between 08:45-09:00 AM and 02:05-02-20 PM."),
+    NSE_T_PLUS_0_LIVE_SESSION("Runs between 09:15 AM - 01:30 PM.");
 
     private String description;
 

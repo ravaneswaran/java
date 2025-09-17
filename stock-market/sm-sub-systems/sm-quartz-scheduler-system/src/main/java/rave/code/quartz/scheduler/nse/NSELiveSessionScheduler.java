@@ -33,74 +33,74 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
     public void scheduleJobs(){} {
 
         JobDetail nseExchangeTradedFundDetailEntityMakerJob = newJob(NSEExchangeTradedFundDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_ETF_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseMainBoardDetailEntityMakerJob = newJob(NSEMainBoardDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_MAIN_BOARD_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseSMEDetailEntityMakerJob = newJob(NSESMEDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_SME_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nsePriceSpurtSPGtr20DetailEntityMakerJob = newJob(NSEPriceSpurtSPGtr20DetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_PRICE_SPURT_SP_GTR_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nsePriceSpurtSPLwr20DetailEntityMakerJob = newJob(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_PRICE_SPURT_SP_LWR_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseVolumeSpurtsDetailEntityMakerJob = newJob(NSEVolumeSpurtsDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_VOLUME_SPURT_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseBankNiftyTop20GainerDetailEntityMakerJob = newJob(NSEBankNiftyTop20GainerDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_BANK_NIFTY_GAINER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseFuturesAndOptionTop20GainerDetailEntityMakerJob = newJob(NSEFuturesAndOptionTop20GainerDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_FO_GAINER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseNifty50Top20GainerDetailEntityMakerJob = newJob(NSENifty50Top20GainerDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_NIFTY_50_GAINER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseNiftyNext50Top20GainerDetailEntityMakerJob = newJob(NSENiftyNext50Top20GainerDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_NIFTY_NEXT_50_GAINER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseSecGtr20Top20GainerDetailEntityMakerJob = newJob(NSESecGtr20Top20GainerDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_SECURITY_GTR_20_GAINER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseSecLwr20Top20GainerDetailEntityMakerJob = newJob(NSESecLwr20Top20GainerDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_SECURITY_LWR_20_GAINER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseBankNiftyTop20LoserDetailEntityMakerJob = newJob(NSEBankNiftyTop20LoserDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_BANK_NIFTY_LOSER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseFuturesAndOptionTop20LoserDetailEntityMakerJob = newJob(NSEFuturesAndOptionTop20LoserDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_FO_LOSER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseNifty50Top20LoserDetailEntityMakerJob = newJob(NSENifty50Top20LoserDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_NIFTY_50_LOSER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseNiftyNext50Top20LoserDetailEntityMakerJob = newJob(NSENiftyNext50Top20LoserDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_NIFTY_NEXT_50_LOSER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseSecGtr20Top20LoserDetailEntityMakerJob = newJob(NSESecGtr20Top20LoserDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_SECURITY_GTR_20_LOSER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
         JobDetail nseSecLwr20Top20LoserDetailEntityMakerJob = newJob(NSESecLwr20Top20LoserDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_T_PLUS_0_LIVE_SESSION.getName(), Group.LIVE_SESSION.name())
+                .withIdentity(Job.NSE_T_PLUS_0_SECURITY_LWR_20_LOSER_TOP_20_LIVE_SESSION.getName(), Group.NSE_LIVE_SESSION.name()).storeDurably()
                 .build();
 
         Trigger triggerOne = newTrigger()
-                .withIdentity(TriggerName.NSE_T_PLUS_0_LIVE_SESSION_TRIGGER.get(), Group.LIVE_SESSION.toString())
+                .withIdentity(TriggerName.NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_TRIGGER.get(), Group.NSE_LIVE_SESSION.toString())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_09_15_AM_TO_09_59_AM_MONDAY_TO_FRIDAY.toString()))
-                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.T_PLUS_0_LIVE_SESSION.get())
+                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_LIVE_SESSION.get())
                 .build();
         Trigger triggerTwo = newTrigger()
-                .withIdentity(TriggerName.NSE_T_PLUS_0_LIVE_SESSION_TRIGGER.get(), Group.LIVE_SESSION.toString())
+                .withIdentity(TriggerName.NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_TRIGGER.get(), Group.NSE_LIVE_SESSION.toString())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_10_00_AM_TO_12_59_PM_MONDAY_TO_FRIDAY.toString()))
-                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.T_PLUS_0_LIVE_SESSION.get())
+                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_LIVE_SESSION.get())
                 .build();
         Trigger triggerThree = newTrigger()
-                .withIdentity(TriggerName.NSE_T_PLUS_0_LIVE_SESSION_TRIGGER.get(), Group.LIVE_SESSION.toString())
+                .withIdentity(TriggerName.NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_TRIGGER.get(), Group.NSE_LIVE_SESSION.toString())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_13_00_PM_TO_13_30_PM_MONDAY_TO_FRIDAY.toString()))
-                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.T_PLUS_0_LIVE_SESSION.get())
+                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_LIVE_SESSION.get())
                 .build();
 
 
