@@ -46,32 +46,32 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
             String symbol = csvRecord.get(0).trim();
             nseSmeDetailEntity.setSymbol(symbol);
             try {
-                nseSmeDetailEntity.setOpenPrice(Double.parseDouble(csvRecord.get(1).trim()));
+                nseSmeDetailEntity.setOpenPrice(Double.parseDouble(csvRecord.get(1).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("OpenPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }
             try {
-                nseSmeDetailEntity.setHighPrice(Double.parseDouble(csvRecord.get(2).trim()));
+                nseSmeDetailEntity.setHighPrice(Double.parseDouble(csvRecord.get(2).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("HighPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }
             try {
-                nseSmeDetailEntity.setLowPrice(Double.parseDouble(csvRecord.get(3).trim()));
+                nseSmeDetailEntity.setLowPrice(Double.parseDouble(csvRecord.get(3).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("LowPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }
             try {
-                nseSmeDetailEntity.setPreviousClosePrice(Double.parseDouble(csvRecord.get(4).trim()));
+                nseSmeDetailEntity.setPreviousClosePrice(Double.parseDouble(csvRecord.get(4).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("PreviousClosePrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }
             try {
-                nseSmeDetailEntity.setLastTradedPrice(Double.parseDouble(csvRecord.get(5).trim()));
+                nseSmeDetailEntity.setLastTradedPrice(Double.parseDouble(csvRecord.get(5).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("LastTradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }
             try {
-                nseSmeDetailEntity.setPercentageChange(Double.parseDouble(csvRecord.get(6).trim()));
+                nseSmeDetailEntity.setPercentageChange(Double.parseDouble(csvRecord.get(6).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("PercentageChange of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }

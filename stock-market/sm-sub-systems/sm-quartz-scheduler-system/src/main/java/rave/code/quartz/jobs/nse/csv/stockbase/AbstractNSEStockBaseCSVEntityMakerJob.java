@@ -72,20 +72,20 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSEC
                 LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
             }
             try {
-                int paidUpValue = Integer.parseInt(csvRecord.get(4));
+                int paidUpValue = Integer.parseInt(csvRecord.get(4).trim().replaceAll(",", ""));
                 nseStockBaseEntity.setPaidUpValue(paidUpValue);
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
             }
             try {
-                int marketLot = Integer.parseInt(csvRecord.get(5));
+                int marketLot = Integer.parseInt(csvRecord.get(5).trim().replaceAll(",", ""));
                 nseStockBaseEntity.setMarketLot(marketLot);
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
             }
             nseStockBaseEntity.setISINumber(csvRecord.get(6));
             try {
-                int faceValue = Integer.parseInt(csvRecord.get(7));
+                int faceValue = Integer.parseInt(csvRecord.get(7).trim().replaceAll(",", ""));
                 nseStockBaseEntity.setMarketLot(faceValue);
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);

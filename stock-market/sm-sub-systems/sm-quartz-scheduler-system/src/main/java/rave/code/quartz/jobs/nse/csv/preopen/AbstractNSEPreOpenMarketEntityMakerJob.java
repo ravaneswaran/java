@@ -46,61 +46,61 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
             String symbol = csvRecord.get(0);
             nsePreOpenMarketDetailEntity.setSymbol(symbol);
             try {
-                nsePreOpenMarketDetailEntity.setPreviousClose(Double.parseDouble(csvRecord.get(1).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setPreviousClose(Double.parseDouble(csvRecord.get(1).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("PreviousClose of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setPreviousClose(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setIndicativeEquilibriumPrice(Double.parseDouble(csvRecord.get(2).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setIndicativeEquilibriumPrice(Double.parseDouble(csvRecord.get(2).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("IndicativeEquilibriumPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setIndicativeEquilibriumPrice(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setPriceChange(Double.parseDouble(csvRecord.get(3).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setPriceChange(Double.parseDouble(csvRecord.get(3).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("change of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setPriceChange(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setPricePercentageChange(Double.parseDouble(csvRecord.get(4).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setPricePercentageChange(Double.parseDouble(csvRecord.get(4).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("PercentageChange of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setPricePercentageChange(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setFinalPrice(Double.parseDouble(csvRecord.get(5).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setFinalPrice(Double.parseDouble(csvRecord.get(5).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("FinalPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setFinalPrice(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setFinalQuantity(Integer.parseInt(csvRecord.get(6).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setFinalQuantity(Integer.parseInt(csvRecord.get(6).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("FinalQuantity of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setFinalQuantity(0);
             }
             try {
-                nsePreOpenMarketDetailEntity.setValueInCrores(new BigDecimal(csvRecord.get(7).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setValueInCrores(new BigDecimal(csvRecord.get(7).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("ValueInCrores of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setFinalQuantity(0);
             }
             try {
-                nsePreOpenMarketDetailEntity.setFreeFloatMarketCapitalization(new BigDecimal(csvRecord.get(8).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setFreeFloatMarketCapitalization(new BigDecimal(csvRecord.get(8).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("FreeFloatMarketCapitalization of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setFinalQuantity(0);
             }
             try {
-                nsePreOpenMarketDetailEntity.setNewMarket52WeekHigh(Double.parseDouble(csvRecord.get(9).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setNewMarket52WeekHigh(Double.parseDouble(csvRecord.get(9).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("NewMarket52WeekHigh of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setNewMarket52WeekHigh(0.00);
             }
             try {
-                nsePreOpenMarketDetailEntity.setNewMarket52WeekLow(Double.parseDouble(csvRecord.get(10).replaceAll(",", "")));
+                nsePreOpenMarketDetailEntity.setNewMarket52WeekLow(Double.parseDouble(csvRecord.get(10).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("NewMarket52WeekLow of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
                 nsePreOpenMarketDetailEntity.setNewMarket52WeekLow(0.00);

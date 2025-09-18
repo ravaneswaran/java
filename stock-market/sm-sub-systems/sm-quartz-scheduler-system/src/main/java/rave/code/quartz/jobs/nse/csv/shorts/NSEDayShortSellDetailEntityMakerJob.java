@@ -61,7 +61,7 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
             nseDayShortSellDetailEntity.setSymbol(symbol);
             nseDayShortSellDetailEntity.setSecurityName(csvRecord.get(2));
             try {
-                nseDayShortSellDetailEntity.setQuantity(Integer.parseInt(csvRecord.get(3).replaceAll(",", "")));
+                nseDayShortSellDetailEntity.setQuantity(Integer.parseInt(csvRecord.get(3).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
                 LOGGER.log(Level.SEVERE, String.format("Quantity of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
             }
