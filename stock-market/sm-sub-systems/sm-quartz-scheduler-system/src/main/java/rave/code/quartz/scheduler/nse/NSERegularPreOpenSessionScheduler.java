@@ -2,7 +2,7 @@ package rave.code.quartz.scheduler.nse;
 
 import org.quartz.*;
 import rave.code.quartz.enums.CronExpression;
-import rave.code.quartz.enums.Job;
+import rave.code.quartz.enums.QuartzJob;
 import rave.code.quartz.enums.*;
 import rave.code.quartz.jobs.nse.csv.preopen.*;
 import rave.code.quartz.scheduler.AbstractQuartzScheduler;
@@ -25,47 +25,47 @@ public class NSERegularPreOpenSessionScheduler extends AbstractQuartzScheduler {
     public void scheduleJobs(){} {
 
         JobDetail nsePreOpenMarketNifty50EntityMakerJobDetail = newJob(NSEPreOpenMarketNifty50EntityMakerJob.class)
-                .withIdentity(Job.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_JOB.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_JOB.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketBankNiftyEntityMakerJobDetail = newJob(NSEPreOpenMarketBankNiftyEntityMakerJob.class)
-                .withIdentity(Job.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_JOB.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_JOB.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketSMEEntityMakerJobDetail = newJob(NSEPreOpenMarketSMEEntityMakerJob.class)
-                .withIdentity(Job.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_JOB.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_JOB.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketFOEntityMakerJobDetail = newJob(NSEPreOpenMarketFOEntityMakerJob.class)
-                .withIdentity(Job.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_JOB.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_JOB.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketOthersEntityMakerJobDetail = newJob(NSEPreOpenMarketOthersEntityMakerJob.class)
-                .withIdentity(Job.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_JOB.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_JOB.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name()).storeDurably()
                 .build();
 
         Trigger preOpenMarketNifty50RegularSessionTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_TRIGGER.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_TRIGGER.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketBankNiftyRegularSessionTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_TRIGGER.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_TRIGGER.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularSMESessionTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_TRIGGER.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_TRIGGER.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularFOSessionTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_TRIGGER.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_TRIGGER.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularOthersSessionTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_TRIGGER.name(), Group.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_TRIGGER.name(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.name())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();

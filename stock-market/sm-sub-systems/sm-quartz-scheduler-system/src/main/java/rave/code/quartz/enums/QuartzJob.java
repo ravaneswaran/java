@@ -1,6 +1,6 @@
 package rave.code.quartz.enums;
 
-public enum Job {
+public enum QuartzJob {
 
     BSE_ACTIVE_100_JOB_NAME("BSEActive100Job"),
     BSE_ACTIVE_200_JOB_NAME("BSEActive200Job"),
@@ -110,7 +110,7 @@ public enum Job {
 
     private String name;
 
-    private Job(String name){
+    private QuartzJob(String name){
         this.name = name;
     }
 

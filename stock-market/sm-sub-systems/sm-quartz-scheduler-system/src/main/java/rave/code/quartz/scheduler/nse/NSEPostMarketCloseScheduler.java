@@ -2,7 +2,7 @@ package rave.code.quartz.scheduler.nse;
 
 import org.quartz.*;
 import rave.code.quartz.enums.CronExpression;
-import rave.code.quartz.enums.Job;
+import rave.code.quartz.enums.QuartzJob;
 import rave.code.quartz.enums.*;
 import rave.code.quartz.jobs.nse.csv.bhavcopy.NSEDayPriceDetailEntityMakerJob;
 import rave.code.quartz.scheduler.AbstractQuartzScheduler;
@@ -25,11 +25,11 @@ public class NSEPostMarketCloseScheduler extends AbstractQuartzScheduler {
     public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJobDetail = newJob(NSEDayPriceDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_POST_MARKET_CLOSE_JOB.name(), Group.NSE_POST_MARKET_CLOSE.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_POST_MARKET_CLOSE_JOB.name(), QuartzGroup.NSE_POST_MARKET_CLOSE.name()).storeDurably()
                 .build();
 
         Trigger nseDayPriceDetailEntityMakerJobTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_POST_MARKET_CLOSE_TRIGGER.name(), Group.NSE_POST_MARKET_CLOSE.name())
+                .withIdentity(QuartzTrigger.NSE_POST_MARKET_CLOSE_TRIGGER.name(), QuartzGroup.NSE_POST_MARKET_CLOSE.name())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_POST_MARKET_CLOSE_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_POST_MARKET_CLOSE.get())
                 .build();

@@ -2,7 +2,7 @@ package rave.code.quartz.scheduler.nse;
 
 import org.quartz.*;
 import rave.code.quartz.enums.CronExpression;
-import rave.code.quartz.enums.Job;
+import rave.code.quartz.enums.QuartzJob;
 import rave.code.quartz.enums.*;
 import rave.code.quartz.jobs.nse.csv.largetrade.block.NSEDayBlockDealDetailEntityMakerJob;
 import rave.code.quartz.scheduler.AbstractQuartzScheduler;
@@ -25,11 +25,11 @@ public class NSESecondBlockDealSessionScheduler extends AbstractQuartzScheduler 
     public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJob = newJob(NSEDayBlockDealDetailEntityMakerJob.class)
-                .withIdentity(Job.NSE_SECOND_BLOCK_DEAL_SESSION_JOB.getName(), Group.NSE_BLOCK_DEAL_SESSION.name()).storeDurably()
+                .withIdentity(QuartzJob.NSE_SECOND_BLOCK_DEAL_SESSION_JOB.getName(), QuartzGroup.NSE_BLOCK_DEAL_SESSION.name()).storeDurably()
                 .build();
 
         Trigger stockBaseJobTrigger = newTrigger()
-                .withIdentity(TriggerName.NSE_FIRST_BLOCK_DEAL_SESSION_TRIGGER.get(), Group.NSE_BLOCK_DEAL_SESSION.toString())
+                .withIdentity(QuartzTrigger.NSE_FIRST_BLOCK_DEAL_SESSION_TRIGGER.get(), QuartzGroup.NSE_BLOCK_DEAL_SESSION.toString())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_SECOND_SESSION_BETWEEN_02_05_TO_02_20_PM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_BLOCK_DEAL_SESSION.get())
                 .build();

@@ -1,6 +1,6 @@
 package rave.code.quartz.enums;
 
-public enum Group {
+public enum QuartzGroup {
 
     TRADING_BATCH_1,
     TRADING_BATCH_2,
