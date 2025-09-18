@@ -96,6 +96,7 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
     public void saveTransformedData(List<NSESMEDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSESMEDetailEntity> nseSmeDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSESMEDetailEntity nseSmeDetailEntity : transformedData) {
             String key = nseSmeDetailEntity.getSymbol();
@@ -105,9 +106,12 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
                 nseSmeDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                 nseSmeDetailEntities.add(nseSmeDetailEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("\"%s : stock base entity for(%s) does not exists...hence creating it.", key, nseSmeDetailEntity.getSymbol()));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseSmeDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseSmeDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseSmeDetailRepository.bulkUpsert(nseSmeDetailEntities);
     }
 

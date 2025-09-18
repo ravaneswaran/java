@@ -99,6 +99,7 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
     public void saveTransformedData(List<NSEPriceSpurtDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEPriceSpurtDetailEntity nsePriceSpurtsDetailEntity : transformedData) {
             String key = nsePriceSpurtsDetailEntity.getKey();
@@ -109,8 +110,11 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
                 nsePriceSpurtsDetailEntities.add(nsePriceSpurtsDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nsePriceSpurtsDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nsePriceSpurtsDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nsePriceSpurtsDetailRepository.bulkUpsert(nsePriceSpurtsDetailEntities);
     }
 }

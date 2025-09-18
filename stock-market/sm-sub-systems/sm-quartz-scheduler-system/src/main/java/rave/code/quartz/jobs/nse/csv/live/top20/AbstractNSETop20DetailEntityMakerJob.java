@@ -109,6 +109,7 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
     public void saveTransformedData(List<NSETop20DetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSETop20DetailEntity> nseTop20DetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSETop20DetailEntity nseTop20DetailEntity : transformedData) {
             String key = nseTop20DetailEntity.getSymbol();
@@ -119,8 +120,11 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
                 nseTop20DetailEntities.add(nseTop20DetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseTop20DetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseTop20DetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseTop20DetailRepository.bulkUpsert(nseTop20DetailEntities);
     }
 }

@@ -114,6 +114,7 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
     public void saveTransformedData(List<NSEPreOpenMarketDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEPreOpenMarketDetailEntity> properNsePreOpenMarketDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity : transformedData) {
             String key = nsePreOpenMarketDetailEntity.getKey();
@@ -124,8 +125,11 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
                 properNsePreOpenMarketDetailEntities.add(nsePreOpenMarketDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("stock base entity for(%s) does not exists...hence creating it.", key, nsePreOpenMarketDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nsePreOpenMarketDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nsePreOpenMarketDetailRepository.bulkUpsert(properNsePreOpenMarketDetailEntities);
     }
 

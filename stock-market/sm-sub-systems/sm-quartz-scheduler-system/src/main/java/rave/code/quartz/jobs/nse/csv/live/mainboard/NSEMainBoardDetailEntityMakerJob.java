@@ -103,6 +103,7 @@ public class NSEMainBoardDetailEntityMakerJob extends AbstractNSELiveMarketEntit
     public void saveTransformedData(List<NSEMainBoardDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEMainBoardDetailEntity> nseMainBoardDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEMainBoardDetailEntity nseMainBoardDetailEntity : transformedData) {
             String key = nseMainBoardDetailEntity.getSymbol();
@@ -113,8 +114,11 @@ public class NSEMainBoardDetailEntityMakerJob extends AbstractNSELiveMarketEntit
                 nseMainBoardDetailEntities.add(nseMainBoardDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseMainBoardDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseMainBoardDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseMainBoardDetailRepository.bulkUpsert(nseMainBoardDetailEntities);
     }
 

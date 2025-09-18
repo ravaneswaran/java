@@ -74,6 +74,7 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
     public void saveTransformedData(List<NSEDayShortSellDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEDayShortSellDetailEntity> nseDayShortSellDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEDayShortSellDetailEntity nseDayShortSellDetailEntity : transformedData) {
             String key = nseDayShortSellDetailEntity.getSymbol();
@@ -84,8 +85,11 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
                 nseDayShortSellDetailEntities.add(nseDayShortSellDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("stock base entity for(%s) does not exists...hence creating it.", key, nseDayShortSellDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseDayShortSellDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseDayShortSellDetailRepository.bulkUpsert(nseDayShortSellDetailEntities);
     }
 

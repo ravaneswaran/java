@@ -34,7 +34,7 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
     @Override
     public List<NSEExchangeTradedFundDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEExchangeTradedFundDetailEntity> nseExchangeTradedFundDetailEntities = new ArrayList<>();
-        if(sourceData.size() > 0) {
+        if (sourceData.size() > 0) {
             CSVRecord header = sourceData.remove(0);
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
@@ -95,6 +95,7 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
     public void saveTransformedData(List<NSEExchangeTradedFundDetailEntity> transformedData) {
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEExchangeTradedFundDetailEntity> nseExchangeTradedFundDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEExchangeTradedFundDetailEntity nseExchangeTradedFundDetailEntity : transformedData) {
             String key = nseExchangeTradedFundDetailEntity.getSymbol();
@@ -105,8 +106,11 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
                 nseExchangeTradedFundDetailEntities.add(nseExchangeTradedFundDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nseExchangeTradedFundDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseExchangeTradedFundDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseExchangeTradedFundDetailRepository.bulkUpsert(nseExchangeTradedFundDetailEntities);
     }
 

@@ -158,7 +158,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
                 LOGGER.log(Level.INFO, String.format("%s : stock base entity exists...", key));
                 nseDayPriceDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
             } else {
-                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity not exists...hence creating it.", key));
+                LOGGER.log(Level.SEVERE, String.format("%s : stock base entity does not exists...hence creating it.", key));
                 NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseDayPriceDetailEntity.getSymbol(), nseDayPriceDetailEntity.getCompanyName(), nseDayPriceDetailEntity.getSeries(), null, -1, -1, -1);
                 nseStockBaseEntities.add(nseStockBaseEntityToCreate);
                 nseDayPriceDetailEntity.setNseStockBaseEntity(nseStockBaseEntityToCreate);
