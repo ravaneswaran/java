@@ -2,6 +2,7 @@ package rave.code.quartz.jobs.nse.csv.bhavcopy;
 
 import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.entity.nse.csv.NSETop20DetailEntity;
 import rave.code.process.SubProcess;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
@@ -147,7 +148,10 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
 
     @Override
     public void saveTransformedData(List<NSEDayPriceDetailEntity> transformedData) {
-
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEDayPriceDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.getEntityMapForDayPriceDetails();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 

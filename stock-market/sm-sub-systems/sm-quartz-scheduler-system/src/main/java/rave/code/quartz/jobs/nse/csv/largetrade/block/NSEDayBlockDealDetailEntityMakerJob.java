@@ -69,8 +69,13 @@ public class NSEDayBlockDealDetailEntityMakerJob extends AbstractNSECSVLargeTrad
 
     @Override
     public void saveTransformedData(List<NSEDayBlockDealDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEDayBlockDealDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEDayBlockDealDetailEntity> nseDayBlockDealDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEDayBlockDealDetailEntity nseDayBlockDealDetailEntity : transformedData) {
             String key = nseDayBlockDealDetailEntity.getSymbol();
@@ -81,8 +86,11 @@ public class NSEDayBlockDealDetailEntityMakerJob extends AbstractNSECSVLargeTrad
                 nseDayBlockDealDetailEntities.add(nseDayBlockDealDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("stock base entity for(%s) does not exists...hence creating it.", key, nseDayBlockDealDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseDayBlockDealDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseDayBlockDealDetailRepository.bulkUpsert(nseDayBlockDealDetailEntities);
     }
 

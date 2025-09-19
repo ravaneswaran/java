@@ -98,8 +98,11 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSEC
 
     @Override
     public void saveTransformedData(List<NSEStockBaseEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEStockBaseEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.getEntityMap();
-
         if (mappedStockBaseEntities.size() == 0) {
             LOGGER.log(Level.INFO, String.format("%sLoading fresh set of NSE stock base into the repository...", ASCIIColorCodes.WHITE.get()));
             this.nseStockBaseRepository.bulkUpsert(transformedData);

@@ -97,6 +97,10 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
 
     @Override
     public void saveTransformedData(List<NSEPriceSpurtDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEPriceSpurtDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtsDetailEntities = new ArrayList<>();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();

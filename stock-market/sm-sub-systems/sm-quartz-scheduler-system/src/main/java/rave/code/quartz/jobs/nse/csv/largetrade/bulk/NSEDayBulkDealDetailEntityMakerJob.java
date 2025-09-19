@@ -71,8 +71,13 @@ public class NSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVLargeTrade
 
     @Override
     public void saveTransformedData(List<NSEDayBulkDealDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEDayBulkDealDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEDayBulkDealDetailEntity> nseDayBulkDealDetailEntities = new ArrayList<>();
+        List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
 
         for (NSEDayBulkDealDetailEntity nseDayBulkDealDetailEntity : transformedData) {
             String key = nseDayBulkDealDetailEntity.getSymbol();
@@ -83,8 +88,11 @@ public class NSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVLargeTrade
                 nseDayBulkDealDetailEntities.add(nseDayBulkDealDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("stock base entity for(%s) does not exists...hence creating it.", key, nseDayBulkDealDetailEntity.getSymbol()));
+                NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nseDayBulkDealDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
+                nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
         }
+        this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseDayBulkDealDetailRepository.bulkUpsert(nseDayBulkDealDetailEntities);
     }
 

@@ -112,6 +112,10 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
 
     @Override
     public void saveTransformedData(List<NSEPreOpenMarketDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEPreOpenMarketDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEPreOpenMarketDetailEntity> properNsePreOpenMarketDetailEntities = new ArrayList<>();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();

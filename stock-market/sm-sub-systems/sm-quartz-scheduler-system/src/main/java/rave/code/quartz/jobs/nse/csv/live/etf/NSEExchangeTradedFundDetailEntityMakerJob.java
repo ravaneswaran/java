@@ -93,6 +93,10 @@ public class NSEExchangeTradedFundDetailEntityMakerJob extends AbstractNSELiveMa
 
     @Override
     public void saveTransformedData(List<NSEExchangeTradedFundDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEExchangeTradedFundDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEExchangeTradedFundDetailEntity> nseExchangeTradedFundDetailEntities = new ArrayList<>();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();

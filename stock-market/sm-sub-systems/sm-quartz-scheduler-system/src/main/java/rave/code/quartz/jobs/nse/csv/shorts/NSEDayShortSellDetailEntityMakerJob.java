@@ -72,6 +72,10 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
 
     @Override
     public void saveTransformedData(List<NSEDayShortSellDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEDayShortSellDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEDayShortSellDetailEntity> nseDayShortSellDetailEntities = new ArrayList<>();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();

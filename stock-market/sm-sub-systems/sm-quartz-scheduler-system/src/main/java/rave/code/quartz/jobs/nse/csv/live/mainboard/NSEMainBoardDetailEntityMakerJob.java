@@ -101,6 +101,10 @@ public class NSEMainBoardDetailEntityMakerJob extends AbstractNSELiveMarketEntit
 
     @Override
     public void saveTransformedData(List<NSEMainBoardDetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSEMainBoardDetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSEMainBoardDetailEntity> nseMainBoardDetailEntities = new ArrayList<>();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();

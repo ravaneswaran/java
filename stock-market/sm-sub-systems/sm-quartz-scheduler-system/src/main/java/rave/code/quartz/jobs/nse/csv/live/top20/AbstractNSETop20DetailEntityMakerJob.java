@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.nse.csv.live.top20;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
+import rave.code.entity.nse.csv.NSEVolumeSpurtDetailEntity;
 import rave.code.quartz.jobs.nse.csv.live.AbstractNSELiveMarketEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.repository.nse.NSETop20DetailRepository;
@@ -107,6 +108,10 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
 
     @Override
     public void saveTransformedData(List<NSETop20DetailEntity> transformedData) {
+        if (transformedData.size() <= 0) {
+            LOGGER.log(Level.INFO, String.format("Number of NSETop20DetailEntity.... %s", transformedData.size()));
+            return;
+        }
         Map<String, NSEStockBaseEntity> mappedStockBaseEntities = this.nseStockBaseRepository.mapSymbolToStockBaseEntities();
         List<NSETop20DetailEntity> nseTop20DetailEntities = new ArrayList<>();
         List<NSEStockBaseEntity> nseStockBaseEntities = new ArrayList<>();
