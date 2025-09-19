@@ -19,13 +19,11 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
 
     @Override
     public Map<String, NSEStockBaseEntity> getEntityMap() {
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
-        Query query = this.getEntityManager().createQuery(queryBuilder.toString());
+        Query query = this.getEntityManager().createQuery("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
         if(null != query){
             List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
-            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query, nseStockBaseEntities.size()));
             for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
                 String key = String.format("%s:%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries(), nseStockBaseEntity.getISINumber());
                 mappedStockBaseEntity.put(key, nseStockBaseEntity);
@@ -35,13 +33,11 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
     }
 
     public Map<String, NSEStockBaseEntity> getEntityMapForDayPriceDetails() {
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
-        Query query = this.getEntityManager().createQuery(queryBuilder.toString());
+        Query query = this.getEntityManager().createQuery("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
         if(null != query){
             List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
-            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query, nseStockBaseEntities.size()));
             for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
                 String key = String.format("%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries());
                 mappedStockBaseEntity.put(key, nseStockBaseEntity);
@@ -51,13 +47,11 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
     }
 
     public Map<String, NSEStockBaseEntity> mapSymbolToStockBaseEntities() {
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
-        Query query = this.getEntityManager().createQuery(queryBuilder.toString());
+        Query query = this.getEntityManager().createQuery("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
         if(null != query){
             List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
-            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query, nseStockBaseEntities.size()));
             for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
                 String key = String.format("%s", nseStockBaseEntity.getSymbol());
                 mappedStockBaseEntity.put(key, nseStockBaseEntity);
