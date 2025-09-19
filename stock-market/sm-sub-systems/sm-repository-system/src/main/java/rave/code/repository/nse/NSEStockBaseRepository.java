@@ -22,16 +22,15 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Query query = this.getEntityManager().createQuery(queryBuilder.toString());
-
-        List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
-        LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
-
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
-        for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
-            String key = String.format("%s:%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries(), nseStockBaseEntity.getISINumber());
-            mappedStockBaseEntity.put(key, nseStockBaseEntity);
+        if(null != query){
+            List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
+            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+            for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
+                String key = String.format("%s:%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries(), nseStockBaseEntity.getISINumber());
+                mappedStockBaseEntity.put(key, nseStockBaseEntity);
+            }
         }
-
         return mappedStockBaseEntity;
     }
 
@@ -39,16 +38,15 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Query query = this.getEntityManager().createQuery(queryBuilder.toString());
-
-        List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
-        LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
-
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
-        for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
-            String key = String.format("%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries());
-            mappedStockBaseEntity.put(key, nseStockBaseEntity);
+        if(null != query){
+            List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
+            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+            for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
+                String key = String.format("%s:%s:%s", nseStockBaseEntity.getSymbol(), nseStockBaseEntity.getCompanyName(), nseStockBaseEntity.getSeries());
+                mappedStockBaseEntity.put(key, nseStockBaseEntity);
+            }
         }
-
         return mappedStockBaseEntity;
     }
 
@@ -56,16 +54,15 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Query query = this.getEntityManager().createQuery(queryBuilder.toString());
-
-        List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
-        LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
-
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();
-        for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
-            String key = String.format("%s", nseStockBaseEntity.getSymbol());
-            mappedStockBaseEntity.put(key, nseStockBaseEntity);
+        if(null != query){
+            List<NSEStockBaseEntity> nseStockBaseEntities = query.getResultList();
+            LOGGER.log(Level.INFO, String.format("the query(<<< %s >>>) did find %s item(s) in the repository...", query.toString(), nseStockBaseEntities.size()));
+            for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
+                String key = String.format("%s", nseStockBaseEntity.getSymbol());
+                mappedStockBaseEntity.put(key, nseStockBaseEntity);
+            }
         }
-
         return mappedStockBaseEntity;
     }
 }
