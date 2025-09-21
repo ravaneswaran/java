@@ -8,35 +8,52 @@ import java.util.List;
 
 public abstract class DatabaseManager<T> {
 
-    private static final String PERSISTENCE_UNIT_NAME = "stock_market";
-
-    private static EntityManagerFactory factory;
-    private static EntityManager entityManager;
+    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("stock_market");;
+    private static final ThreadLocal<EntityManager> threadLocal = new ThreadLocal<>();
 
     private Class<T> type;
 
     public DatabaseManager(Class<T> type) {
         this.type = type;
-
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        this.entityManager = factory.createEntityManager();
+        this.initialize();
     }
 
-    protected EntityManager getEntityManager() {
-        return entityManager;
+    private void initialize(){
+        EntityManager localEntityManager = threadLocal.get();
+        if (localEntityManager == null || !localEntityManager.isOpen()) {
+            localEntityManager = entityManagerFactory.createEntityManager();
+            threadLocal.set(localEntityManager);
+        }
     }
 
-    protected void closeEntityManager() {
-        if (null != entityManager && entityManager.isOpen()) {
+    public EntityManager getEntityManager() {
+        EntityManager entityManager = threadLocal.get();
+        if(null != entityManager){
+            return entityManager;
+        } else {
+            initialize();
+            return threadLocal.get();
+        }
+    }
+
+    public static void closeEntityManager() {EntityManager localEntityManager = threadLocal.get();
+        if (localEntityManager == null || !localEntityManager.isOpen()) {
+            localEntityManager = entityManagerFactory.createEntityManager();
+            threadLocal.set(localEntityManager);
+        }
+        EntityManager entityManager = threadLocal.get();
+        if (entityManager != null) {
             entityManager.close();
+            threadLocal.remove();
         }
     }
 
     public T findBy(String primaryKey) {
-        return entityManager.find(this.type, primaryKey);
+        return getEntityManager().find(this.type, primaryKey);
     }
 
     public T save(T entity) {
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
@@ -44,6 +61,7 @@ public abstract class DatabaseManager<T> {
     }
 
     public T delete(T entity) {
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
@@ -51,6 +69,7 @@ public abstract class DatabaseManager<T> {
     }
 
     public T update(T entity) {
+        EntityManager entityManager = getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
@@ -60,19 +79,19 @@ public abstract class DatabaseManager<T> {
     // method introduced specially to move the data to the history tables...
     public List<T> findAll() {
         String queryString = "from ? entity".replace("?", this.type.getName());
-        Query query = entityManager.createQuery(queryString, this.type);
+        Query query = getEntityManager().createQuery(queryString, this.type);
         return query.getResultList();
     }
 
-    public static EntityManager createEntityManager(){
-        factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    /*public static EntityManager createEntityManager(){
+        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         if (null == entityManager) {
-            entityManager = factory.createEntityManager();
+            entityManager = entityManagerFactory.createEntityManager();
         } else {
             if (!entityManager.isOpen()) {
-                entityManager = factory.createEntityManager();
+                entityManager = entityManagerFactory.createEntityManager();
             }
         }
         return entityManager;
-    }
+    }*/
 }
