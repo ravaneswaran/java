@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractRepositoryManager<T> extends DatabaseManager<T> {
+public abstract class AbstractRepositoryManager<T> extends ThreadSafeDatabaseManager<T> {
 
     public AbstractRepositoryManager(Class<T> type) {
         super(type);

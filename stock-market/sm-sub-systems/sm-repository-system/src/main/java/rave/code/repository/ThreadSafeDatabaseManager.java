@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-public abstract class ThreadSafeDatabaseManager <T> extends DatabaseManager<T>{
+public abstract class ThreadSafeDatabaseManager<T> extends NotThreadSafeDatabaseManager<T> {
 
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("stock_market");;
     private static final ThreadLocal<EntityManager> threadLocal = new ThreadLocal<>();
@@ -83,16 +83,4 @@ public abstract class ThreadSafeDatabaseManager <T> extends DatabaseManager<T>{
         Query query = getEntityManager().createQuery(queryString, this.type);
         return query.getResultList();
     }
-
-    /*public static EntityManager createEntityManager(){
-        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        if (null == entityManager) {
-            entityManager = entityManagerFactory.createEntityManager();
-        } else {
-            if (!entityManager.isOpen()) {
-                entityManager = entityManagerFactory.createEntityManager();
-            }
-        }
-        return entityManager;
-    }*/
 }
