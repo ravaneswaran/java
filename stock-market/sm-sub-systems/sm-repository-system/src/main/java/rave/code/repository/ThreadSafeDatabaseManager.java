@@ -6,14 +6,15 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
-public abstract class DatabaseManager<T> {
+public abstract class ThreadSafeDatabaseManager <T> extends DatabaseManager<T>{
 
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("stock_market");;
     private static final ThreadLocal<EntityManager> threadLocal = new ThreadLocal<>();
 
     private Class<T> type;
 
-    public DatabaseManager(Class<T> type) {
+    public ThreadSafeDatabaseManager(Class<T> type) {
+        super(type);
         this.type = type;
         this.initialize();
     }
