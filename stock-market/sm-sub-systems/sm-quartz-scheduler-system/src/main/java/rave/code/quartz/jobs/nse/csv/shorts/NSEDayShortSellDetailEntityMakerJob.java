@@ -56,14 +56,14 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 nseDayShortSellDetailEntity.setBusinessDate(simpleDateFormat.parse(csvRecord.get(0)));
             } catch (ParseException exception) {
-                LOGGER.log(Level.SEVERE, String.format("BusinessDate of %s has raised NumberFormatException(%s)", symbol, exception.getMessage()), exception);
+                LOGGER.log(Level.SEVERE, String.format("BusinessDate of %s has raised ParseException(%s)", symbol, exception.getMessage()));
             }
             nseDayShortSellDetailEntity.setSymbol(symbol);
             nseDayShortSellDetailEntity.setSecurityName(csvRecord.get(2));
             try {
                 nseDayShortSellDetailEntity.setQuantity(Integer.parseInt(csvRecord.get(3).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("Quantity of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("Quantity of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             nseDayShortSellDetailEntities.add(nseDayShortSellDetailEntity);
         }

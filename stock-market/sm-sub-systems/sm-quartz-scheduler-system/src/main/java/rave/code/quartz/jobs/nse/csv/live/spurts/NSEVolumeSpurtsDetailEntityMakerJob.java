@@ -41,17 +41,17 @@ public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEn
             try {
                 nseVolumeSpurtsDetailEntity.setVolume(Integer.parseInt(csvRecord.get(1).trim()));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("Volume of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("Volume of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseVolumeSpurtsDetailEntity.setOneWeekAverageVolume(Integer.parseInt(csvRecord.get(2).trim()));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("OneWeekAverageVolume of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("OneWeekAverageVolume of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseVolumeSpurtsDetailEntity.setNoOfTimes(Double.parseDouble(csvRecord.get(3).trim()));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("NoOfTimes of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("NoOfTimes of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
 
             nseVolumeSpurtsDetailEntities.add(nseVolumeSpurtsDetailEntity);

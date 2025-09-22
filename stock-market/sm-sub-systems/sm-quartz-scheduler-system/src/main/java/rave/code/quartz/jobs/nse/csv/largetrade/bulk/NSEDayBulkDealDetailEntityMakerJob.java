@@ -46,7 +46,7 @@ public class NSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVLargeTrade
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 nseDayBulkDealDetailEntity.setBusinessDate(simpleDateFormat.parse(csvRecord.get(0)));
             } catch (ParseException exception) {
-                LOGGER.log(Level.SEVERE, String.format("BusinessDate of %s has raised NumberFormatException(%s)", symbol, exception.getMessage()), exception);
+                LOGGER.log(Level.SEVERE, String.format("BusinessDate of %s has raised ParseException(%s)", symbol, exception.getMessage()));
             }
 
             nseDayBulkDealDetailEntity.setSymbol(symbol);
@@ -56,12 +56,12 @@ public class NSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVLargeTrade
             try {
                 nseDayBulkDealDetailEntity.setQuantityTraded(Integer.parseInt(csvRecord.get(5).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("QuantityTraded of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("QuantityTraded of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseDayBulkDealDetailEntity.setTradePrice(Double.parseDouble(csvRecord.get(6).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("TradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("TradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             nseDayBulkDealDetailEntity.setRemarks(csvRecord.get(7));
             nseDayBulkDealDetailEntities.add(nseDayBulkDealDetailEntity);

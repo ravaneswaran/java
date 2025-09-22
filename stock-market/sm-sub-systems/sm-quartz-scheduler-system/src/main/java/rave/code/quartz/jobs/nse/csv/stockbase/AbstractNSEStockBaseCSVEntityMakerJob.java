@@ -69,26 +69,26 @@ public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSEC
                 Date dateOfListing = simpleDateFormat.parse(csvRecord.get(3));
                 nseStockBaseEntity.setDateOfListing(dateOfListing);
             } catch (ParseException parseException) {
-                LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+                LOGGER.log(Level.SEVERE, parseException.getMessage());
             }
             try {
                 int paidUpValue = Integer.parseInt(csvRecord.get(4).trim().replaceAll(",", ""));
                 nseStockBaseEntity.setPaidUpValue(paidUpValue);
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
             }
             try {
                 int marketLot = Integer.parseInt(csvRecord.get(5).trim().replaceAll(",", ""));
                 nseStockBaseEntity.setMarketLot(marketLot);
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
             }
             nseStockBaseEntity.setISINumber(csvRecord.get(6));
             try {
                 int faceValue = Integer.parseInt(csvRecord.get(7).trim().replaceAll(",", ""));
                 nseStockBaseEntity.setMarketLot(faceValue);
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
             }
 
             nseStockBaseEntities.add(nseStockBaseEntity);

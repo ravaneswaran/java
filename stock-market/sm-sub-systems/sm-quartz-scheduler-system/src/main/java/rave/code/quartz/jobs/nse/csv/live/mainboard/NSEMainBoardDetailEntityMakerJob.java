@@ -51,47 +51,47 @@ public class NSEMainBoardDetailEntityMakerJob extends AbstractNSELiveMarketEntit
             try {
                 nseMainBoardDetailEntity.setOpenPrice(Double.parseDouble(csvRecord.get(1).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("OpenPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("OpenPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setHighPrice(Double.parseDouble(csvRecord.get(2).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("HighPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("HighPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setLowPrice(Double.parseDouble(csvRecord.get(3).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("LowPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("LowPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setPreviousClosePrice(Double.parseDouble(csvRecord.get(4).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("PreviousClosePrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("PreviousClosePrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setLastTradedPrice(Double.parseDouble(csvRecord.get(5).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("LastTradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("LastTradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setPercentageChange(Double.parseDouble(csvRecord.get(6).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("PercentageChange of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("PercentageChange of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setVolumeInShares(Integer.parseInt(csvRecord.get(7).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("VolumeInShares of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("VolumeInShares of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setValueInLakhs(Double.parseDouble(csvRecord.get(8).trim().replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("ValueInLakhs of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("ValueInLakhs of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseMainBoardDetailEntity.setCA(simpleDateFormat.parse(csvRecord.get(9).trim()));
             } catch (ParseException parseException) {
-                LOGGER.log(Level.SEVERE, String.format("CA of %s has raised ParseException(%s)", symbol, parseException.getMessage()), parseException);
+                LOGGER.log(Level.SEVERE, String.format("CA of %s has raised ParseException(%s)", symbol, parseException.getMessage()));
             }
             nseMainBoardDetailEntities.add(nseMainBoardDetailEntity);
         }

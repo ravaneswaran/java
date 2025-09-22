@@ -44,7 +44,7 @@ public class NSEDayBlockDealDetailEntityMakerJob extends AbstractNSECSVLargeTrad
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 nseDayBlockDealDetailEntity.setBusinessDate(simpleDateFormat.parse(csvRecord.get(0)));
             } catch (ParseException exception) {
-                LOGGER.log(Level.SEVERE, String.format("BusinessDate of %s has raised NumberFormatException(%s)", symbol, exception.getMessage()), exception);
+                LOGGER.log(Level.SEVERE, String.format("BusinessDate of %s has raised ParseException(%s)", symbol, exception.getMessage()));
             }
 
             nseDayBlockDealDetailEntity.setSymbol(symbol);
@@ -54,12 +54,12 @@ public class NSEDayBlockDealDetailEntityMakerJob extends AbstractNSECSVLargeTrad
             try {
                 nseDayBlockDealDetailEntity.setQuantityTraded(Integer.parseInt(csvRecord.get(5).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("QuantityTraded of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("QuantityTraded of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             try {
                 nseDayBlockDealDetailEntity.setTradePrice(Double.parseDouble(csvRecord.get(6).replaceAll(",", "")));
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, String.format("TradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()), numberFormatException);
+                LOGGER.log(Level.SEVERE, String.format("TradedPrice of %s has raised NumberFormatException(%s)", symbol, numberFormatException.getMessage()));
             }
             nseDayBlockDealDetailEntity.setRemarks(csvRecord.get(7));
             nseDayBlockDealDetailEntities.add(nseDayBlockDealDetailEntity);

@@ -39,13 +39,13 @@ public class NSESMEEquityStockBaseEntityMakerJob extends AbstractNSEStockBaseCSV
                 Date dateOfListing = simpleDateFormat.parse(csvRecord.get(3));
                 nseStockBaseEntity.setDateOfListing(dateOfListing);
             } catch (ParseException parseException) {
-                LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+                LOGGER.log(Level.SEVERE, parseException.getMessage());
             }
             try {
                 int paidUpValue = Integer.parseInt(csvRecord.get(4));
                 nseStockBaseEntity.setPaidUpValue(paidUpValue);
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
             }
             nseStockBaseEntity.setMarketLot(0);
             nseStockBaseEntity.setISINumber(csvRecord.get(5));
@@ -53,7 +53,7 @@ public class NSESMEEquityStockBaseEntityMakerJob extends AbstractNSEStockBaseCSV
                 int faceValue = Integer.parseInt(csvRecord.get(6));
                 nseStockBaseEntity.setMarketLot(faceValue);
             } catch (NumberFormatException numberFormatException) {
-                LOGGER.log(Level.SEVERE, numberFormatException.getMessage(), numberFormatException);
+                LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
             }
 
             nseStockBaseEntities.add(nseStockBaseEntity);
