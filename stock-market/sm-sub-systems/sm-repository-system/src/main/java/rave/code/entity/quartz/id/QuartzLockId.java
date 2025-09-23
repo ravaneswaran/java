@@ -1,6 +1,7 @@
 package rave.code.entity.quartz.id;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +9,9 @@ import java.util.Objects;
 @Embeddable
 public class QuartzLockId implements Serializable {
 
+    @Column(name = "SCHED_NAME")
     private String schedulerName;
+    @Column(name = "LOCK_NAME")
     private String lockName;
 
     public String getSchedulerName() {

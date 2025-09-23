@@ -1,5 +1,7 @@
 package rave.code.entity.quartz.id;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -7,6 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Access(AccessType.FIELD)
 public class QuartzJobDetailId implements Serializable {
 
     @Column(name="SCHED_NAME")

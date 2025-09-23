@@ -1,6 +1,6 @@
 package rave.code.entity.quartz.id;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Embeddable;
 
 import java.io.Serializable;
 import java.util.Objects;

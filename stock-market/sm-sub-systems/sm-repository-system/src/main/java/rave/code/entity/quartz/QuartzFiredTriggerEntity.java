@@ -1,26 +1,37 @@
 package rave.code.entity.quartz;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import rave.code.entity.quartz.id.QuartzEntryId;
 
 @Entity
 @Table(name = "QUARTZ_FIRED_TRIGGERS")
+@Access(AccessType.FIELD)
 public class QuartzFiredTriggerEntity {
 
     @EmbeddedId
     private QuartzEntryId quartzEntryId;
+    @Column(name = "TRIGGER_NAME")
     private String triggerName;
+    @Column(name = "TRIGGER_GROUP")
     private String triggerGroup;
+    @Column(name = "INSTANCE_NAME")
     private String instanceName;
+    @Column(name = "FIRED_TIME")
     private long firedTime;
+    @Column(name = "SCHED_TIME")
     private long scheduledTime;
+    @Column(name = "PRIORITY")
     private int priority;
+    @Column(name = "STATE")
     private String state;
+    @Column(name = "JOB_NAME")
     private String jobName;
+    @Column(name = "JOB_GROUP")
     private String jobGroup;
+    @Column(name = "IS_NONCONCURRENT")
     private String isNonConcurrent;
+    @Column(name = "REQUESTS_RECOVERY")
     private String requestRecovery;
 
     public QuartzEntryId getQuartzEntryId() {

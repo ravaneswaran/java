@@ -2,18 +2,18 @@ package rave.code.entity.quartz;
 
 import rave.code.entity.quartz.id.QuartzCalendarId;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.sql.Blob;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "QUARTZ_CALENDARS")
+@Access(AccessType.FIELD)
 public class QuartzCalendarEntity {
 
     @EmbeddedId
     private QuartzCalendarId quartzCalendarId;
-    private Blob calendar;
+    @Lob
+    @Column(name = "CALENDAR")
+    private byte[] calendar;
 
     public QuartzCalendarId getQuartzCalendarId() {
         return quartzCalendarId;
@@ -23,11 +23,11 @@ public class QuartzCalendarEntity {
         this.quartzCalendarId = quartzCalendarId;
     }
 
-    public Blob getCalendar() {
+    public byte[] getCalendar() {
         return calendar;
     }
 
-    public void setCalendar(Blob calendar) {
+    public void setCalendar(byte[] calendar) {
         this.calendar = calendar;
     }
 }
