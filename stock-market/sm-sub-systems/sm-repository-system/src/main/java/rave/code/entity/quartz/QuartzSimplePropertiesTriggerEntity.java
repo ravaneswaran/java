@@ -1,5 +1,6 @@
 package rave.code.entity.quartz;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,16 +12,27 @@ public class QuartzSimplePropertiesTriggerEntity {
 
     @EmbeddedId
     private QuartzTriggerId quartzTriggerId;
+    @Column(name = "STR_PROP_1")
     private String stringProperty1;
+    @Column(name = "STR_PROP_2")
     private String stringProperty2;
+    @Column(name = "STR_PROP_3")
     private String stringProperty3;
+    @Column(name = "INT_PROP_1")
     private int integerProperty1;
+    @Column(name = "INT_PROP_2")
     private int integerProperty2;
+    @Column(name = "LONG_PROP_1")
     private long longProperty1;
+    @Column(name = "LONG_PROP_2")
     private long longProperty2;
+    @Column(name = "DEC_PROP_1")
     private double decimalProperty1;
+    @Column(name = "DEC_PROP_2")
     private double decimalProperty2;
+    @Column(name = "BOOL_PROP_1")
     private String booleanProperty1;
+    @Column(name = "BOOL_PROP_2")
     private String booleanProperty2;
 
     public QuartzTriggerId getQuartzTriggerId() {

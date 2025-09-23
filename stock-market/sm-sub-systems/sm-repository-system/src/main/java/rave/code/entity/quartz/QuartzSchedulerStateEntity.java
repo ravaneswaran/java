@@ -1,5 +1,6 @@
 package rave.code.entity.quartz;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,7 +12,9 @@ public class QuartzSchedulerStateEntity {
 
     @EmbeddedId
     private QuartzInstanceId quartzInstanceId;
+    @Column(name = "LAST_CHECKIN_TIME")
     private long lastCheckInTime;
+    @Column(name = "CHECKIN_INTERVAL")
     private long checkInInterval;
 
     public QuartzInstanceId getQuartzInstanceId() {

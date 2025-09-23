@@ -1,5 +1,6 @@
 package rave.code.entity.quartz.id;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import java.io.Serializable;
@@ -8,7 +9,9 @@ import java.util.Objects;
 @Embeddable
 public class QuartzInstanceId implements Serializable {
 
+    @Column(name = "SCHED_NAME")
     private String schedulerName;
+    @Column(name = "INSTANCE_NAME")
     private String instanceName;
 
     public String getSchedulerName() {

@@ -1,5 +1,6 @@
 package rave.code.entity.quartz;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,8 +12,11 @@ public class QuartzSimpleTriggerEntity {
 
     @EmbeddedId
     private QuartzTriggerId quartzTriggerId;
+    @Column(name = "REPEAT_COUNT")
     private long repeatCount;
+    @Column(name = "REPEAT_INTERVAL")
     private long repeatInterval;
+    @Column(name = "TIMES_TRIGGERED")
     private long timesTriggered;
 
     public QuartzTriggerId getQuartzTriggerId() {
