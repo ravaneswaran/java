@@ -1,24 +1,35 @@
 package rave.code.entity.quartz;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import rave.code.entity.quartz.id.QuartzJobDetailId;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
 import java.sql.Blob;
 
 @Entity
 @Table(name = "QUARTZ_JOB_DETAILS")
+@Access(AccessType.FIELD)
 public class QuartzJobDetailEntity {
 
     @EmbeddedId
     private QuartzJobDetailId quartzJobDetailId;
+    @Column(name="DESCRIPTION")
     private String description;
+    @Column(name="JOB_CLASS_NAME")
     private String jobClassName;
+    @Column(name="IS_DURABLE")
     private String isDurable;
+    @Column(name="IS_NONCONCURRENT")
     private String isNonConcurrent;
+    @Column(name="IS_UPDATE_DATA")
     private String isUpdateData;
+    @Column(name="REQUESTS_RECOVERY")
     private String requestRecovery;
+    @Column(name="JOB_DATA")
     private Blob jobData;
 
     public QuartzJobDetailId getQuartzJobDetailId() {

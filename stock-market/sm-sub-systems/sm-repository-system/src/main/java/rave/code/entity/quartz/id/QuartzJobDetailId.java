@@ -1,14 +1,18 @@
 package rave.code.entity.quartz.id;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 import java.io.Serializable;
 
 @Embeddable
 public class QuartzJobDetailId implements Serializable {
 
+    @Column(name="SCHED_NAME")
     private String schedulerName;
+    @Column(name="JOB_NAME")
     private String jobName;
+    @Column(name="JOB_GROUP")
     private String jobGroup;
 
     public String getSchedulerName() {

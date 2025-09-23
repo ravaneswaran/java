@@ -1,10 +1,10 @@
 package rave.code.entity.quartz;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import rave.code.entity.quartz.id.QuartzCalendarId;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Blob;
 
 @Entity

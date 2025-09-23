@@ -1,8 +1,9 @@
 package rave.code.entity.quartz;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import rave.code.entity.quartz.id.QuartzTriggerId;
 
 @Entity
@@ -11,18 +12,32 @@ public class QuartzTriggerEntity {
 
     @EmbeddedId
     private QuartzTriggerId quartzTriggerId;
+    @Column(name = "JOB_NAME")
     private String jobName;
+    @Column(name = "JOB_GROUP")
     private String jobGroup;
+    @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "NEXT_FIRE_TIME")
     private long nextFireTime;
+    @Column(name = "PREV_FIRE_TIME")
     private long previousFireTime;
+    @Column(name = "PRIORITY")
     private int priority;
+    @Column(name = "TRIGGER_STATE")
     private String triggerState;
+    @Column(name = "TRIGGER_TYPE")
     private String triggerType;
+    @Column(name = "START_TIME")
     private long startTime;
+    @Column(name = "END_TIME")
     private long endTime;
+    @Column(name = "CALENDAR_NAME")
     private String calendarName;
+    @Column(name = "MISFIRE_INSTR")
     private int missFireInstruction;
+    @Column(name = "JOB_DATA")
+    private byte[] jobData;
 
     public QuartzTriggerId getQuartzTriggerId() {
         return quartzTriggerId;
@@ -126,5 +141,13 @@ public class QuartzTriggerEntity {
 
     public void setMissFireInstruction(int missFireInstruction) {
         this.missFireInstruction = missFireInstruction;
+    }
+
+    public byte[] getJobData() {
+        return jobData;
+    }
+
+    public void setJobData(byte[] jobData) {
+        this.jobData = jobData;
     }
 }

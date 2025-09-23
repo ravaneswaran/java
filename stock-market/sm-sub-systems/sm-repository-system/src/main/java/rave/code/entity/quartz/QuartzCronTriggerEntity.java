@@ -1,8 +1,9 @@
 package rave.code.entity.quartz;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import rave.code.entity.quartz.id.QuartzTriggerId;
 
 @Entity
@@ -11,7 +12,9 @@ public class QuartzCronTriggerEntity {
 
     @EmbeddedId
     private QuartzTriggerId quartzTriggerId;
+    @Column(name="CRON_EXPRESSION")
     private String cronExpression;
+    @Column(name="TIME_ZONE_ID")
     private String timeZoneId;
 
     public QuartzTriggerId getQuartzTriggerId() {
