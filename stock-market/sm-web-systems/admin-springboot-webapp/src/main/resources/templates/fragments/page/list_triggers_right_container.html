@@ -1,0 +1,33 @@
+<div class="right-container">
+    <div th:each="trigger : ${page.triggers}">
+        <table>
+            <tbody>
+            <tr>
+                <td th:text="${trigger.name}" colspan="6" style="font-weight:bold;font-size:16px;background-color:#f97743;color:#000000;"></td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;font-size:16px;width:40%;background-color:#adf943;color:#000000;">Job Name</td>
+                <td style="font-weight:bold;font-size:16px;width:12%;background-color:#adf943;color:#000000;">Scheduler Name</td>
+                <td style="font-weight:bold;font-size:16px;width:12%;background-color:#adf943;color:#000000;">Previous Fire Time</td>
+                <td style="font-weight:bold;font-size:16px;width:12%;background-color:#adf943;color:#000000;">Next Fire Time</td>
+                <td style="font-weight:bold;font-size:16px;width:12%;background-color:#adf943;color:#000000;">Priority</td>
+                <td style="font-weight:bold;font-size:16px;width:12%;background-color:#adf943;color:#000000;">State</td>
+            </tr>
+            <tr>
+                <td th:text="${trigger.jobName}" style="font-size:16px;width:40%;"></td>
+                <td th:text="${trigger.schedulerName}" style="font-size:16px;width:12%;"></td>
+                <td th:text="${trigger.previousFireTime}" style="font-size:16px;width:12%;"></td>
+                <td th:text="${trigger.nextFireTime}" style="font-size:16px;width:12%;"></td>
+                <td th:text="${trigger.priority}" style="font-size:16px;width:12%;"></td>
+                <td th:text="${trigger.triggerState}" style="font-size:16px;width:12%;"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+  // Refresh page after 1 minute (1 × 60 × 1000 ms)
+  setTimeout(function() {
+    location.reload();
+  }, 1 * 60 * 1000);
+</script>

@@ -6,31 +6,11 @@
 </head>
 <body>
 <div class="container">
-    <div th:each="trigger : ${page.triggers}">
-        <table>
-            <tbody>
-                <tr>
-                    <td th:text="${trigger.name}" colspan="6" style="font-weight:bold;font-size:16px;"></td>
-                </tr>
-                <tr>
-                    <td style="font-weight:bold;font-size:16px;width:40%;">Job Name</td>
-                    <td style="font-weight:bold;font-size:16px;width:12%;">Scheduler Name</td>
-                    <td style="font-weight:bold;font-size:16px;width:12%;">Previous Fire Time</td>
-                    <td style="font-weight:bold;font-size:16px;width:12%;">Next Fire Time</td>
-                    <td style="font-weight:bold;font-size:16px;width:12%;">Priority</td>
-                    <td style="font-weight:bold;font-size:16px;width:12%;">State</td>
-                </tr>
-                <tr>
-                    <td th:text="${trigger.jobName}" style="font-size:16px;width:40%;"></td>
-                    <td th:text="${trigger.schedulerName}" style="font-size:16px;width:12%;"></td>
-                    <td th:text="${trigger.previousFireTime}" style="font-size:16px;width:12%;"></td>
-                    <td th:text="${trigger.nextFireTime}" style="font-size:16px;width:12%;"></td>
-                    <td th:text="${trigger.priority}" style="font-size:16px;width:12%;"></td>
-                    <td th:text="${trigger.triggerState}" style="font-size:16px;width:12%;"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <div th:replace="~{fragments/common/header_container}"/>
+    <div th:replace="~{fragments/common/container_horizontal_separator}"/>
+    <div th:replace="~{fragments/common/left_container}"/>
+    <div th:replace="~{fragments/common/container_vertical_separator}"/>
+    <div th:replace="~{fragments/page/list_triggers_right_container}"/>
 </div>
 </body>
 </html>
