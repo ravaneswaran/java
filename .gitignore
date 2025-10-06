@@ -80,6 +80,7 @@ maven-plugins/quartz-sqlite-maven-plugin/target/
 maven-plugins/quartz-sybase-maven-plugin/target/
 
 razorpay-payment-gateway-web-integration/razorpay-payment-gateway-web-integration.iml
+
 razorpay-payment-gateway-web-integration/.mvn/
 razorpay-payment-gateway-web-integration/target/
 razorpay-payment-gateway-web-integration/tmp/
@@ -100,6 +101,7 @@ stock-market/sm-sub-systems/sm-email-system/sm-email-system.iml
 stock-market/sm-sub-systems/sm-technical-analysis-system/sm-technical-analysis-system.iml
 stock-market/sm-web-systems/sm-web-systems.iml
 stock-market/.username-and-passwords
+
 stock-market/sm-maven-plugin/target
 stock-market/sm-sub-systems/sm-ai-system/target/
 stock-market/sm-sub-systems/sm-repository-system/target/
@@ -111,6 +113,8 @@ stock-market/sm-sub-systems/sm-data-parser-system/target/
 stock-market/sm-sub-systems/sm-technical-analysis-system/target/
 stock-market/sm-sub-systems/sm-utility-system/target/
 stock-market/sm-web-systems/admin-springboot-webapp/target
+stock-market/sm-web-systems/nse-india-springboot-webapp/target
+stock-market/sm-web-systems/bse-india-springboot-webapp/target
 
 utilities/utilities.iml
 utilities/google-zxing-qrcode/target/

@@ -17,6 +17,7 @@
     <modules>
         <module>bse-india-springboot-webapp</module>
         <module>admin-springboot-webapp</module>
+        <module>nse-india-springboot-webapp</module>
     </modules>
 
 </project>
