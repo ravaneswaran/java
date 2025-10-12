@@ -26,10 +26,10 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
         for (NSEVolumeSpurtDetailEntity nseVolumeSpurtDetailEntity: nseVolumeSpurtDetailEntities) {
             NSEVolumeSpurtDetailModel nseVolumeSpurtDetailModel = new NSEVolumeSpurtDetailModel();
 
-            nseVolumeSpurtDetailModel.setVolume(nseVolumeSpurtDetailModel.getVolume());
-            nseVolumeSpurtDetailModel.setOneWeekAverageVolume(nseVolumeSpurtDetailModel.getOneWeekAverageVolume());
-            nseVolumeSpurtDetailModel.setNoOfTimes(nseVolumeSpurtDetailModel.getNoOfTimes());
-            nseVolumeSpurtDetailModel.setSymbol(nseVolumeSpurtDetailModel.getSymbol());
+            nseVolumeSpurtDetailModel.setVolume(nseVolumeSpurtDetailEntity.getVolume());
+            nseVolumeSpurtDetailModel.setOneWeekAverageVolume(nseVolumeSpurtDetailEntity.getOneWeekAverageVolume());
+            nseVolumeSpurtDetailModel.setNoOfTimes(nseVolumeSpurtDetailEntity.getNoOfTimes());
+            nseVolumeSpurtDetailModel.setSymbol(nseVolumeSpurtDetailEntity.getSymbol());
 
             nseVolumeSpurtDetailModels.add(nseVolumeSpurtDetailModel);
         }

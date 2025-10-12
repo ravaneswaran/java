@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.nse.web.model.page.PriceSpurtsPage;
+import rave.code.nse.web.model.page.SMEPage;
 import rave.code.nse.web.model.page.VolumeSpurtsPage;
 import rave.code.nse.web.service.NSEPriceSpurtService;
+import rave.code.nse.web.service.NSESMEService;
 import rave.code.nse.web.service.NSEVolumeSpurtsService;
 
 @Controller
@@ -42,7 +44,12 @@ public class NationalStockExchangeController {
 
     @GetMapping("/sme")
     public ModelAndView sme() {
-        return null;
+        NSESMEService nseSMEService = new NSESMEService();
+        SMEPage smePage = new SMEPage();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("sme");
+        modelAndView.addObject("webpage", smePage);
+        return modelAndView;
     }
 
     @GetMapping("/nifty-fifty")
