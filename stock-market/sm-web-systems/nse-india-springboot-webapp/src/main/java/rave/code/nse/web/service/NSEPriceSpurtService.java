@@ -8,7 +8,7 @@ import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PriceSpurtService extends AbstractService<NSEPriceSpurtDetailEntity, PriceSpurtsPage> {
+public class NSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetailEntity, PriceSpurtsPage> {
 
     NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
 

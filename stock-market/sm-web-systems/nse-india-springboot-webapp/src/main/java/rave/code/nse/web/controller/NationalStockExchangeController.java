@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.nse.web.model.page.PriceSpurtsPage;
-import rave.code.nse.web.service.PriceSpurtService;
+import rave.code.nse.web.model.page.VolumeSpurtsPage;
+import rave.code.nse.web.service.NSEPriceSpurtService;
+import rave.code.nse.web.service.NSEVolumeSpurtsService;
 
 @Controller
 @RequestMapping("/nse")
@@ -20,7 +22,7 @@ public class NationalStockExchangeController {
 
     @GetMapping("/price-spurts")
     public ModelAndView priceSpurts() {
-        PriceSpurtService priceSpurtService = new PriceSpurtService();
+        NSEPriceSpurtService priceSpurtService = new NSEPriceSpurtService();
         PriceSpurtsPage priceSpurtPage = priceSpurtService.getPriceSpurtsLWR20();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("price_spurts");
@@ -30,7 +32,12 @@ public class NationalStockExchangeController {
 
     @GetMapping("/volume-spurts")
     public ModelAndView volumeSpurts() {
-        return null;
+        NSEVolumeSpurtsService nseVolumeSpurtsService = new NSEVolumeSpurtsService();
+        VolumeSpurtsPage volumeSpurtsPage = nseVolumeSpurtsService.getVolumeSpurts();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("volume_spurts");
+        modelAndView.addObject("webpage", volumeSpurtsPage);
+        return modelAndView;
     }
 
     @GetMapping("/sme")
