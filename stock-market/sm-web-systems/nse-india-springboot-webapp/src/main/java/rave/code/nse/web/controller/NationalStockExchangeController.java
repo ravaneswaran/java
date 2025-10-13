@@ -98,7 +98,12 @@ public class NationalStockExchangeController {
 
     @GetMapping("/nse/top-20/bank-nifty")
     public ModelAndView bankNifty() {
-        return null;
+        NSETop20BankNiftyService nseTop20BankNiftyService = new NSETop20BankNiftyService();
+        Top20BankNiftyPage top20BankNiftyPage = nseTop20BankNiftyService.getTop20BankNifty();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("top_20_bank_nifty");
+        modelAndView.addObject("webpage", top20BankNiftyPage);
+        return modelAndView;
     }
 
 }
