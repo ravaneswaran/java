@@ -14,7 +14,7 @@ public class NSETop20NiftyNextFiftyService extends AbstractNSEService<NSETop20De
 
     public Top20NiftyNextFiftyPage getTop20NiftyNextFifty() {
         Top20NiftyNextFiftyPage top20NiftyNextFiftyPage = new Top20NiftyNextFiftyPage();
-        top20NiftyNextFiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findAll()));
+        top20NiftyNextFiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findTop20NiftyNext50()));
 
         return top20NiftyNextFiftyPage;
     }

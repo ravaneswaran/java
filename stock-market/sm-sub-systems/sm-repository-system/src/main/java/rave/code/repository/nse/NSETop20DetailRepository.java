@@ -64,7 +64,7 @@ public class NSETop20DetailRepository extends AbstractNSERepositoryManager<NSETo
         return this.getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
-    public List<NSETop20DetailEntity> findTop20FOSecurity(){
+    public List<NSETop20DetailEntity> findTop20FOSecurities(){
         CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);

@@ -68,7 +68,13 @@ public class NationalStockExchangeController {
 
     @GetMapping("/nse/top-20/fo-security")
     public ModelAndView foSecurity() {
-        return null;
+        NSETop20FOSecurityService nseTop20FOSecurityService = new NSETop20FOSecurityService();
+        Top20FOSecurityPage top20FOSecurityPage = nseTop20FOSecurityService.getTop20FOSecurities();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("top_20_fo_securities");
+        modelAndView.addObject("webpage", top20FOSecurityPage);
+        return modelAndView;
     }
 
     @GetMapping("/nse/top-20/security-lwr-20")
