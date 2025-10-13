@@ -88,7 +88,12 @@ public class NationalStockExchangeController {
 
     @GetMapping("/nse/top-20/security-gtr-20")
     public ModelAndView securitiesGreaterThan20() {
-        return null;
+        NSETop20SecuritiesGtr20Service nseTop20SecuritiesGtr20Service = new NSETop20SecuritiesGtr20Service();
+        Top20SecuritiesGTR20Page top20SecuritiesGTR20Page = nseTop20SecuritiesGtr20Service.getTop20SecuritiesGtr20();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("top_20_security_gtr_20");
+        modelAndView.addObject("webpage", top20SecuritiesGTR20Page);
+        return modelAndView;
     }
 
     @GetMapping("/nse/top-20/bank-nifty")
