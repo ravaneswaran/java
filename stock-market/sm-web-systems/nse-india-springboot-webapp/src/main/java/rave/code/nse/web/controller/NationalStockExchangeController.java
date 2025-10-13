@@ -70,7 +70,6 @@ public class NationalStockExchangeController {
     public ModelAndView foSecurity() {
         NSETop20FOSecurityService nseTop20FOSecurityService = new NSETop20FOSecurityService();
         Top20FOSecurityPage top20FOSecurityPage = nseTop20FOSecurityService.getTop20FOSecurities();
-
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("top_20_fo_securities");
         modelAndView.addObject("webpage", top20FOSecurityPage);
@@ -79,7 +78,12 @@ public class NationalStockExchangeController {
 
     @GetMapping("/nse/top-20/security-lwr-20")
     public ModelAndView securitiesLowerThan20() {
-        return null;
+        NSETop20SecuritiesLwr20Service nseTop20FOSecurityService = new NSETop20SecuritiesLwr20Service();
+        Top20SecuritiesLWR20Page top20SecuritiesLWR20Page = nseTop20FOSecurityService.getTop20SecuritiesLwr20();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("top_20_security_lwr_20");
+        modelAndView.addObject("webpage", top20SecuritiesLWR20Page);
+        return modelAndView;
     }
 
     @GetMapping("/nse/top-20/security-gtr-20")
