@@ -12,4 +12,8 @@ public class Top20FOSecurityPage extends WebPage {
     public void setModelList(List<NSETop20FOSecurityModel> nseTop20FOSecurityModels) {
         this.nseTop20FOSecurityModels = nseTop20FOSecurityModels;
     }
+
+    public List<NSETop20FOSecurityModel> getNseTop20FOSecurityModels() {
+        return nseTop20FOSecurityModels;
+    }
 }

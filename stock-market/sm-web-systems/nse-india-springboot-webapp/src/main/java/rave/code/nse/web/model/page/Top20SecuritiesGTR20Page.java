@@ -16,4 +16,8 @@ public class Top20SecuritiesGTR20Page extends WebPage {
     public void setModelList(List<NSETop20SecurityGTR20Model> nseTop20SecurityGTR20Models) {
         this.nseTop20SecurityGTR20Models = nseTop20SecurityGTR20Models;
     }
+
+    public List<NSETop20SecurityGTR20Model> getNseTop20SecurityGTR20Models() {
+        return nseTop20SecurityGTR20Models;
+    }
 }

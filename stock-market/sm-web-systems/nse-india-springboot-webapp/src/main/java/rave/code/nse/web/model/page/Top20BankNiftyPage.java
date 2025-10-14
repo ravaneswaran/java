@@ -16,4 +16,8 @@ public class Top20BankNiftyPage extends WebPage {
     public void setModelList(List<NSETop20BankNiftyModel> nseTop20BankNiftyModels) {
         this.nseTop20BankNiftyModels = nseTop20BankNiftyModels;
     }
+
+    public List<NSETop20BankNiftyModel> getNseTop20BankNiftyModels() {
+        return nseTop20BankNiftyModels;
+    }
 }

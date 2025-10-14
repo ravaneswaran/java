@@ -1,7 +1,5 @@
 package rave.code.nse.web.model;
 
-import javax.persistence.Column;
-
 public class NSETop20NiftyFiftyModel {
 
     private String symbol;

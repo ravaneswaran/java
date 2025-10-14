@@ -13,6 +13,10 @@ public class Top20NiftyFiftyPage extends WebPage {
         this.setNiftyFifty(true);
     }
 
+    public List<NSETop20NiftyFiftyModel> getNseTop20NiftyFiftyModels() {
+        return nseTop20NiftyFiftyModels;
+    }
+
     public void setModelList(List<NSETop20NiftyFiftyModel> nseTop20NiftyFiftyModels) {
         this.nseTop20NiftyFiftyModels = nseTop20NiftyFiftyModels;
     }

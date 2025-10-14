@@ -16,4 +16,8 @@ public class Top20NiftyNextFiftyPage extends WebPage {
     public void setModelList(List<NSETop20NiftyNextFiftyModel> nseTop20NiftyNextFiftyModels) {
         this.nseTop20NiftyNextFiftyModels = nseTop20NiftyNextFiftyModels;
     }
+
+    public List<NSETop20NiftyNextFiftyModel> getNseTop20NiftyNextFiftyModels() {
+        return nseTop20NiftyNextFiftyModels;
+    }
 }

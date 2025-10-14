@@ -16,4 +16,8 @@ public class Top20SecuritiesLWR20Page extends WebPage {
     public void setModelList(List<NSETop20SecurityLWR20Model> nseTop20SecurityLWR20Models) {
         this.nseTop20SecurityLWR20Models = nseTop20SecurityLWR20Models;
     }
+
+    public List<NSETop20SecurityLWR20Model> getNseTop20SecurityLWR20Models() {
+        return nseTop20SecurityLWR20Models;
+    }
 }
