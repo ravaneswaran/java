@@ -1,26 +1,26 @@
 package rave.code.nse.web.service.top20;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
-import rave.code.nse.web.model.top20.NSETop20NiftyFiftyModel;
+import rave.code.nse.web.model.WebPage;
 import rave.code.nse.web.model.page.top20.Top20NiftyFiftyPage;
-import rave.code.nse.web.service.AbstractNSEService;
+import rave.code.nse.web.model.top20.NSETop20NiftyFiftyModel;
 import rave.code.repository.nse.NSETop20DetailRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NSETop20NiftyFiftyService extends AbstractNSEService<NSETop20DetailEntity, Top20NiftyFiftyPage> {
+public class NSETop20NiftyFiftyService extends AbstractNSETop20Service<NSETop20NiftyFiftyModel> {
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
 
-    public Top20NiftyFiftyPage getWebPageModel() {
+    public WebPage getWebPageModel() {
         Top20NiftyFiftyPage top20NiftyFiftyPage = new Top20NiftyFiftyPage();
         top20NiftyFiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findAll()));
 
         return top20NiftyFiftyPage;
     }
 
-    private List<NSETop20NiftyFiftyModel> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities) {
+    public List<NSETop20NiftyFiftyModel> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities) {
         List<NSETop20NiftyFiftyModel> nseTop20NiftyFiftyModels = new ArrayList<>();
         for (NSETop20DetailEntity nseTop20DetailEntity: nseTop20DetailEntities){
             NSETop20NiftyFiftyModel nseTop20NiftyFiftyModel = new NSETop20NiftyFiftyModel();

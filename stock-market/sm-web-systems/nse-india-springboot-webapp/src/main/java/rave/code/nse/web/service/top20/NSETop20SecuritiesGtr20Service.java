@@ -1,26 +1,26 @@
 package rave.code.nse.web.service.top20;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
-import rave.code.nse.web.model.top20.NSETop20SecurityGTR20Model;
+import rave.code.nse.web.model.WebPage;
 import rave.code.nse.web.model.page.top20.Top20SecuritiesGTR20Page;
-import rave.code.nse.web.service.AbstractNSEService;
+import rave.code.nse.web.model.top20.NSETop20SecurityGTR20Model;
 import rave.code.repository.nse.NSETop20DetailRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NSETop20SecuritiesGtr20Service extends AbstractNSEService<NSETop20DetailEntity, Top20SecuritiesGTR20Page> {
+public class NSETop20SecuritiesGtr20Service extends AbstractNSETop20Service<NSETop20SecurityGTR20Model> {
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
 
-    public Top20SecuritiesGTR20Page getWebPageModel() {
+    public WebPage getWebPageModel() {
         Top20SecuritiesGTR20Page top20SecuritiesGTR20Page = new Top20SecuritiesGTR20Page();
         top20SecuritiesGTR20Page.setModelList(this.transformEntities(this.nseTop20DetailRepository.findTop20SecurityLWR20()));
 
         return top20SecuritiesGTR20Page;
     }
 
-    private List<NSETop20SecurityGTR20Model> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities) {
+    public List<NSETop20SecurityGTR20Model> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities) {
         List<NSETop20SecurityGTR20Model> nseTop20SecurityGTR20Models = new ArrayList<>();
         for (NSETop20DetailEntity nseTop20DetailEntity : nseTop20DetailEntities) {
             NSETop20SecurityGTR20Model nseTop20SecurityGTR20Model = new NSETop20SecurityGTR20Model();

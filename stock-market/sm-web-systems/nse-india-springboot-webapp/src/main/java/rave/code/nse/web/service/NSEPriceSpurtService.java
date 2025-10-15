@@ -15,7 +15,6 @@ public class NSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetail
     public PriceSpurtsPage getWebPageModel() {
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.nsePriceSpurtDetailRepository.findAll();
         PriceSpurtsPage priceSpurtPage = new PriceSpurtsPage();
-        priceSpurtPage.setPriceSpurt(true);
         priceSpurtPage.setModelList(this.transformEntities(nsePriceSpurtDetailEntities));
         return priceSpurtPage;
     }
@@ -23,7 +22,6 @@ public class NSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetail
     public PriceSpurtsPage getPriceSpurtsLWR20() {
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.nsePriceSpurtDetailRepository.findPriceSpurtsLWR20();
         PriceSpurtsPage priceSpurtPage = new PriceSpurtsPage();
-        priceSpurtPage.setPriceSpurt(true);
         priceSpurtPage.setModelList(this.transformEntities(nsePriceSpurtDetailEntities));
         return priceSpurtPage;
     }
@@ -31,7 +29,6 @@ public class NSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetail
     public PriceSpurtsPage getPriceSpurtsGTR20() {
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.nsePriceSpurtDetailRepository.findPriceSpurtsGTR20();
         PriceSpurtsPage priceSpurtPage = new PriceSpurtsPage();
-        priceSpurtPage.setPriceSpurt(true);
         priceSpurtPage.setModelList(this.transformEntities(nsePriceSpurtDetailEntities));
         return priceSpurtPage;
     }
@@ -41,12 +38,14 @@ public class NSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetail
         for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity: nsePriceSpurtDetailEntities) {
             NSEPriceSpurtDetailModel nsePriceSpurtDetailModel = new NSEPriceSpurtDetailModel();
 
+            nsePriceSpurtDetailModel.setStockDivId(nsePriceSpurtDetailEntity.getId());
             nsePriceSpurtDetailModel.setSymbol(nsePriceSpurtDetailEntity.getSymbol());
             nsePriceSpurtDetailModel.setOpenPrice(nsePriceSpurtDetailEntity.getOpenPrice());
             nsePriceSpurtDetailModel.setHighPrice(nsePriceSpurtDetailEntity.getHighPrice());
             nsePriceSpurtDetailModel.setLowPrice(nsePriceSpurtDetailEntity.getLowPrice());
             nsePriceSpurtDetailModel.setPreviousClosePrice(nsePriceSpurtDetailEntity.getPreviousClosePrice());
             nsePriceSpurtDetailModel.setPercentageChange(nsePriceSpurtDetailEntity.getPercentageChange());
+            nsePriceSpurtDetailModel.setLastTradedPrice(nsePriceSpurtDetailEntity.getLastTradedPrice());
             nsePriceSpurtDetailModel.setValue(nsePriceSpurtDetailEntity.getValue());
             nsePriceSpurtDetailModel.setVolume(nsePriceSpurtDetailEntity.getVolume());
 

@@ -14,9 +14,7 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, SMEPag
 
     public SMEPage getWebPageModel(){
         List<NSESMEDetailEntity> nseSMEDetailEntities = this.nseSMEDetailRepository.findAll();
-
         SMEPage smePage = new SMEPage();
-        smePage.setSme(true);
         smePage.setModelList(this.transformEntities(nseSMEDetailEntities));
 
         return smePage;
@@ -27,6 +25,7 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, SMEPag
         for (NSESMEDetailEntity nseSMEDetailEntity: nseSMEDetailEntities) {
             NSESMEDetailModel nseSMEDetailModel = new NSESMEDetailModel();
 
+            nseSMEDetailModel.setStockDivId(nseSMEDetailEntity.getId());
             nseSMEDetailModel.setSymbol(nseSMEDetailEntity.getSymbol());
             nseSMEDetailModel.setHighPrice(nseSMEDetailEntity.getHighPrice());
             nseSMEDetailModel.setVolume(nseSMEDetailEntity.getVolume());

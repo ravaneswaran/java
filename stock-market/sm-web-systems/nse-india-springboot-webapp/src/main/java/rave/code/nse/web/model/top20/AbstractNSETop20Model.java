@@ -1,8 +1,9 @@
 package rave.code.nse.web.model.top20;
 
-public class AbstractNSETop20Model {
+import rave.code.nse.web.model.AbstractNSEModel;
 
-    private String stockDivId;
+public class AbstractNSETop20Model extends AbstractNSEModel {
+
     private String symbol;
     private double openPrice;
     private double highPrice;
@@ -12,14 +13,6 @@ public class AbstractNSETop20Model {
     private double percentageChange;
     private int volumeInShares;
     private double valueInLakhs;
-
-    public String getStockDivId() {
-        return stockDivId;
-    }
-
-    public void setStockDivId(String stockDivId) {
-        this.stockDivId = stockDivId;
-    }
 
     public String getSymbol() {
         return symbol;

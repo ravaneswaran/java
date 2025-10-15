@@ -1,26 +1,26 @@
 package rave.code.nse.web.service.top20;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
-import rave.code.nse.web.model.top20.NSETop20FOSecurityModel;
+import rave.code.nse.web.model.WebPage;
 import rave.code.nse.web.model.page.top20.Top20FOSecurityPage;
-import rave.code.nse.web.service.AbstractNSEService;
+import rave.code.nse.web.model.top20.NSETop20FOSecurityModel;
 import rave.code.repository.nse.NSETop20DetailRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NSETop20FOSecurityService extends AbstractNSEService<NSETop20DetailEntity, Top20FOSecurityPage> {
+public class NSETop20FOSecurityService extends AbstractNSETop20Service<NSETop20FOSecurityModel> {
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
 
-    public Top20FOSecurityPage getWebPageModel() {
+    public WebPage getWebPageModel() {
         Top20FOSecurityPage top20FOSecurityPage = new Top20FOSecurityPage();
         top20FOSecurityPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findTop20FOSecurities()));
 
         return top20FOSecurityPage;
     }
 
-    private List<NSETop20FOSecurityModel> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities) {
+    public List<NSETop20FOSecurityModel> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities) {
         List<NSETop20FOSecurityModel> nseTop20FOSecurityModels = new ArrayList<>();
         for (NSETop20DetailEntity nseTop20DetailEntity: nseTop20DetailEntities){
             NSETop20FOSecurityModel nseTop20FOSecurityModel = new NSETop20FOSecurityModel();

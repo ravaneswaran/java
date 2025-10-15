@@ -9,6 +9,10 @@ public class Top20FOSecurityPage extends WebPage {
 
     private List<NSETop20FOSecurityModel> top20Models;
 
+    public Top20FOSecurityPage(){
+        this.setFOSecurity(true);
+    }
+
     public void setModelList(List<NSETop20FOSecurityModel> nseTop20FOSecurityModels) {
         this.top20Models = nseTop20FOSecurityModels;
     }

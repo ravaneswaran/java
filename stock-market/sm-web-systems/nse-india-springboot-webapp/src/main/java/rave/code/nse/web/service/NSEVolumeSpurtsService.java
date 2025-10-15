@@ -15,7 +15,6 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
     public VolumeSpurtsPage getWebPageModel(){
         List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtDetailEntities = this.nseVolumeSpurtDetailRepository.findAll();
         VolumeSpurtsPage volumeSpurtsPage = new VolumeSpurtsPage();
-        volumeSpurtsPage.setPriceSpurt(true);
         volumeSpurtsPage.setModelList(this.transformEntities(nseVolumeSpurtDetailEntities));
 
         return volumeSpurtsPage;
@@ -26,6 +25,7 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
         for (NSEVolumeSpurtDetailEntity nseVolumeSpurtDetailEntity: nseVolumeSpurtDetailEntities) {
             NSEVolumeSpurtDetailModel nseVolumeSpurtDetailModel = new NSEVolumeSpurtDetailModel();
 
+            nseVolumeSpurtDetailModel.setStockDivId(nseVolumeSpurtDetailEntity.getId());
             nseVolumeSpurtDetailModel.setVolume(nseVolumeSpurtDetailEntity.getVolume());
             nseVolumeSpurtDetailModel.setOneWeekAverageVolume(nseVolumeSpurtDetailEntity.getOneWeekAverageVolume());
             nseVolumeSpurtDetailModel.setNoOfTimes(nseVolumeSpurtDetailEntity.getNoOfTimes());

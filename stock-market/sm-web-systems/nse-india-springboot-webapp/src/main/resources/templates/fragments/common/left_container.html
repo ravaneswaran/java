@@ -28,17 +28,17 @@
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
             <a class="left-container-application-link" href="/nse/price-spurts"
-               th:style="${page != null} ? ${page.priceShockersLinkStyle} : ''">Price Spurts</a>
+               th:style="${webpage != null && webpage.priceSpurt ? 'font-weight:bold' : ''}">Price Spurts</a>
         </div>
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
             <a class="left-container-application-link" href="/nse/volume-spurts"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">Volume Spurts</a>
+               th:style="${webpage != null && webpage.volumeSpurt ? 'font-weight:bold' : ''}">Volume Spurts</a>
         </div>
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
             <a class="left-container-application-link" href="/nse/sme"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">SME</a>
+               th:style="${webpage != null && webpage.sme ? 'font-weight:bold' : ''}">SME</a>
         </div>
     </div>
     <div class="container-horizontal-separator"></div>
@@ -47,33 +47,33 @@
     <div>
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
-            <a class="left-container-application-link" href="/nse/top-20/nifty-fifty"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">Nifty Fifty</a>
-        </div>
-        <div class="left-container-application-link-div">
-            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
-            <a class="left-container-application-link" href="/nse/top-20/nifty-next-fifty"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">Nifty Next Fifty</a>
-        </div>
-        <div class="left-container-application-link-div">
-            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
-            <a class="left-container-application-link" href="/nse/top-20/fo-security"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">FO Security</a>
-        </div>
-        <div class="left-container-application-link-div">
-            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
             <a class="left-container-application-link" href="/nse/top-20/security-lwr-20"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">Security < 20</a>
+               th:style="${webpage != null && webpage.securityLessThan20 ? 'font-weight:bold' : ''}">Security < 20</a>
         </div>
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
             <a class="left-container-application-link" href="/nse/top-20/security-gtr-20"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">Security > 20</a>
+               th:style="${webpage != null && webpage.securityGreaterThan20 ? 'font-weight:bold' : ''}">Security > 20</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/top-20/nifty-fifty"
+               th:style="${webpage != null && webpage.niftyFifty ? 'font-weight:bold' : ''}">Nifty Fifty</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/top-20/nifty-next-fifty"
+               th:style="${webpage != null && webpage.niftyNextFifty ? 'font-weight:bold' : ''}">Nifty Next Fifty</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/top-20/fo-security"
+               th:style="${webpage != null && webpage.FOSecurity ? 'font-weight:bold' : ''}">FO Security</a>
         </div>
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
             <a class="left-container-application-link" href="/nse/top-20/bank-nifty"
-               th:style="${page != null} ? ${page.volumeShockersLinkStyle} : ''">Bank Nifty</a>
+               th:style="${webpage != null && webpage.bankNifty ? 'font-weight:bold' : ''}">Bank Nifty</a>
         </div>
         <!--
         <div class="left-container-application-link-div">

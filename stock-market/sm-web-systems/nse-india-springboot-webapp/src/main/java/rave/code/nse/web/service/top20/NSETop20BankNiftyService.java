@@ -1,8 +1,9 @@
 package rave.code.nse.web.service.top20;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
-import rave.code.nse.web.model.top20.NSETop20BankNiftyModel;
+import rave.code.nse.web.model.WebPage;
 import rave.code.nse.web.model.page.top20.Top20BankNiftyPage;
+import rave.code.nse.web.model.top20.NSETop20BankNiftyModel;
 import rave.code.repository.nse.NSETop20DetailRepository;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class NSETop20BankNiftyService extends AbstractNSETop20Service<NSETop20Ba
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
 
-    public Top20BankNiftyPage getWebPageModel() {
+    public WebPage getWebPageModel() {
         Top20BankNiftyPage top20BankNiftyPage = new Top20BankNiftyPage();
         top20BankNiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findTop20BankNifty()));
 
