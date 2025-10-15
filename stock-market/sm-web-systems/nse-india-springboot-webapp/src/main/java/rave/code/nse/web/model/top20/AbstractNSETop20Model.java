@@ -1,7 +1,8 @@
-package rave.code.nse.web.model;
+package rave.code.nse.web.model.top20;
 
-public class NSETop20NiftyFiftyModel {
+public class AbstractNSETop20Model {
 
+    private String stockDivId;
     private String symbol;
     private double openPrice;
     private double highPrice;
@@ -11,6 +12,14 @@ public class NSETop20NiftyFiftyModel {
     private double percentageChange;
     private int volumeInShares;
     private double valueInLakhs;
+
+    public String getStockDivId() {
+        return stockDivId;
+    }
+
+    public void setStockDivId(String stockDivId) {
+        this.stockDivId = stockDivId;
+    }
 
     public String getSymbol() {
         return symbol;
@@ -83,4 +92,5 @@ public class NSETop20NiftyFiftyModel {
     public void setValueInLakhs(double valueInLakhs) {
         this.valueInLakhs = valueInLakhs;
     }
+
 }

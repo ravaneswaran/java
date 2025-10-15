@@ -12,7 +12,7 @@ public class NSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetail
 
     NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
 
-    public PriceSpurtsPage getPriceSpurts() {
+    public PriceSpurtsPage getWebPageModel() {
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.nsePriceSpurtDetailRepository.findAll();
         PriceSpurtsPage priceSpurtPage = new PriceSpurtsPage();
         priceSpurtPage.setPriceSpurt(true);

@@ -1,7 +1,62 @@
 <div class="right-container">
     <div th:replace="~{fragments/common/stock_group_tip_container}"></div>
     <div class="right-container-stock-listing-container">
-        <div class="right-container-company-frame-div-0" th:each="stock : ${webpage.nseTop20FOSecurityModels}" th:text="${stock.symbol}">
+        <div class="right-container-company-frame-div-0" th:each="stock : ${webpage.top20Models}">
+            <div class="right-container-company-div">
+                <div class="right-container-company-title-container">
+                    <div class="right-container-company-title-div" th:text="${stock.symbol}"></div>
+                    <div class="right-container-company-stock-market-chart-div">
+                        <img src="/images/icons/stock-market-chart.png" class="right-container-company-stock-market-chart-img"/>
+                    </div>
+                </div>
+                <!--width: 100%; height: 70%;-->
+                <div>
+                    <div th:id="${stock.stockDivId}" class="right-container-company-table-div">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="td-left">Open Price</td>
+                                <td class="td-right" th:text="${stock.openPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">High Price</td>
+                                <td class="td-right" th:text="${stock.highPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Low Price</td>
+                                <td class="td-right" th:text="${stock.lowPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Prev Close Price</td>
+                                <td class="td-right" th:text="${stock.previousClosePrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">LTP</td>
+                                <td class="td-right" th:text="${stock.lastTradedPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">% Change</td>
+                                <td class="td-right" th:text="${stock.percentageChange}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Vol in Shares</td>
+                                <td class="td-right" th:text="${stock.volumeInShares}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Val in Lakhs</td>
+                                <td class="td-right" th:text="${stock.valueInLakhs}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--<div th:id="${stock.stockStatDivId}" class="right-container-company-table-div" style="height:0%; width:0%;">
+                        this is the div
+                    </div>-->
+                </div>
+                <div class="right-container-company-trading-stats-div">
+                    Trading Statistics
+                </div>
+            </div>
         </div>
     </div>
 </div>

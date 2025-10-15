@@ -1,8 +1,9 @@
-package rave.code.nse.web.service;
+package rave.code.nse.web.service.top20;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
-import rave.code.nse.web.model.NSETop20NiftyFiftyModel;
-import rave.code.nse.web.model.page.Top20NiftyFiftyPage;
+import rave.code.nse.web.model.top20.NSETop20NiftyFiftyModel;
+import rave.code.nse.web.model.page.top20.Top20NiftyFiftyPage;
+import rave.code.nse.web.service.AbstractNSEService;
 import rave.code.repository.nse.NSETop20DetailRepository;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class NSETop20NiftyFiftyService extends AbstractNSEService<NSETop20Detail
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
 
-    public Top20NiftyFiftyPage getTop20NiftyFifty() {
+    public Top20NiftyFiftyPage getWebPageModel() {
         Top20NiftyFiftyPage top20NiftyFiftyPage = new Top20NiftyFiftyPage();
         top20NiftyFiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findAll()));
 
@@ -24,6 +25,7 @@ public class NSETop20NiftyFiftyService extends AbstractNSEService<NSETop20Detail
         for (NSETop20DetailEntity nseTop20DetailEntity: nseTop20DetailEntities){
             NSETop20NiftyFiftyModel nseTop20NiftyFiftyModel = new NSETop20NiftyFiftyModel();
 
+            nseTop20NiftyFiftyModel.setStockDivId(nseTop20DetailEntity.getId());
             nseTop20NiftyFiftyModel.setHighPrice(nseTop20DetailEntity.getHighPrice());
             nseTop20NiftyFiftyModel.setLastTradedPrice(nseTop20DetailEntity.getLastTradedPrice());
             nseTop20NiftyFiftyModel.setLowPrice(nseTop20DetailEntity.getLowPrice());

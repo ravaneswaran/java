@@ -12,7 +12,7 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
 
     private NSEVolumeSpurtDetailRepository nseVolumeSpurtDetailRepository = new NSEVolumeSpurtDetailRepository();
 
-    public VolumeSpurtsPage getVolumeSpurts(){
+    public VolumeSpurtsPage getWebPageModel(){
         List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtDetailEntities = this.nseVolumeSpurtDetailRepository.findAll();
         VolumeSpurtsPage volumeSpurtsPage = new VolumeSpurtsPage();
         volumeSpurtsPage.setPriceSpurt(true);

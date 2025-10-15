@@ -12,7 +12,7 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, SMEPag
 
     private NSESMEDetailRepository nseSMEDetailRepository = new NSESMEDetailRepository();
 
-    public SMEPage getSMEs(){
+    public SMEPage getWebPageModel(){
         List<NSESMEDetailEntity> nseSMEDetailEntities = this.nseSMEDetailRepository.findAll();
 
         SMEPage smePage = new SMEPage();
