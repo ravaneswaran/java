@@ -15,7 +15,7 @@ public class NSETop20NiftyFiftyService extends AbstractNSETop20Service<NSETop20N
 
     public WebPage getWebPageModel() {
         Top20NiftyFiftyPage top20NiftyFiftyPage = new Top20NiftyFiftyPage();
-        top20NiftyFiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findAll()));
+        top20NiftyFiftyPage.setModelList(this.transformEntities(this.nseTop20DetailRepository.findTop20NiftyFifty()));
 
         return top20NiftyFiftyPage;
     }
