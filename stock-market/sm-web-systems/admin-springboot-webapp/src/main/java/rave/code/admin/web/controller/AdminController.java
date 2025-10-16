@@ -8,7 +8,7 @@ import rave.code.admin.web.service.AdminService;
 @Controller
 public class AdminController {
 
-    @GetMapping("/admin/home")
+    @GetMapping("/admin")
     public ModelAndView home() {
         return this.listQuartzTriggers();
     }
