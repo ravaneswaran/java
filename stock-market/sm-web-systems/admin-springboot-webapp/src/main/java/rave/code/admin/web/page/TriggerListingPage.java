@@ -1,18 +1,22 @@
 package rave.code.admin.web.page;
 
-import rave.code.admin.web.model.Trigger;
+import rave.code.admin.web.model.TriggerModel;
 
 import java.util.List;
 
 public class TriggerListingPage extends WebPage{
 
-    private List<Trigger> triggers;
+    private List<TriggerModel> triggers;
 
-    public void setTriggers(List<Trigger> triggers) {
+    public TriggerListingPage(){
+        this.setTriggersLink(true);
+    }
+
+    public void setTriggers(List<TriggerModel> triggers) {
         this.triggers = triggers;
     }
 
-    public List<Trigger> getTriggers() {
+    public List<TriggerModel> getTriggers() {
         return this.triggers;
     }
 }

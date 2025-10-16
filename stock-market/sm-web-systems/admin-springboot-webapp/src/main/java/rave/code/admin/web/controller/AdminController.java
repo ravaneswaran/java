@@ -2,35 +2,24 @@ package rave.code.admin.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.admin.web.service.AdminService;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 
-    @GetMapping("/home")
+    @GetMapping("/admin/home")
     public ModelAndView home() {
-        return this.listQuartzJobs();
+        return this.listQuartzTriggers();
     }
 
-    @GetMapping("/jobs")
-    public ModelAndView listQuartzJobs(){
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("list_jobs");
-
-        return modelAndView;
-    }
-
-    @GetMapping("/triggers")
+    @GetMapping("/admin/triggers")
     public ModelAndView listQuartzTriggers(){
         AdminService adminService = new AdminService();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list_triggers");
-        modelAndView.addObject("page", adminService.listTriggers());
+        modelAndView.addObject("webpage", adminService.listTriggers());
 
         return modelAndView;
     }
