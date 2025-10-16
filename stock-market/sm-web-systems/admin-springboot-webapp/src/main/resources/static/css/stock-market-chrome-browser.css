@@ -38,7 +38,7 @@ td{
 }
 
 .td-left{
-    width:65%;
+    width:28%;
     color:#353839;
     text-indent: 5px;
     font-weight:bold;
@@ -111,7 +111,7 @@ td{
 /*****************************************/
 .left-container-external-site-link-section{
     width: 98%;
-    height:15%;
+    height:10%;
     border:2px solid #ffffff;
     background: #353839;
     border-radius:5px;
@@ -206,14 +206,14 @@ td{
 
 .right-container-stock-listing-container{
     width:99.8%;
-    height:93.6%;
+    height:99.8%;
     border:0px solid red;
     overflow:auto;
 }
 
 .right-container-company-frame-div-0{
-    height:34.5%;
-    width:12%;
+    height:40.5%;
+    width:18%;
     border:0px solid #353839;
     border-radius:5px;
     float:left;
@@ -250,7 +250,7 @@ td{
 }
 
 .right-container-company-title-div{
-    width:80%;
+    width:99%;
     padding-top:5px;
     height:88%;
     background: #353839;

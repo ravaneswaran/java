@@ -31,6 +31,10 @@ public class AdminService {
             trigger.setPriority(quartzTriggerEntity.getPriority());
             trigger.setTriggerState(quartzTriggerEntity.getTriggerState());
 
+            trigger.setName("Test Name");
+            trigger.setGroup("Test Group");
+            trigger.setJobName("Test Job Name");
+
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
             trigger.setNextFireTime(simpleDateFormat.format(new Date(quartzTriggerEntity.getNextFireTime())));
             trigger.setPreviousFireTime(simpleDateFormat.format(new Date(quartzTriggerEntity.getPreviousFireTime())));
