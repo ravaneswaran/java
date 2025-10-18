@@ -2,13 +2,22 @@ package rave.code.admin.web.page;
 
 public class WebPage {
 
-    private boolean triggersLink;
+    private boolean triggersListingLink;
+    private boolean jobsListingLink;
 
-    public boolean isTriggersLink() {
-        return triggersLink;
+    public boolean isTriggersListingLink() {
+        return triggersListingLink;
     }
 
-    public void setTriggersLink(boolean triggersLink) {
-        this.triggersLink = triggersLink;
+    public void setTriggersListingLink(boolean triggersListingLink) {
+        this.triggersListingLink = triggersListingLink;
+    }
+
+    public boolean isJobsListingLink() {
+        return jobsListingLink;
+    }
+
+    public void setJobsListingLink(boolean jobsListingLink) {
+        this.jobsListingLink = jobsListingLink;
     }
 }

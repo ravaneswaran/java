@@ -15,13 +15,21 @@
             <img class="left-container-external-link-icon" src="/images/icons/external-link-icon.png">
         </div>
     </div>
+    <div class="container-horizontal-separator"></div>
+    <div class="left-container-lounge-div">
+       NSE Quartz Items
+    </div>
+    <div class="container-horizontal-separator"></div>
     <div>
-        <div class="container-horizontal-separator"></div>
-        <div class="container-horizontal-separator"></div>
         <div class="left-container-application-link-div">
             <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
-            <a class="left-container-application-link" href="/admin/triggers"
-               th:style="${webpage != null && webpage.triggersLink ? 'font-weight:bold' : ''}">NSE Triggers</a>
+            <a class="left-container-application-link" href="/admin/nse/triggers"
+               th:style="${webpage != null && webpage.triggersListingLink ? 'font-weight:bold' : ''}">NSE Triggers</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/admin/nse/jobs"
+               th:style="${webpage != null && webpage.jobsListingLink ? 'font-weight:bold' : ''}">NSE Jobs</a>
         </div>
     </div>
 </div>

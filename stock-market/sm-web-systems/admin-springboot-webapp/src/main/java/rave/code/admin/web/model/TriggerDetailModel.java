@@ -1,6 +1,6 @@
 package rave.code.admin.web.model;
 
-public class TriggerModel {
+public class TriggerDetailModel {
 
     private String id;
     private String schedulerName;

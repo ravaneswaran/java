@@ -2,7 +2,7 @@ package rave.code.quartz.enums;
 
 public enum Priorities {
 
-    LOW(1), MID(5), HIGH(10);
+    LOW(1), LID(3),  MID(5), MIGH(8), HIGH(10);
 
     private int priority;
 
