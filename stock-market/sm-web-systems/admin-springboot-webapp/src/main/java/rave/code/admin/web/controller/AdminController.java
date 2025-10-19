@@ -9,12 +9,12 @@ import rave.code.admin.web.service.TriggerListingService;
 @Controller
 public class AdminController {
 
-    @GetMapping("/admin")
+    @GetMapping("/")
     public ModelAndView home() {
         return this.listNSETriggers();
     }
 
-    @GetMapping("/admin/nse/triggers")
+    @GetMapping("/nse/triggers")
     public ModelAndView listNSETriggers(){
         TriggerListingService adminService = new TriggerListingService();
 
@@ -25,7 +25,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    @GetMapping("/admin/nse/jobs")
+    @GetMapping("/nse/jobs")
     public ModelAndView listNSEJobs(){
         JobListingService jobListingService = new JobListingService();
 

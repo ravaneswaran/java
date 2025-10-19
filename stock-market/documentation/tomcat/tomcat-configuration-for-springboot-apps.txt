@@ -1,0 +1,19 @@
+Override context name using a Tomcat context descriptor
+-------------------------------------------------------
+
+1. Go to Tomcat’s configuration directory
+-----------------------------------------
+    $ $CATALINA_BASE/conf/Catalina/localhost/
+
+2. Create a file named after your desired context
+-------------------------------------------------
+    stock-market-admin.xml
+
+3. Add this content
+-------------------
+    <Context
+        path="/myapp"
+        docBase="/path/to/tomcat/webapps/app-1.0.war"
+        reloadable="true" />
+
+4. Restart Tomcat

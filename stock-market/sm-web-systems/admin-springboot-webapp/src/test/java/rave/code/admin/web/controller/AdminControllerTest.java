@@ -22,21 +22,21 @@ public class AdminControllerTest {
     public void testHomePage() throws Exception {
         this.mockMvc.perform(get("/admin"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("list_jobs"));
+                .andExpect(view().name("list_nse_triggers"));
     }
 
     @Test
     public void testListJobs() throws Exception{
-        this.mockMvc.perform(get("/jobs"))
+        this.mockMvc.perform(get("/admin/nse/jobs"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("list_jobs"));
+                .andExpect(view().name("list_nse_jobs"));
     }
 
     @Test
     public void testListTriggers() throws Exception{
-        this.mockMvc.perform(get("/triggers"))
+        this.mockMvc.perform(get("/admin/nse/triggers"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("list_triggers"))
-                .andExpect(model().attribute("page", hasProperty("triggers", notNullValue())));
+                .andExpect(view().name("list_nse_triggers"))
+                .andExpect(model().attribute("webpage", hasProperty("modelList", notNullValue())));
     }
 }

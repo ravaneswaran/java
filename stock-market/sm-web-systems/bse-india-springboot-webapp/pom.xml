@@ -8,11 +8,11 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <name>bse-india-springboot-webapp</name>
     <groupId>rave.code.java.stock-market.sm-web-systems</groupId>
-    <artifactId>bse-india-springboot-webapp</artifactId>
+    <artifactId>stock-market-bse</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>bse-india-springboot-webapp</name>
     <description>web application for bse-india</description>
     <properties>
         <java.version>17</java.version>
