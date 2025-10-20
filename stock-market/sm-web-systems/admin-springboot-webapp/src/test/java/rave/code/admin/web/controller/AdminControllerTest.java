@@ -20,21 +20,21 @@ public class AdminControllerTest {
 
     @Test
     public void testHomePage() throws Exception {
-        this.mockMvc.perform(get("/admin"))
+        this.mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list_nse_triggers"));
     }
 
     @Test
     public void testListJobs() throws Exception{
-        this.mockMvc.perform(get("/admin/nse/jobs"))
+        this.mockMvc.perform(get("/nse/jobs"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list_nse_jobs"));
     }
 
     @Test
     public void testListTriggers() throws Exception{
-        this.mockMvc.perform(get("/admin/nse/triggers"))
+        this.mockMvc.perform(get("/nse/triggers"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list_nse_triggers"))
                 .andExpect(model().attribute("webpage", hasProperty("modelList", notNullValue())));

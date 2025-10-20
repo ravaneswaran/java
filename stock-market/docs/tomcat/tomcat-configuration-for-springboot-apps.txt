@@ -7,13 +7,12 @@ Override context name using a Tomcat context descriptor
 
 2. Create a file named after your desired context
 -------------------------------------------------
-    stock-market-admin.xml
+    <context-name>.xml
 
 3. Add this content
 -------------------
     <Context
-        path="/myapp"
-        docBase="/path/to/tomcat/webapps/app-1.0.war"
+        docBase="<path-to-the-war-file>" <!-- ex: /home/springboot/<file-name>.war -->
         reloadable="true" />
 
 4. Restart Tomcat
