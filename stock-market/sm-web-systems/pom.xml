@@ -18,6 +18,7 @@
         <module>bse-india-springboot-webapp</module>
         <module>nse-india-springboot-webapp</module>
         <module>sm-admin-springboot-webapp</module>
+        <module>sm-static-hub-springboot-webapp</module>
     </modules>
 
 </project>
