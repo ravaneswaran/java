@@ -11,9 +11,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <name>admin-springboot-webapp</name>
+    <name>sm-admin-springboot-webapp</name>
     <groupId>rave.code.java.stock-market.sm-web-systems</groupId>
-    <artifactId>admin-springboot-webapp</artifactId>
+    <artifactId>sm-admin-springboot-webapp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 

@@ -10,7 +10,7 @@ import rave.code.quartz.scheduler.BSEQuartzScheduler;
 
 @Configuration
 public class BSEQuartzSchedulerConfiguration {
-    
+
     @Bean
     public int scheduleBSEJobs() {
         try {
