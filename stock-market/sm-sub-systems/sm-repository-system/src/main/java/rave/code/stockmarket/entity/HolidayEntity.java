@@ -6,16 +6,19 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "holidays")
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class HolidayEntity extends AbstractTestEntity {
-
-    private String id;
-    private String holidate;
-    private String holiday;
-    private String description;
 
     @Id
     @Column(name = "id")
+    private String id;
+    @Column(name = "holidate")
+    private String holidate;
+    @Column(name = "holiday")
+    private String holiday;
+    @Column(name = "description")
+    private String description;
+
     public String getId() {
         return id;
     }
@@ -23,7 +26,6 @@ public class HolidayEntity extends AbstractTestEntity {
         this.id = id;
     }
 
-    @Column(name = "holidate")
     public String getHolidate() {
         return holidate;
     }
@@ -31,7 +33,6 @@ public class HolidayEntity extends AbstractTestEntity {
         this.holidate = holidate;
     }
 
-    @Column(name = "holiday")
     public String getHoliday() {
         return holiday;
     }
@@ -39,7 +40,6 @@ public class HolidayEntity extends AbstractTestEntity {
         this.holiday = holiday;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
