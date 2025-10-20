@@ -11,7 +11,7 @@ import rave.code.bse.web.service.TopDividendService;
 @Controller
 public class BSEInvestorsLoungeController {
 
-    @GetMapping("/bse/top-dividend")
+    @GetMapping("/top-dividend")
     public ModelAndView bseTopDividend() {
         TopDividendService topDividendService = new TopDividendService();
         WebPage webPage = topDividendService.getPageModel();
@@ -23,7 +23,7 @@ public class BSEInvestorsLoungeController {
         return indexModelAndView;
     }
 
-    @GetMapping("/bse/small-cap-gainers")
+    @GetMapping("/small-cap-gainers")
     public ModelAndView bseSmallCapGainers() {
         SmallCapGainerService smallCapGainerService = new SmallCapGainerService();
         WebPage webPage = smallCapGainerService.getPageModel();
@@ -35,7 +35,7 @@ public class BSEInvestorsLoungeController {
         return indexModelAndView;
     }
 
-    @GetMapping("/bse/mid-cap-gainers")
+    @GetMapping("/mid-cap-gainers")
     public ModelAndView bseMidCapGainers() {
         MidCapGainerService midCapGainerService = new MidCapGainerService();
         WebPage webPage = midCapGainerService.getPageModel();

@@ -11,12 +11,12 @@ import rave.code.bse.web.service.*;
 @Controller
 public class BSETradersLoungeController {
 
-    @GetMapping("/bse")
+    @GetMapping("/")
     public ModelAndView home() {
         return this.bseActive100();
     }
 
-    @GetMapping("/bse/active-100")
+    @GetMapping("/active-100")
     public ModelAndView bseActive100() {
         Active100Service active100Service = new Active100Service();
         WebPage active100Page = active100Service.getPageModel();
@@ -28,7 +28,7 @@ public class BSETradersLoungeController {
         return modelAndView;
     }
 
-    @GetMapping("/bse/active-200")
+    @GetMapping("/active-200")
     public ModelAndView bseActive200() {
         Active200Service active200Service = new Active200Service();
         WebPage active200Page = active200Service.getPageModel();
@@ -40,7 +40,7 @@ public class BSETradersLoungeController {
         return modelAndView;
     }
 
-    @GetMapping("/bse/active-500")
+    @GetMapping("/active-500")
     public ModelAndView bseActive500() {
         Active500Service active500Service = new Active500Service();
         WebPage active500Page = active500Service.getPageModel();
@@ -52,7 +52,7 @@ public class BSETradersLoungeController {
         return modelAndView;
     }
 
-    @GetMapping("/bse/price-shockers")
+    @GetMapping("/price-shockers")
     public ModelAndView bsePriceShockers() {
         PriceShockerService priceShockerService = new PriceShockerService();
         PriceShockerWebPage priceShockersWebPage = priceShockerService.getPageModel();
@@ -64,7 +64,7 @@ public class BSETradersLoungeController {
         return modelAndView;
     }
 
-    @GetMapping("/bse/volume-shockers")
+    @GetMapping("/volume-shockers")
     public ModelAndView bseVolumeShockers() {
         VolumeShockerService volumeShockerService = new VolumeShockerService();
         VolumeShockerWebPage volumeShockerWebPage = volumeShockerService.getPageModel();
@@ -76,7 +76,7 @@ public class BSETradersLoungeController {
         return modelAndView;
     }
 
-    @GetMapping("/bse/intraday-large-deals")
+    @GetMapping("/intraday-large-deals")
     public ModelAndView bseIntradayLargeDeals() {
         PriceShockerService priceShockerService = new PriceShockerService();
         PriceShockerWebPage priceShockersWebPage = priceShockerService.getPageModel();

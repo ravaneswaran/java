@@ -10,7 +10,7 @@ import rave.code.bse.web.service.TopDividendService;
 @Controller
 public class BSESensexController {
 
-    @GetMapping("/bse/sensex")
+    @GetMapping("/sensex")
     public ModelAndView sensex() {
         SensexService sensexService = new SensexService();
         WebPage webPage = sensexService.getPageModel();

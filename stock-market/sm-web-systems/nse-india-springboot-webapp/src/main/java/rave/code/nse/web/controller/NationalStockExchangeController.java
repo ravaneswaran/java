@@ -15,14 +15,19 @@ import rave.code.nse.web.service.top20.*;
 @Controller
 public class NationalStockExchangeController {
 
-    @GetMapping("/nse/test")
+    @GetMapping("/test")
     public ModelAndView test() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("test");
         return modelAndView;
     }
 
-    @GetMapping("/nse/price-spurts")
+    @GetMapping("/")
+    public ModelAndView home() {
+       return this.priceSpurts();
+    }
+
+    @GetMapping("/price-spurts")
     public ModelAndView priceSpurts() {
         NSEPriceSpurtService priceSpurtService = new NSEPriceSpurtService();
         PriceSpurtsPage priceSpurtPage = priceSpurtService.getPriceSpurtsLWR20();
@@ -32,7 +37,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/volume-spurts")
+    @GetMapping("/volume-spurts")
     public ModelAndView volumeSpurts() {
         NSEVolumeSpurtsService nseVolumeSpurtsService = new NSEVolumeSpurtsService();
         VolumeSpurtsPage volumeSpurtsPage = nseVolumeSpurtsService.getWebPageModel();
@@ -42,7 +47,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/sme")
+    @GetMapping("/sme")
     public ModelAndView sme() {
         NSESMEService nseSMEService = new NSESMEService();
         SMEPage smePage = nseSMEService.getWebPageModel();
@@ -52,7 +57,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/top-20/nifty-fifty")
+    @GetMapping("/top-20/nifty-fifty")
     public ModelAndView top20NiftyFifty() {
         NSETop20NiftyFiftyService nseTop20NiftyFiftyService = new NSETop20NiftyFiftyService();
         WebPage top20NiftyFiftyPage = nseTop20NiftyFiftyService.getWebPageModel();
@@ -62,7 +67,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/top-20/nifty-next-fifty")
+    @GetMapping("/top-20/nifty-next-fifty")
     public ModelAndView top20NiftyNextFifty() {
         NSETop20NiftyNextFiftyService nseTop20NiftyNextFiftyService = new NSETop20NiftyNextFiftyService();
         WebPage top20NiftyNextFiftyPage = nseTop20NiftyNextFiftyService.getWebPageModel();
@@ -72,7 +77,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/top-20/fo-security")
+    @GetMapping("/top-20/fo-security")
     public ModelAndView foSecurity() {
         NSETop20FOSecurityService nseTop20FOSecurityService = new NSETop20FOSecurityService();
         WebPage top20FOSecurityPage = nseTop20FOSecurityService.getWebPageModel();
@@ -82,7 +87,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/top-20/security-lwr-20")
+    @GetMapping("/top-20/security-lwr-20")
     public ModelAndView securitiesLowerThan20() {
         NSETop20SecuritiesLwr20Service nseTop20FOSecurityService = new NSETop20SecuritiesLwr20Service();
         WebPage top20SecuritiesLWR20Page = nseTop20FOSecurityService.getWebPageModel();
@@ -92,7 +97,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/top-20/security-gtr-20")
+    @GetMapping("/top-20/security-gtr-20")
     public ModelAndView securitiesGreaterThan20() {
         NSETop20SecuritiesGtr20Service nseTop20SecuritiesGtr20Service = new NSETop20SecuritiesGtr20Service();
         WebPage top20SecuritiesGTR20Page = nseTop20SecuritiesGtr20Service.getWebPageModel();
@@ -102,7 +107,7 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/nse/top-20/bank-nifty")
+    @GetMapping("/top-20/bank-nifty")
     public ModelAndView bankNifty() {
         NSETop20BankNiftyService nseTop20BankNiftyService = new NSETop20BankNiftyService();
         WebPage top20BankNiftyPage = nseTop20BankNiftyService.getWebPageModel();

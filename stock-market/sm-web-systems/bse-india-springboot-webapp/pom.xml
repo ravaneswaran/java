@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -8,19 +9,30 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <name>bse-india-springboot-webapp</name>
     <groupId>rave.code.java.stock-market.sm-web-systems</groupId>
-    <artifactId>stock-market-bse</artifactId>
+    <artifactId>bse-india-springboot-webapp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <description>web application for bse-india</description>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
         <java.version>17</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -87,6 +99,14 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -103,19 +123,6 @@
                     <password>admin</password>
                     <prefix>QUARTZ_</prefix>
                 </configuration>
-                <!--<dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.plugin-tools</groupId>
-                        <artifactId>maven-plugin-annotations</artifactId>
-                        <version>3.15.1</version>
-                    </dependency>
-                    &lt;!&ndash; https://mvnrepository.com/artifact/mysql/mysql-connector-java &ndash;&gt;
-                    <dependency>
-                        <groupId>com.mysql</groupId>
-                        <artifactId>mysql-connector-j</artifactId>
-                        <version>8.0.33</version>
-                    </dependency>
-                </dependencies>-->
             </plugin>
             <plugin>
                 <groupId>rave.code.java.stock-market</groupId>
