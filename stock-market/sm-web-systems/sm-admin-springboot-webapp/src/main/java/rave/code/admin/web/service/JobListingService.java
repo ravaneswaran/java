@@ -1,5 +1,6 @@
 package rave.code.admin.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.admin.web.model.JobDetailModel;
 import rave.code.admin.web.page.JobListingPage;
 import rave.code.entity.quartz.QuartzJobDetailEntity;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class JobListingService extends AbstractAdminService<QuartzJobDetailEntity, JobDetailModel> {
 
     private QuartzJobDetailRepository quartzJobDetailRepository = new QuartzJobDetailRepository();

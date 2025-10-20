@@ -1,5 +1,6 @@
 package rave.code.nse.web.service.top20;
 
+import org.springframework.stereotype.Service;
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
 import rave.code.nse.web.model.WebPage;
 import rave.code.nse.web.model.page.top20.Top20NiftyFiftyPage;
@@ -9,6 +10,7 @@ import rave.code.repository.nse.NSETop20DetailRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class NSETop20NiftyFiftyService extends AbstractNSETop20Service<NSETop20NiftyFiftyModel> {
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();

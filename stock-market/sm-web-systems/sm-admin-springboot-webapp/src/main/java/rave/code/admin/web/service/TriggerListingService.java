@@ -1,5 +1,6 @@
 package rave.code.admin.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.admin.web.model.TriggerDetailModel;
 import rave.code.admin.web.page.TriggerListingPage;
 import rave.code.entity.quartz.QuartzTriggerEntity;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class TriggerListingService extends AbstractAdminService<QuartzTriggerEntity, TriggerDetailModel>{
 
     private QuartzTriggerRepository quartzTriggerRepository = new QuartzTriggerRepository();
