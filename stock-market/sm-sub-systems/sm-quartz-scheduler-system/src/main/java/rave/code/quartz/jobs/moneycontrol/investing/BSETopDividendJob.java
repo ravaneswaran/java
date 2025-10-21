@@ -3,7 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.investing;
 import rave.code.data.parser.html.moneycontrol.BSETopDividendParser;
 import rave.code.stockmarket.entity.BSETopDividendEntity;
 import rave.code.stockmarket.repository.BSETopDividendRepository;
-import rave.code.website.data.model.moneycontrol.DividendModel;
+import rave.code.data.model.web.external.moneycontrol.DividendModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

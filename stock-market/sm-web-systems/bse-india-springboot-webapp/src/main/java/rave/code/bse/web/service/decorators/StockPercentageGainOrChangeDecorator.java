@@ -1,8 +1,8 @@
 package rave.code.bse.web.service.decorators;
 
-import rave.code.bse.web.model.stock.ActiveStock;
-import rave.code.bse.web.model.stock.CapitalGainerStock;
-import rave.code.bse.web.model.stock.Stock;
+import rave.code.data.model.web.bse.stock.ActiveStock;
+import rave.code.data.model.web.bse.stock.CapitalGainerStock;
+import rave.code.data.model.web.bse.stock.Stock;
 
 public class StockPercentageGainOrChangeDecorator implements Decorator{
 

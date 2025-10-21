@@ -7,5 +7,5 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "bse_active_100")
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class BSEActive100Entity extends StockMarketActiveEntity {}

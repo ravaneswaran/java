@@ -1,7 +1,7 @@
 package rave.code.bse.web.service;
 
-import rave.code.bse.web.model.page.WebPage;
-import rave.code.bse.web.model.stock.ActiveStock;
+import rave.code.data.model.web.bse.page.WebPage;
+import rave.code.data.model.web.bse.stock.ActiveStock;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.stockmarket.repository.BSEActive500Repository;

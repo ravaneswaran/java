@@ -1,7 +1,7 @@
 package rave.code.bse.web.service;
 
-import rave.code.bse.web.model.page.PriceShockerWebPage;
-import rave.code.bse.web.model.stock.PriceShockerStock;
+import rave.code.data.model.web.bse.page.PriceShockerWebPage;
+import rave.code.data.model.web.bse.stock.PriceShockerStock;
 import rave.code.bse.web.service.algorithms.sort.CurrentPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.stockmarket.repository.BSEPriceShockerRepository;

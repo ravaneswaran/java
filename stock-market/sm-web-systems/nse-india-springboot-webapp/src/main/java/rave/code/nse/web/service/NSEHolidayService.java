@@ -1,8 +1,8 @@
 package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
-import rave.code.nse.web.model.HolidayDetailModel;
-import rave.code.nse.web.model.WebPage;
+import rave.code.data.model.web.HolidayDetailModel;
+import rave.code.data.model.web.nse.WebPage;
 import rave.code.stockmarket.entity.HolidayEntity;
 import rave.code.stockmarket.repository.HolidayRepository;
 

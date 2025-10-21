@@ -3,7 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.trading;
 import rave.code.data.parser.html.moneycontrol.BSEVolumeShockersParser;
 import rave.code.stockmarket.entity.BSEVolumeShockerEntity;
 import rave.code.stockmarket.repository.BSEVolumeShockerRepository;
-import rave.code.website.data.model.moneycontrol.VolumeShockerModel;
+import rave.code.data.model.web.external.moneycontrol.VolumeShockerModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

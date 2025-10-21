@@ -1,6 +1,6 @@
 package rave.code.data.parser.html.moneycontrol;
 
-import rave.code.website.data.model.moneycontrol.BSEGenericActiveModel;
+import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 
 import java.util.List;
 import java.util.logging.Level;

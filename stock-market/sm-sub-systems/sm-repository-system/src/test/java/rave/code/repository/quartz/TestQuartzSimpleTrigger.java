@@ -13,15 +13,15 @@ public class TestQuartzSimpleTrigger extends TestCase {
 
     public void testSave() {
         QuartzJobDetailEntity quartzJobDetailEntity = TestQuartzJobDetail.createQuartzJobDetailEntity();
-        quartzJobDetailRepository.save(quartzJobDetailEntity);
+        this.quartzJobDetailRepository.save(quartzJobDetailEntity);
         QuartzTriggerEntity quartzTriggerEntity = TestQuartzTrigger.createQuartzTriggerEntity();
         quartzTriggerEntity.setJobName(quartzJobDetailEntity.getQuartzJobDetailId().getJobName());
         quartzTriggerEntity.setJobGroup(quartzJobDetailEntity.getQuartzJobDetailId().getJobGroup());
-        quartzTriggerRepository.save(quartzTriggerEntity);
+        this.quartzTriggerRepository.save(quartzTriggerEntity);
         QuartzSimpleTriggerEntity quartzSimpleTriggerEntity = new QuartzSimpleTriggerEntity();
         quartzSimpleTriggerEntity.setQuartzTriggerId(quartzTriggerEntity.getQuartzTriggerId());
 
-        QuartzSimpleTriggerEntity returnVal = quartzSimpleTriggerRepository.save(quartzSimpleTriggerEntity);
+        QuartzSimpleTriggerEntity returnVal = this.quartzSimpleTriggerRepository.save(quartzSimpleTriggerEntity);
 
         assertNotNull(returnVal);
     }

@@ -4,14 +4,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "bse_price_shockers")
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class BSEPriceShockerEntity extends StockMarketShockerEntity {
 
+    @Column(name = "current_price")
     private String previousPrice;
+    @Column(name = "current_price_movement")
     private String currentPrice;
+    @Column(name = "previous_price")
     private String currentPriceMovement;
 
-    @Column(name = "current_price")
     public String getCurrentPrice() {
         return currentPrice;
     }
@@ -19,7 +21,6 @@ public class BSEPriceShockerEntity extends StockMarketShockerEntity {
         this.currentPrice = currentPrice;
     }
 
-    @Column(name = "current_price_movement")
     public String getCurrentPriceMovement() {
         return currentPriceMovement;
     }
@@ -27,7 +28,6 @@ public class BSEPriceShockerEntity extends StockMarketShockerEntity {
         this.currentPriceMovement = currentPriceMovement;
     }
 
-    @Column(name = "previous_price")
     public String getPreviousPrice() {return previousPrice;}
     public void setPreviousPrice(String previousPrice) {
         this.previousPrice = previousPrice;

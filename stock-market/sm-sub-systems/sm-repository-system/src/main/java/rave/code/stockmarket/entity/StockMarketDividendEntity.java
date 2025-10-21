@@ -6,19 +6,22 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class StockMarketDividendEntity extends StockMarketEntity {
 
+    @Column(name = "last_price")
     protected String lastPrice;
+    @Column(name = "latest_dividend_percentage")
     protected String latestDividendPercentage;
+    @Column(name = "dividend_yield_percentage_52_high")
     protected String dividendYieldPercentage52High;
+    @Column(name = "dividend_yield_percentage_52_low")
     protected String dividendYieldPercentage52Low;
+    @Column(name = "dividend_yield_percentage_at_current")
     protected String dividendYieldPercentageAtCurrent;
 
-    @Column(name = "last_price")
     public String getLastPrice() {return lastPrice;}
     public void setLastPrice(String lastPrice) {
         this.lastPrice = lastPrice;
     }
 
-    @Column(name = "latest_dividend_percentage")
     public String getLatestDividendPercentage() {
         return latestDividendPercentage;
     }
@@ -26,7 +29,6 @@ public class StockMarketDividendEntity extends StockMarketEntity {
         this.latestDividendPercentage = latestDividendPercentage;
     }
 
-    @Column(name = "dividend_yield_percentage_52_high")
     public String getDividendYieldPercentage52High() {
         return dividendYieldPercentage52High;
     }
@@ -34,7 +36,6 @@ public class StockMarketDividendEntity extends StockMarketEntity {
         this.dividendYieldPercentage52High = dividendYieldPercentage52High;
     }
 
-    @Column(name = "dividend_yield_percentage_52_low")
     public String getDividendYieldPercentage52Low() {
         return dividendYieldPercentage52Low;
     }
@@ -42,7 +43,6 @@ public class StockMarketDividendEntity extends StockMarketEntity {
         this.dividendYieldPercentage52Low = dividendYieldPercentage52Low;
     }
 
-    @Column(name = "dividend_yield_percentage_at_current")
     public String getDividendYieldPercentageAtCurrent() {
         return dividendYieldPercentageAtCurrent;
     }

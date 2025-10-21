@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "nse_stock_base")
@@ -28,6 +29,10 @@ public class NSEStockBaseEntity extends AbstractNSECSVEntity {
     private int faceValue;
     @Column(name = "market_lot")
     private int marketLot;
+
+    public NSEStockBaseEntity(){
+        this.setId(UUID.randomUUID().toString());
+    }
 
     public List<NSEDayPriceDetailEntity> getNseDayPriceDetailEntities() {
         return nseDayPriceDetailEntities;

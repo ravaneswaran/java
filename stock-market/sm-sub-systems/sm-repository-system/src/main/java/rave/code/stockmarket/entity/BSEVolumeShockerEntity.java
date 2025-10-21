@@ -4,14 +4,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "bse_volume_shockers")
-@Access(AccessType.PROPERTY)
+@Access(AccessType.FIELD)
 public class BSEVolumeShockerEntity extends StockMarketShockerEntity {
 
+    @Column(name = "average_volume")
     private String lastPrice;
+    @Column(name = "last_price")
     private String lastPriceMovement;
+    @Column(name = "last_price_movement")
     private String averageVolume;
 
-    @Column(name = "average_volume")
     public String getAverageVolume() {
         return averageVolume;
     }
@@ -19,13 +21,11 @@ public class BSEVolumeShockerEntity extends StockMarketShockerEntity {
         this.averageVolume = averageVolume;
     }
 
-    @Column(name = "last_price")
     public String getLastPrice() {return lastPrice;}
     public void setLastPrice(String lastPrice) {
         this.lastPrice = lastPrice;
     }
 
-    @Column(name = "last_price_movement")
     public String getLastPriceMovement() {return lastPriceMovement;}
     public void setLastPriceMovement(String lastPriceMovement) {
         this.lastPriceMovement = lastPriceMovement;

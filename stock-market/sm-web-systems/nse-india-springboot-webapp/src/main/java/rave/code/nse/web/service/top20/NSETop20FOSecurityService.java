@@ -2,9 +2,9 @@ package rave.code.nse.web.service.top20;
 
 import org.springframework.stereotype.Service;
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
-import rave.code.nse.web.model.WebPage;
-import rave.code.nse.web.model.page.top20.Top20FOSecurityPage;
-import rave.code.nse.web.model.top20.NSETop20FOSecurityModel;
+import rave.code.data.model.web.nse.WebPage;
+import rave.code.data.model.web.nse.page.top20.Top20FOSecurityPage;
+import rave.code.data.model.web.nse.top20.NSETop20FOSecurityModel;
 import rave.code.repository.nse.NSETop20DetailRepository;
 
 import java.util.ArrayList;

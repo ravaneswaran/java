@@ -3,7 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.investing;
 import rave.code.data.parser.html.moneycontrol.BSEMidCapGainersParser;
 import rave.code.stockmarket.entity.BSEMidCapGainerEntity;
 import rave.code.stockmarket.repository.BSEMidCapGainerRepository;
-import rave.code.website.data.model.moneycontrol.CapitalGainerModel;
+import rave.code.data.model.web.external.moneycontrol.CapitalGainerModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

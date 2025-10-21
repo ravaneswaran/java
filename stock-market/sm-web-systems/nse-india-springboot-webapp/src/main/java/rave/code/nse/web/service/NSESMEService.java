@@ -2,8 +2,8 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.entity.nse.csv.NSESMEDetailEntity;
-import rave.code.nse.web.model.NSESMEDetailModel;
-import rave.code.nse.web.model.page.SMEPage;
+import rave.code.data.model.web.nse.NSESMEDetailModel;
+import rave.code.data.model.web.nse.page.SMEPage;
 import rave.code.repository.nse.NSESMEDetailRepository;
 
 import java.util.ArrayList;

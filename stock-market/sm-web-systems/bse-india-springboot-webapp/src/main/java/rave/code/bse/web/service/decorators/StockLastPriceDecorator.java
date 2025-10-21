@@ -1,6 +1,6 @@
 package rave.code.bse.web.service.decorators;
 
-import rave.code.bse.web.model.stock.Stock;
+import rave.code.data.model.web.bse.stock.Stock;
 
 public class StockLastPriceDecorator implements Decorator{
 

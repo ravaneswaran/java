@@ -6,27 +6,43 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class StockMarketGainerEntity extends StockMarketEntity {
 
+    @Column(name = "high")
     protected String high;
+    @Column(name = "low")
     protected String low;
+    @Column(name = "last_price")
     protected String lastPrice;
+    @Column(name = "variation")
     protected String variation;
+    @Column(name = "previous_close")
     protected String previousClose;
+    @Column(name = "percentage_gain")
     protected String percentageGain;
+    @Column(name = "average_volume_5d")
     protected String averageVolume5Days;
+    @Column(name = "average_volume_10d")
     protected String averageVolume10Days;
+    @Column(name = "average_volume_30d")
     protected String averageVolume30Days;
+    @Column(name = "price_to_earning_ratio")
     protected String priceToEarningRatio;
+    @Column(name = "price_to_book_ratio")
     protected String priceToBookRatio;
+    @Column(name = "upper_circuit")
     protected String upperCircuit;
+    @Column(name = "lower_circuit")
     protected String lowerCircuit;
+    @Column(name = "volume_weighted_average_price")
     protected String volumeWeightedAveragePrice;
+    @Column(name = "displaced_moving_average_30d")
     protected String displacedMovingAverage30D;
+    @Column(name = "displaced_moving_average_50d")
     protected String displacedMovingAverage50D;
+    @Column(name = "displaced_moving_average_150d")
     protected String displacedMovingAverage150D;
+    @Column(name = "displaced_moving_average_200d")
     protected String displacedMovingAverage200D;
 
-
-    @Column(name = "high")
     public String getHigh() {
         return high;
     }
@@ -34,7 +50,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.high = high;
     }
 
-    @Column(name = "low")
     public String getLow() {
         return low;
     }
@@ -42,7 +57,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.low = low;
     }
 
-    @Column(name = "last_price")
     public String getLastPrice() {
         return lastPrice;
     }
@@ -50,7 +64,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.lastPrice = lastPrice;
     }
 
-    @Column(name = "variation")
     public String getVariation() {
         return variation;
     }
@@ -58,7 +71,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.variation = variation;
     }
 
-    @Column(name = "previous_close")
     public String getPreviousClose() {
         return previousClose;
     }
@@ -66,7 +78,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.previousClose = previousClose;
     }
 
-    @Column(name = "percentage_gain")
     public String getPercentageGain() {
         return percentageGain;
     }
@@ -74,7 +85,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.percentageGain = percentageGain;
     }
 
-    @Column(name = "average_volume_5d")
     public String getAverageVolume5Days() {
         return averageVolume5Days;
     }
@@ -82,13 +92,11 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.averageVolume5Days = averageVolume5Days;
     }
 
-    @Column(name = "average_volume_10d")
     public String getAverageVolume10Days() {return averageVolume10Days;}
     public void setAverageVolume10Days(String averageVolume10Days) {
         this.averageVolume10Days = averageVolume10Days;
     }
 
-    @Column(name = "average_volume_30d")
     public String getAverageVolume30Days() {
         return averageVolume30Days;
     }
@@ -96,7 +104,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.averageVolume30Days = averageVolume30Days;
     }
 
-    @Column(name = "price_to_earning_ratio")
     public String getPriceToEarningRatio() {
         return priceToEarningRatio;
     }
@@ -104,7 +111,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.priceToEarningRatio = priceToEarningRatio;
     }
 
-    @Column(name = "price_to_book_ratio")
     public String getPriceToBookRatio() {
         return priceToBookRatio;
     }
@@ -112,7 +118,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.priceToBookRatio = priceToBookRatio;
     }
 
-    @Column(name = "upper_circuit")
     public String getUpperCircuit() {
         return upperCircuit;
     }
@@ -120,7 +125,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.upperCircuit = upperCircuit;
     }
 
-    @Column(name = "lower_circuit")
     public String getLowerCircuit() {
         return lowerCircuit;
     }
@@ -128,7 +132,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.lowerCircuit = lowerCircuit;
     }
 
-    @Column(name = "volume_weighted_average_price")
     public String getVolumeWeightedAveragePrice() {
         return volumeWeightedAveragePrice;
     }
@@ -136,7 +139,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.volumeWeightedAveragePrice = volumeWeightedAveragePrice;
     }
 
-    @Column(name = "displaced_moving_average_30d")
     public String getDisplacedMovingAverage30D() {
         return displacedMovingAverage30D;
     }
@@ -144,7 +146,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.displacedMovingAverage30D = displacedMovingAverage30D;
     }
 
-    @Column(name = "displaced_moving_average_50d")
     public String getDisplacedMovingAverage50D() {
         return displacedMovingAverage50D;
     }
@@ -152,7 +153,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.displacedMovingAverage50D = displacedMovingAverage50D;
     }
 
-    @Column(name = "displaced_moving_average_150d")
     public String getDisplacedMovingAverage150D() {
         return displacedMovingAverage150D;
     }
@@ -160,7 +160,6 @@ public class StockMarketGainerEntity extends StockMarketEntity {
         this.displacedMovingAverage150D = displacedMovingAverage150D;
     }
 
-    @Column(name = "displaced_moving_average_200d")
     public String getDisplacedMovingAverage200D() {
         return displacedMovingAverage200D;
     }

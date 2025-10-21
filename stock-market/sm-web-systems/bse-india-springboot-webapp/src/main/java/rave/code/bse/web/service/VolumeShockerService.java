@@ -1,7 +1,7 @@
 package rave.code.bse.web.service;
 
-import rave.code.bse.web.model.page.VolumeShockerWebPage;
-import rave.code.bse.web.model.stock.VolumeShockerStock;
+import rave.code.data.model.web.bse.page.VolumeShockerWebPage;
+import rave.code.data.model.web.bse.stock.VolumeShockerStock;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.stockmarket.repository.BSEVolumeShockerRepository;

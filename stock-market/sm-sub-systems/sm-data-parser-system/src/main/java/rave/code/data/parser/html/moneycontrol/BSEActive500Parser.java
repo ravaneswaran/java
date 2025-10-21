@@ -5,7 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import rave.code.website.data.model.moneycontrol.BSEGenericActiveModel;
+import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;

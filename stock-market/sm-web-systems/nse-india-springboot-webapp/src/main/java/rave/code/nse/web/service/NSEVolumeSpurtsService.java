@@ -2,8 +2,8 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.entity.nse.csv.NSEVolumeSpurtDetailEntity;
-import rave.code.nse.web.model.NSEVolumeSpurtDetailModel;
-import rave.code.nse.web.model.page.VolumeSpurtsPage;
+import rave.code.data.model.web.nse.NSEVolumeSpurtDetailModel;
+import rave.code.data.model.web.nse.page.VolumeSpurtsPage;
 import rave.code.repository.nse.NSEVolumeSpurtDetailRepository;
 
 import java.util.ArrayList;

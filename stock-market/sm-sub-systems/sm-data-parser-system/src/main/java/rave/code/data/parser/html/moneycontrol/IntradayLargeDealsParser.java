@@ -1,7 +1,7 @@
 package rave.code.data.parser.html.moneycontrol;
 
 import rave.code.data.parser.html.HTMLSourceParser;
-import rave.code.website.data.model.moneycontrol.IntradayLargeDealModel;
+import rave.code.data.model.web.external.moneycontrol.IntradayLargeDealModel;
 
 import java.util.List;
 import java.util.logging.Logger;

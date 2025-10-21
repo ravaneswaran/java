@@ -3,6 +3,7 @@ package rave.code.entity.nse.csv;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name = "nse_pre_open_market_detail")
@@ -40,6 +41,7 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
     private double newMarket52WeekLow;
 
     public NSEPreOpenMarketDetailEntity(){
+        this.setId(UUID.randomUUID().toString());
         this.setBusinessDate(new Date());
     }
 

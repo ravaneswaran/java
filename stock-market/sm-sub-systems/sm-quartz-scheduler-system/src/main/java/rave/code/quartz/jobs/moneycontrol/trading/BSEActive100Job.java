@@ -4,7 +4,7 @@ import org.quartz.DisallowConcurrentExecution;
 import rave.code.data.parser.html.moneycontrol.BSEActive100Parser;
 import rave.code.stockmarket.entity.BSEActive100Entity;
 import rave.code.stockmarket.repository.BSEActive100Repository;
-import rave.code.website.data.model.moneycontrol.BSEGenericActiveModel;
+import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

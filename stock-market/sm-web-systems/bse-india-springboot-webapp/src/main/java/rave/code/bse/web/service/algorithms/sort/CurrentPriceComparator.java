@@ -1,6 +1,6 @@
 package rave.code.bse.web.service.algorithms.sort;
 
-import rave.code.bse.web.model.stock.PriceShockerStock;
+import rave.code.data.model.web.bse.stock.PriceShockerStock;
 
 import java.util.Comparator;
 

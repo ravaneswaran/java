@@ -2,8 +2,8 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
-import rave.code.nse.web.model.NSEPriceSpurtDetailModel;
-import rave.code.nse.web.model.page.PriceSpurtsPage;
+import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
+import rave.code.data.model.web.nse.page.PriceSpurtsPage;
 import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
 
 import java.util.ArrayList;

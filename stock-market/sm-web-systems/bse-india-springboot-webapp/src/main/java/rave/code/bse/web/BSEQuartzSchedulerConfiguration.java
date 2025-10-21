@@ -1,26 +1,59 @@
 package rave.code.bse.web;
 
+import org.quartz.ObjectAlreadyExistsException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.calendar.HolidayCalendar;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import rave.code.bse.web.service.BSEHolidayService;
+import rave.code.data.model.web.HolidayDetailModel;
 import rave.code.quartz.scheduler.BSEQuartzScheduler;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Configuration
 public class BSEQuartzSchedulerConfiguration {
 
+    private static final Logger LOGGER = Logger.getLogger(BSEQuartzSchedulerConfiguration.class.getName());
+
+    @Autowired
+    private BSEHolidayService bseHolidayService;
+
     @Bean
     public int scheduleBSEJobs() {
+
+        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        Scheduler scheduler = null;
         try {
-            SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-            Scheduler scheduler = schedulerFactory.getScheduler();
-            new BSEQuartzScheduler(scheduler).scheduleJobs();
+            scheduler = schedulerFactory.getScheduler();
+        } catch (SchedulerException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        }
+        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        List<HolidayDetailModel> holidayDetailModels = this.bseHolidayService.listHolidays();
+        for (HolidayDetailModel holidayDetailModel : holidayDetailModels) {
+            holidayCalendar.addExcludedDate(holidayDetailModel.getHolidate());
+        }
+        try {
+            scheduler.addCalendar("BSECalendar", holidayCalendar, false, true);
+        } catch (ObjectAlreadyExistsException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        } catch (SchedulerException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        }
+        new BSEQuartzScheduler(scheduler).scheduleJobs();
+        try {
             scheduler.start();
         } catch (SchedulerException exception) {
-            exception.printStackTrace();
+            LOGGER.log(Level.SEVERE, exception.getMessage());
         }
+
         return 0;
     }
 }

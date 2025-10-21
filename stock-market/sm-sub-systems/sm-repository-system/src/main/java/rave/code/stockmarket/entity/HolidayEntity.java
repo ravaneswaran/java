@@ -1,13 +1,13 @@
 package rave.code.stockmarket.entity;
 
-import rave.code.entity.AbstractTestEntity;
+import rave.code.entity.AbstractEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "holidays")
 @Access(AccessType.FIELD)
-public class HolidayEntity extends AbstractTestEntity {
+public class HolidayEntity extends AbstractEntity {
 
     @Id
     @Column(name = "id")

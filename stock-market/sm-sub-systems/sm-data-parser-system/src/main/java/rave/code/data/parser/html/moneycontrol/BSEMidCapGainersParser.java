@@ -6,7 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import rave.code.data.parser.html.HTMLSourceParser;
-import rave.code.website.data.model.moneycontrol.CapitalGainerModel;
+import rave.code.data.model.web.external.moneycontrol.CapitalGainerModel;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;

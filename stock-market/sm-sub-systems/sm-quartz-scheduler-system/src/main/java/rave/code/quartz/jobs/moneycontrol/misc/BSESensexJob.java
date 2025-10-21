@@ -4,7 +4,7 @@ import rave.code.data.parser.html.moneycontrol.BSESensexParser;
 import rave.code.quartz.jobs.moneycontrol.AbstractMoneyControlEntityMakerJob;
 import rave.code.stockmarket.entity.BSESensexEntity;
 import rave.code.stockmarket.repository.BSESensexRepository;
-import rave.code.website.data.model.moneycontrol.BSEGenericActiveModel;
+import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

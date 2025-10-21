@@ -8,8 +8,6 @@ import java.util.UUID;
 @MappedSuperclass
 public class AbstractEntity implements Serializable {
 
-    @Id
-    protected String id;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     protected Date createdDate;
@@ -24,7 +22,6 @@ public class AbstractEntity implements Serializable {
     protected boolean newEntity;
 
     public AbstractEntity(){
-        this.setId(UUID.randomUUID().toString());
         Date now = new Date();
         this.setCreatedDate(now);
         this.setModifiedDate(now);
@@ -32,9 +29,6 @@ public class AbstractEntity implements Serializable {
         this.setModifiedBy("SYSTEM");
         this.setNewEntity(true);
     }
-
-    public String getId() {return id;}
-    public void setId(String id) {this.id = id;}
 
     public boolean isNewEntity() {
         return newEntity;
