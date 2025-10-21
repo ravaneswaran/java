@@ -1,21 +1,27 @@
 package rave.code.bse.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.bse.web.service.BSEMidCapGainerService;
 import rave.code.bse.web.service.BSESmallCapGainerService;
 import rave.code.bse.web.service.BSETopDividendService;
+import rave.code.data.model.web.bse.page.BSEWebPage;
 
 @Controller
 public class BSEInvestorsLoungeController {
 
+    @Autowired
+    private BSETopDividendService bseTopDividendService;
+    @Autowired
+    private BSESmallCapGainerService bseSmallCapGainerService;
+    @Autowired
+    private BSEMidCapGainerService bseMidCapGainerService;
+
     @GetMapping("/top-dividend")
     public ModelAndView bseTopDividend() {
-        BSETopDividendService topDividendService = new BSETopDividendService();
-        BSEWebPage webPage = topDividendService.getPageModel();
-
+        BSEWebPage webPage = this.bseTopDividendService.getWebPage();
         ModelAndView indexModelAndView = new ModelAndView();
         indexModelAndView.addObject("page", webPage);
         indexModelAndView.setViewName("top_dividend");
@@ -25,9 +31,7 @@ public class BSEInvestorsLoungeController {
 
     @GetMapping("/small-cap-gainers")
     public ModelAndView bseSmallCapGainers() {
-        BSESmallCapGainerService smallCapGainerService = new BSESmallCapGainerService();
-        BSEWebPage webPage = smallCapGainerService.getPageModel();
-
+        BSEWebPage webPage = this.bseSmallCapGainerService.getWebPage();
         ModelAndView indexModelAndView = new ModelAndView();
         indexModelAndView.addObject("page", webPage);
         indexModelAndView.setViewName("small_cap_gainers");
@@ -37,9 +41,7 @@ public class BSEInvestorsLoungeController {
 
     @GetMapping("/mid-cap-gainers")
     public ModelAndView bseMidCapGainers() {
-        BSEMidCapGainerService midCapGainerService = new BSEMidCapGainerService();
-        BSEWebPage webPage = midCapGainerService.getPageModel();
-
+        BSEWebPage webPage = this.bseMidCapGainerService.getWebPage();
         ModelAndView indexModelAndView = new ModelAndView();
         indexModelAndView.addObject("page", webPage);
         indexModelAndView.setViewName("mid_cap_gainers");

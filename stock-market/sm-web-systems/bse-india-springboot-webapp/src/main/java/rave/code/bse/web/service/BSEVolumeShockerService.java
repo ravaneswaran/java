@@ -1,5 +1,6 @@
 package rave.code.bse.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.data.model.web.bse.page.VolumeShockerWebPage;
 import rave.code.data.model.web.bse.VolumeShockerDetailModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
@@ -13,17 +14,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class BSEVolumeShockerService extends AbstractBSEService<BSEVolumeShockerEntity, VolumeShockerDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEVolumeShockerService.class.getName());
 
     @Override
-    public VolumeShockerWebPage getPageModel() {
+    public VolumeShockerWebPage getWebPage() {
         VolumeShockerWebPage volumeShockerWebPage = new VolumeShockerWebPage();
         volumeShockerWebPage.setVolumeShockersLinkStyle("font-weight: bold;");
 
         List<BSEVolumeShockerEntity> entities = this.getEntities();
-        volumeShockerWebPage.setVolumeShockerStocks(this.getStocks(entities));
+        volumeShockerWebPage.setVolumeShockerStocks(this.transformEntities(entities));
 
         return volumeShockerWebPage;
     }
@@ -34,7 +36,7 @@ public class BSEVolumeShockerService extends AbstractBSEService<BSEVolumeShocker
     }
 
     @Override
-    public List<VolumeShockerDetailModel> getStocks(List<BSEVolumeShockerEntity> entities) {
+    public List<VolumeShockerDetailModel> transformEntities(List<BSEVolumeShockerEntity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();

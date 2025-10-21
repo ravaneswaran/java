@@ -1,5 +1,6 @@
 package rave.code.bse.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.data.model.web.bse.CapitalGainerDetailModel;
 import rave.code.data.model.web.bse.BSEStockModel;
@@ -14,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class BSESmallCapGainerService extends AbstractBSEService<BSESmallCapGainerEntity, CapitalGainerDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(BSESmallCapGainerService.class.getName());
 
     @Override
-    public BSEWebPage getPageModel() {
-        BSEWebPage webPage = super.getPageModel();
+    public BSEWebPage getWebPage() {
+        BSEWebPage webPage = super.getWebPage();
         webPage.setSmallCapGainerLinkStyle("font-weight: bold;");
         return webPage;
     }
@@ -31,7 +33,7 @@ public class BSESmallCapGainerService extends AbstractBSEService<BSESmallCapGain
     }
 
     @Override
-    public List<CapitalGainerDetailModel> getStocks(List<BSESmallCapGainerEntity> entities) {
+    public List<CapitalGainerDetailModel> transformEntities(List<BSESmallCapGainerEntity> entities) {
 
         List<CapitalGainerDetailModel> stocks = new ArrayList<>();
 

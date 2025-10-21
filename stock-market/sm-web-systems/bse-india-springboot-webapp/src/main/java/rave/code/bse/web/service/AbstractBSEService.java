@@ -7,16 +7,16 @@ import java.util.List;
 
 public abstract class AbstractBSEService<S, T> {
 
-    public BSEWebPage getPageModel() {
+    public BSEWebPage getWebPage() {
         BSEWebPage webPage = new BSEWebPage();
 
         List<S> entities = this.getEntities();
-        webPage.setStocks((List<BSEStockModel>) this.getStocks(entities));
+        webPage.setStocks((List<BSEStockModel>) this.transformEntities(entities));
 
         return webPage;
     }
 
     public abstract List<S> getEntities();
 
-    public abstract List<T> getStocks(List<S> entities);
+    public abstract List<T> transformEntities(List<S> entities);
 }

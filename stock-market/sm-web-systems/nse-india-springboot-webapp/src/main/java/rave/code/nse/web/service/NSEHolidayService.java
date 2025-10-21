@@ -15,19 +15,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class NSEHolidayService extends AbstractNSEService<HolidayEntity, List<HolidayDetailModel>> {
+public class NSEHolidayService extends AbstractNSEService<HolidayEntity, HolidayDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(NSEHolidayService.class.getName());
 
     private HolidayRepository holidayRepository = new HolidayRepository();
 
-    @Override
-    public NSEWebPage getWebPageModel() {
-        return null;
+    public List<HolidayDetailModel> listHolidays()  {
+        return this.transformEntities(this.getEntities());
     }
 
-    public List<HolidayDetailModel> listHolidays()  {
-        List<HolidayEntity> entities = this.holidayRepository.findAll();
+    @Override
+    public List<HolidayEntity> getEntities() {
+        return this.holidayRepository.findAll();
+    }
+
+    @Override
+    public List<HolidayDetailModel> transformEntities(List<HolidayEntity> entities) {
         List<HolidayDetailModel> holidayDetailModels = new ArrayList<>();
         for (HolidayEntity holidayEntity : entities) {
             HolidayDetailModel holidayDetailModel = new HolidayDetailModel();

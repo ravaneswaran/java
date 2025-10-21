@@ -26,7 +26,7 @@ public class BSEHolidayService extends AbstractBSEService<HolidayEntity, Holiday
     }
 
     @Override
-    public List<HolidayDetailModel> getStocks(List<HolidayEntity> entities) {
+    public List<HolidayDetailModel> transformEntities(List<HolidayEntity> entities) {
         new RuntimeException("Implementation not required...");
         return null;
     }

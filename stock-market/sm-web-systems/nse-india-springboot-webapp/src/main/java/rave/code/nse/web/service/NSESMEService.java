@@ -10,21 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, SMEPage> {
+public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESMEDetailModel> {
 
     private NSESMEDetailRepository nseSMEDetailRepository = new NSESMEDetailRepository();
 
-    public SMEPage getWebPageModel(){
-        List<NSESMEDetailEntity> nseSMEDetailEntities = this.nseSMEDetailRepository.findAll();
-        SMEPage smePage = new SMEPage();
-        smePage.setModelList(this.transformEntities(nseSMEDetailEntities));
-
-        return smePage;
+    @Override
+    public List<NSESMEDetailEntity> getEntities() {
+        return this.nseSMEDetailRepository.findAll();
     }
 
-    private List<NSESMEDetailModel> transformEntities(List<NSESMEDetailEntity> nseSMEDetailEntities){
+    @Override
+    public List<NSESMEDetailModel> transformEntities(List<NSESMEDetailEntity> entities){
         List<NSESMEDetailModel> nseSMEDetailModels = new ArrayList();
-        for (NSESMEDetailEntity nseSMEDetailEntity: nseSMEDetailEntities) {
+        for (NSESMEDetailEntity nseSMEDetailEntity: entities) {
             NSESMEDetailModel nseSMEDetailModel = new NSESMEDetailModel();
 
             nseSMEDetailModel.setStockDivId(nseSMEDetailEntity.getId());

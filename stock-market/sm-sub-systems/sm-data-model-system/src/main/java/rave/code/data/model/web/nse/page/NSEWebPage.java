@@ -1,6 +1,9 @@
 package rave.code.data.model.web.nse.page;
 
 import rave.code.data.model.web.AbstractWebPage;
+import rave.code.data.model.web.nse.NSEStockModel;
+
+import java.util.List;
 
 public class NSEWebPage extends AbstractWebPage {
 
@@ -13,6 +16,7 @@ public class NSEWebPage extends AbstractWebPage {
     private boolean securityLessThan20;
     private boolean securityGreaterThan20;
     private boolean bankNifty;
+    private List<NSEStockModel> nseStockModels;
 
     public boolean isPriceSpurt() {
         return priceSpurt;
@@ -84,5 +88,13 @@ public class NSEWebPage extends AbstractWebPage {
 
     public void setBankNifty(boolean bankNifty) {
         this.bankNifty = bankNifty;
+    }
+
+    public List<NSEStockModel> getNseStockModels() {
+        return nseStockModels;
+    }
+
+    public void setNseStockModels(List<NSEStockModel> nseStockModels) {
+        this.nseStockModels = nseStockModels;
     }
 }

@@ -1,5 +1,6 @@
 package rave.code.bse.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.TopDividendDetailModel;
@@ -14,13 +15,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class BSETopDividendService extends AbstractBSEService<BSETopDividendEntity, TopDividendDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(BSETopDividendService.class.getName());
 
     @Override
-    public BSEWebPage getPageModel() {
-        BSEWebPage webPage = super.getPageModel();
+    public BSEWebPage getWebPage() {
+        BSEWebPage webPage = super.getWebPage();
         webPage.setTopDividendLinkStyle("font-weight: bold;");
         return webPage;
     }
@@ -32,7 +34,7 @@ public class BSETopDividendService extends AbstractBSEService<BSETopDividendEnti
     }
 
     @Override
-    public List<TopDividendDetailModel> getStocks(List<BSETopDividendEntity> entities) {
+    public List<TopDividendDetailModel> transformEntities(List<BSETopDividendEntity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();

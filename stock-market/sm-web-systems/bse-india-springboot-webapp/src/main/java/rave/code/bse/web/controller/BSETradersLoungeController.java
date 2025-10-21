@@ -1,15 +1,28 @@
 package rave.code.bse.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import rave.code.bse.web.service.*;
+import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.data.model.web.bse.page.PriceShockerWebPage;
 import rave.code.data.model.web.bse.page.VolumeShockerWebPage;
-import rave.code.data.model.web.bse.page.BSEWebPage;
-import rave.code.bse.web.service.*;
 
 @Controller
 public class BSETradersLoungeController {
+
+    @Autowired
+    private BSEActive100Service bseActive100Service;
+    @Autowired
+    private BSEActive200Service bseActive200Service;
+    @Autowired
+    private BSEActive500Service bseActive500Service;
+    @Autowired
+    private BSEPriceShockerService bsePriceShockerService;
+    @Autowired
+    private BSEVolumeShockerService bseVolumeShockerService;
+
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -18,9 +31,7 @@ public class BSETradersLoungeController {
 
     @GetMapping("/active-100")
     public ModelAndView bseActive100() {
-        BSEActive100Service active100Service = new BSEActive100Service();
-        BSEWebPage active100Page = active100Service.getPageModel();
-
+        BSEWebPage active100Page = this.bseActive100Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("page", active100Page);
         modelAndView.setViewName("active_100");
@@ -30,9 +41,7 @@ public class BSETradersLoungeController {
 
     @GetMapping("/active-200")
     public ModelAndView bseActive200() {
-        BSEActive200Service active200Service = new BSEActive200Service();
-        BSEWebPage active200Page = active200Service.getPageModel();
-
+        BSEWebPage active200Page = this.bseActive200Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("page", active200Page);
         modelAndView.setViewName("active_200");
@@ -42,9 +51,7 @@ public class BSETradersLoungeController {
 
     @GetMapping("/active-500")
     public ModelAndView bseActive500() {
-        BSEActive500Service active500Service = new BSEActive500Service();
-        BSEWebPage active500Page = active500Service.getPageModel();
-
+        BSEWebPage active500Page = this.bseActive500Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("page", active500Page);
         modelAndView.setViewName("active_500");
@@ -54,9 +61,7 @@ public class BSETradersLoungeController {
 
     @GetMapping("/price-shockers")
     public ModelAndView bsePriceShockers() {
-        BSEPriceShockerService priceShockerService = new BSEPriceShockerService();
-        PriceShockerWebPage priceShockersWebPage = priceShockerService.getPageModel();
-
+        PriceShockerWebPage priceShockersWebPage = this.bsePriceShockerService.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("page", priceShockersWebPage);
         modelAndView.setViewName("price_shockers");
@@ -66,9 +71,7 @@ public class BSETradersLoungeController {
 
     @GetMapping("/volume-shockers")
     public ModelAndView bseVolumeShockers() {
-        BSEVolumeShockerService volumeShockerService = new BSEVolumeShockerService();
-        VolumeShockerWebPage volumeShockerWebPage = volumeShockerService.getPageModel();
-
+        VolumeShockerWebPage volumeShockerWebPage = this.bseVolumeShockerService.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("page", volumeShockerWebPage);
         modelAndView.setViewName("volume_shockers");
@@ -79,7 +82,7 @@ public class BSETradersLoungeController {
     @GetMapping("/intraday-large-deals")
     public ModelAndView bseIntradayLargeDeals() {
         BSEPriceShockerService priceShockerService = new BSEPriceShockerService();
-        PriceShockerWebPage priceShockersWebPage = priceShockerService.getPageModel();
+        PriceShockerWebPage priceShockersWebPage = priceShockerService.getWebPage();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("page", priceShockersWebPage);

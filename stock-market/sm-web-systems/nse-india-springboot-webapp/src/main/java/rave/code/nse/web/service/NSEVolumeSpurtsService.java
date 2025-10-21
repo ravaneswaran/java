@@ -10,21 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDetailEntity, VolumeSpurtsPage> {
+public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDetailEntity, NSEVolumeSpurtDetailModel> {
 
     private NSEVolumeSpurtDetailRepository nseVolumeSpurtDetailRepository = new NSEVolumeSpurtDetailRepository();
 
-    public VolumeSpurtsPage getWebPageModel(){
-        List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtDetailEntities = this.nseVolumeSpurtDetailRepository.findAll();
-        VolumeSpurtsPage volumeSpurtsPage = new VolumeSpurtsPage();
-        volumeSpurtsPage.setModelList(this.transformEntities(nseVolumeSpurtDetailEntities));
-
-        return volumeSpurtsPage;
+    @Override
+    public List<NSEVolumeSpurtDetailEntity> getEntities() {
+        return this.nseVolumeSpurtDetailRepository.findAll();
     }
 
-    private List<NSEVolumeSpurtDetailModel> transformEntities(List<NSEVolumeSpurtDetailEntity> nseVolumeSpurtDetailEntities){
+    @Override
+    public List<NSEVolumeSpurtDetailModel> transformEntities(List<NSEVolumeSpurtDetailEntity> entities){
         List<NSEVolumeSpurtDetailModel> nseVolumeSpurtDetailModels = new ArrayList();
-        for (NSEVolumeSpurtDetailEntity nseVolumeSpurtDetailEntity: nseVolumeSpurtDetailEntities) {
+        for (NSEVolumeSpurtDetailEntity nseVolumeSpurtDetailEntity: entities) {
             NSEVolumeSpurtDetailModel nseVolumeSpurtDetailModel = new NSEVolumeSpurtDetailModel();
 
             nseVolumeSpurtDetailModel.setStockDivId(nseVolumeSpurtDetailEntity.getId());

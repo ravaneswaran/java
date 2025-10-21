@@ -1,5 +1,6 @@
 package rave.code.bse.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.data.model.web.bse.ActiveStockDetailModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
@@ -13,13 +14,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class BSEActive200Service extends AbstractBSEService<BSEActive200Entity, ActiveStockDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEActive100Service.class.getName());
 
     @Override
-    public BSEWebPage getPageModel() {
-        BSEWebPage webPage = super.getPageModel();
+    public BSEWebPage getWebPage() {
+        BSEWebPage webPage = super.getWebPage();
         webPage.setActive200LinkStyle("font-weight: bold;");
         return webPage;
     }
@@ -29,7 +31,7 @@ public class BSEActive200Service extends AbstractBSEService<BSEActive200Entity, 
         return moneyControlBSEActive200DataAccess.findAll();
     }
 
-    public List<ActiveStockDetailModel> getStocks(List<BSEActive200Entity> entities) {
+    public List<ActiveStockDetailModel> transformEntities(List<BSEActive200Entity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();

@@ -1,5 +1,6 @@
 package rave.code.bse.web.service;
 
+import org.springframework.stereotype.Service;
 import rave.code.data.model.web.bse.page.PriceShockerWebPage;
 import rave.code.data.model.web.bse.PriceShockerDetailModel;
 import rave.code.bse.web.service.algorithms.sort.CurrentPriceComparator;
@@ -13,16 +14,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Service
 public class BSEPriceShockerService extends AbstractBSEService<BSEPriceShockerEntity, PriceShockerDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEVolumeShockerService.class.getName());
 
-    public PriceShockerWebPage getPageModel() {
+    public PriceShockerWebPage getWebPage() {
         PriceShockerWebPage priceShockerWebPage = new PriceShockerWebPage();
         priceShockerWebPage.setPriceShockersLinkStyle("font-weight: bold;");
 
         List<BSEPriceShockerEntity> entities = this.getEntities();
-        priceShockerWebPage.setPriceShockerStocks(this.getStocks(entities));
+        priceShockerWebPage.setPriceShockerStocks(this.transformEntities(entities));
 
         return priceShockerWebPage;
     }
@@ -32,7 +34,7 @@ public class BSEPriceShockerService extends AbstractBSEService<BSEPriceShockerEn
         return moneyControlBSEPriceShockerDataAccess.findAll();
     }
 
-    public List<PriceShockerDetailModel> getStocks(List<BSEPriceShockerEntity> entities) {
+    public List<PriceShockerDetailModel> transformEntities(List<BSEPriceShockerEntity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
