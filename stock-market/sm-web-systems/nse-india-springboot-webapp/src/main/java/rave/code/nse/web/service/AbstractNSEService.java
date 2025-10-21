@@ -1,8 +1,8 @@
 package rave.code.nse.web.service;
 
-import rave.code.data.model.web.nse.WebPage;
+import rave.code.data.model.web.nse.page.NSEWebPage;
 
 public abstract class AbstractNSEService<S, T> {
 
-    public abstract WebPage getWebPageModel();
+    public abstract NSEWebPage getWebPageModel();
 }

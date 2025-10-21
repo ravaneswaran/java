@@ -1,6 +1,6 @@
 package rave.code.data.model.web.nse;
 
-public class NSEVolumeSpurtDetailModel extends AbstractNSEModel{
+public class NSEVolumeSpurtDetailModel extends NSEStockModel {
 
     private String symbol;
     private int volume;

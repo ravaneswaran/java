@@ -1,6 +1,6 @@
-package rave.code.data.model.web.bse.stock;
+package rave.code.data.model.web.bse;
 
-public class Stock {
+public class BSEStockModel {
 
     public static final String TITLE_CONTAINER_CSS_STYLE = "right-container-company-title-container %s";
     public static final String TITLE_CSS_STYLE = "right-container-company-title-div %s";

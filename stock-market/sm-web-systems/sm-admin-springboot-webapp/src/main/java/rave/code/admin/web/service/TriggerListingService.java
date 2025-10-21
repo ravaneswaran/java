@@ -1,8 +1,8 @@
 package rave.code.admin.web.service;
 
 import org.springframework.stereotype.Service;
-import rave.code.admin.web.model.TriggerDetailModel;
-import rave.code.admin.web.page.TriggerListingPage;
+import rave.code.data.model.web.admin.TriggerDetailModel;
+import rave.code.data.model.web.admin.page.TriggerListingPage;
 import rave.code.entity.quartz.QuartzTriggerEntity;
 import rave.code.repository.quartz.QuartzTriggerRepository;
 

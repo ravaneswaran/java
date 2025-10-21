@@ -1,19 +1,19 @@
 package rave.code.bse.web.service.decorators;
 
-import rave.code.data.model.web.bse.stock.ActiveStock;
-import rave.code.data.model.web.bse.stock.CapitalGainerStock;
-import rave.code.data.model.web.bse.stock.Stock;
+import rave.code.data.model.web.bse.ActiveStockDetailModel;
+import rave.code.data.model.web.bse.CapitalGainerDetailModel;
+import rave.code.data.model.web.bse.BSEStockModel;
 
 public class StockPERatioDecorator implements Decorator {
 
     @Override
-    public Stock decorate(Stock stock) {
+    public BSEStockModel decorate(BSEStockModel stock) {
         double peRatio = 0;
 
-        if (stock instanceof ActiveStock) {
-            peRatio = ((ActiveStock) stock).getPriceToEarningRatio();;
-        } else if (stock instanceof CapitalGainerStock) {
-            peRatio = ((CapitalGainerStock) stock).getPriceToEarningRatio();;
+        if (stock instanceof ActiveStockDetailModel) {
+            peRatio = ((ActiveStockDetailModel) stock).getPriceToEarningRatio();;
+        } else if (stock instanceof CapitalGainerDetailModel) {
+            peRatio = ((CapitalGainerDetailModel) stock).getPriceToEarningRatio();;
         }
 
         if(peRatio <= 25){

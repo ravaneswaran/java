@@ -1,11 +1,10 @@
 package rave.code.data.model.web.nse.page;
 
 import rave.code.data.model.web.nse.NSEVolumeSpurtDetailModel;
-import rave.code.data.model.web.nse.WebPage;
 
 import java.util.List;
 
-public class VolumeSpurtsPage extends WebPage {
+public class VolumeSpurtsPage extends NSEWebPage {
 
     private List<NSEVolumeSpurtDetailModel> nseVolumeSpurtDetailModels;
 

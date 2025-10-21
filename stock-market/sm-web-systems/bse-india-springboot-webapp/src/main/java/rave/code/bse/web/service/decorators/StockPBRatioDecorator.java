@@ -1,19 +1,19 @@
 package rave.code.bse.web.service.decorators;
 
-import rave.code.data.model.web.bse.stock.ActiveStock;
-import rave.code.data.model.web.bse.stock.CapitalGainerStock;
-import rave.code.data.model.web.bse.stock.Stock;
+import rave.code.data.model.web.bse.ActiveStockDetailModel;
+import rave.code.data.model.web.bse.CapitalGainerDetailModel;
+import rave.code.data.model.web.bse.BSEStockModel;
 
 public class StockPBRatioDecorator implements Decorator {
 
     @Override
-    public Stock decorate(Stock stock) {
+    public BSEStockModel decorate(BSEStockModel stock) {
         double pbRatio = 0;
 
-        if (stock instanceof ActiveStock) {
-            pbRatio = ((ActiveStock) stock).getPriceToBookRatio() * 100;;
-        } else if (stock instanceof CapitalGainerStock) {
-            pbRatio = ((CapitalGainerStock) stock).getPriceToBookRatio() * 100;;
+        if (stock instanceof ActiveStockDetailModel) {
+            pbRatio = ((ActiveStockDetailModel) stock).getPriceToBookRatio() * 100;;
+        } else if (stock instanceof CapitalGainerDetailModel) {
+            pbRatio = ((CapitalGainerDetailModel) stock).getPriceToBookRatio() * 100;;
         }
 
         int pbRatioPercentage = 0;

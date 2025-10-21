@@ -1,11 +1,11 @@
 package rave.code.data.model.web.nse.page.top20;
 
 import rave.code.data.model.web.nse.top20.NSETop20SecurityLWR20Model;
-import rave.code.data.model.web.nse.WebPage;
+import rave.code.data.model.web.nse.page.NSEWebPage;
 
 import java.util.List;
 
-public class Top20SecuritiesLWR20Page extends WebPage {
+public class Top20SecuritiesLWR20Page extends NSEWebPage {
 
     private List<NSETop20SecurityLWR20Model> top20Models;
 

@@ -1,6 +1,6 @@
-package rave.code.data.model.web.bse.stock;
+package rave.code.data.model.web.bse;
 
-public class TopDividendStock extends Stock {
+public class TopDividendDetailModel extends BSEStockModel {
 
     private double latestDividendPercentage;
     private double dividendYieldPercentage52High;

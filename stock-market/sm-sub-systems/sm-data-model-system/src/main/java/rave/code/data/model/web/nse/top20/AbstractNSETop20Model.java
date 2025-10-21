@@ -1,8 +1,8 @@
 package rave.code.data.model.web.nse.top20;
 
-import rave.code.data.model.web.nse.AbstractNSEModel;
+import rave.code.data.model.web.nse.NSEStockModel;
 
-public class AbstractNSETop20Model extends AbstractNSEModel {
+public class AbstractNSETop20Model extends NSEStockModel {
 
     private String symbol;
     private double openPrice;

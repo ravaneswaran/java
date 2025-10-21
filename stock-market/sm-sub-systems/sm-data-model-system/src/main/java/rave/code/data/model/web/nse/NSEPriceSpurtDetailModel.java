@@ -1,6 +1,6 @@
 package rave.code.data.model.web.nse;
 
-public class NSEPriceSpurtDetailModel extends AbstractNSEModel{
+public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     private String symbol;
     private double openPrice;

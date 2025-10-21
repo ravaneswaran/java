@@ -1,12 +1,12 @@
 package rave.code.bse.web.service;
 
-import rave.code.data.model.web.bse.page.WebPage;
-import rave.code.data.model.web.bse.stock.CapitalGainerStock;
-import rave.code.data.model.web.bse.stock.Stock;
+import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.CapitalGainerDetailModel;
+import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
-import rave.code.stockmarket.repository.BSEMidCapGainerRepository;
-import rave.code.stockmarket.entity.BSEMidCapGainerEntity;
+import rave.code.stockmarket.repository.BSESmallCapGainerRepository;
+import rave.code.stockmarket.entity.BSESmallCapGainerEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,24 +14,26 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MidCapGainerService extends AbstractService<BSEMidCapGainerEntity, CapitalGainerStock> {
+public class BSESmallCapGainerService extends AbstractBSEService<BSESmallCapGainerEntity, CapitalGainerDetailModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(MidCapGainerService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSESmallCapGainerService.class.getName());
 
     @Override
-    public WebPage getPageModel() {
-        WebPage webPage = super.getPageModel();
-        webPage.setMidCapGainerLinkStyle("font-weight: bold;");
+    public BSEWebPage getPageModel() {
+        BSEWebPage webPage = super.getPageModel();
+        webPage.setSmallCapGainerLinkStyle("font-weight: bold;");
         return webPage;
     }
 
     @Override
-    public List<BSEMidCapGainerEntity> getEntities() {
-        return new BSEMidCapGainerRepository().findAll();
+    public List<BSESmallCapGainerEntity> getEntities() {
+        return new BSESmallCapGainerRepository().findAll();
     }
 
     @Override
-    public List<CapitalGainerStock> getStocks(List<BSEMidCapGainerEntity> entities) {
+    public List<CapitalGainerDetailModel> getStocks(List<BSESmallCapGainerEntity> entities) {
+
+        List<CapitalGainerDetailModel> stocks = new ArrayList<>();
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
@@ -41,12 +43,11 @@ public class MidCapGainerService extends AbstractService<BSEMidCapGainerEntity, 
         StockPercentageGainOrChangeDecorator stockPercentageGainOrChangeDecorator = new StockPercentageGainOrChangeDecorator();
         StockPERatioDecorator stockPERatioDecorator = new StockPERatioDecorator();
 
-        List<CapitalGainerStock> stocks = new ArrayList<>();
-        for (BSEMidCapGainerEntity entity : entities) {
-            CapitalGainerStock stock = new CapitalGainerStock();
+        for (BSESmallCapGainerEntity entity : entities) {
+            CapitalGainerDetailModel stock = new CapitalGainerDetailModel();
 
             stock.setDisplayName(entity.getStockName());
-            stock.setCategory(Stock.NO_CATEGORY_STOCK);
+            stock.setCategory(BSEStockModel.NO_CATEGORY_STOCK);
             String toolTip = String.format("%s", entity.getStockName());
             stock.setToolTip(toolTip);
 
@@ -118,7 +119,7 @@ public class MidCapGainerService extends AbstractService<BSEMidCapGainerEntity, 
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
                 stock.setPercentageGain(0.0);
             }
-            //---------------------------------------
+
             try {
                 value = entity.getAverageVolume5Days();
                 if (null != value) {
@@ -265,4 +266,5 @@ public class MidCapGainerService extends AbstractService<BSEMidCapGainerEntity, 
         Collections.sort(stocks, new LastPriceComparator());
         return stocks;
     }
+
 }

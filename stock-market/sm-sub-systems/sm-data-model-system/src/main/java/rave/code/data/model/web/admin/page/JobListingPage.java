@@ -1,10 +1,10 @@
-package rave.code.admin.web.page;
+package rave.code.data.model.web.admin.page;
 
-import rave.code.admin.web.model.JobDetailModel;
+import rave.code.data.model.web.admin.JobDetailModel;
 
 import java.util.List;
 
-public class JobListingPage extends WebPage{
+public class JobListingPage extends AdminWebPage {
 
     private List<JobDetailModel> jobDetailModels;
 

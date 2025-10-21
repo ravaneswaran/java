@@ -1,6 +1,6 @@
-package rave.code.data.model.web.bse.stock;
+package rave.code.data.model.web.bse;
 
-public class CapitalGainerStock extends Stock {
+public class CapitalGainerDetailModel extends BSEStockModel {
 
     private double high;
     private double low;

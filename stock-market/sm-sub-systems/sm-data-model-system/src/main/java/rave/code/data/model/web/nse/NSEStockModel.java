@@ -1,6 +1,6 @@
 package rave.code.data.model.web.nse;
 
-public class AbstractNSEModel {
+public class NSEStockModel {
 
     private String stockDivId;
 

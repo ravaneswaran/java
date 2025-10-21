@@ -1,12 +1,11 @@
 package rave.code.bse.web.service;
 
-import rave.code.data.model.web.bse.page.WebPage;
-import rave.code.data.model.web.bse.stock.ActiveStock;
-import rave.code.data.model.web.bse.stock.Stock;
-import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
+import rave.code.data.model.web.bse.page.PriceShockerWebPage;
+import rave.code.data.model.web.bse.PriceShockerDetailModel;
+import rave.code.bse.web.service.algorithms.sort.CurrentPriceComparator;
 import rave.code.bse.web.service.decorators.*;
-import rave.code.stockmarket.repository.BSESensexRepository;
-import rave.code.stockmarket.entity.BSESensexEntity;
+import rave.code.stockmarket.repository.BSEPriceShockerRepository;
+import rave.code.stockmarket.entity.BSEPriceShockerEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,23 +13,26 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SensexService extends AbstractService<BSESensexEntity, ActiveStock> {
+public class BSEPriceShockerService extends AbstractBSEService<BSEPriceShockerEntity, PriceShockerDetailModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(Active100Service.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSEVolumeShockerService.class.getName());
 
-    @Override
-    public WebPage getPageModel() {
-        WebPage webPage = super.getPageModel();
-        webPage.setSensexLinkStyle("font-weight: bold;");
-        return webPage;
+    public PriceShockerWebPage getPageModel() {
+        PriceShockerWebPage priceShockerWebPage = new PriceShockerWebPage();
+        priceShockerWebPage.setPriceShockersLinkStyle("font-weight: bold;");
+
+        List<BSEPriceShockerEntity> entities = this.getEntities();
+        priceShockerWebPage.setPriceShockerStocks(this.getStocks(entities));
+
+        return priceShockerWebPage;
     }
 
-    public List<BSESensexEntity> getEntities() {
-        BSESensexRepository bseSensexDataAccess = new BSESensexRepository();
-        return bseSensexDataAccess.findAll();
+    public List<BSEPriceShockerEntity> getEntities() {
+        BSEPriceShockerRepository moneyControlBSEPriceShockerDataAccess = new BSEPriceShockerRepository();
+        return moneyControlBSEPriceShockerDataAccess.findAll();
     }
 
-    public List<ActiveStock> getStocks(List<BSESensexEntity> bseSensexEntities) {
+    public List<PriceShockerDetailModel> getStocks(List<BSEPriceShockerEntity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
@@ -40,46 +42,44 @@ public class SensexService extends AbstractService<BSESensexEntity, ActiveStock>
         StockPercentageGainOrChangeDecorator stockPercentageGainOrChangeDecorator = new StockPercentageGainOrChangeDecorator();
         StockPERatioDecorator stockPERatioDecorator = new StockPERatioDecorator();
 
-        List<ActiveStock> stocks = new ArrayList<>();
-        for (BSESensexEntity entity : bseSensexEntities) {
-            ActiveStock stock = new ActiveStock();
+        List<PriceShockerDetailModel> priceShockerStocks = new ArrayList<>();
+        for (BSEPriceShockerEntity entity : entities) {
+            PriceShockerDetailModel stock = new PriceShockerDetailModel();
 
             stock.setDisplayName(entity.getStockName());
             String toolTip = String.format("%s (%s)", entity.getStockName(), entity.getCategory());
             stock.setToolTip(toolTip);
             stock.setCategory(entity.getCategory());
+
+            String sector = entity.getSector();
+            stock.setSectorToolTip(sector);
+
+            if (null != sector && sector.length() > 6) {
+                sector = sector.substring(0, 4) + "..";
+            }
+            stock.setSector(sector);
+            
             try {
-                String lastPrice = entity.getLastPrice();
-                if (null != lastPrice) {
-                    stock.setLastPrice(Double.parseDouble(lastPrice));
+                String currentPrice = entity.getCurrentPrice();
+                if (null != currentPrice) {
+                    stock.setCurrentPrice(Double.parseDouble(currentPrice));
                 } else {
-                    stock.setLastPrice(0.0);
+                    stock.setCurrentPrice(0.0);
                 }
             } catch (NumberFormatException nfe) {
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
-                stock.setHigh(0.0);
+                stock.setCurrentPrice(0.0);
             }
             try {
-                String high = entity.getHigh();
-                if (null != high) {
-                    stock.setHigh(Double.parseDouble(high));
+                String previousPrice = entity.getPreviousPrice();
+                if (null != previousPrice) {
+                    stock.setPreviousPrice(Double.parseDouble(previousPrice));
                 } else {
-                    stock.setHigh(0.0);
+                    stock.setPreviousPrice(0.0);
                 }
             } catch (NumberFormatException nfe) {
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
-                stock.setHigh(0.0);
-            }
-            try {
-                String low = entity.getLow();
-                if (null != low) {
-                    stock.setLow(Double.parseDouble(low));
-                } else {
-                    stock.setLow(0.0);
-                }
-            } catch (NumberFormatException nfe) {
-                LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
-                stock.setLow(0.0);
+                stock.setPreviousPrice(0.0);
             }
             try {
                 String upperCircuit = entity.getUpperCircuit();
@@ -107,13 +107,7 @@ public class SensexService extends AbstractService<BSESensexEntity, ActiveStock>
             try {
                 String percentageChange = entity.getPercentageChange();
                 if (null != percentageChange) {
-                    double value = Double.parseDouble(percentageChange);
-                    stock.setPercentageChange(value);
-                    if(value < 0){
-                        stock.setPercentageGainCssStyle(Stock.RED_BG_CSS_STYLE);
-                    } else {
-                        stock.setPercentageGainCssStyle(Stock.GREEN_BG_CSS_STYLE);
-                    }
+                    stock.setPercentageChange(Double.parseDouble(percentageChange));
                 } else {
                     stock.setPercentageChange(0.0);
                 }
@@ -232,17 +226,6 @@ public class SensexService extends AbstractService<BSESensexEntity, ActiveStock>
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
                 stock.setVolumeWeightedAveragePrice(0.0);
             }
-            try {
-                String valueInCrores = entity.getValueInCrores();
-                if (null != valueInCrores) {
-                    stock.setValueInCrores(Double.parseDouble(valueInCrores));
-                } else {
-                    stock.setValueInCrores(0.0);
-                }
-            } catch (NumberFormatException nfe) {
-                LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
-                stock.setValueInCrores(0.0);
-            }
 
             stockTitleDecorator.decorate(stock);
             stockTitleContainerDecorator.decorate(stock);
@@ -252,11 +235,12 @@ public class SensexService extends AbstractService<BSESensexEntity, ActiveStock>
             stockPercentageGainOrChangeDecorator.decorate(stock);
             stockPERatioDecorator.decorate(stock);
 
-            stocks.add(stock);
+            priceShockerStocks.add(stock);
         }
-        Collections.sort(stocks, new LastPriceComparator());
 
-        return stocks;
+        Collections.sort(priceShockerStocks, new CurrentPriceComparator());
+
+        return priceShockerStocks;
     }
 
 }

@@ -1,4 +1,4 @@
-package rave.code.admin.web.model;
+package rave.code.data.model.web.admin;
 
 public class TriggerDetailModel {
 

@@ -1,10 +1,11 @@
 package rave.code.data.model.web.bse.page;
 
-import rave.code.data.model.web.bse.stock.Stock;
+import rave.code.data.model.web.AbstractWebPage;
+import rave.code.data.model.web.bse.BSEStockModel;
 
 import java.util.List;
 
-public class WebPage {
+public class BSEWebPage extends AbstractWebPage {
 
     private String active100LinkStyle = "";
     private String active200LinkStyle = "";
@@ -15,7 +16,7 @@ public class WebPage {
     private String smallCapGainerLinkStyle = "";
     private String midCapGainerLinkStyle = "";
     private String sensexLinkStyle = "";
-    private List<Stock> stocks;
+    private List<BSEStockModel> stocks;
 
     public String getActive100LinkStyle() {
         return active100LinkStyle;
@@ -89,11 +90,11 @@ public class WebPage {
         this.sensexLinkStyle = sensexLinkStyle;
     }
 
-    public List<Stock> getStocks() {
+    public List<BSEStockModel> getStocks() {
         return stocks;
     }
 
-    public void setStocks(List<Stock> stocks) {
+    public void setStocks(List<BSEStockModel> stocks) {
         this.stocks = stocks;
     }
 

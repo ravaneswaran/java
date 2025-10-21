@@ -1,6 +1,8 @@
-package rave.code.admin.web.page;
+package rave.code.data.model.web.admin.page;
 
-public class WebPage {
+import rave.code.data.model.web.AbstractWebPage;
+
+public class AdminWebPage extends AbstractWebPage {
 
     private boolean triggersListingLink;
     private boolean jobsListingLink;

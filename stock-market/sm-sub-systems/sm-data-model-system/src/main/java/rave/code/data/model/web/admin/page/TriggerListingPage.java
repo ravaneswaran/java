@@ -1,10 +1,10 @@
-package rave.code.admin.web.page;
+package rave.code.data.model.web.admin.page;
 
-import rave.code.admin.web.model.TriggerDetailModel;
+import rave.code.data.model.web.admin.TriggerDetailModel;
 
 import java.util.List;
 
-public class TriggerListingPage extends WebPage{
+public class TriggerListingPage extends AdminWebPage {
 
     private List<TriggerDetailModel> triggerDetailModels;
 

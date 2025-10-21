@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class StockMarketErrorController implements ErrorController {
+public class BSEStockMarketErrorController implements ErrorController {
 
     @RequestMapping(value = "/error", produces = "text/html")
     public ModelAndView errorHtml(HttpServletRequest request) {

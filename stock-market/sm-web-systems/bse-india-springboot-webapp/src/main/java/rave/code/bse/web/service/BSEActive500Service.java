@@ -1,7 +1,7 @@
 package rave.code.bse.web.service;
 
-import rave.code.data.model.web.bse.page.WebPage;
-import rave.code.data.model.web.bse.stock.ActiveStock;
+import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.ActiveStockDetailModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.stockmarket.repository.BSEActive500Repository;
@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Active500Service extends AbstractService<BSEActive500Entity, ActiveStock> {
+public class BSEActive500Service extends AbstractBSEService<BSEActive500Entity, ActiveStockDetailModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(Active100Service.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSEActive100Service.class.getName());
 
     @Override
-    public WebPage getPageModel() {
-        WebPage webPage = super.getPageModel();
+    public BSEWebPage getPageModel() {
+        BSEWebPage webPage = super.getPageModel();
         webPage.setActive500LinkStyle("font-weight: bold;");
         return webPage;
     }
@@ -29,7 +29,7 @@ public class Active500Service extends AbstractService<BSEActive500Entity, Active
         return moneyControlBSEActive500DataAccess.findAll();
     }
 
-    public List<ActiveStock> getStocks(List<BSEActive500Entity> entities) {
+    public List<ActiveStockDetailModel> getStocks(List<BSEActive500Entity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
@@ -39,9 +39,9 @@ public class Active500Service extends AbstractService<BSEActive500Entity, Active
         StockPercentageGainOrChangeDecorator stockPercentageGainOrChangeDecorator = new StockPercentageGainOrChangeDecorator();
         StockPERatioDecorator stockPERatioDecorator = new StockPERatioDecorator();
 
-        List<ActiveStock> stocks = new ArrayList<>();
+        List<ActiveStockDetailModel> stocks = new ArrayList<>();
         for (BSEActive500Entity entity : entities) {
-            ActiveStock stock = new ActiveStock();
+            ActiveStockDetailModel stock = new ActiveStockDetailModel();
 
             stock.setDisplayName(entity.getStockName());
             String toolTip = String.format("%s (%s)", entity.getStockName(), entity.getCategory());

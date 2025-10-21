@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSEHolidayService extends AbstractService<HolidayEntity, HolidayDetailModel>{
+public class BSEHolidayService extends AbstractBSEService<HolidayEntity, HolidayDetailModel> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEHolidayService.class.getName());
 

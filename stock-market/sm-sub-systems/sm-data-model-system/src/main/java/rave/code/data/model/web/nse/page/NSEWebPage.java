@@ -1,6 +1,8 @@
-package rave.code.data.model.web.nse;
+package rave.code.data.model.web.nse.page;
 
-public class WebPage {
+import rave.code.data.model.web.AbstractWebPage;
+
+public class NSEWebPage extends AbstractWebPage {
 
     private boolean priceSpurt;
     private boolean volumeSpurt;

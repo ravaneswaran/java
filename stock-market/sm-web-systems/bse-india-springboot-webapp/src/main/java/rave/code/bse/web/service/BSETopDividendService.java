@@ -1,8 +1,8 @@
 package rave.code.bse.web.service;
 
-import rave.code.data.model.web.bse.page.WebPage;
-import rave.code.data.model.web.bse.stock.Stock;
-import rave.code.data.model.web.bse.stock.TopDividendStock;
+import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.BSEStockModel;
+import rave.code.data.model.web.bse.TopDividendDetailModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.stockmarket.repository.BSETopDividendRepository;
@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TopDividendService extends AbstractService<BSETopDividendEntity, TopDividendStock> {
+public class BSETopDividendService extends AbstractBSEService<BSETopDividendEntity, TopDividendDetailModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(TopDividendService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSETopDividendService.class.getName());
 
     @Override
-    public WebPage getPageModel() {
-        WebPage webPage = super.getPageModel();
+    public BSEWebPage getPageModel() {
+        BSEWebPage webPage = super.getPageModel();
         webPage.setTopDividendLinkStyle("font-weight: bold;");
         return webPage;
     }
@@ -32,7 +32,7 @@ public class TopDividendService extends AbstractService<BSETopDividendEntity, To
     }
 
     @Override
-    public List<TopDividendStock> getStocks(List<BSETopDividendEntity> entities) {
+    public List<TopDividendDetailModel> getStocks(List<BSETopDividendEntity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
@@ -42,12 +42,12 @@ public class TopDividendService extends AbstractService<BSETopDividendEntity, To
         StockPercentageGainOrChangeDecorator stockPercentageGainOrChangeDecorator = new StockPercentageGainOrChangeDecorator();
         StockPERatioDecorator stockPERatioDecorator = new StockPERatioDecorator();
 
-        List<TopDividendStock> stocks = new ArrayList<>();
+        List<TopDividendDetailModel> stocks = new ArrayList<>();
         for (BSETopDividendEntity entity : entities) {
-            TopDividendStock stock = new TopDividendStock();
+            TopDividendDetailModel stock = new TopDividendDetailModel();
 
             stock.setDisplayName(entity.getStockName());
-            stock.setCategory(Stock.NO_CATEGORY_STOCK);
+            stock.setCategory(BSEStockModel.NO_CATEGORY_STOCK);
             String toolTip = String.format("%s", entity.getStockName());
             stock.setToolTip(toolTip);
 

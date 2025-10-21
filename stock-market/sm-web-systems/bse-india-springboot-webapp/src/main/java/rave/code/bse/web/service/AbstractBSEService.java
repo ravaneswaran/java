@@ -1,0 +1,22 @@
+package rave.code.bse.web.service;
+
+import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.BSEStockModel;
+
+import java.util.List;
+
+public abstract class AbstractBSEService<S, T> {
+
+    public BSEWebPage getPageModel() {
+        BSEWebPage webPage = new BSEWebPage();
+
+        List<S> entities = this.getEntities();
+        webPage.setStocks((List<BSEStockModel>) this.getStocks(entities));
+
+        return webPage;
+    }
+
+    public abstract List<S> getEntities();
+
+    public abstract List<T> getStocks(List<S> entities);
+}

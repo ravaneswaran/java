@@ -1,18 +1,18 @@
 package rave.code.data.model.web.bse.page;
 
-import rave.code.data.model.web.bse.stock.VolumeShockerStock;
+import rave.code.data.model.web.bse.VolumeShockerDetailModel;
 
 import java.util.List;
 
-public class VolumeShockerWebPage extends WebPage {
+public class VolumeShockerWebPage extends BSEWebPage {
 
-    private List<VolumeShockerStock> volumeShockerStocks;
+    private List<VolumeShockerDetailModel> volumeShockerStocks;
 
-    public List<VolumeShockerStock> getVolumeShockerStocks() {
+    public List<VolumeShockerDetailModel> getVolumeShockerStocks() {
         return volumeShockerStocks;
     }
 
-    public void setVolumeShockerStocks(List<VolumeShockerStock> volumeShockerStocks) {
+    public void setVolumeShockerStocks(List<VolumeShockerDetailModel> volumeShockerStocks) {
         this.volumeShockerStocks = volumeShockerStocks;
     }
 }

@@ -1,6 +1,6 @@
-package rave.code.data.model.web.bse.stock;
+package rave.code.data.model.web.bse;
 
-public class PriceShockerStock extends ActiveStock {
+public class PriceShockerDetailModel extends ActiveStockDetailModel {
 
     private String sector;
     private double currentPrice;

@@ -1,11 +1,12 @@
 package rave.code.bse.web.service;
 
-import rave.code.data.model.web.bse.page.WebPage;
-import rave.code.data.model.web.bse.stock.ActiveStock;
+import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.ActiveStockDetailModel;
+import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
-import rave.code.stockmarket.repository.BSEActive200Repository;
-import rave.code.stockmarket.entity.BSEActive200Entity;
+import rave.code.stockmarket.repository.BSESensexRepository;
+import rave.code.stockmarket.entity.BSESensexEntity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,23 +14,23 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Active200Service extends AbstractService<BSEActive200Entity, ActiveStock> {
+public class BSESensexService extends AbstractBSEService<BSESensexEntity, ActiveStockDetailModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(Active100Service.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BSEActive100Service.class.getName());
 
     @Override
-    public WebPage getPageModel() {
-        WebPage webPage = super.getPageModel();
-        webPage.setActive200LinkStyle("font-weight: bold;");
+    public BSEWebPage getPageModel() {
+        BSEWebPage webPage = super.getPageModel();
+        webPage.setSensexLinkStyle("font-weight: bold;");
         return webPage;
     }
 
-    public List<BSEActive200Entity> getEntities() {
-        BSEActive200Repository moneyControlBSEActive200DataAccess = new BSEActive200Repository();
-        return moneyControlBSEActive200DataAccess.findAll();
+    public List<BSESensexEntity> getEntities() {
+        BSESensexRepository bseSensexDataAccess = new BSESensexRepository();
+        return bseSensexDataAccess.findAll();
     }
 
-    public List<ActiveStock> getStocks(List<BSEActive200Entity> entities) {
+    public List<ActiveStockDetailModel> getStocks(List<BSESensexEntity> bseSensexEntities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
@@ -39,15 +40,25 @@ public class Active200Service extends AbstractService<BSEActive200Entity, Active
         StockPercentageGainOrChangeDecorator stockPercentageGainOrChangeDecorator = new StockPercentageGainOrChangeDecorator();
         StockPERatioDecorator stockPERatioDecorator = new StockPERatioDecorator();
 
-        List<ActiveStock> stocks = new ArrayList<>();
-        for (BSEActive200Entity entity : entities) {
-            ActiveStock stock = new ActiveStock();
+        List<ActiveStockDetailModel> stocks = new ArrayList<>();
+        for (BSESensexEntity entity : bseSensexEntities) {
+            ActiveStockDetailModel stock = new ActiveStockDetailModel();
 
             stock.setDisplayName(entity.getStockName());
             String toolTip = String.format("%s (%s)", entity.getStockName(), entity.getCategory());
             stock.setToolTip(toolTip);
             stock.setCategory(entity.getCategory());
-
+            try {
+                String lastPrice = entity.getLastPrice();
+                if (null != lastPrice) {
+                    stock.setLastPrice(Double.parseDouble(lastPrice));
+                } else {
+                    stock.setLastPrice(0.0);
+                }
+            } catch (NumberFormatException nfe) {
+                LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
+                stock.setHigh(0.0);
+            }
             try {
                 String high = entity.getHigh();
                 if (null != high) {
@@ -65,17 +76,6 @@ public class Active200Service extends AbstractService<BSEActive200Entity, Active
                     stock.setLow(Double.parseDouble(low));
                 } else {
                     stock.setLow(0.0);
-                }
-            } catch (NumberFormatException nfe) {
-                LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
-                stock.setLow(0.0);
-            }
-            try {
-                String lastPrice = entity.getLastPrice();
-                if (null != lastPrice) {
-                    stock.setLastPrice(Double.parseDouble(lastPrice));
-                } else {
-                    stock.setLastPrice(0.0);
                 }
             } catch (NumberFormatException nfe) {
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
@@ -103,10 +103,17 @@ public class Active200Service extends AbstractService<BSEActive200Entity, Active
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
                 stock.setLowerCircuit(0.0);
             }
+
             try {
                 String percentageChange = entity.getPercentageChange();
                 if (null != percentageChange) {
-                    stock.setPercentageChange(Double.parseDouble(percentageChange));
+                    double value = Double.parseDouble(percentageChange);
+                    stock.setPercentageChange(value);
+                    if(value < 0){
+                        stock.setPercentageGainCssStyle(BSEStockModel.RED_BG_CSS_STYLE);
+                    } else {
+                        stock.setPercentageGainCssStyle(BSEStockModel.GREEN_BG_CSS_STYLE);
+                    }
                 } else {
                     stock.setPercentageChange(0.0);
                 }
@@ -114,6 +121,7 @@ public class Active200Service extends AbstractService<BSEActive200Entity, Active
                 LOGGER.log(Level.SEVERE, nfe.getMessage(), nfe);
                 stock.setPercentageChange(0.0);
             }
+
             try {
                 String averageVolume5D = entity.getAverageVolume5Days();
                 if (null != averageVolume5D) {
