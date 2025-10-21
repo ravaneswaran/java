@@ -11,15 +11,20 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class JobListingService extends AbstractAdminService<QuartzJobDetailEntity, JobDetailModel> {
+public class JobListingService extends AbstractAdminService<QuartzJobDetailEntity, JobDetailModel, JobListingPage> {
 
     private QuartzJobDetailRepository quartzJobDetailRepository = new QuartzJobDetailRepository();
 
-    public JobListingPage listNSEJobs() {
-        JobListingPage jobListingPage = new JobListingPage();
-        List<QuartzJobDetailEntity> quartzJobDetailEntities = quartzJobDetailRepository.findAll();
-        jobListingPage.setModelList(this.transformEntities(quartzJobDetailEntities));
-        return jobListingPage;
+    @Override
+    public JobListingPage getWebPage() {
+        JobListingPage webPage = new JobListingPage();
+        webPage.setJobDetailModels(this.transformEntities(this.getEntities()));
+        return webPage;
+    }
+
+    @Override
+    public List<QuartzJobDetailEntity> getEntities() {
+        return this.quartzJobDetailRepository.findAll();
     }
 
     @Override

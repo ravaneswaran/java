@@ -12,12 +12,11 @@ public class TriggerListingPage extends AdminWebPage {
         this.setTriggersListingLink(true);
     }
 
-    public void setModelList(List<TriggerDetailModel> triggerDetailModels){
+    public List<TriggerDetailModel> getTriggerDetailModels() {
+        return triggerDetailModels;
+    }
+
+    public void setTriggerDetailModels(List<TriggerDetailModel> triggerDetailModels) {
         this.triggerDetailModels = triggerDetailModels;
     }
-
-    public List<TriggerDetailModel> getModelList(){
-        return this.triggerDetailModels;
-    }
-
 }

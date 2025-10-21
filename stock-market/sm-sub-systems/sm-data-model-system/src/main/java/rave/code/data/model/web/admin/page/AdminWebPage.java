@@ -22,4 +22,5 @@ public class AdminWebPage extends AbstractWebPage {
     public void setJobsListingLink(boolean jobsListingLink) {
         this.jobsListingLink = jobsListingLink;
     }
+
 }

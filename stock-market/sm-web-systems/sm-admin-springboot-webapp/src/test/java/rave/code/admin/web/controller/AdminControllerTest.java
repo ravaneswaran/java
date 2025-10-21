@@ -37,6 +37,6 @@ public class AdminControllerTest {
         this.mockMvc.perform(get("/nse/triggers"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("list_nse_triggers"))
-                .andExpect(model().attribute("webpage", hasProperty("modelList", notNullValue())));
+                .andExpect(model().attribute("webpage", hasProperty("triggerDetailModels", notNullValue())));
     }
 }

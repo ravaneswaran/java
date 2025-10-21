@@ -24,7 +24,7 @@ public class AdminController {
     public ModelAndView listNSETriggers(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list_nse_triggers");
-        modelAndView.addObject("webpage", this.triggerListingService.listNSETriggers());
+        modelAndView.addObject("webpage", this.triggerListingService.getWebPage());
 
         return modelAndView;
     }
@@ -33,7 +33,7 @@ public class AdminController {
     public ModelAndView listNSEJobs(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("list_nse_jobs");
-        modelAndView.addObject("webpage", this.jobListingService.listNSEJobs());
+        modelAndView.addObject("webpage", this.jobListingService.getWebPage());
 
         return modelAndView;
     }

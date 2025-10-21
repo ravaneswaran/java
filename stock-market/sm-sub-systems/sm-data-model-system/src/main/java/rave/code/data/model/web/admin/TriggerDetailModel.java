@@ -1,8 +1,7 @@
 package rave.code.data.model.web.admin;
 
-public class TriggerDetailModel {
+public class TriggerDetailModel extends AdminDetailModel {
 
-    private String id;
     private String schedulerName;
     private String name;
     private String group;
@@ -16,14 +15,6 @@ public class TriggerDetailModel {
     private String triggerType;
     private String startTime;
     private String endTime;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getSchedulerName() {
         return schedulerName;

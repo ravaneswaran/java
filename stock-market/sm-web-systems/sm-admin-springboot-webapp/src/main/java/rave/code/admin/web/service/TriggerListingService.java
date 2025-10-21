@@ -13,15 +13,20 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TriggerListingService extends AbstractAdminService<QuartzTriggerEntity, TriggerDetailModel>{
+public class TriggerListingService extends AbstractAdminService<QuartzTriggerEntity, TriggerDetailModel, TriggerListingPage>{
 
     private QuartzTriggerRepository quartzTriggerRepository = new QuartzTriggerRepository();
 
-    public TriggerListingPage listNSETriggers() {
+    @Override
+    public TriggerListingPage getWebPage() {
         TriggerListingPage triggerListingPage = new TriggerListingPage();
-        List<QuartzTriggerEntity> quartzTriggerEntities = this.quartzTriggerRepository.findAll();
-        triggerListingPage.setModelList(this.transformEntities(quartzTriggerEntities));
+        triggerListingPage.setTriggerDetailModels(this.transformEntities(this.getEntities()));
         return triggerListingPage;
+    }
+
+    @Override
+    public List<QuartzTriggerEntity> getEntities() {
+        return this.quartzTriggerRepository.findAll();
     }
 
     @Override

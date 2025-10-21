@@ -1,8 +1,7 @@
 package rave.code.data.model.web.admin;
 
-public class JobDetailModel {
+public class JobDetailModel extends AdminDetailModel {
 
-    private String id;
     private String description;
     private String className;
     private String isDurable;
@@ -12,14 +11,6 @@ public class JobDetailModel {
     private String schedulerName;
     private String name;
     private String group;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getDescription() {
         return description;

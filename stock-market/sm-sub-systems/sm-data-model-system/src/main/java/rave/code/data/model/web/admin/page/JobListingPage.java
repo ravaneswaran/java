@@ -12,11 +12,11 @@ public class JobListingPage extends AdminWebPage {
         this.setJobsListingLink(true);
     }
 
-    public void setModelList(List<JobDetailModel> jobDetailModels){
-        this.jobDetailModels = jobDetailModels;
+    public List<JobDetailModel> getJobDetailModels() {
+        return jobDetailModels;
     }
 
-    public List<JobDetailModel> getModelList(){
-        return this.jobDetailModels;
+    public void setJobDetailModels(List<JobDetailModel> jobDetailModels) {
+        this.jobDetailModels = jobDetailModels;
     }
 }
