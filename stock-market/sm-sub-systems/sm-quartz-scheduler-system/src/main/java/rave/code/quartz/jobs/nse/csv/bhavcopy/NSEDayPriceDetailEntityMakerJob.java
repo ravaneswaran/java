@@ -2,7 +2,6 @@ package rave.code.quartz.jobs.nse.csv.bhavcopy;
 
 import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.entity.nse.csv.NSETop20DetailEntity;
 import rave.code.process.SubProcess;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
@@ -21,7 +20,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

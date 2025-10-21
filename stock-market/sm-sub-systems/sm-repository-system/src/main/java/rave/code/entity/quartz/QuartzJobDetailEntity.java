@@ -1,13 +1,8 @@
 package rave.code.entity.quartz;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import rave.code.entity.quartz.id.QuartzJobDetailId;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.sql.Blob;
 
 @Entity

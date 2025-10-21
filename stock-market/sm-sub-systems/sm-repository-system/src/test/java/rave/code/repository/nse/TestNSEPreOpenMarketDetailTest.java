@@ -3,8 +3,6 @@ package rave.code.repository.nse;
 import junit.framework.TestCase;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
-import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
-import rave.code.repository.nse.NSEStockBaseRepository;
 
 import java.math.BigDecimal;
 import java.util.Date;

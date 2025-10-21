@@ -1,7 +1,7 @@
 package rave.code.bse.web.service;
 
-import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.data.model.web.bse.BSEStockModel;
+import rave.code.data.model.web.bse.page.BSEWebPage;
 
 import java.util.List;
 

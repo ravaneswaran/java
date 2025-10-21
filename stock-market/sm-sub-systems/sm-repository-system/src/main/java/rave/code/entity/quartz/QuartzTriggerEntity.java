@@ -1,10 +1,11 @@
 package rave.code.entity.quartz;
 
+import rave.code.entity.quartz.id.QuartzTriggerId;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import rave.code.entity.quartz.id.QuartzTriggerId;
 
 @Entity
 @Table(name = "QUARTZ_TRIGGERS")

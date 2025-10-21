@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.bse.web.service.BSESensexService;
+import rave.code.data.model.web.bse.page.BSEWebPage;
 
 @Controller
 public class BSESensexController {

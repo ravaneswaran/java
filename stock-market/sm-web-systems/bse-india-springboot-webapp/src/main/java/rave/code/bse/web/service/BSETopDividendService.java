@@ -1,13 +1,13 @@
 package rave.code.bse.web.service;
 
 import org.springframework.stereotype.Service;
-import rave.code.data.model.web.bse.page.BSEWebPage;
-import rave.code.data.model.web.bse.BSEStockModel;
-import rave.code.data.model.web.bse.TopDividendDetailModel;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
-import rave.code.stockmarket.repository.BSETopDividendRepository;
+import rave.code.data.model.web.bse.BSEStockModel;
+import rave.code.data.model.web.bse.TopDividendDetailModel;
+import rave.code.data.model.web.bse.page.BSEWebPage;
 import rave.code.stockmarket.entity.BSETopDividendEntity;
+import rave.code.stockmarket.repository.BSETopDividendRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,6 @@
 package rave.code.entity.nse.csv;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "nse_etf_detail")

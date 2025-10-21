@@ -1,9 +1,9 @@
 package rave.code.quartz.jobs.moneycontrol.trading;
 
+import rave.code.data.model.web.external.moneycontrol.PriceShockerModel;
 import rave.code.data.parser.html.moneycontrol.BSEPriceShockersParser;
 import rave.code.stockmarket.entity.BSEPriceShockerEntity;
 import rave.code.stockmarket.repository.BSEPriceShockerRepository;
-import rave.code.data.model.web.external.moneycontrol.PriceShockerModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

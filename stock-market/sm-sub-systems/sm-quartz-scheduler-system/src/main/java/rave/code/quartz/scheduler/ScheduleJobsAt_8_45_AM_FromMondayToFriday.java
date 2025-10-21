@@ -3,8 +3,6 @@ package rave.code.quartz.scheduler;
 import org.quartz.*;
 import rave.code.quartz.enums.CronExpression;
 import rave.code.quartz.enums.*;
-import rave.code.quartz.enums.QuartzJob;
-import rave.code.quartz.enums.QuartzTrigger;
 import rave.code.quartz.jobs.history.*;
 
 import java.util.logging.Level;

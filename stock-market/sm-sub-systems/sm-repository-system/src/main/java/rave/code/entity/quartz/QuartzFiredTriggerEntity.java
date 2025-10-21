@@ -1,8 +1,8 @@
 package rave.code.entity.quartz;
 
-import javax.persistence.*;
-
 import rave.code.entity.quartz.id.QuartzEntryId;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "QUARTZ_FIRED_TRIGGERS")

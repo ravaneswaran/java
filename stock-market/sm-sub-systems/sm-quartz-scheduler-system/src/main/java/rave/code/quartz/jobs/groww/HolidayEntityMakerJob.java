@@ -1,11 +1,11 @@
 package rave.code.quartz.jobs.groww;
 
 import org.quartz.JobExecutionException;
+import rave.code.data.model.web.external.groww.HolidayModel;
 import rave.code.data.parser.html.groww.HolidayListParser;
 import rave.code.quartz.jobs.AbstractWebPageEntityMakerJob;
 import rave.code.stockmarket.entity.HolidayEntity;
 import rave.code.stockmarket.repository.HolidayRepository;
-import rave.code.data.model.web.external.groww.HolidayModel;
 
 import java.util.ArrayList;
 import java.util.Date;

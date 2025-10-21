@@ -4,7 +4,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.util.Objects;
 

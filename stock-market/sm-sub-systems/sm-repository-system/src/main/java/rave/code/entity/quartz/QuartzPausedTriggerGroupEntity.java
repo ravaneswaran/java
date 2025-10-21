@@ -1,9 +1,10 @@
 package rave.code.entity.quartz;
 
+import rave.code.entity.quartz.id.QuartzPausedTriggerGroupId;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import rave.code.entity.quartz.id.QuartzPausedTriggerGroupId;
 
 @Entity
 @Table(name = "QUARTZ_PAUSED_TRIGGER_GRPS")

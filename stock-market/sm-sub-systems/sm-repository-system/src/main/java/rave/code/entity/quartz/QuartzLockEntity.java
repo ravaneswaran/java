@@ -1,9 +1,10 @@
 package rave.code.entity.quartz;
 
+import rave.code.entity.quartz.id.QuartzLockId;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import rave.code.entity.quartz.id.QuartzLockId;
 
 @Entity
 @Table(name = "QUARTZ_LOCKS")

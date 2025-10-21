@@ -1,9 +1,8 @@
 package rave.code.quartz.scheduler.nse;
 
 import org.quartz.*;
-import rave.code.quartz.enums.*;
 import rave.code.quartz.enums.CronExpression;
-import rave.code.quartz.enums.QuartzJob;
+import rave.code.quartz.enums.*;
 import rave.code.quartz.jobs.nse.csv.largetrade.block.NSEDayBlockDealDetailEntityMakerJob;
 import rave.code.quartz.scheduler.AbstractQuartzScheduler;
 

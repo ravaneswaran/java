@@ -1,7 +1,5 @@
 package rave.code.entity.bse.csv;
 
-import rave.code.entity.nse.csv.NSEStockBaseEntity;
-
 import javax.persistence.*;
 import java.util.Date;
 
