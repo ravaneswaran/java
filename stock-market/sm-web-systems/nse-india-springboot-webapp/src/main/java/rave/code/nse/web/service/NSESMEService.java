@@ -2,6 +2,7 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.NSESMEDetailModel;
+import rave.code.data.model.web.nse.page.SMEPage;
 import rave.code.entity.nse.csv.NSESMEDetailEntity;
 import rave.code.repository.nse.NSESMEDetailRepository;
 
@@ -9,9 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESMEDetailModel> {
+public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESMEDetailModel, SMEPage> {
 
     private NSESMEDetailRepository nseSMEDetailRepository = new NSESMEDetailRepository();
+
+    @Override
+    public SMEPage getWebPage() {
+        SMEPage smePage = new SMEPage();
+        smePage.setNseSMEDetailModels(this.transformEntities(this.getEntities()));
+        return smePage;
+    }
 
     @Override
     public List<NSESMEDetailEntity> getEntities() {

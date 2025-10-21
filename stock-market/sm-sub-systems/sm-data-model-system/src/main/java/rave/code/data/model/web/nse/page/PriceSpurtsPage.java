@@ -11,4 +11,12 @@ public class PriceSpurtsPage extends NSEWebPage {
     public PriceSpurtsPage(){
         this.setPriceSpurt(true);
     }
+
+    public List<NSEPriceSpurtDetailModel> getNsePriceSpurtDetailModels() {
+        return nsePriceSpurtDetailModels;
+    }
+
+    public void setNsePriceSpurtDetailModels(List<NSEPriceSpurtDetailModel> nsePriceSpurtDetailModels) {
+        this.nsePriceSpurtDetailModels = nsePriceSpurtDetailModels;
+    }
 }

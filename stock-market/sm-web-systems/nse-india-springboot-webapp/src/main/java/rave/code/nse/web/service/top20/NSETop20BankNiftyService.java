@@ -1,6 +1,7 @@
 package rave.code.nse.web.service.top20;
 
 import org.springframework.stereotype.Service;
+import rave.code.data.model.web.nse.page.top20.Top20BankNiftyPage;
 import rave.code.data.model.web.nse.top20.NSETop20BankNiftyModel;
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
 import rave.code.repository.nse.NSETop20DetailRepository;
@@ -9,9 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class NSETop20BankNiftyService extends AbstractNSETop20Service<NSETop20BankNiftyModel> {
+public class NSETop20BankNiftyService extends AbstractNSETop20Service<NSETop20BankNiftyModel, Top20BankNiftyPage> {
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
+
+    @Override
+    public Top20BankNiftyPage getWebPage() {
+        Top20BankNiftyPage top20BankNiftyPage = new Top20BankNiftyPage();
+        top20BankNiftyPage.setNseTop20BankNiftyModels(this.transformEntities(this.getEntities()));
+        return top20BankNiftyPage;
+    }
 
     @Override
     public List<NSETop20DetailEntity> getEntities() {

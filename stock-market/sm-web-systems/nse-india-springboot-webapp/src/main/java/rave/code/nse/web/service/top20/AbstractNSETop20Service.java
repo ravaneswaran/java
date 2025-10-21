@@ -5,7 +5,7 @@ import rave.code.nse.web.service.AbstractNSEService;
 
 import java.util.List;
 
-public abstract class AbstractNSETop20Service<T> extends AbstractNSEService<NSETop20DetailEntity, T> {
+public abstract class AbstractNSETop20Service<T, W> extends AbstractNSEService<NSETop20DetailEntity, T, W> {
 
     public abstract List<T> transformEntities(List<NSETop20DetailEntity> nseTop20DetailEntities);
 

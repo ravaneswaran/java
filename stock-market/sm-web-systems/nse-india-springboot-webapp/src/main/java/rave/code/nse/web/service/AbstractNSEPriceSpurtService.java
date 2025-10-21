@@ -7,7 +7,7 @@ import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractNSEPriceSpurtService extends AbstractNSEService<NSEPriceSpurtDetailEntity, NSEPriceSpurtDetailModel>{
+public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService<NSEPriceSpurtDetailEntity, NSEPriceSpurtDetailModel, W>{
 
     protected NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
 

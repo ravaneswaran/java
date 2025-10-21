@@ -12,4 +12,11 @@ public class SMEPage extends NSEWebPage {
         this.setSme(true);
     }
 
+    public List<NSESMEDetailModel> getNseSMEDetailModels() {
+        return nseSMEDetailModels;
+    }
+
+    public void setNseSMEDetailModels(List<NSESMEDetailModel> nseSMEDetailModels) {
+        this.nseSMEDetailModels = nseSMEDetailModels;
+    }
 }

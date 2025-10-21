@@ -12,4 +12,11 @@ public class VolumeSpurtsPage extends NSEWebPage {
         this.setVolumeSpurt(true);
     }
 
+    public List<NSEVolumeSpurtDetailModel> getNseVolumeSpurtDetailModels() {
+        return nseVolumeSpurtDetailModels;
+    }
+
+    public void setNseVolumeSpurtDetailModels(List<NSEVolumeSpurtDetailModel> nseVolumeSpurtDetailModels) {
+        this.nseVolumeSpurtDetailModels = nseVolumeSpurtDetailModels;
+    }
 }

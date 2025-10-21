@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class NSEHolidayService extends AbstractNSEService<HolidayEntity, HolidayDetailModel> {
+public class NSEHolidayService extends AbstractNSEService<HolidayEntity, HolidayDetailModel, Object> {
 
     private static final Logger LOGGER = Logger.getLogger(NSEHolidayService.class.getName());
 
@@ -22,6 +22,11 @@ public class NSEHolidayService extends AbstractNSEService<HolidayEntity, Holiday
 
     public List<HolidayDetailModel> listHolidays()  {
         return this.transformEntities(this.getEntities());
+    }
+
+    @Override
+    public Object getWebPage() {
+        return null;
     }
 
     @Override

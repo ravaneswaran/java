@@ -1,6 +1,7 @@
 package rave.code.nse.web.service.top20;
 
 import org.springframework.stereotype.Service;
+import rave.code.data.model.web.nse.page.top20.Top20FOSecurityPage;
 import rave.code.data.model.web.nse.top20.NSETop20FOSecurityModel;
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
 import rave.code.repository.nse.NSETop20DetailRepository;
@@ -9,9 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class NSETop20FOSecurityService extends AbstractNSETop20Service<NSETop20FOSecurityModel> {
+public class NSETop20FOSecurityService extends AbstractNSETop20Service<NSETop20FOSecurityModel, Top20FOSecurityPage> {
 
     private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
+
+    @Override
+    public Top20FOSecurityPage getWebPage() {
+        Top20FOSecurityPage top20FOSecurityPage = new Top20FOSecurityPage();
+        top20FOSecurityPage.setNseTop20FOSecurityModels(this.transformEntities(this.getEntities()));
+        return top20FOSecurityPage;
+    }
 
     @Override
     public List<NSETop20DetailEntity> getEntities() {

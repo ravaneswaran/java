@@ -1,7 +1,7 @@
 <div class="right-container">
     <div th:replace="~{fragments/common/stock_group_tip_container}"></div>
     <div class="right-container-stock-listing-container">
-        <div class="right-container-company-frame-div-0" th:each="stock : ${webpage.nseStockModels}">
+        <div class="right-container-company-frame-div-0" th:each="stock : ${webpage.nseTop20SecurityLWR20Models}">
             <div class="right-container-company-div">
                 <div class="right-container-company-title-container">
                     <div class="right-container-company-title-div" th:text="${stock.symbol}"></div>

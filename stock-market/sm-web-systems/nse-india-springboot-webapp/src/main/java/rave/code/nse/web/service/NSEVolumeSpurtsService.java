@@ -2,6 +2,7 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.NSEVolumeSpurtDetailModel;
+import rave.code.data.model.web.nse.page.VolumeSpurtsPage;
 import rave.code.entity.nse.csv.NSEVolumeSpurtDetailEntity;
 import rave.code.repository.nse.NSEVolumeSpurtDetailRepository;
 
@@ -9,9 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDetailEntity, NSEVolumeSpurtDetailModel> {
+public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDetailEntity, NSEVolumeSpurtDetailModel, VolumeSpurtsPage> {
 
     private NSEVolumeSpurtDetailRepository nseVolumeSpurtDetailRepository = new NSEVolumeSpurtDetailRepository();
+
+    @Override
+    public VolumeSpurtsPage getWebPage() {
+        VolumeSpurtsPage volumeSpurtsPage = new VolumeSpurtsPage();
+        volumeSpurtsPage.setNseVolumeSpurtDetailModels(this.transformEntities(this.getEntities()));
+        return volumeSpurtsPage;
+    }
 
     @Override
     public List<NSEVolumeSpurtDetailEntity> getEntities() {
