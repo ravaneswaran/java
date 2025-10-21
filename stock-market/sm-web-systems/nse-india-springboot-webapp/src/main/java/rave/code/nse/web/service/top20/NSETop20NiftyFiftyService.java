@@ -2,7 +2,6 @@ package rave.code.nse.web.service.top20;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.page.top20.Top20NiftyFiftyPage;
-import rave.code.data.model.web.nse.page.top20.Top20NiftyNextFiftyPage;
 import rave.code.data.model.web.nse.top20.NSETop20NiftyFiftyModel;
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
 import rave.code.repository.nse.NSETop20DetailRepository;
