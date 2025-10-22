@@ -5,7 +5,7 @@ import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.TopDividendDetailModel;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.TopDividendWebPage;
 import rave.code.stockmarket.entity.BSETopDividendEntity;
 import rave.code.stockmarket.repository.BSETopDividendRepository;
 
@@ -16,15 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSETopDividendService extends AbstractBSEService<BSETopDividendEntity, TopDividendDetailModel> {
+public class BSETopDividendService extends AbstractBSEService<BSETopDividendEntity, TopDividendDetailModel, TopDividendWebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSETopDividendService.class.getName());
 
     @Override
-    public BSEWebPage getWebPage() {
-        BSEWebPage webPage = super.getWebPage();
-        webPage.setTopDividendLinkStyle("font-weight: bold;");
-        return webPage;
+    public TopDividendWebPage getWebPage() {
+        TopDividendWebPage topDividendWebPage = new TopDividendWebPage();
+        topDividendWebPage.setTopDividendDetailModels(this.transformEntities(this.getEntities()));
+        return topDividendWebPage;
     }
 
     @Override

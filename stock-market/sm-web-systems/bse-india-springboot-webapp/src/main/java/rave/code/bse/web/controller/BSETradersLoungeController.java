@@ -33,7 +33,7 @@ public class BSETradersLoungeController {
     public ModelAndView bseActive100() {
         BSEWebPage active100Page = this.bseActive100Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", active100Page);
+        modelAndView.addObject("webpage", active100Page);
         modelAndView.setViewName("active_100");
 
         return modelAndView;
@@ -43,7 +43,7 @@ public class BSETradersLoungeController {
     public ModelAndView bseActive200() {
         BSEWebPage active200Page = this.bseActive200Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", active200Page);
+        modelAndView.addObject("webpage", active200Page);
         modelAndView.setViewName("active_200");
 
         return modelAndView;
@@ -53,7 +53,7 @@ public class BSETradersLoungeController {
     public ModelAndView bseActive500() {
         BSEWebPage active500Page = this.bseActive500Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", active500Page);
+        modelAndView.addObject("webpage", active500Page);
         modelAndView.setViewName("active_500");
 
         return modelAndView;
@@ -63,7 +63,7 @@ public class BSETradersLoungeController {
     public ModelAndView bsePriceShockers() {
         PriceShockerWebPage priceShockersWebPage = this.bsePriceShockerService.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", priceShockersWebPage);
+        modelAndView.addObject("webpage", priceShockersWebPage);
         modelAndView.setViewName("price_shockers");
 
         return modelAndView;
@@ -73,7 +73,7 @@ public class BSETradersLoungeController {
     public ModelAndView bseVolumeShockers() {
         VolumeShockerWebPage volumeShockerWebPage = this.bseVolumeShockerService.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", volumeShockerWebPage);
+        modelAndView.addObject("webpage", volumeShockerWebPage);
         modelAndView.setViewName("volume_shockers");
 
         return modelAndView;
@@ -85,7 +85,7 @@ public class BSETradersLoungeController {
         PriceShockerWebPage priceShockersWebPage = priceShockerService.getWebPage();
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("page", priceShockersWebPage);
+        modelAndView.addObject("webpage", priceShockersWebPage);
         modelAndView.setViewName("intraday_large_deals");
 
         return modelAndView;

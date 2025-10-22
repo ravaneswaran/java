@@ -5,7 +5,7 @@ import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.ActiveStockDetailModel;
 import rave.code.data.model.web.bse.BSEStockModel;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.SensexWebPage;
 import rave.code.stockmarket.entity.BSESensexEntity;
 import rave.code.stockmarket.repository.BSESensexRepository;
 
@@ -16,15 +16,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSESensexService extends AbstractBSEService<BSESensexEntity, ActiveStockDetailModel> {
+public class BSESensexService extends AbstractBSEService<BSESensexEntity, ActiveStockDetailModel, SensexWebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEActive100Service.class.getName());
 
+
     @Override
-    public BSEWebPage getWebPage() {
-        BSEWebPage webPage = super.getWebPage();
-        webPage.setSensexLinkStyle("font-weight: bold;");
-        return webPage;
+    public SensexWebPage getWebPage() {
+        SensexWebPage sensexWebPage = new SensexWebPage();
+        sensexWebPage.setActiveStockDetailModels(this.transformEntities(this.getEntities()));
+        return sensexWebPage;
     }
 
     public List<BSESensexEntity> getEntities() {

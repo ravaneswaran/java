@@ -5,7 +5,7 @@ import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.CapitalGainerDetailModel;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.MidCapGainerWebPage;
 import rave.code.stockmarket.entity.BSEMidCapGainerEntity;
 import rave.code.stockmarket.repository.BSEMidCapGainerRepository;
 
@@ -16,15 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSEMidCapGainerService extends AbstractBSEService<BSEMidCapGainerEntity, CapitalGainerDetailModel> {
+public class BSEMidCapGainerService extends AbstractBSEService<BSEMidCapGainerEntity, CapitalGainerDetailModel, MidCapGainerWebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEMidCapGainerService.class.getName());
 
     @Override
-    public BSEWebPage getWebPage() {
-        BSEWebPage webPage = super.getWebPage();
-        webPage.setMidCapGainerLinkStyle("font-weight: bold;");
-        return webPage;
+    public MidCapGainerWebPage getWebPage() {
+        MidCapGainerWebPage midCapGainerWebPage = new MidCapGainerWebPage();
+        midCapGainerWebPage.setCapitalGainerDetailModels(this.transformEntities(this.getEntities()));
+        return midCapGainerWebPage;
     }
 
     @Override

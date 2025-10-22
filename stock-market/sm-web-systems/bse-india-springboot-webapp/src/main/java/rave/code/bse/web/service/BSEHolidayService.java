@@ -14,11 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSEHolidayService extends AbstractBSEService<HolidayEntity, HolidayDetailModel> {
+public class BSEHolidayService extends AbstractBSEService<HolidayEntity, HolidayDetailModel, Object> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEHolidayService.class.getName());
 
     private HolidayRepository holidayRepository = new HolidayRepository();
+
+    @Override
+    public Object getWebPage() {
+        return null;
+    }
 
     @Override
     public List<HolidayEntity> getEntities() {
@@ -27,19 +32,12 @@ public class BSEHolidayService extends AbstractBSEService<HolidayEntity, Holiday
 
     @Override
     public List<HolidayDetailModel> transformEntities(List<HolidayEntity> entities) {
-        new RuntimeException("Implementation not required...");
-        return null;
-    }
-
-    public List<HolidayDetailModel> listHolidays()  {
-        List<HolidayEntity> entities = this.getEntities();
         List<HolidayDetailModel> holidayDetailModels = new ArrayList<>();
         for (HolidayEntity holidayEntity : entities) {
             HolidayDetailModel holidayDetailModel = new HolidayDetailModel();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, YYYY");
             try {
                 Date holiDate =  simpleDateFormat.parse(holidayEntity.getHolidate());
-                System.out.println("--------------->>>>>> "+simpleDateFormat.format(holiDate));
                 holidayDetailModel.setHolidate(holiDate);
                 holidayDetailModels.add(holidayDetailModel);
             } catch (ParseException exception) {
@@ -47,5 +45,9 @@ public class BSEHolidayService extends AbstractBSEService<HolidayEntity, Holiday
             }
         }
         return holidayDetailModels;
+    }
+
+    public List<HolidayDetailModel> listHolidays()  {
+        return this.transformEntities(this.getEntities());
     }
 }

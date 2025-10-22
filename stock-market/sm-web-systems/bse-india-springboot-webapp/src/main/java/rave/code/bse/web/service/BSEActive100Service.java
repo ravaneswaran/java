@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.ActiveStockDetailModel;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.Active100WebPage;
 import rave.code.stockmarket.entity.BSEActive100Entity;
 import rave.code.stockmarket.repository.BSEActive100Repository;
 
@@ -15,15 +15,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSEActive100Service extends AbstractBSEService<BSEActive100Entity, ActiveStockDetailModel> {
+public class BSEActive100Service extends AbstractBSEService<BSEActive100Entity, ActiveStockDetailModel, Active100WebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEActive100Service.class.getName());
 
     @Override
-    public BSEWebPage getWebPage() {
-        BSEWebPage webPage = super.getWebPage();
-        webPage.setActive100LinkStyle("font-weight: bold;");
-        return webPage;
+    public Active100WebPage getWebPage() {
+        Active100WebPage active100WebPage = new Active100WebPage();
+        active100WebPage.setActiveStockDetailModels(this.transformEntities(this.getEntities()));
+        return active100WebPage;
     }
 
     public List<BSEActive100Entity> getEntities() {
@@ -31,7 +31,7 @@ public class BSEActive100Service extends AbstractBSEService<BSEActive100Entity, 
         return bseActive100DataAccess.findAll();
     }
 
-    public List<ActiveStockDetailModel> transformEntities(List<BSEActive100Entity> bseActive100Entities) {
+    public List<ActiveStockDetailModel> transformEntities(List<BSEActive100Entity> entities) {
 
         StockTitleDecorator stockTitleDecorator = new StockTitleDecorator();
         StockTitleContainerDecorator stockTitleContainerDecorator = new StockTitleContainerDecorator();
@@ -42,7 +42,7 @@ public class BSEActive100Service extends AbstractBSEService<BSEActive100Entity, 
         StockPERatioDecorator stockPERatioDecorator = new StockPERatioDecorator();
 
         List<ActiveStockDetailModel> stocks = new ArrayList<>();
-        for (BSEActive100Entity entity : bseActive100Entities) {
+        for (BSEActive100Entity entity : entities) {
             ActiveStockDetailModel stock = new ActiveStockDetailModel();
 
             stock.setDisplayName(entity.getStockName());

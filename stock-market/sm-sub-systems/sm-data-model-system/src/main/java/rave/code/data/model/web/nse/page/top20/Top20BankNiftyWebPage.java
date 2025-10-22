@@ -5,11 +5,11 @@ import rave.code.data.model.web.nse.top20.NSETop20BankNiftyModel;
 
 import java.util.List;
 
-public class Top20BankNiftyPage extends NSEWebPage {
+public class Top20BankNiftyWebPage extends NSEWebPage {
 
     List<NSETop20BankNiftyModel> nseTop20BankNiftyModels;
 
-    public Top20BankNiftyPage(){
+    public Top20BankNiftyWebPage(){
         this.setBankNifty(true);
     }
 

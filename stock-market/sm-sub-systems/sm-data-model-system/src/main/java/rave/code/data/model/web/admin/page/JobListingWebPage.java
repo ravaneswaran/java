@@ -4,11 +4,11 @@ import rave.code.data.model.web.admin.JobDetailModel;
 
 import java.util.List;
 
-public class JobListingPage extends AdminWebPage {
+public class JobListingWebPage extends AdminWebPage {
 
     private List<JobDetailModel> jobDetailModels;
 
-    public JobListingPage(){
+    public JobListingWebPage(){
         this.setJobsListingLink(true);
     }
 

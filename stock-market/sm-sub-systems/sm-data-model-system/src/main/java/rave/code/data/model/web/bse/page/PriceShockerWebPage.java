@@ -6,13 +6,17 @@ import java.util.List;
 
 public class PriceShockerWebPage extends BSEWebPage {
 
-    private List<PriceShockerDetailModel> priceShockerStocks;
+    private List<PriceShockerDetailModel> priceShockerDetailModels;
 
-    public List<PriceShockerDetailModel> getPriceShockerStocks() {
-        return priceShockerStocks;
+    public PriceShockerWebPage(){
+        this.setPriceShockersLink(true);
     }
 
-    public void setPriceShockerStocks(List<PriceShockerDetailModel> priceShockerStocks) {
-        this.priceShockerStocks = priceShockerStocks;
+    public List<PriceShockerDetailModel> getPriceShockerDetailModels() {
+        return priceShockerDetailModels;
+    }
+
+    public void setPriceShockerDetailModels(List<PriceShockerDetailModel> priceShockerDetailModels) {
+        this.priceShockerDetailModels = priceShockerDetailModels;
     }
 }

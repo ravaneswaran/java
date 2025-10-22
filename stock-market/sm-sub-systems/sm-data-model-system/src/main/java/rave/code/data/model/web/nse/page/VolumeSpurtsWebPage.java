@@ -4,11 +4,11 @@ import rave.code.data.model.web.nse.NSEVolumeSpurtDetailModel;
 
 import java.util.List;
 
-public class VolumeSpurtsPage extends NSEWebPage {
+public class VolumeSpurtsWebPage extends NSEWebPage {
 
     private List<NSEVolumeSpurtDetailModel> nseVolumeSpurtDetailModels;
 
-    public VolumeSpurtsPage(){
+    public VolumeSpurtsWebPage(){
         this.setVolumeSpurt(true);
     }
 

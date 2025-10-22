@@ -4,11 +4,11 @@ import rave.code.data.model.web.nse.NSESMEDetailModel;
 
 import java.util.List;
 
-public class SMEPage extends NSEWebPage {
+public class SMEWebPage extends NSEWebPage {
 
     private List<NSESMEDetailModel> nseSMEDetailModels;
 
-    public SMEPage(){
+    public SMEWebPage(){
         this.setSme(true);
     }
 

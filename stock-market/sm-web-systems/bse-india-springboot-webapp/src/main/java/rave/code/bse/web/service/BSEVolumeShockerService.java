@@ -15,18 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSEVolumeShockerService extends AbstractBSEService<BSEVolumeShockerEntity, VolumeShockerDetailModel> {
+public class BSEVolumeShockerService extends AbstractBSEService<BSEVolumeShockerEntity, VolumeShockerDetailModel, VolumeShockerWebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEVolumeShockerService.class.getName());
 
     @Override
     public VolumeShockerWebPage getWebPage() {
         VolumeShockerWebPage volumeShockerWebPage = new VolumeShockerWebPage();
-        volumeShockerWebPage.setVolumeShockersLinkStyle("font-weight: bold;");
-
-        List<BSEVolumeShockerEntity> entities = this.getEntities();
-        volumeShockerWebPage.setVolumeShockerStocks(this.transformEntities(entities));
-
+        volumeShockerWebPage.setVolumeShockerDetailModels(this.transformEntities(this.getEntities()));
         return volumeShockerWebPage;
     }
 

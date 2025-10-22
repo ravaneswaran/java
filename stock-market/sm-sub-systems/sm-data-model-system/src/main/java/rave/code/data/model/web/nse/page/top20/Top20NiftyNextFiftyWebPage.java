@@ -5,11 +5,11 @@ import rave.code.data.model.web.nse.top20.NSETop20NiftyNextFiftyModel;
 
 import java.util.List;
 
-public class Top20NiftyNextFiftyPage extends NSEWebPage {
+public class Top20NiftyNextFiftyWebPage extends NSEWebPage {
 
     private List<NSETop20NiftyNextFiftyModel> nseTop20NiftyNextFiftyModels;
 
-    public Top20NiftyNextFiftyPage() {
+    public Top20NiftyNextFiftyWebPage() {
         this.setNiftyNextFifty(true);
     }
 

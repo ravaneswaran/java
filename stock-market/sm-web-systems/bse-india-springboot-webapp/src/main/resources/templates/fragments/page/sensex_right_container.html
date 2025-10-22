@@ -1,7 +1,7 @@
 <div class="right-container">
     <div th:replace="~{fragments/common/stock_group_tip_container}"></div>
     <div class="right-container-stock-listing-container">
-        <div class="right-container-company-frame-div-0" th:each="stock : ${page.stocks}">
+        <div class="right-container-company-frame-div-0" th:each="stock : ${webpage.activeStockDetailModels}">
             <div class="right-container-company-div">
                 <div th:class="${stock.titleContainerCssStyle}">
                     <div th:class="${stock.titleCssStyle}" th:text="${stock.displayName}" th:title="${stock.toolTip}"></div>

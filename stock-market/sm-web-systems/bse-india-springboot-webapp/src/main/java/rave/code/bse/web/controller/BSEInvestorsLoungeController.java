@@ -7,7 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 import rave.code.bse.web.service.BSEMidCapGainerService;
 import rave.code.bse.web.service.BSESmallCapGainerService;
 import rave.code.bse.web.service.BSETopDividendService;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.MidCapGainerWebPage;
+import rave.code.data.model.web.bse.page.SmallCapGainerWebPage;
+import rave.code.data.model.web.bse.page.TopDividendWebPage;
 
 @Controller
 public class BSEInvestorsLoungeController {
@@ -21,9 +23,9 @@ public class BSEInvestorsLoungeController {
 
     @GetMapping("/top-dividend")
     public ModelAndView bseTopDividend() {
-        BSEWebPage webPage = this.bseTopDividendService.getWebPage();
+        TopDividendWebPage topDividendWebPage = this.bseTopDividendService.getWebPage();
         ModelAndView indexModelAndView = new ModelAndView();
-        indexModelAndView.addObject("page", webPage);
+        indexModelAndView.addObject("webpage", topDividendWebPage);
         indexModelAndView.setViewName("top_dividend");
 
         return indexModelAndView;
@@ -31,9 +33,9 @@ public class BSEInvestorsLoungeController {
 
     @GetMapping("/small-cap-gainers")
     public ModelAndView bseSmallCapGainers() {
-        BSEWebPage webPage = this.bseSmallCapGainerService.getWebPage();
+        SmallCapGainerWebPage smallCapGainerWebPage = this.bseSmallCapGainerService.getWebPage();
         ModelAndView indexModelAndView = new ModelAndView();
-        indexModelAndView.addObject("page", webPage);
+        indexModelAndView.addObject("webpage", smallCapGainerWebPage);
         indexModelAndView.setViewName("small_cap_gainers");
 
         return indexModelAndView;
@@ -41,9 +43,9 @@ public class BSEInvestorsLoungeController {
 
     @GetMapping("/mid-cap-gainers")
     public ModelAndView bseMidCapGainers() {
-        BSEWebPage webPage = this.bseMidCapGainerService.getWebPage();
+        MidCapGainerWebPage midCapGainerWebPage = this.bseMidCapGainerService.getWebPage();
         ModelAndView indexModelAndView = new ModelAndView();
-        indexModelAndView.addObject("page", webPage);
+        indexModelAndView.addObject("webpage", midCapGainerWebPage);
         indexModelAndView.setViewName("mid_cap_gainers");
 
         return indexModelAndView;

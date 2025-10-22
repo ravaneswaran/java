@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.bse.web.service.BSESensexService;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.SensexWebPage;
 
 @Controller
 public class BSESensexController {
@@ -15,9 +15,9 @@ public class BSESensexController {
 
     @GetMapping("/sensex")
     public ModelAndView sensex() {
-        BSEWebPage webPage = this.bseSensexService.getWebPage();
+        SensexWebPage sensexWebPage = this.bseSensexService.getWebPage();
         ModelAndView sensexModelAndView = new ModelAndView();
-        sensexModelAndView.addObject("page", webPage);
+        sensexModelAndView.addObject("webpage", sensexWebPage);
         sensexModelAndView.setViewName("sensex");
 
         return sensexModelAndView;

@@ -2,7 +2,7 @@ package rave.code.admin.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.admin.TriggerDetailModel;
-import rave.code.data.model.web.admin.page.TriggerListingPage;
+import rave.code.data.model.web.admin.page.TriggerListingWebPage;
 import rave.code.entity.quartz.QuartzTriggerEntity;
 import rave.code.repository.quartz.QuartzTriggerRepository;
 
@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TriggerListingService extends AbstractAdminService<QuartzTriggerEntity, TriggerDetailModel, TriggerListingPage>{
+public class TriggerListingService extends AbstractAdminService<QuartzTriggerEntity, TriggerDetailModel, TriggerListingWebPage>{
 
     private QuartzTriggerRepository quartzTriggerRepository = new QuartzTriggerRepository();
 
     @Override
-    public TriggerListingPage getWebPage() {
-        TriggerListingPage triggerListingPage = new TriggerListingPage();
+    public TriggerListingWebPage getWebPage() {
+        TriggerListingWebPage triggerListingPage = new TriggerListingWebPage();
         triggerListingPage.setTriggerDetailModels(this.transformEntities(this.getEntities()));
         return triggerListingPage;
     }

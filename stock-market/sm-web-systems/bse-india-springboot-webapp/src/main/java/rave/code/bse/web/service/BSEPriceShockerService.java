@@ -15,17 +15,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSEPriceShockerService extends AbstractBSEService<BSEPriceShockerEntity, PriceShockerDetailModel> {
+public class BSEPriceShockerService extends AbstractBSEService<BSEPriceShockerEntity, PriceShockerDetailModel, PriceShockerWebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSEVolumeShockerService.class.getName());
 
+    @Override
     public PriceShockerWebPage getWebPage() {
         PriceShockerWebPage priceShockerWebPage = new PriceShockerWebPage();
-        priceShockerWebPage.setPriceShockersLinkStyle("font-weight: bold;");
-
-        List<BSEPriceShockerEntity> entities = this.getEntities();
-        priceShockerWebPage.setPriceShockerStocks(this.transformEntities(entities));
-
+        priceShockerWebPage.setPriceShockerDetailModels(this.transformEntities(this.getEntities()));
         return priceShockerWebPage;
     }
 

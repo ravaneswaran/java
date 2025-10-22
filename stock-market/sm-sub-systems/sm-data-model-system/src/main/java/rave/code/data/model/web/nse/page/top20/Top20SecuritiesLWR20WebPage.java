@@ -5,11 +5,11 @@ import rave.code.data.model.web.nse.top20.NSETop20SecurityLWR20Model;
 
 import java.util.List;
 
-public class Top20SecuritiesLWR20Page extends NSEWebPage {
+public class Top20SecuritiesLWR20WebPage extends NSEWebPage {
 
     private List<NSETop20SecurityLWR20Model> nseTop20SecurityLWR20Models;
 
-    public Top20SecuritiesLWR20Page() {
+    public Top20SecuritiesLWR20WebPage() {
         this.setSecurityLessThan20(true);
     }
 

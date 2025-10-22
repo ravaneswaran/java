@@ -5,7 +5,7 @@ import rave.code.bse.web.service.algorithms.sort.LastPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.CapitalGainerDetailModel;
-import rave.code.data.model.web.bse.page.BSEWebPage;
+import rave.code.data.model.web.bse.page.SmallCapGainerWebPage;
 import rave.code.stockmarket.entity.BSESmallCapGainerEntity;
 import rave.code.stockmarket.repository.BSESmallCapGainerRepository;
 
@@ -16,15 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
-public class BSESmallCapGainerService extends AbstractBSEService<BSESmallCapGainerEntity, CapitalGainerDetailModel> {
+public class BSESmallCapGainerService extends AbstractBSEService<BSESmallCapGainerEntity, CapitalGainerDetailModel, SmallCapGainerWebPage> {
 
     private static final Logger LOGGER = Logger.getLogger(BSESmallCapGainerService.class.getName());
 
     @Override
-    public BSEWebPage getWebPage() {
-        BSEWebPage webPage = super.getWebPage();
-        webPage.setSmallCapGainerLinkStyle("font-weight: bold;");
-        return webPage;
+    public SmallCapGainerWebPage getWebPage() {
+        SmallCapGainerWebPage smallCapGainerWebPage = new SmallCapGainerWebPage();
+        smallCapGainerWebPage.setCapitalGainerDetailModels(this.transformEntities(this.getEntities()));
+        return smallCapGainerWebPage;
     }
 
     @Override

@@ -4,11 +4,11 @@ import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
 
 import java.util.List;
 
-public class PriceSpurtsPage extends NSEWebPage {
+public class PriceSpurtsWebPage extends NSEWebPage {
 
     private List<NSEPriceSpurtDetailModel> nsePriceSpurtDetailModels;
 
-    public PriceSpurtsPage(){
+    public PriceSpurtsWebPage(){
         this.setPriceSpurt(true);
     }
 

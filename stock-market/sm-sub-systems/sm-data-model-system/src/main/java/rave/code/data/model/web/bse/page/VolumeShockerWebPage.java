@@ -6,13 +6,17 @@ import java.util.List;
 
 public class VolumeShockerWebPage extends BSEWebPage {
 
-    private List<VolumeShockerDetailModel> volumeShockerStocks;
+    private List<VolumeShockerDetailModel> volumeShockerDetailModels;
 
-    public List<VolumeShockerDetailModel> getVolumeShockerStocks() {
-        return volumeShockerStocks;
+    public VolumeShockerWebPage(){
+        this.setVolumeShockersLink(true);
     }
 
-    public void setVolumeShockerStocks(List<VolumeShockerDetailModel> volumeShockerStocks) {
-        this.volumeShockerStocks = volumeShockerStocks;
+    public List<VolumeShockerDetailModel> getVolumeShockerDetailModels() {
+        return volumeShockerDetailModels;
+    }
+
+    public void setVolumeShockerDetailModels(List<VolumeShockerDetailModel> volumeShockerDetailModels) {
+        this.volumeShockerDetailModels = volumeShockerDetailModels;
     }
 }
