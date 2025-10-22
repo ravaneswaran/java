@@ -4,6 +4,7 @@ import rave.code.entity.AbstractEntity;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.util.UUID;
 
 @MappedSuperclass
 public class AbstractNSEEntity extends AbstractEntity {
@@ -17,5 +18,9 @@ public class AbstractNSEEntity extends AbstractEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public AbstractNSEEntity(){
+        this.setId(UUID.randomUUID().toString());
     }
 }
