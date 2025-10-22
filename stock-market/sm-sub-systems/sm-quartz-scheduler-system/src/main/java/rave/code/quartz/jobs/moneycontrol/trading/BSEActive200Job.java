@@ -3,8 +3,8 @@ package rave.code.quartz.jobs.moneycontrol.trading;
 import org.quartz.DisallowConcurrentExecution;
 import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 import rave.code.data.parser.html.moneycontrol.BSEActive200Parser;
-import rave.code.stockmarket.entity.BSEActive200Entity;
-import rave.code.stockmarket.repository.BSEActive200Repository;
+import rave.code.entity.bse.BSEActive200Entity;
+import rave.code.repository.bse.BSEActive200Repository;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

@@ -2,8 +2,8 @@ package rave.code.quartz.jobs.moneycontrol.investing;
 
 import rave.code.data.model.web.external.moneycontrol.CapitalGainerModel;
 import rave.code.data.parser.html.moneycontrol.BSEMidCapGainersParser;
-import rave.code.stockmarket.entity.BSEMidCapGainerEntity;
-import rave.code.stockmarket.repository.BSEMidCapGainerRepository;
+import rave.code.entity.bse.BSEMidCapGainerEntity;
+import rave.code.repository.bse.BSEMidCapGainerRepository;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

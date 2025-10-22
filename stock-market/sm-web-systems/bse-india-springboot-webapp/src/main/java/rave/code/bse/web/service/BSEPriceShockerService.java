@@ -5,8 +5,8 @@ import rave.code.bse.web.service.algorithms.sort.CurrentPriceComparator;
 import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.PriceShockerDetailModel;
 import rave.code.data.model.web.bse.page.PriceShockerWebPage;
-import rave.code.stockmarket.entity.BSEPriceShockerEntity;
-import rave.code.stockmarket.repository.BSEPriceShockerRepository;
+import rave.code.entity.bse.BSEPriceShockerEntity;
+import rave.code.repository.bse.BSEPriceShockerRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;

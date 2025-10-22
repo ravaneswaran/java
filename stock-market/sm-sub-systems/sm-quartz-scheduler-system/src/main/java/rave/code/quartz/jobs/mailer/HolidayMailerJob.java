@@ -2,10 +2,10 @@ package rave.code.quartz.jobs.mailer;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import rave.code.entity.groww.HolidayEntity;
 import rave.code.mail.java.ElectronicMail;
 import rave.code.quartz.jobs.AbstractQuartzJob;
-import rave.code.stockmarket.entity.HolidayEntity;
-import rave.code.stockmarket.repository.HolidayRepository;
+import rave.code.repository.groww.HolidayRepository;
 import rave.code.utilities.file.UserCredentialsFileReader;
 import rave.code.utility.log.JavaUtilLogDecor;
 

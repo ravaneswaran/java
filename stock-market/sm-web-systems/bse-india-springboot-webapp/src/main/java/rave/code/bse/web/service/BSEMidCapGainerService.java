@@ -6,8 +6,8 @@ import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.CapitalGainerDetailModel;
 import rave.code.data.model.web.bse.page.MidCapGainerWebPage;
-import rave.code.stockmarket.entity.BSEMidCapGainerEntity;
-import rave.code.stockmarket.repository.BSEMidCapGainerRepository;
+import rave.code.entity.bse.BSEMidCapGainerEntity;
+import rave.code.repository.bse.BSEMidCapGainerRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;

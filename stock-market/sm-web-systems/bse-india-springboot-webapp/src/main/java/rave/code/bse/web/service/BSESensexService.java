@@ -6,8 +6,8 @@ import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.ActiveStockDetailModel;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.page.SensexWebPage;
-import rave.code.stockmarket.entity.BSESensexEntity;
-import rave.code.stockmarket.repository.BSESensexRepository;
+import rave.code.entity.bse.BSESensexEntity;
+import rave.code.repository.bse.BSESensexRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;

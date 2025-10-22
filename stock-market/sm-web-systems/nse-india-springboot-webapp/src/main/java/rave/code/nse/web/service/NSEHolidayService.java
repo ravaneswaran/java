@@ -2,8 +2,8 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.HolidayDetailModel;
-import rave.code.stockmarket.entity.HolidayEntity;
-import rave.code.stockmarket.repository.HolidayRepository;
+import rave.code.entity.groww.HolidayEntity;
+import rave.code.repository.groww.HolidayRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

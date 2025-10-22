@@ -1,7 +1,7 @@
 package rave.code.quartz.jobs;
 
-import rave.code.stockmarket.entity.HolidayEntity;
-import rave.code.stockmarket.repository.HolidayRepository;
+import rave.code.entity.groww.HolidayEntity;
+import rave.code.repository.groww.HolidayRepository;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

@@ -6,8 +6,8 @@ import rave.code.bse.web.service.decorators.*;
 import rave.code.data.model.web.bse.BSEStockModel;
 import rave.code.data.model.web.bse.TopDividendDetailModel;
 import rave.code.data.model.web.bse.page.TopDividendWebPage;
-import rave.code.stockmarket.entity.BSETopDividendEntity;
-import rave.code.stockmarket.repository.BSETopDividendRepository;
+import rave.code.entity.bse.BSETopDividendEntity;
+import rave.code.repository.bse.BSETopDividendRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
