@@ -17,6 +17,39 @@
             <img class="left-container-external-link-icon" src="/sm-static-hub/images/icons/external-link-icon.png">
         </div>
     </div>
+
+    <div class="container-horizontal-separator"></div>
+    <div class="left-container-lounge-div">Pre Open Market</div>
+    <div class="container-horizontal-separator"></div>
+    <div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/sm-static-hub/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/pre-open-market/nifty-50"
+               th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">NIfty 50</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/sm-static-hub/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/pre-open-market/bank-nifty"
+               th:style="${webpage != null && webpage.preOpenMarketBankNifty ? 'font-weight:bold' : ''}">Bank Nifty</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/sm-static-hub/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/pre-open-market/sme"
+               th:style="${webpage != null && webpage.preOpenMarketSME ? 'font-weight:bold' : ''}">SME</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/sm-static-hub/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/pre-open-market/fo"
+               th:style="${webpage != null && webpage.preOpenMarketFO ? 'font-weight:bold' : ''}">FO</a>
+        </div>
+        <div class="left-container-application-link-div">
+            <img class="left-container-application-link-icon" src="/sm-static-hub/images/icons/play-store-icon.png">
+            <a class="left-container-application-link" href="/nse/pre-open-market/others"
+               th:style="${webpage != null && webpage.preOpenMarketOthers ? 'font-weight:bold' : ''}">Others</a>
+        </div>
+    </div>
+
+
     <div class="container-horizontal-separator"></div>
     <div class="left-container-lounge-div">
         <a href="/nse/nifty" style="color:white;">NIFTY</a>
@@ -39,6 +72,7 @@
                th:style="${webpage != null && webpage.sme ? 'font-weight:bold' : ''}">SME</a>
         </div>
     </div>
+
     <div class="container-horizontal-separator"></div>
     <div class="left-container-lounge-div">Top 20</div>
     <div class="container-horizontal-separator"></div>

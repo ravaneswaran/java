@@ -5,25 +5,24 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include relativeToChangelogFile="true" file="bse-active-100-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-active-100-history-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-active-200-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-active-200-history-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-active-500-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-active-500-history-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-top-dividend-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-small-cap-gainer-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-mid-cap-gainer-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-price-shockers-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-price-shockers-history-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-volume-shockers-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-volume-shockers-history-changelog.xml"/>
-    <include relativeToChangelogFile="true" file="bse-sensex-changelog.xml"/>
-
-    <include relativeToChangelogFile="true" file="groww/holidays-changelog.xml"/>
-
+    <include relativeToChangelogFile="true" file="bse/bse-active-100-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-active-100-history-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-active-200-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-active-200-history-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-active-500-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-active-500-history-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-top-dividend-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-small-cap-gainer-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-mid-cap-gainer-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-price-shockers-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-price-shockers-history-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-volume-shockers-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-volume-shockers-history-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="bse/bse-sensex-changelog.xml"/>
     <include relativeToChangelogFile="true" file="bse/bse-stock-base-changelog.xml"/>
     <include relativeToChangelogFile="true" file="bse/bse-day-price-detail-changelog.xml"/>
+
+    <include relativeToChangelogFile="true" file="groww/holidays-changelog.xml"/>
 
     <include relativeToChangelogFile="true" file="nse/nse-stock-base-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-day-price-detail-changelog.xml"/>

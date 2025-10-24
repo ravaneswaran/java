@@ -16,7 +16,52 @@ public class NSEWebPage extends AbstractWebPage {
     private boolean securityLessThan20;
     private boolean securityGreaterThan20;
     private boolean bankNifty;
+    private boolean preOpenMarketFO;
+    private boolean preOpenMarketNifty50;
+    private boolean preOpenMarketBankNifty;
+    private boolean preOpenMarketSME;
+    private boolean preOpenMarketOthers;
     private List<NSEStockModel> nseStockModels;
+
+    public boolean isPreOpenMarketOthers() {
+        return preOpenMarketOthers;
+    }
+
+    public void setPreOpenMarketOthers(boolean preOpenMarketOthers) {
+        this.preOpenMarketOthers = preOpenMarketOthers;
+    }
+
+    public boolean isPreOpenMarketSME() {
+        return preOpenMarketSME;
+    }
+
+    public void setPreOpenMarketSME(boolean preOpenMarketSME) {
+        this.preOpenMarketSME = preOpenMarketSME;
+    }
+
+    public boolean isPreOpenMarketBankNifty() {
+        return preOpenMarketBankNifty;
+    }
+
+    public void setPreOpenMarketBankNifty(boolean preOpenMarketBankNifty) {
+        this.preOpenMarketBankNifty = preOpenMarketBankNifty;
+    }
+
+    public boolean isPreOpenMarketNifty50() {
+        return preOpenMarketNifty50;
+    }
+
+    public void setPreOpenMarketNifty50(boolean preOpenMarketNifty50) {
+        this.preOpenMarketNifty50 = preOpenMarketNifty50;
+    }
+
+    public boolean isPreOpenMarketFO() {
+        return preOpenMarketFO;
+    }
+
+    public void setPreOpenMarketFO(boolean preOpenMarketFO) {
+        this.preOpenMarketFO = preOpenMarketFO;
+    }
 
     public boolean isPriceSpurt() {
         return priceSpurt;

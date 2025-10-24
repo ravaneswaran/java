@@ -317,6 +317,19 @@ td{
     line-height: 200%;
 }
 
+.right-container-stock-stat-item{
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 2px solid #0BDA51;
+    background: #353839;
+    height: 80%;
+    width: 15%;
+    float: right;
+    font-size: 12px;
+    margin: 3px;
+}
+
 /**************** Gradient background *************************/
 
 /*.red-to-dark-red-gradient{

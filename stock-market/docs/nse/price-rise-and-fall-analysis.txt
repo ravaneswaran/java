@@ -1,0 +1,117 @@
+Question
+========
+how to know the price rise of a stock before the market starts?
+
+Chat GPT Response
+=================
+
+Excellent question — and a very practical one if you’re studying trading or automation 📈
+
+Let’s break it down step-by-step:
+
+🎯 Goal
+--------
+
+You want to know:
+
+“Which stocks are likely to rise in price before the market actually opens.”
+
+That means you want to estimate or observe pre-market price movement or signals before 9:15 AM (NSE) or 9:30 AM (BSE) in India.
+
+🕐 Market Timing Refresher (India)
+----------------------------------
+Session                                  Time (IST)          Notes
+-------------------------------------------------------------------
+Pre-open session                         9:00 AM – 9:08 AM   Orders are placed; indicative prices are formed.
+Order matching (pre-open equilibrium)    9:08 AM – 9:12 AM   NSE matches demand/supply and calculates equilibrium price.
+Buffer / transition                      9:12 AM – 9:15 AM   Orders frozen; final price discovery pushed to regular market.
+Market opens                             9:15 AM             Regular trading begins.
+
+So:
+👉 The price rise signal before market open comes from the pre-open market (9:00–9:12 AM).
+
+🔍 Step 1 — Watch the “Pre-Open Market” Data
+
+Official source:
+🔗 https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market
+
+During 9:00–9:12 AM, you’ll see for each stock:
+
+Indicative equilibrium price
+
+Previous close
+
+Difference (%)
+
+Buy/sell quantities
+
+📊 How to read it
+------------------
+
+If a stock’s indicative equilibrium price is higher than its previous close —
+→ there’s demand pressure (expected rise).
+
+Example:
+
+Symbol  Prev Close  Equilibrium Price   Change (%)  Trend
+----------------------------------------------------------
+INFY    1500        1530                +2.0%       Likely upward open
+TCS     3650        3640                -0.3%       Flat/down
+
+
+🧠 Step 2 — Analyze “Gap Up” and “Gap Down” Stocks
+---------------------------------------------------
+
+After 9:08 AM, many broker terminals and sites publish:
+
+Top Gainers (Pre-open)
+
+Top Losers (Pre-open)
+
+These lists show which stocks are likely to open higher or lower.
+
+Examples:
+
+https://www.moneycontrol.com/stocks/marketstats/preopen/
+https://www.nseindia.com/live_market/dynaContent/live_watch/pre_open_market/pre_open_market.htm
+https://www.screener.in
+
+🧮 Step 3 — Compute “Expected % Change” Programmatically
+---------------------------------------------------------
+
+If you want to automate or predict, you can fetch pre-open data using APIs.
+
+
+💡 During 9:08–9:12, this gives you a strong hint of the open direction.
+
+
+
+💬 Step 4 — Optional: Use Global / Derivative Indicators
+--------------------------------------------------------
+
+Sometimes, prices rise due to overnight cues, even before pre-open begins.
+
+You can check:
+
+Source                                                Data Type                            Purpose
+---------------------------------------------------------------------------------------------------
+SGX Nifty / GIFT Nifty                                Index futures (before 9:00 AM)       Market direction hint
+US markets (Dow/Nasdaq)                               Overnight trends                     Sentiment correlation
+ADR prices (for Indian companies listed abroad)       e.g., INFY ADR on NYSE               Estimate open gap
+FII/DII data                                          Previous day’s flows                 Institutional trend
+
+
+⚙️ Step 5 — Combine Clues
+Time                   What You Can Observe              Likely Signal
+----------------------------------------------------------------------
+8:30 AM                GIFT Nifty, global markets        Market-wide sentiment
+9:00–9:08 AM           Pre-open orders building up       Stock-level interest
+9:08–9:12 AM           Indicative equilibrium prices     Likely open gaps
+9:15 AM                Market opens                      Confirmation
+
+
+🚫 Note
+
+* Before 9:00 AM, no live stock price exists — only cues from derivatives, ADRs, or sentiment.
+* The real actionable “price before open” comes from 9:00–9:12 AM pre-open session.
+* Predictions outside that (overnight) are just statistical or sentiment guesses.

@@ -103,7 +103,7 @@ public class NationalStockExchangeController {
 
     @GetMapping("/top-20/security-lwr-20")
     public ModelAndView securitiesLowerThan20() {
-        NSEWebPage top20SecuritiesLWR20Page = this.nseTop20FOSecurityService.getWebPage();
+        NSEWebPage top20SecuritiesLWR20Page = this.nseTop20SecuritiesLwr20Service.getWebPage();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("top_20_security_lwr_20");
         modelAndView.addObject("webpage", top20SecuritiesLWR20Page);
