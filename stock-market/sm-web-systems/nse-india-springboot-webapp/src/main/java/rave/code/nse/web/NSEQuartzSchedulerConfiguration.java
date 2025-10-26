@@ -40,7 +40,7 @@ public class NSEQuartzSchedulerConfiguration {
             holidayCalendar.addExcludedDate(holidayDetailModel.getHolidate());
         }
         try {
-            scheduler.addCalendar("BSECalendar", holidayCalendar, false, true);
+            scheduler.addCalendar("NSECalendar", holidayCalendar, false, true);
         } catch (ObjectAlreadyExistsException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         } catch (SchedulerException exception) {

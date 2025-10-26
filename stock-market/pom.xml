@@ -15,4 +15,76 @@
         <module>sm-web-systems</module>
     </modules>
 
+    <properties>
+        <jdbcUrl>jdbc:mysql://localhost:3306/</jdbcUrl>
+        <db.user>admin</db.user>
+        <db.password>admin</db.password>
+        <db.name>stock_market</db.name>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>rave.code.java.stock-market</groupId>
+                <artifactId>sm-maven-plugin</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <configuration>
+                    <jdbcUrl>${jdbcUrl}</jdbcUrl>
+                    <driver>com.mysql.cj.jdbc.Driver</driver>
+                    <username>${db.user}</username>
+                    <password>${db.password}</password>
+                </configuration>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+                    <dependency>
+                        <groupId>com.mysql</groupId>
+                        <artifactId>mysql-connector-j</artifactId>
+                        <version>8.0.33</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>export-db</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>mysqldump</executable>
+                            <arguments>
+                                <argument>-u</argument>
+                                <argument>${db.user}</argument>
+                                <argument>-p${db.password}</argument>
+                                <argument>--databases</argument>
+                                <argument>${db.name}</argument>
+                                <argument>--no-tablespaces</argument>
+                                <argument>--result-file=${project.build.directory}/${db.name}_dump.sql</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>create-tables</id>
+            <properties>
+                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+            </properties>
+        </profile>
+        <profile>
+            <id>delete-tables</id>
+            <properties>
+                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>

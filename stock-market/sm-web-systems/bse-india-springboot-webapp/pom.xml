@@ -21,6 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
         <java.version>17</java.version>
+        <jdbcUrl>jdbc:mysql://localhost:3306/</jdbcUrl>
     </properties>
 
     <dependencies>
@@ -113,29 +114,40 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>rave.code.java.maven-plugins</groupId>
-                <artifactId>quartz-mysql-maven-plugin</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-                <configuration>
-                    <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
-                    <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <username>admin</username>
-                    <password>admin</password>
-                    <prefix>QUARTZ_</prefix>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>rave.code.java.stock-market</groupId>
                 <artifactId>sm-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <configuration>
-                    <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+                    <jdbcUrl>${jdbcUrl}</jdbcUrl>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
                     <username>admin</username>
                     <password>admin</password>
                 </configuration>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+                    <dependency>
+                        <groupId>com.mysql</groupId>
+                        <artifactId>mysql-connector-j</artifactId>
+                        <version>8.0.33</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>create-tables</id>
+            <properties>
+                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+            </properties>
+        </profile>
+        <profile>
+            <id>delete-tables</id>
+            <properties>
+                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
