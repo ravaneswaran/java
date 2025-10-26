@@ -43,32 +43,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>export-db</id>
-                        <phase>none</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>mysqldump</executable>
-                            <arguments>
-                                <argument>-u</argument>
-                                <argument>${db.user}</argument>
-                                <argument>-p${db.password}</argument>
-                                <argument>--databases</argument>
-                                <argument>${db.name}</argument>
-                                <argument>--no-tablespaces</argument>
-                                <argument>--result-file=${project.build.directory}/${db.name}_dump.sql</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
