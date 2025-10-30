@@ -1,23 +1,25 @@
-package rave.code.quartz.jobs.nse.manual;
+package rave.code.quartz.jobs.mains;
 
+import rave.code.entity.nse.NSEDayPriceLastRunDetailEntity;
 import rave.code.process.SubProcessor;
 import rave.code.quartz.jobs.nse.csv.bhavcopy.NSEDayPriceDetailEntityMakerJob;
+import rave.code.repository.nse.NSEDayPriceLastRunDetailRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TestNSEHistoricalDayPriceDetailSubProcess {
+public class MainNSEHistoricalDayPriceDetailSubProcess {
 
-    private static final Logger LOGGER = Logger.getLogger(TestNSEHistoricalDayPriceDetailSubProcess.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(MainNSEHistoricalDayPriceDetailSubProcess.class.getName());
 
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
@@ -32,7 +34,7 @@ public class TestNSEHistoricalDayPriceDetailSubProcess {
             Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             historicalDates.add(pastDate);
         }
-        Collections.reverse(historicalDates);
+        //Collections.reverse(historicalDates);
 
         int end = subListItemCount;
         int start = 1;
@@ -60,5 +62,18 @@ public class TestNSEHistoricalDayPriceDetailSubProcess {
             end = end + subListItemCount;
 
         } while (end <= noOfDaysInPast);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date now = new Date();
+        String nowAsString = simpleDateFormat.format(now);
+        NSEDayPriceLastRunDetailRepository nseDayPriceLastRunDetailRepository = new NSEDayPriceLastRunDetailRepository();
+        NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = nseDayPriceLastRunDetailRepository.find();
+        if (null == nseDayPriceLastRunDetailEntity) {
+            nseDayPriceLastRunDetailEntity = new NSEDayPriceLastRunDetailEntity();
+        }
+        nseDayPriceLastRunDetailEntity.setLastRunAt(now);
+        nseDayPriceLastRunDetailEntity.setLastRunAtStr(nowAsString);
+        nseDayPriceLastRunDetailRepository.upsert(nseDayPriceLastRunDetailEntity);
+        LOGGER.info(String.format("NSEHistoricalDayPriceDetailSubProcess made its last run at %s.", simpleDateFormat.format(now)));
     }
 }

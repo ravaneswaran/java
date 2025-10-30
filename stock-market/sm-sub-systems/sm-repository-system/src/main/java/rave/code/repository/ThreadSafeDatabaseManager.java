@@ -11,7 +11,7 @@ public abstract class ThreadSafeDatabaseManager<T> extends NotThreadSafeDatabase
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("stock_market");;
     private static final ThreadLocal<EntityManager> threadLocal = new ThreadLocal<>();
 
-    private Class<T> type;
+    protected Class<T> type;
 
     public ThreadSafeDatabaseManager(Class<T> type) {
         super(type);

@@ -7,6 +7,7 @@ import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
 import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
 import rave.code.repository.nse.NSEDayPriceDetailRepository;
+import rave.code.repository.nse.NSEDayPriceLastRunDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utilities.file.SimpleFileReader;
 import rave.code.utility.download.FileDownloader;
@@ -34,6 +35,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
     private Date date;
     private NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private NSEDayPriceLastRunDetailRepository nseDayPriceLastRunDetailRepository = new NSEDayPriceLastRunDetailRepository();
 
     List<Date> dates = new ArrayList<>();
 
@@ -46,7 +48,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         this.initialize(date);
     }
 
-    private void initialize(Date date){
+    private void initialize(Date date) {
         this.date = date;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
         String formattedDate = simpleDateFormat.format(this.date);
@@ -63,9 +65,35 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         String zipEntryFileName = String.format("Pd%s.csv", formattedDate);
 
         List<String> lines = new ArrayList<>();
-        try (InputStream inputStream = fileDownloader.downloadFile(url);
-             InputStream csvFileInputStream = new ZipFileReader().read(inputStream, zipEntryFileName);) {
-            lines = new SimpleFileReader().read(csvFileInputStream);
+        try {
+            InputStream inputStream = fileDownloader.downloadFile(url);
+            InputStream csvFileInputStreamOne = new ZipFileReader().read(inputStream, zipEntryFileName);
+            if (csvFileInputStreamOne != null) {
+                LOGGER.log(Level.INFO, String.format("Reading the zip entry (%s)",zipEntryFileName));
+                lines = new SimpleFileReader().read(csvFileInputStreamOne);
+                csvFileInputStreamOne.close();
+            } else {
+                simpleDateFormat = new SimpleDateFormat("ddMMyyyy");
+                formattedDate = simpleDateFormat.format(this.date);
+                zipEntryFileName = String.format("Pd%s.csv", formattedDate);
+                LOGGER.log(Level.INFO, String.format("Reading the zip entry (%s)",zipEntryFileName));
+                InputStream csvFileInputStreamTwo = new ZipFileReader().read(inputStream, zipEntryFileName);
+                if (null != csvFileInputStreamTwo) {
+                    lines = new SimpleFileReader().read(csvFileInputStreamTwo);
+                    csvFileInputStreamTwo.close();
+                } else {
+                    simpleDateFormat = new SimpleDateFormat("ddMMyyyy");
+                    formattedDate = simpleDateFormat.format(this.date);
+                    zipEntryFileName = String.format("pd%s.csv", formattedDate);
+                    LOGGER.log(Level.INFO, String.format("Reading the zip entry (%s)",zipEntryFileName));
+                    InputStream csvFileInputStreamThree = new ZipFileReader().read(inputStream, zipEntryFileName);
+                    if (null != csvFileInputStreamThree) {
+                        lines = new SimpleFileReader().read(csvFileInputStreamThree);
+                        csvFileInputStreamThree.close();
+                    }
+                }
+            }
+            inputStream.close();
         } catch (FileNotFoundException ioException) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", url));

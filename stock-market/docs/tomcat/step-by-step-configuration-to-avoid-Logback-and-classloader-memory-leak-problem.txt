@@ -1,0 +1,205 @@
+🧱 Step 1: Structure Your Project as a WAR
+------------------------------------------
+
+In your pom.xml:
+<packaging>war</packaging>
+
+and ensure your main class extends SpringBootServletInitializer:
+
+@SpringBootApplication
+public class MyAppApplication extends SpringBootServletInitializer {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MyAppApplication.class);
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(MyAppApplication.class, args);
+    }
+}
+
+🧰 Step 2: Exclude Boot’s Embedded Tomcat + Logging
+---------------------------------------------------
+
+You don’t want two Tomcats or two logging systems.
+So exclude Boot’s embedded server + logging modules:
+
+<dependencies>
+    <!-- Your Spring Boot starter -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+
+    <!-- Use the container’s logging bridge instead -->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+</dependencies>
+
+⚙️ Step 3: Add Logging Configuration That Shuts Down Cleanly
+-----------------------------------------------------------
+
+In src/main/resources/logback-spring.xml:
+
+<configuration scan="false">
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
+
+✅ Note:
+
+scan="false" → disables config-watcher thread (prevents leaks)
+
+LevelChangePropagator → syncs JUL with SLF4J correctly
+
+No background threads = no post-shutdown logging
+
+
+🧾 Step 4: Enable Proper Logging Shutdown Hook
+----------------------------------------------
+
+In application.properties:
+
+logging.shutdown-hook.enabled=true
+
+This ensures Logback cleans up before Tomcat unloads your webapp.
+
+
+🧹 Step 5: Make Sure No Extra Logback JARs Exist
+------------------------------------------------
+
+Run:
+
+mvn dependency:tree | grep logback
+
+You should see only:
+
+ch.qos.logback:logback-classic
+ch.qos.logback:logback-core
+
+🧩 Step 6: Clean Redeploy Workflow
+----------------------------------
+
+Before redeploying:
+
+mvn clean package
+
+Then delete the exploded app folder in Tomcat:
+
+$CATALINA_HOME/webapps/YourApp/
+
+Then redeploy the new WAR:
+
+$CATALINA_HOME/webapps/YourApp.war
+
+Check catalina.out — you should see:
+
+INFO ... org.apache.catalina.core.StandardContext: Destroying Spring FrameworkServlet ...
+INFO ... Closing JPA EntityManagerFactory for persistence unit ...
+INFO ... Stopping Logback context
+
+✅ and no “Illegal access: web application instance has been stopped already”.
+
+🧰 Optional Step 7: Container-Specific Logging Integration
+----------------------------------------------------------
+If you want to let Tomcat handle all logging (not Logback), you can skip Logback entirely and bridge Spring’s logs to Tomcat’s JUL:
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-logging</artifactId>
+    <scope>provided</scope>
+</dependency>
+
+and add this system property to setenv.sh:
+
+export CATALINA_OPTS="$CATALINA_OPTS -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"
+
+This avoids any Logback at all.
+
+*******************************************************************************************************************************************
+
+Question to ChatGPT
+-------------------
+setenv.sh is not available in apache-tomat-11.0.7?
+
+Response
+--------
+
+Apache Tomcat 11 has changed a few internal structures compared to Tomcat 9/10, and setenv.sh is no longer created by default (and in some installations, the startup scripts behave differently due to Jakarta EE 10 / modular layout).
+
+Let’s go over this carefully and practically 👇
+
+Let’s go over this carefully and practically 👇
+
+🧩 1️⃣ Is setenv.sh Gone?
+-----------------------
+No — it’s not gone, it’s just not provided by default.
+
+You can still create it manually, and Tomcat will automatically detect and use it if it exists — even in Tomcat 11.
+
+Tomcat’s catalina.sh (and its newer startup.sh) still contains:
+
+if [ -r "$CATALINA_BASE/bin/setenv.sh" ]; then
+  . "$CATALINA_BASE/bin/setenv.sh"
+fi
+
+✅ So it still supports setenv.sh.
+It’s simply not shipped by default anymore.
+
+⚙️ 2️⃣ How to Add It
+-----------------
+
+Just create this file yourself:
+
+$CATALINA_HOME/bin/setenv.sh
+
+Then make it executable:
+
+chmod +x $CATALINA_HOME/bin/setenv.sh
+
+Add your environment variables in it, for example:
+✅ Tomcat will automatically source it every time you run startup.sh, shutdown.sh, or catalina.sh.
++------------------------------------------------------------------------------------------------------------+
+|    #!/bin/bash                                                                                             |
+|                                                                                                            |
+|    # Java options                                                                                          |
+|    export JAVA_OPTS="$JAVA_OPTS -Xms512m -Xmx1g"                                                           |
+|                                                                                                            |
+|    # Tomcat logging manager (for JUL integration)                                                          |
+|    export CATALINA_OPTS="$CATALINA_OPTS -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager" |
+|                                                                                                            |
+|    # Optional: Spring profiles or extra system props                                                       |
+|    export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active=prod"                                     |
++------------------------------------------------------------------------------------------------------------+
+
+✅ Tomcat will automatically source it every time you run startup.sh, shutdown.sh, or catalina.sh.
+
