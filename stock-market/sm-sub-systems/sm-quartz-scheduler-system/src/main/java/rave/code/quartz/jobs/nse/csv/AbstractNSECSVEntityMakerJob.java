@@ -24,9 +24,16 @@ public abstract class AbstractNSECSVEntityMakerJob<T> extends AbstractCSVEntityM
     }
 
     public File downloadFile() throws IOException, InterruptedException {
+        return this.waitAndDownloadFile(0);
+    }
+
+    public File waitAndDownloadFile(int seconds) throws IOException, InterruptedException {
         NationalStockExchangeHttpClient nationalStockExchangeHttpClient = new NationalStockExchangeHttpClient();
         nationalStockExchangeHttpClient.gotoHomePage();
         nationalStockExchangeHttpClient.stringResponseOf(this.downloadPageUrl);
+        if(seconds > 0) {
+            Thread.sleep(seconds * 1000);
+        }
         return nationalStockExchangeHttpClient.getFile(this.csvDownloadUrl);
     }
 

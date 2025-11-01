@@ -10,7 +10,10 @@ import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -26,7 +29,10 @@ public class NSEDayBulkDealDetailEntityMakerJob extends AbstractNSECSVLargeTrade
     public NSEDayBulkDealDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/historicalOR/bulk-block-short-deals?csv=true&optionType=bulk_deals&from=%s&to=%s");
         this.setDownloadPageUrl("https://www.nseindia.com/report-detail/display-bulk-and-block-deals");
-        this.reconstructCsvDownloadUrl();
+        LocalDate now = LocalDate.now();
+        LocalDate historicalDate = now.minusDays(1);
+        Date fromDate = Date.from(historicalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        this.reconstructCsvDownloadUrl(fromDate);
     }
 
     @Override
