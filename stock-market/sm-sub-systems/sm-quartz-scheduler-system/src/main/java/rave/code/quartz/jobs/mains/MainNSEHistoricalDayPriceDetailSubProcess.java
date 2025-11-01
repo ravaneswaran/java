@@ -24,7 +24,7 @@ public class MainNSEHistoricalDayPriceDetailSubProcess {
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
 
-        int noOfDaysInPast = 365;
+        int noOfDaysInPast = 50;
         int subListItemCount = (noOfDaysInPast * 10) / 100;
 
         LocalDate today = LocalDate.now();

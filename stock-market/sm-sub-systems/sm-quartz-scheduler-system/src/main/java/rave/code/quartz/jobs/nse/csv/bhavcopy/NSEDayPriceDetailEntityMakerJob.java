@@ -14,7 +14,7 @@ import rave.code.utility.download.FileDownloader;
 import rave.code.utility.log.JavaUtilLogDecor;
 import rave.code.utility.zip.ZipFileReader;
 
-import java.io.FileNotFoundException;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -55,6 +55,31 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         this.setCsvDownloadUrl(String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate));
     }
 
+    private List<String> getCsvFileLines(InputStream zipFileInputStream, String zipEntryFileName) {
+        List<String> lines = new ArrayList<>();
+        if (null != zipFileInputStream) {
+            InputStream zipFileEntryCsvInputStream = null;
+            try {
+                zipFileEntryCsvInputStream = new ZipFileReader().read(zipFileInputStream, zipEntryFileName);
+            } catch (IOException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+            }
+            if(null != zipFileEntryCsvInputStream){
+                try {
+                    lines = new SimpleFileReader().read(zipFileEntryCsvInputStream);
+                } catch (IOException exception) {
+                    LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+                }
+                try {
+                    zipFileEntryCsvInputStream.close();
+                } catch (IOException exception) {
+                    LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+                }
+            }
+        }
+        return lines;
+    }
+
     @Override
     public List<String> getDataFromSource() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
@@ -62,46 +87,33 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         String url = String.format(DailyPriceListDownloadLink.DAY_PRICE_LIST_DOWNLOAD_LINK_NSE.get(), formattedDate);
         LOGGER.log(Level.INFO, String.format("Downloading file... %s", url));
         FileDownloader fileDownloader = new FileDownloader();
-        String zipEntryFileName = String.format("Pd%s.csv", formattedDate);
-
         List<String> lines = new ArrayList<>();
         try {
-            InputStream inputStream = fileDownloader.downloadFile(url);
-            InputStream csvFileInputStreamOne = new ZipFileReader().read(inputStream, zipEntryFileName);
-            if (csvFileInputStreamOne != null) {
-                LOGGER.log(Level.INFO, String.format("Reading the zip entry (%s)",zipEntryFileName));
-                lines = new SimpleFileReader().read(csvFileInputStreamOne);
-                csvFileInputStreamOne.close();
-            } else {
-                simpleDateFormat = new SimpleDateFormat("ddMMyyyy");
+            InputStream zipFileInputStream = fileDownloader.downloadFile(url);
+            if (null != zipFileInputStream) {
+                byte[] fileContent = zipFileInputStream.readAllBytes(); // this line is very important
+                InputStream zipFileInputStreamCopyOne = new ByteArrayInputStream(fileContent);
+                InputStream zipFileInputStreamCopyTwo = new ByteArrayInputStream(fileContent);
+                simpleDateFormat = new SimpleDateFormat("ddMMyy");
                 formattedDate = simpleDateFormat.format(this.date);
-                zipEntryFileName = String.format("Pd%s.csv", formattedDate);
-                LOGGER.log(Level.INFO, String.format("Reading the zip entry (%s)",zipEntryFileName));
-                InputStream csvFileInputStreamTwo = new ZipFileReader().read(inputStream, zipEntryFileName);
-                if (null != csvFileInputStreamTwo) {
-                    lines = new SimpleFileReader().read(csvFileInputStreamTwo);
-                    csvFileInputStreamTwo.close();
-                } else {
+                String zipEntryFileName = String.format("Pd%s.csv", formattedDate);
+                lines = this.getCsvFileLines(zipFileInputStreamCopyOne, zipEntryFileName);
+                zipFileInputStreamCopyOne.close();
+                if (lines.isEmpty()) {
                     simpleDateFormat = new SimpleDateFormat("ddMMyyyy");
                     formattedDate = simpleDateFormat.format(this.date);
-                    zipEntryFileName = String.format("pd%s.csv", formattedDate);
-                    LOGGER.log(Level.INFO, String.format("Reading the zip entry (%s)",zipEntryFileName));
-                    InputStream csvFileInputStreamThree = new ZipFileReader().read(inputStream, zipEntryFileName);
-                    if (null != csvFileInputStreamThree) {
-                        lines = new SimpleFileReader().read(csvFileInputStreamThree);
-                        csvFileInputStreamThree.close();
-                    }
+                    zipEntryFileName = String.format("Pd%s.csv", formattedDate);
+                    lines = this.getCsvFileLines(zipFileInputStreamCopyTwo, zipEntryFileName);
+                    zipFileInputStreamCopyTwo.close();
                 }
+                zipFileInputStream.close();
             }
-            inputStream.close();
-        } catch (FileNotFoundException ioException) {
+        } catch (IOException exception) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", url));
             LOGGER.log(Level.SEVERE, "Possibly could be the following reason(s)...");
             LOGGER.log(Level.SEVERE, String.format("the day the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY)", sdf.format(this.date)));
             LOGGER.log(Level.SEVERE, String.format("the system expects the file now but will be made available only after market closes(approximately after 04:15 PM)..", sdf.format(this.date)));
-        } catch (IOException ioException) {
-            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
         }
         return lines;
     }
@@ -201,6 +213,8 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
 
         this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseDayPriceDetailRepository.bulkUpsert(transformedData);
+
+        LOGGER.log(Level.INFO, String.format("Number of NSEDayPriceDetailEntity.... %s", transformedData.size()));
     }
 
     public void setDates(List<Date> dates) {

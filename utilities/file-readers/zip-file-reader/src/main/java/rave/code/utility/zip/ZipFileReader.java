@@ -15,7 +15,7 @@ public class ZipFileReader {
         StringBuffer lineBuffer = new StringBuffer();
         ZipEntry entry;
         while ((entry = zis.getNextEntry()) != null) {
-            if (entry.getName().equalsIgnoreCase(zipEntryName)) {
+            if (zipEntryName.toLowerCase().equalsIgnoreCase(entry.getName())) {
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(zis, "UTF-8"))) {
                     String line;
                     while ((line = br.readLine()) != null) {
@@ -26,11 +26,11 @@ public class ZipFileReader {
             }
             zis.closeEntry();
         }
+
         if(lineBuffer.toString().length() > 0){
             return new ByteArrayInputStream(lineBuffer.toString().getBytes(StandardCharsets.UTF_8));
         } else {
             return null;
         }
-
     }
 }

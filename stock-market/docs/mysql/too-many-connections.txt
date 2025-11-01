@@ -1,0 +1,60 @@
+🧩 1. Understand what’s happening
+---------------------------------
+Each connection to MySQL consumes resources.
+The server allows only up to a certain number of concurrent connections (default ≈ 151).
+
+If your app (for example, Tomcat + Quartz + JDBC) opens connections and doesn’t close them properly — or if you have too many threads using DB connections at once — MySQL will reject new connections.
+
+🧰 2. Check the current connection limits
+------------------------------------------
+    Run this in MySQL:
+        SHOW VARIABLES LIKE 'max_connections';
+    To see current usage:
+        SHOW STATUS LIKE 'Threads_connected';
+
+⚙️ 3. Increase the limit safely
+------------------------------
+In your MySQL config file (my.cnf or my.ini):
+
+[mysqld]
+max_connections = 500
+
+Then restart MySQL:
+    sudo systemctl restart mysql
+
+🧼 4. Fix your application (the real cause)
+-------------------------------------------
+Even with a higher limit, this usually indicates a connection leak or uncontrolled connection pool.
+For Tomcat + JDBC (or Spring Boot)
+Check your connection pool configuration.
+If you’re using HikariCP (default in Spring Boot):
+
+spring.datasource.hikari.maximum-pool-size=20
+spring.datasource.hikari.minimum-idle=5
+
+Or for Tomcat JDBC pool:
+spring.datasource.tomcat.max-active=20
+spring.datasource.tomcat.max-idle=10
+spring.datasource.tomcat.min-idle=5
+
+🕵️‍♂️ 5. Diagnose leaks
+---------------------
+SHOW PROCESSLIST;
+
+You’ll see all active connections. Look for:
+Many idle connections (e.g. "Sleep")
+Same user/IP repeating — likely your app
+To kill all sleeping connections (for emergency relief):
+
+KILL CONNECTION <id>;
+
+Or restart MySQL to clear them.
+
+🔄 6. Optional: Auto-close idle connections
+-------------------------------------------
+[mysqld]
+wait_timeout = 300
+interactive_timeout = 300
+
+This closes idle connections after 5 minutes (300 seconds).
+
