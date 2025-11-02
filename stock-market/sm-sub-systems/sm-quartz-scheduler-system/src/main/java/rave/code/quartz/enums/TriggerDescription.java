@@ -19,10 +19,13 @@ public enum TriggerDescription {
     BSE_VOLUME_SHOCKER_HISTORY("Triggers the job that moves BSE Volume Shocker entries to the history table..."),
 
 
-    NSE_POST_MARKET_CLOSE("Runs the at 4:30 PM."),
-    NSE_PRE_OPEN_MARKET_REGULAR_SESSION("Runs between 09:00-09:08 AM"),
-    NSE_BLOCK_DEAL_SESSION("Runs between 08:45-09:00 AM and 02:05-02-20 PM."),
-    NSE_T_PLUS_0_LIVE_SESSION("Runs between 09:15 AM - 01:30 PM.");
+    NSE_POST_MARKET_CLOSE("Triggers the job at 04:30 PM."),
+    NSE_PRE_OPEN_MARKET_REGULAR_SESSION("Triggers the job between 09:00 AM - 09:08 AM with 1 min frequency."),
+    NSE_FIRST_BLOCK_DEAL_SESSION("Triggers the job between 08:45 AM - 09:00 AM with 1 min frequency."),
+    NSE_SECOND_BLOCK_DEAL_SESSION("Triggers the job between 02:05 PM - 02-20 PM with 1 min frequency."),
+    NSE_T_PLUS_0_SLOT_1_LIVE_SESSION("Triggers the job between 09:15 AM - 09-59 AM with 1 min frequency."),
+    NSE_T_PLUS_0_SLOT_2_LIVE_SESSION("Triggers the job between 10:00 AM - 12:59 PM with 1 min frequency."),
+    NSE_T_PLUS_0_SLOT_3_LIVE_SESSION("Triggers the job between 01:00 PM - 01:30 PM with 1 min frequency.");
 
     private String description;
 

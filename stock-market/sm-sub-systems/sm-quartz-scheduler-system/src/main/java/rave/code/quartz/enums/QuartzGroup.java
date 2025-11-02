@@ -11,11 +11,11 @@ public enum QuartzGroup {
     HISTORY("History", "GRP-History"),
     STOCK_BASE("Stock Base", "GRP-Stock Base"),
 
-    NSE_BLOCK_DEAL_SESSION("NSE Block Deal Session", "GRP-Block Deal"),
-    NSE_PRE_OPEN_MARKET_REGULAR_SESSION("NSE Pre Open Market Regular", "GRP-Pre Open Reg"),
-    NSE_PRE_OPEN_MARKET_SPECIAL_SESSION("NSE Pre Open Market Special", "GRP-Pre Open Spl"),
-    NSE_LIVE_SESSION("NSE Live Session", "Grp-Live Session"),
-    NSE_POST_MARKET_CLOSE("NSE Post Market Session", "GRP-Post Mkt Close");
+    NSE_BLOCK_DEAL_SESSION("NSE Block Deal Session", "GRP-BLOCK-DEAL"),
+    NSE_PRE_OPEN_MARKET_REGULAR_SESSION("NSE Pre Open Market Regular", "GRP-PRE-OPEN-REG"),
+    NSE_PRE_OPEN_MARKET_SPECIAL_SESSION("NSE Pre Open Market Special", "GRP-PRE-OPEN-SPL"),
+    NSE_LIVE_SESSION("NSE Live Session", "GRP-LIVE-SESSION"),
+    NSE_POST_MARKET_CLOSE("NSE Post Market Session", "GRP-POST-MKT-CLOSE");
 
     private String name;
     private String shortName;

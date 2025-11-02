@@ -25,13 +25,13 @@ public class NSEFirstBlockDealSessionScheduler extends AbstractQuartzScheduler {
     public void scheduleJobs(){} {
 
         JobDetail nseDayBlockDealDetailEntityMakerJobDetail = newJob(NSEDayBlockDealDetailEntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_FIRST_BLOCK_DEAL_SESSION_JOB.get(), QuartzGroup.NSE_BLOCK_DEAL_SESSION.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_FIRST_BLOCK_DEAL_SESSION_JOB.getShortName(), QuartzGroup.NSE_BLOCK_DEAL_SESSION.getShortName()).storeDurably()
                 .build();
 
         Trigger nseDayBlockDealDetailEntityMakerTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_FIRST_BLOCK_DEAL_SESSION_TRIGGER.get(), QuartzGroup.NSE_BLOCK_DEAL_SESSION.get())
+                .withIdentity(QuartzTrigger.NSE_FIRST_BLOCK_DEAL_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_BLOCK_DEAL_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_BLOCK_DEAL_FIRST_SESSION_BETWEEN_08_45_TO_08_59_AM_MONDAY_TO_FRIDAY.toString()))
-                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_BLOCK_DEAL_SESSION.name())
+                .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_FIRST_BLOCK_DEAL_SESSION.get())
                 .build();
 
         try {

@@ -24,11 +24,11 @@ public class NSEPostMarketCloseScheduler extends AbstractQuartzScheduler {
     public void scheduleJobs(){} {
 
         JobDetail nseDayPriceDetailEntityMakerJobDetail = newJob(NSEDayPriceDetailEntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_POST_MARKET_CLOSE_JOB.get(), QuartzGroup.NSE_POST_MARKET_CLOSE.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_POST_MARKET_CLOSE_JOB.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName()).storeDurably()
                 .build();
 
         Trigger nseDayPriceDetailEntityMakerJobTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_POST_MARKET_CLOSE_TRIGGER.get(), QuartzGroup.NSE_POST_MARKET_CLOSE.get())
+                .withIdentity(QuartzTrigger.NSE_POST_MARKET_CLOSE_TRIGGER.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_POST_MARKET_CLOSE_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_POST_MARKET_CLOSE.get())
                 .build();

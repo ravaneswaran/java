@@ -24,47 +24,47 @@ public class NSERegularPreOpenSessionScheduler extends AbstractQuartzScheduler {
     public void scheduleJobs(){} {
 
         JobDetail nsePreOpenMarketNifty50EntityMakerJobDetail = newJob(NSEPreOpenMarketNifty50EntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_JOB.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_JOB.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketBankNiftyEntityMakerJobDetail = newJob(NSEPreOpenMarketBankNiftyEntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_JOB.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_JOB.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketSMEEntityMakerJobDetail = newJob(NSEPreOpenMarketSMEEntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_JOB.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_JOB.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketFOEntityMakerJobDetail = newJob(NSEPreOpenMarketFOEntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_JOB.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_JOB.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName()).storeDurably()
                 .build();
         JobDetail nsePreOpenMarketOthersEntityMakerJobDetail = newJob(NSEPreOpenMarketOthersEntityMakerJob.class)
-                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_JOB.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get()).storeDurably()
+                .withIdentity(QuartzJob.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_JOB.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName()).storeDurably()
                 .build();
 
         Trigger preOpenMarketNifty50RegularSessionTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_TRIGGER.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketBankNiftyRegularSessionTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_TRIGGER.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularSMESessionTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_TRIGGER.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularFOSessionTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_TRIGGER.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularOthersSessionTrigger = newTrigger()
-                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_TRIGGER.get(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
+                .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
