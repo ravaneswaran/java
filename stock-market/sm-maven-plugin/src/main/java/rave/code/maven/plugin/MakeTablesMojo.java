@@ -4,8 +4,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
-@Mojo(name = "create-tables")
-public class CreateTablesMojo extends AbstractStockMarketMojo{
+@Mojo(name = "maketabs")
+public class MakeTablesMojo extends AbstractStockMarketMojo{
 
     private String fileName = "create-tables.sql";
 

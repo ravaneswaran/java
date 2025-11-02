@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-@Mojo(name = "import-db")
+@Mojo(name = "importdb")
 public class ImportDatabaseMojo extends AbstractStockMarketMojo {
 
     @Parameter(defaultValue = "${project.build.directory}", readonly = true, required = true)

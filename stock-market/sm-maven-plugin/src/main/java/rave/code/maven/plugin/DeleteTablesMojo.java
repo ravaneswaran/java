@@ -4,7 +4,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
-@Mojo(name = "delete-tables")
+@Mojo(name = "deltabs")
 public class DeleteTablesMojo extends AbstractStockMarketMojo {
 
     private String fileName = "delete-tables.sql";
