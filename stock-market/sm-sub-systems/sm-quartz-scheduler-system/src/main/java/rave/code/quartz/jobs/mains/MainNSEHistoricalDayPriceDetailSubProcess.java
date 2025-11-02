@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainNSEHistoricalDayPriceDetailSubProcess {
-    
 
     private static final Logger LOGGER = Logger.getLogger(MainNSEHistoricalDayPriceDetailSubProcess.class.getName());
 
