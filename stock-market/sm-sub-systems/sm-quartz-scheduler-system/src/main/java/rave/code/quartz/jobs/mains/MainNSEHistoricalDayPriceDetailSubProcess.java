@@ -24,8 +24,15 @@ public class MainNSEHistoricalDayPriceDetailSubProcess {
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
 
-        int noOfDaysInPast = 50;
-        int subListItemCount = (noOfDaysInPast * 10) / 100;
+        int noOfDaysInPast = 365;
+        int noOfDatesForAProcess = (noOfDaysInPast / 10) + (noOfDaysInPast % 10);
+
+        int noOfProcesses = noOfDaysInPast / noOfDatesForAProcess;
+        int remainingDates = noOfDaysInPast % noOfDatesForAProcess;
+
+        if (remainingDates > 0) {
+            noOfProcesses += 1;
+        }
 
         LocalDate today = LocalDate.now();
         List<Date> historicalDates = new ArrayList<>();
@@ -34,13 +41,16 @@ public class MainNSEHistoricalDayPriceDetailSubProcess {
             Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             historicalDates.add(pastDate);
         }
-        //Collections.reverse(historicalDates);
 
-        int end = subListItemCount;
-        int start = 1;
+        int startIndex = 0;
+        int endIndex = noOfDatesForAProcess;
+        for (int index = 1; index <= noOfProcesses; index++) {
+            if (endIndex > noOfDaysInPast) {
+                endIndex = (endIndex + remainingDates) - noOfDatesForAProcess;
+            }
 
-        do {
-            List<Date> subHistoricalDates = historicalDates.subList(start - 1, end - 1);
+            List<Date> subHistoricalDates = historicalDates.subList(startIndex, endIndex);
+
             try {
                 NSEDayPriceDetailEntityMakerJob subProcess = (NSEDayPriceDetailEntityMakerJob) SubProcessor.createSubProcess(NSEDayPriceDetailEntityMakerJob.class);
                 subProcess.setDates(subHistoricalDates);
@@ -58,10 +68,10 @@ public class MainNSEHistoricalDayPriceDetailSubProcess {
             } catch (IllegalAccessException exception) {
                 LOGGER.log(Level.SEVERE, exception.getMessage());
             }
-            start = end + 1;
-            end = end + subListItemCount;
 
-        } while (end <= noOfDaysInPast);
+            startIndex += noOfDatesForAProcess;
+            endIndex += noOfDatesForAProcess;
+        }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date now = new Date();
