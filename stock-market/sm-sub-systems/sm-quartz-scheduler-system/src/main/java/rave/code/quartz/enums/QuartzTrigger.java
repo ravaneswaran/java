@@ -103,7 +103,7 @@ public enum QuartzTrigger {
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_SECURITY_LWR_20_TOP_20_LOSER_TRIGGER("NSE T+0 Slot-2 Live Session Trigger","T-S2-T20-SP<20-L-T+0"),
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_SECURITY_LWR_20_TOP_20_LOSER_TRIGGER("NSE T+0 Slot-3 Live Session Trigger","T-S3-T20-SP<20-L-T+0"),
 
-    NSE_PRE_OPEN_SPECIAL_SESSION_TRIGGER("NSE Pre Market Special Session Trigger", "T-Pre Open Session");
+    NSE_PRE_OPEN_SPECIAL_SESSION_TRIGGER("NSE Pre Market Special Session Trigger", "T-PRE-OPEN-SPL-SESSION");
 
     private String name;
     private String shortName;

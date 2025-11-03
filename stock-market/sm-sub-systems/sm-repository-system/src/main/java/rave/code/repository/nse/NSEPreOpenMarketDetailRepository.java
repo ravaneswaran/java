@@ -85,20 +85,21 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
         String nowString = simpleDateFormat.format(new Date());
         String nowStringWithOutTime = nowString.split(" ")[0];
         String todayMorningAt_09_00 = String.format("%s %s", nowStringWithOutTime, "09:00:00");
-        String todayNoonAt_09_08 = String.format("%s %s", nowStringWithOutTime, "09:08:00");
+        String todayMorningAt_09_08 = String.format("%s %s", nowStringWithOutTime, "09:08:00");
         try {
             from = simpleDateFormat.parse(todayMorningAt_09_00);
-            to = simpleDateFormat.parse(todayNoonAt_09_08);
+            to = simpleDateFormat.parse(todayMorningAt_09_08);
 
             CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
             CriteriaQuery<NSEPreOpenMarketDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPreOpenMarketDetailEntity.class);
             Root<NSEPreOpenMarketDetailEntity> root = criteriaQuery.from(NSEPreOpenMarketDetailEntity.class);
             Predicate preOpenMarketTypePredicate = criteriaBuilder.equal(root.get("preOpenType"), preOpenType);
             Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), from, to);
-            Predicate indicativeEquilibriumPricePredicate = criteriaBuilder.lessThanOrEqualTo(root.get("indicativeEquilibriumPrice"), 20);
+            //Predicate indicativeEquilibriumPricePredicate = criteriaBuilder.lessThanOrEqualTo(root.get("indicativeEquilibriumPrice"), 20);
             Predicate finalPricePredicate = criteriaBuilder.greaterThan(root.get("finalPrice"), 0);
             Predicate pricePercentageChangePredicate = criteriaBuilder.greaterThan(root.get("pricePercentageChange"), 0);
-            Predicate whereClausePredicate = criteriaBuilder.and(preOpenMarketTypePredicate, createdDatePredicate, indicativeEquilibriumPricePredicate, finalPricePredicate, pricePercentageChangePredicate);
+            Predicate whereClausePredicate = criteriaBuilder.and(preOpenMarketTypePredicate, createdDatePredicate, finalPricePredicate, pricePercentageChangePredicate);
+            //Predicate whereClausePredicate = criteriaBuilder.and(preOpenMarketTypePredicate, createdDatePredicate, indicativeEquilibriumPricePredicate, finalPricePredicate, pricePercentageChangePredicate);
             criteriaQuery.select(root).where(whereClausePredicate).orderBy(criteriaBuilder.asc(root.get("pricePercentageChange")));
 
             return this.getEntityManager().createQuery(criteriaQuery).getResultList();
