@@ -18,4 +18,12 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="002" author="Ravaneswaran Chinnasamy">
+        <sql>
+            ALTER TABLE bse_day_price_last_run_detail
+            ADD last_run_at_str VARCHAR(50)
+            AFTER last_run_at;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

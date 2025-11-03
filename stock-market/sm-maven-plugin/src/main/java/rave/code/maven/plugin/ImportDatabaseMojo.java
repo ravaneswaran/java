@@ -18,7 +18,7 @@ public class ImportDatabaseMojo extends AbstractStockMarketMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            List<String> command = Arrays.asList("mysqldump", "-u", this.username, String.format("-p%s", this.password), "stock_market");
+            List<String> command = Arrays.asList("mysqldump", "-u", this.username, String.format("-p%s", this.password), this.databaseName);
             ProcessBuilder pb = new ProcessBuilder(command);
             // Option 1: redirect output to file
             pb.redirectInput(new File(this.outputDirectory.getAbsolutePath(), "exported_stock_market_db.sql"));

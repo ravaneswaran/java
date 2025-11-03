@@ -11,10 +11,12 @@ import java.sql.Statement;
 
 public abstract class AbstractStockMarketMojo extends AbstractMojo {
 
-    @Parameter(property = "jdbcUrl", required = true)
-    protected String jdbcUrl;
+    @Parameter(property = "dbServerUrl", required = true)
+    protected String dbServerUrl;
     @Parameter(property = "driver", required = true)
     protected String driver;
+    @Parameter(property = "databaseName", required = true)
+    protected String databaseName;
     @Parameter(property = "username", required = true)
     protected String username;
     @Parameter(property = "password", required = true)
@@ -23,7 +25,7 @@ public abstract class AbstractStockMarketMojo extends AbstractMojo {
     protected void executeFile(String fileName) {
         getLog().info(String.format("Executing the file -- %s", fileName));
         try (InputStream inputStream = this.getClass().getResourceAsStream("/" + fileName);
-             Connection connection = DriverManager.getConnection(this.jdbcUrl, this.username, this.password);
+             Connection connection = DriverManager.getConnection(this.dbServerUrl, this.username, this.password);
              Statement statement = connection.createStatement();
 
              BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
