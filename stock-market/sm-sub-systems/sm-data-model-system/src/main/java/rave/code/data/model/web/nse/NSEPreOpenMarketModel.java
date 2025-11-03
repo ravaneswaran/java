@@ -1,6 +1,7 @@
 package rave.code.data.model.web.nse;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NSEPreOpenMarketModel extends NSEStockModel{
@@ -25,6 +26,11 @@ public class NSEPreOpenMarketModel extends NSEStockModel{
 
     public void setBusinessDate(Date businessDate) {
         this.businessDate = businessDate;
+    }
+
+    public String getBusinessDateAsString(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return simpleDateFormat.format(this.getBusinessDate());
     }
 
     public String getPreOpenType() {

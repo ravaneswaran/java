@@ -78,6 +78,7 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
     }
 
     private List<NSEPreOpenMarketDetailEntity> findPreOpenMarketDetails(String preOpenType){
+
         Date from = null;
         Date to = null;
 
@@ -96,9 +97,9 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
             Predicate preOpenMarketTypePredicate = criteriaBuilder.equal(root.get("preOpenType"), preOpenType);
             Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), from, to);
             //Predicate indicativeEquilibriumPricePredicate = criteriaBuilder.lessThanOrEqualTo(root.get("indicativeEquilibriumPrice"), 20);
-            Predicate finalPricePredicate = criteriaBuilder.greaterThan(root.get("finalPrice"), 0);
-            Predicate pricePercentageChangePredicate = criteriaBuilder.greaterThan(root.get("pricePercentageChange"), 0);
-            Predicate whereClausePredicate = criteriaBuilder.and(preOpenMarketTypePredicate, createdDatePredicate, finalPricePredicate, pricePercentageChangePredicate);
+            //Predicate finalPricePredicate = criteriaBuilder.greaterThan(root.get("finalPrice"), 0);
+            //Predicate pricePercentageChangePredicate = criteriaBuilder.greaterThan(root.get("pricePercentageChange"), 0);
+            Predicate whereClausePredicate = criteriaBuilder.and(preOpenMarketTypePredicate, createdDatePredicate);
             //Predicate whereClausePredicate = criteriaBuilder.and(preOpenMarketTypePredicate, createdDatePredicate, indicativeEquilibriumPricePredicate, finalPricePredicate, pricePercentageChangePredicate);
             criteriaQuery.select(root).where(whereClausePredicate).orderBy(criteriaBuilder.asc(root.get("pricePercentageChange")));
 

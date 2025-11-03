@@ -29,6 +29,12 @@ public class NSEQuartzSchedulerConfiguration {
 
     @Bean
     public int scheduleNSEJobs() {
+        return 0;
+    }
+
+    /*
+    @Bean
+    public int scheduleNSEJobs_Original() {
         SchedulerFactory schedulerFactory = null;
         try {
             schedulerFactory = new StdSchedulerFactory(new NSEQuartzOverrideProperties());
@@ -67,6 +73,6 @@ public class NSEQuartzSchedulerConfiguration {
         } else {
             return -1;
         }
-
     }
+    */
 }

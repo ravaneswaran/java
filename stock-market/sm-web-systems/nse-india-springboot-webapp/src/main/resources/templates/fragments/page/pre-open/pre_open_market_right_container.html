@@ -1,7 +1,7 @@
 <div class="right-container">
     <div th:replace="~{fragments/common/stock_group_tip_container}"></div>
-    <div class="right-container-stock-listing-container">
-        <div class="right-container-company-frame-div-0" th:each="stock : ${webpage.nsePreOpenMarketModels}">
+    <div class="right-container-stock-listing-container right-container-stock-listing-container-nse-ext">
+        <div class="right-container-company-frame-div-0 right-container-company-frame-div-0-nse-ext" th:each="stock : ${webpage.nsePreOpenMarketModels}">
             <div class="right-container-company-div">
                 <div class="right-container-company-title-container">
                     <div class="right-container-company-title-div" th:text="${stock.symbol}"></div>
@@ -15,37 +15,36 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td class="td-left">Bussi Date</td>
-                                <td class="td-right" th:text="${stock.businessDate}"></td>
+                                <td class="td-left td-left-nse-ext">Business Date</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.businessDateAsString}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Previous Cls</td>
-                                <td class="td-right" th:text="${stock.previousClose}"></td><td class="td-left">Previous Cls</td>
-                                <td class="td-right" th:text="${stock.previousClose}"></td>
+                                <td class="td-left td-left-nse-ext">Previous Cls</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.previousClose}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">IndEquiPrice</td>
-                                <td class="td-right" th:text="${stock.indicativeEquilibriumPrice}"></td>
+                                <td class="td-left td-left-nse-ext">IndEquiPrice</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.indicativeEquilibriumPrice}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Price Change</td>
-                                <td class="td-right" th:text="${stock.priceChange}"></td>
+                                <td class="td-left td-left-nse-ext">Price Change</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.priceChange}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Price % Chg</td>
-                                <td class="td-right" th:text="${stock.pricePercentageChange}"></td>
+                                <td class="td-left td-left-nse-ext">Price % Chg</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.pricePercentageChange}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Final Price</td>
-                                <td class="td-right" th:text="${stock.finalPrice}"></td>
+                                <td class="td-left td-left-nse-ext">Final Price</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.finalPrice}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">52 Week High</td>
-                                <td class="td-right" th:text="${stock.newMarket52WeekHigh}"></td>
+                                <td class="td-left td-left-nse-ext">52 Week High</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.newMarket52WeekHigh}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">52 Week Low</td>
-                                <td class="td-right" th:text="${stock.newMarket52WeekLow}"></td>
+                                <td class="td-left td-left-nse-ext">52 Week Low</td>
+                                <td class="td-right td-right-nse-ext" th:text="${stock.newMarket52WeekLow}"></td>
                             </tr>
                             </tbody>
                         </table>

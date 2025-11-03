@@ -6,6 +6,8 @@ import rave.code.data.model.web.nse.page.VolumeSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEVolumeSpurtDetailEntity;
 import rave.code.repository.nse.NSEVolumeSpurtDetailRepository;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,8 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
             nseVolumeSpurtDetailModel.setStockDivId(nseVolumeSpurtDetailEntity.getId());
             nseVolumeSpurtDetailModel.setVolume(nseVolumeSpurtDetailEntity.getVolume());
             nseVolumeSpurtDetailModel.setOneWeekAverageVolume(nseVolumeSpurtDetailEntity.getOneWeekAverageVolume());
-            nseVolumeSpurtDetailModel.setNoOfTimes(nseVolumeSpurtDetailEntity.getNoOfTimes());
+            double noOfTimes = new BigDecimal(nseVolumeSpurtDetailEntity.getNoOfTimes()).setScale(3, RoundingMode.HALF_UP).doubleValue();
+            nseVolumeSpurtDetailModel.setNoOfTimes(noOfTimes);
             nseVolumeSpurtDetailModel.setSymbol(nseVolumeSpurtDetailEntity.getSymbol());
 
             nseVolumeSpurtDetailModels.add(nseVolumeSpurtDetailModel);
