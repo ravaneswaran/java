@@ -1,6 +1,6 @@
 <div class="right-container">
     <div class="right-container-stock-listing-container">
-        <div class="right-container-company-frame-div-0" th:each="trigger : ${webpage.triggerDetailModels}">
+        <div class="right-container-company-frame-div-0 right-container-company-frame-div-0-admin-ext" th:each="trigger : ${webpage.triggerDetailModels}">
             <div class="right-container-company-div">
                 <div class="right-container-company-title-container">
                     <div class="right-container-company-title-div" th:text="${trigger.name}"></div>
@@ -10,44 +10,44 @@
                         <table>
                             <tbody>
                             <tr>
-                                <td class="td-left">Group</td>
-                                <td class="td-right" th:text="${trigger.group}"></td>
+                                <td class="td-left td-left-admin-ext">Group</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.group}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Job Name</td>
-                                <td class="td-right" th:text="${trigger.jobName}"></td>
+                                <td class="td-left td-left-admin-ext">Job Name</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.jobName}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Job Group</td>
-                                <td class="td-right" th:text="${trigger.jobGroup}"></td>
+                                <td class="td-left td-left-admin-ext">Job Group</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.jobGroup}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Prev Fire Time</td>
-                                <td class="td-right" th:text="${trigger.previousFireTime}"></td>
+                                <td class="td-left td-left-admin-ext">Prev Fire Time</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.previousFireTime}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Next Fire Time</td>
-                                <td class="td-right" th:text="${trigger.nextFireTime}"></td>
+                                <td class="td-left td-left-admin-ext">Next Fire Time</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.nextFireTime}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Priority</td>
-                                <td class="td-right" th:text="${trigger.priority}"></td>
+                                <td class="td-left td-left-admin-ext">Priority</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.priority}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Trigger State</td>
-                                <td class="td-right" th:text="${trigger.triggerState}"></td>
+                                <td class="td-left td-left-admin-ext">Trigger State</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.triggerState}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Trigger Type</td>
-                                <td class="td-right" th:text="${trigger.triggerType}"></td>
+                                <td class="td-left td-left-admin-ext">Trigger Type</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.triggerType}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">Start Time</td>
-                                <td class="td-right" th:text="${trigger.startTime}"></td>
+                                <td class="td-left td-left-admin-ext">Start Time</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.startTime}"></td>
                             </tr>
                             <tr>
-                                <td class="td-left">End Time</td>
-                                <td class="td-right" th:text="${trigger.endTime}"></td>
+                                <td class="td-left td-left-admin-ext">End Time</td>
+                                <td class="td-left td-right-admin-ext" th:text="${trigger.endTime}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -60,9 +60,9 @@
         </div>
     </div>
 </div>
-<script>
+<!--<script>
   // Refresh page after 1 minute (1 × 60 × 1000 ms)
   setTimeout(function() {
     location.reload();
   }, 1 * 60 * 1000);
-</script>
+</script>-->

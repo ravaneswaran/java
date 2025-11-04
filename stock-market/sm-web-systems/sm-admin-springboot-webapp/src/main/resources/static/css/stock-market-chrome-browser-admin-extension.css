@@ -1,0 +1,35 @@
+.right-container-stock-listing-container-admin-ext {
+    padding-left: 0%
+}
+
+/************************************/
+
+.right-container-company-frame-div-0-admin-ext {
+    width: 23%;
+    height: 43%;
+}
+.td-left-admin-ext {
+    width: 32%;
+}
+.td-right-admin-ext {
+    width: 72%;
+    font-weight:bold;
+}
+
+/************************************/
+
+.right-container-company-frame-div-0-job-admin-ext {
+    width: 22%;
+    height: 43%;
+}
+.td-left-job-admin-ext {
+    width: 45%;
+}
+.td-right-job-admin-ext {
+    width: 54.9%;
+    font-weight:bold;
+}
+
+
+
+

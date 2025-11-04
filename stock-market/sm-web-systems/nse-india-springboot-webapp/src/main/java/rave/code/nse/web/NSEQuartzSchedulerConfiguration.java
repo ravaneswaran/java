@@ -27,12 +27,12 @@ public class NSEQuartzSchedulerConfiguration {
     @Autowired
     private NSEHolidayService nseHolidayService;
 
-    /*@Bean
+    @Bean
     public int scheduleNSEJobs() {
         return 0;
-    }*/
+    }
 
-    @Bean
+    /*@Bean
     public int scheduleNSEJobs() {
         SchedulerFactory schedulerFactory = null;
         try {
@@ -72,5 +72,5 @@ public class NSEQuartzSchedulerConfiguration {
         } else {
             return -1;
         }
-    }
+    }*/
 }
