@@ -1,10 +1,10 @@
-package rave.code.tech.analysis;
+package rave.code.tech.analysis.indicators;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ExponentialMovingAverage {
+public class ExponentialMovingAverageIndicator {
 
     public static List<Double> calculateEMA(List<Double> prices, int period) {
         List<Double> exponentialMovingAverages = new ArrayList<>();

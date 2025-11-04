@@ -1,4 +1,4 @@
-package rave.code.tech.analysis;
+package rave.code.tech.analysis.indicators;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class SimpleMovingAverage {
+public class SimpleMovingAverageIndicator {
 
     // Method to calculate SMA
     public static List<Double> calculateSMA(List<Double> prices, int period) {

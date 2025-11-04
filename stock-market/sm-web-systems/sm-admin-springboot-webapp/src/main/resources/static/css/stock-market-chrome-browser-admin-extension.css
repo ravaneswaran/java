@@ -20,7 +20,7 @@
 
 .right-container-company-frame-div-0-job-admin-ext {
     width: 22%;
-    height: 43%;
+    height: 26%;
 }
 .td-left-job-admin-ext {
     width: 45%;
@@ -28,6 +28,7 @@
 .td-right-job-admin-ext {
     width: 54.9%;
     font-weight:bold;
+    font-size: 14px;
 }
 
 

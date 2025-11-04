@@ -136,8 +136,9 @@
                 <artifactId>sm-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <configuration>
-                    <jdbcUrl>${jdbcUrl}</jdbcUrl>
+                    <dbServerUrl>jdbc:mysql://localhost:3306/</dbServerUrl>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
+                    <databaseName>stock_market</databaseName>
                     <username>admin</username>
                     <password>admin</password>
                 </configuration>
@@ -152,20 +153,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>create-tables</id>
-            <properties>
-                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
-            </properties>
-        </profile>
-        <profile>
-            <id>delete-tables</id>
-            <properties>
-                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
-            </properties>
-        </profile>
-    </profiles>
 
 </project>

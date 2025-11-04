@@ -1,10 +1,15 @@
 package rave.code.data.model.web.nse;
 
+import rave.code.tech.analysis.indicators.IndicativeEquilibriumPriceIndicator;
+import rave.code.tech.analysis.pricelimit.LowerLimit;
+import rave.code.tech.analysis.pricelimit.UpperLimit;
+import rave.code.tech.analysis.stoploss.StopLoss;
+
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class NSEPreOpenMarketModel extends NSEStockModel{
+public class NSEPreOpenMarketModel extends NSEStockModel {
 
     private Date businessDate;
     private String preOpenType;
@@ -28,7 +33,7 @@ public class NSEPreOpenMarketModel extends NSEStockModel{
         this.businessDate = businessDate;
     }
 
-    public String getBusinessDateAsString(){
+    public String getBusinessDateAsString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return simpleDateFormat.format(this.getBusinessDate());
     }
@@ -128,4 +133,25 @@ public class NSEPreOpenMarketModel extends NSEStockModel{
     public void setNewMarket52WeekLow(double newMarket52WeekLow) {
         this.newMarket52WeekLow = newMarket52WeekLow;
     }
+
+    public IndicativeEquilibriumPriceIndicator getIndicativeEquilibriumPriceIndicator() {
+        return new IndicativeEquilibriumPriceIndicator(this.getPreviousClose(), this.getIndicativeEquilibriumPrice());
+    }
+
+    public double getUpperLimit() {
+        return new UpperLimit(this.getIndicativeEquilibriumPrice()).getLimit(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
+    }
+
+    public double getLowerLimit() {
+        return new LowerLimit(this.getIndicativeEquilibriumPrice()).getLimit(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
+    }
+
+    public double getLongStopLossPrice(){
+        return new StopLoss(this.getIndicativeEquilibriumPrice()).getBuyStopLossPrice(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
+    }
+
+    public double getShortStopLossPrice(){
+        return new StopLoss(this.getIndicativeEquilibriumPrice()).getSellStopLossPrice(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
+    }
+
 }
