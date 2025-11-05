@@ -1,0 +1,44 @@
+.example {
+  border-radius: 8px;
+  background: linear-gradient(#fff, #eee);
+
+  -webkit-user-select: none; /* Chrome */
+     -moz-user-select: none; /* Firefox */
+          user-select: none; /* Standard */
+}
+
+input, button, select, textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 0;
+}
+
+* {
+  scrollbar-width: thin;       /* Firefox */
+  scrollbar-color: #888 #eee;  /* Firefox */
+}
+
+/* Chrome override */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: #888; }
+
+.container {
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+img, video {
+  max-width: 100%;
+}
+
+.parent {
+  display: flex;
+  gap: 1rem; /* Works now in FF + Chrome */
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

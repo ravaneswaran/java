@@ -1,0 +1,60 @@
+<div id="${stock.id + '-tech-analysis'}" class="popup-container-div" th:each="stock : ${webpage.nsePreOpenMarketModels}">
+    <div class="popup-title-div" th:text="${stock.symbol}"></div>
+    <div class="popup-body-div">
+        <div class="popup-left-container-div">
+            <div class="popup-left-container-item-div" onclick="javascript:show('stock-id-sl');">
+                SL
+            </div>
+            <div class="popup-left-container-item-div" onclick="javascript:show('stock-id-atr');">
+                ATR
+            </div>
+            <div class="popup-left-container-item-div" onclick="javascript:show('stock-id-sma');">
+                SMA
+            </div>
+        </div>
+        <div class="popup-right-container-div">
+            <div class="popup-right-container-div">
+                <div id="stock-id-sl" class="popup-right-container-item-div" style="display:block;">
+                    SL
+                </div>
+                <div id="stock-id-atr" class="popup-right-container-item-div">
+                    ATR
+                </div>
+                <div id="stock-id-sma" class="popup-right-container-item-div">
+                    SMA
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script lang="javascript">
+    var show = function(id){
+
+        var slDivElement = document.getElementById("stock-id-sl");
+        var atrDivElement = document.getElementById("stock-id-atr");
+        var smaDivElement = document.getElementById("stock-id-sma");
+
+        if(id == slDivElement.id){
+            slDivElement.style = "display:block";
+            atrDivElement.style = "display:none";
+            smaDivElement.style = "display:none";
+            return;
+        }
+
+        if(id == atrDivElement.id){
+            atrDivElement.style = "display:block";
+            smaDivElement.style = "display:none";
+            slDivElement.style = "display:none";
+            return;
+        }
+
+        if(id == smaDivElement.id){
+            smaDivElement.style = "display:block";
+            atrDivElement.style = "display:none";
+            slDivElement.style = "display:none";
+            return;
+        }
+
+    }
+</script>

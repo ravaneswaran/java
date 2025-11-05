@@ -1,3 +1,4 @@
+/******************** application styles override ******************/
 .right-container-company-title-div{
     width: 79.9%;
 }
@@ -80,9 +81,7 @@
     width: 40%;
 }
 
-
 /******************** arrow styles ******************/
-
 .arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -112,4 +111,57 @@
   -webkit-transform: rotate(45deg);
 }
 
-/******************** arrow styles ******************/
+/******************** Popup styles ******************/
+.popup-container-div{
+    border:5px solid #353839;
+    width: 1000px;
+    height:600px;
+    border-radius: 10px;
+    display:none;
+}
+
+.popup-title-div{
+    border: 0px solid #353839;
+    width:100%; height:10%;
+    background-color: #353839;
+    display: grid;
+    place-items:center;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.popup-left-container-div{
+    border: 0px solid #353839;
+    width:6%;
+    height:90%;
+    background-color: #353839;
+    float:left;
+}
+
+.popup-left-container-item-div{
+    border: 2px solid white;
+    width:85%;
+    height:9%;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    display: grid;
+    place-items:center;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.popup-right-container-div{
+    float:left;
+    border:0px solid red;
+    width: 93.7%;
+    height: 89.2%;
+}
+
+.popup-right-container-item-div{
+    border: 0px solid red;
+    width: 99.9%;
+    height: 99.9%;
+    display: none;
+}
