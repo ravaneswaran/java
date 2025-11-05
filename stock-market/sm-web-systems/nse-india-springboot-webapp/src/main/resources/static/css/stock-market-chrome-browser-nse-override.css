@@ -65,6 +65,13 @@
     cursor: pointer;
 }
 
+
+.left-container-application-link-arrow-div {
+    float:right;
+    width:99.5%;
+    height:99.8%
+}
+
 .td-left {
     width: 50%;
 }
@@ -72,3 +79,37 @@
 .td-right {
     width: 40%;
 }
+
+
+/******************** arrow styles ******************/
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 4px;
+  margin-top: 4%;
+  margin-left: 5%;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+/******************** arrow styles ******************/
