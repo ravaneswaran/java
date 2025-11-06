@@ -1,6 +1,7 @@
 /*****************************************/
 body{
     font-family: verdana;
+    font-site: 20px;
 }
 
 /*****************************************/
@@ -454,6 +455,7 @@ td{
     text-decoration-thickness:3px;
     text-decoration-color :#ff0c07;
 }
+
 
 
 
