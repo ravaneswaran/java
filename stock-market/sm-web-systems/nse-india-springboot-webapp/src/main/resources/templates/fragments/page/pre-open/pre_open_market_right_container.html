@@ -5,8 +5,8 @@
             <div class="right-container-company-div">
                 <div class="right-container-company-title-container">
                     <div class="right-container-company-title-div" th:text="${stock.symbol}"></div>
-                    <div class="right-container-company-stock-market-chart-div">
-                        <img src="/sm-static-hub/images/icons/stock-market-chart.png" class="right-container-company-stock-market-chart-img"/>
+                    <div class="right-container-company-stock-market-chart-div-green" th:attr="onclick=|showPopUp('${stock.stockDivId}')|">
+                        5%
                     </div>
                 </div>
                 <!--width: 100%; height: 70%;-->
@@ -59,4 +59,5 @@
             </div>
         </div>
     </div>
+    <div th:replace="~{fragments/common/stock_popup}"></div>
 </div>

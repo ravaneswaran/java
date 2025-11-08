@@ -1,60 +1,63 @@
-<div id="${stock.id + '-tech-analysis'}" class="popup-container-div" th:each="stock : ${webpage.nsePreOpenMarketModels}">
-    <div class="popup-title-div" th:text="${stock.symbol}"></div>
+<div th:each="stock : ${webpage.nsePreOpenMarketModels}" th:id="${'tech-analysis-div-' + stock.stockDivId}" class="popup-container-div" >
+    <div class="popup-title-div" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|"></div>
     <div class="popup-body-div">
         <div class="popup-left-container-div">
-            <div class="popup-left-container-item-div" onclick="javascript:show('stock-id-sl');">
+            <div class="popup-left-container-item-div" th:attr="onclick=|showInnerPopUp('${stock.stockDivId}-sl', '${stock.stockDivId}')|">
                 SL
             </div>
-            <div class="popup-left-container-item-div" onclick="javascript:show('stock-id-atr');">
+            <div class="popup-left-container-item-div" th:attr="onclick=|showInnerPopUp('${stock.stockDivId}-atr', '${stock.stockDivId}')|">
                 ATR
             </div>
-            <div class="popup-left-container-item-div" onclick="javascript:show('stock-id-sma');">
+            <div class="popup-left-container-item-div" th:attr="onclick=|showInnerPopUp('${stock.stockDivId}-sma', '${stock.stockDivId}')|">
                 SMA
             </div>
         </div>
         <div class="popup-right-container-div">
-            <div class="popup-right-container-div">
-                <div id="stock-id-sl" class="popup-right-container-item-div" style="display:block;">
-                    SL
-                </div>
-                <div id="stock-id-atr" class="popup-right-container-item-div">
-                    ATR
-                </div>
-                <div id="stock-id-sma" class="popup-right-container-item-div">
-                    SMA
-                </div>
+            <div th:id="${stock.stockDivId + '-sl'}" class="popup-right-container-item-div" style="display:block">
+                <!--<div th:replace="fragments :: ~{fragments/common/popups/trade_fragment/trade('5', '110.00', '100.00',  '90.00' )}"></div>-->
+                SL
+            </div>
+            <div th:id="${stock.stockDivId + '-atr'}" class="popup-right-container-item-div">
+                ATR
+            </div>
+            <div th:id="${stock.stockDivId + '-sma'}" class="popup-right-container-item-div">
+                SMA
             </div>
         </div>
     </div>
 </div>
 
 <script lang="javascript">
-    var show = function(id){
+    var showPopUp = function(id){
+        var popUpDiv = document.getElementById('tech-analysis-div-'+id);
+        popUpDiv.style = 'display:block';
+    }
 
-        var slDivElement = document.getElementById("stock-id-sl");
-        var atrDivElement = document.getElementById("stock-id-atr");
-        var smaDivElement = document.getElementById("stock-id-sma");
+    var closePopUp = function(id){
+        var popUpDiv = document.getElementById('tech-analysis-div-'+id);
+        popUpDiv.style = 'display:none';
+    }
 
-        if(id == slDivElement.id){
-            slDivElement.style = "display:block";
+    var showInnerPopUp = function(innerPopUpId, id){
+        var innerPopupElement = document.getElementById(innerPopUpId);
+
+        var slDivElement = document.getElementById(id + "-sl");
+        var atrDivElement = document.getElementById(id + "-atr");
+        var smaDivElement = document.getElementById(id + "-sma");
+
+        if(innerPopUpId == (id + "-sl")){
             atrDivElement.style = "display:none";
             smaDivElement.style = "display:none";
-            return;
         }
-
-        if(id == atrDivElement.id){
-            atrDivElement.style = "display:block";
+        if(innerPopUpId == (id + "-atr")){
+            slDivElement.style = "display:none";
             smaDivElement.style = "display:none";
-            slDivElement.style = "display:none";
-            return;
         }
-
-        if(id == smaDivElement.id){
-            smaDivElement.style = "display:block";
+        if(innerPopUpId == (id + "-sma")){
+            slDivElement.style = "display:none";
             atrDivElement.style = "display:none";
-            slDivElement.style = "display:none";
-            return;
         }
 
+        innerPopupElement.style = "display:block";
     }
 </script>

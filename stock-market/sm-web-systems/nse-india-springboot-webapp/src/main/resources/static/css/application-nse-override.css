@@ -118,6 +118,10 @@
     height:600px;
     border-radius: 10px;
     display:none;
+    position: absolute; /* or relative / fixed */
+    top: 190px;
+    left: 550px;
+    background-color: white;
 }
 
 .popup-title-div{
@@ -129,6 +133,7 @@
     color: white;
     font-size: 25px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .popup-left-container-div{
@@ -157,6 +162,7 @@
     border:0px solid red;
     width: 93.7%;
     height: 89.2%;
+    background-color: white;
 }
 
 .popup-right-container-item-div{
@@ -164,6 +170,35 @@
     width: 99.9%;
     height: 99.9%;
     display: none;
+    background-color: white;
+}
+
+/******************** Trade popup styles ******************/
+
+.trade-popup-container-stock-div{
+    min-width: 25%;
+    min-height: 50%;
+    border: 1px solid red;
+}
+
+.trade-popup-container-stock-header-div{
+    min-width: 99.9%;
+    min-height: 10%;
+    color: white;
+    background-color:black;
+}
+
+.trade-popup-container-stock-body-div{
+    min-width: 99.9%;
+    min-height: 89.9%;
+}
+
+.trade-popup-container-stock-td-left{
+    min-width: 50%;
+}
+
+.trade-popup-container-stock-td-right{
+    min-width: 50%;
 }
 
 

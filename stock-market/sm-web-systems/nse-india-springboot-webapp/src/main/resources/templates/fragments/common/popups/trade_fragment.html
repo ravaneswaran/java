@@ -1,0 +1,23 @@
+<div class="trade-popup-container-stock-div" th:fragment="trade(percentage, upperLimit, currentPrice, lowerLimit)">
+    <div class="trade-popup-container-stock-header-div" th:text="${percentage + ' ' + 'StopLoss' }"></div>
+    <div>
+        <div class="trade-popup-container-stock-body-div">
+            <table>
+                <tbody>
+                <tr>
+                    <td class="trade-popup-container-stock-td-left">Upper Limit</td>
+                    <td class="trade-popup-container-stock-td-right" th:text="${upperLimit}"></td>
+                </tr>
+                <tr>
+                    <td class="trade-popup-container-stock-td-left">Current Price</td>
+                    <td class="trade-popup-container-stock-td-right" th:text="${currentPrice}"></td>
+                </tr>
+                <tr>
+                    <td class="trade-popup-container-stock-td-left">Lower Limit</td>
+                    <td class="trade-popup-container-stock-td-right" th:text="${lowerLimit}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
