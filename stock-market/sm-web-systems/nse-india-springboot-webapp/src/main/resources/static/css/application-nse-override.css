@@ -1,6 +1,7 @@
 /******************** application styles override ******************/
 .right-container-company-title-div{
     width: 79.9%;
+    cursor: pointer;
 }
 
 .right-container-company-stock-market-chart-div-green{
@@ -173,32 +174,40 @@
     background-color: white;
 }
 
-/******************** Trade popup styles ******************/
+/******************** stock popup styles ******************/
 
 .trade-popup-container-stock-div{
-    min-width: 25%;
-    min-height: 50%;
-    border: 1px solid red;
+    width: 22%;
+    height: 48%;
+    border: 1px solid #353839;
+    border-radius: 5px;
+    float: left;
+    margin: 0.5%;
 }
 
 .trade-popup-container-stock-header-div{
-    min-width: 99.9%;
-    min-height: 10%;
+    width: 99.9%;
+    height: 20%;
     color: white;
-    background-color:black;
+    background-color:#353839;
+    border-radius: 5px;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
 }
 
 .trade-popup-container-stock-body-div{
-    min-width: 99.9%;
-    min-height: 89.9%;
+    width: 99.9%;
+    height: 79.9%;
 }
 
 .trade-popup-container-stock-td-left{
-    min-width: 50%;
+    width: 50%;
 }
 
 .trade-popup-container-stock-td-right{
-    min-width: 50%;
+    width: 50%;
+    text-indent: 5px;
 }
 
 

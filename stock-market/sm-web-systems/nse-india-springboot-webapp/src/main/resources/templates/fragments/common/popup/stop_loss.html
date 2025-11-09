@@ -1,0 +1,21 @@
+<div class="trade-popup-container-stock-div" th:fragment="stopLoss(${stock})">
+    <div class="trade-popup-container-stock-header-div">1% Stop-Loss</div>
+    <div class="trade-popup-container-stock-body-div">
+        <table>
+            <tbody>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">Pre Close</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${stock.previousClose}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">Current Price</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${stock.indicativeEquilibriumPrice}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">% Change</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${stock.pricePercentageChange}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

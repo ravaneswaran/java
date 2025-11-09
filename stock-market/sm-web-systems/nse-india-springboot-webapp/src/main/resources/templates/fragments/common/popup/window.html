@@ -13,9 +13,13 @@
             </div>
         </div>
         <div class="popup-right-container-div">
-            <div th:id="${stock.stockDivId + '-sl'}" class="popup-right-container-item-div" style="display:block">
-                <!--<div th:replace="fragments :: ~{fragments/common/popups/trade_fragment/trade('5', '110.00', '100.00',  '90.00' )}"></div>-->
-                SL
+            <div th:id="${stock.stockDivId + '-sl'}" class="popup-right-container-item-div" style="display:block" >
+                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
+                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
+                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
+                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
+                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
+                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
             </div>
             <div th:id="${stock.stockDivId + '-atr'}" class="popup-right-container-item-div">
                 ATR
