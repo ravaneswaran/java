@@ -5,9 +5,7 @@
             <div class="right-container-company-div">
                 <div class="right-container-company-title-container">
                     <div class="right-container-company-title-div" th:text="${stock.symbol}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
-                    <div class="right-container-company-stock-market-chart-div-green" th:attr="onclick=|showPopUp('${stock.stockDivId}')|">
-                        5%
-                    </div>
+                    <div th:class="${stock.pricePercentageChange >= 0 ? 'right-container-company-stock-market-chart-div-green' : 'right-container-company-stock-market-chart-div-red'}"  th:attr="onclick=|showPopUp('${stock.stockDivId}')|" th:text="${stock.pricePercentageChange + '%'}"></div>
                 </div>
                 <div>
                     <div th:id="${stock.stockDivId}" class="right-container-company-table-div">
