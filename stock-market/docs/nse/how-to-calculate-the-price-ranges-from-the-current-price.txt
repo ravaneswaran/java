@@ -1,0 +1,77 @@
+how to calculate the price ranges from the current price of a stock?
+--------------------------------------------------------------------
+
+To calculate price ranges from the current price of a stock, choose the basis on which you want the range. Common methods:
+
+1. Percent-based Range
+----------------------
+If current price = P and you want ±X% range:
+
+Upper Range = P × (1 + X/100)
+Lower Range = P × (1 - X/100)
+
+Example: P = 200, X = 5%
+
+Upper = 200 × 1.05 = 210
+Lower = 200 × 0.95 = 190
+
+2. ATR-Based Range (Volatility)
+-------------------------------
+ATR (Average True Range) indicates how much a stock typically moves in a day.
+
+Upper Range = P + ATR
+Lower Range = P - ATR
+
+Example: P = 200, ATR = 6
+
+Upper = 206
+Lower = 194
+
+For a stronger move range (2×ATR):
+
+Upper = 200 + 2×6 = 212
+Lower = 200 - 2×6 = 188
+
+3. Support/Resistance Based Range
+---------------------------------
+Identify nearest support (S1, S2) and resistance (R1, R2) from:
+    Pivot points
+    Previous swing highs/lows
+    Moving average zones
+
+Example pivot formula:
+Pivot = (High + Low + Close) / 3
+R1 = 2×Pivot − Low
+S1 = 2×Pivot − High
+
+4. Moving Average Bands (e.g., SMA ± %)
+---------------------------------------
+If SMA(20) = 198 and band offset = 3%
+
+Upper = 198 × 1.03 ≈ 204.94
+Lower = 198 × 0.97 ≈ 191.94
+
+
+
+Which method to choose:
+-----------------------
+Situation	                   Recommended Method
+-------------------------------------------------
+Intraday trading	           ATR range
+Swing trading	               Support/Resistance + ATR
+Short-term breakout watch	   Percent range
+Trend-following	               Moving average bands
+
+Note :-
+--------
+If you tell me:
+The stock name
+Current price
+ATR or % you want
+(or I can compute ATR from historical data if you have a price list)
+
+I will calculate the exact ranges.
+
+
+
+

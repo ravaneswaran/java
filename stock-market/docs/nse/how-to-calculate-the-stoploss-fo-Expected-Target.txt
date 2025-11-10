@@ -1,0 +1,73 @@
+how to calculate the stoploss for Expected Target?
+--------------------------------------------------
+
+Stoploss is calculated first by defining risk, then placing SL at the nearest logical invalidity point. For an Expected Target, the common systematic ways:
+
+1. Percentage-Based Stoploss
+----------------------------
+If you want to risk X% from your entry:
+
+Stoploss = Entry Price × (1 − X/100)
+
+Example:
+Entry = 250, Risk = 2%
+
+SL = 250 × 0.98 = 245
+
+2. ATR-Based Stoploss (Volatility Stop)
+---------------------------------------
+ATR shows average price noise. Place SL outside the normal noise range:
+
+Stoploss = Entry Price − (ATR × k)
+
+Typical k = 1.5 or 2.
+
+Example:
+Entry = 250, ATR = 6, k = 1.5
+
+SL = 250 − (6 × 1.5) = 241
+
+This prevents getting stopped out on routine fluctuations.
+
+3. Swing Low / Support-Based Stoploss
+--------------------------------------
+This is the most logical stoploss for trending entries:
+
+Stoploss = Recent Swing Low (for long trades)
+
+Example:
+Entry = 250
+Nearest swing low = 243
+
+SL = 243
+
+This means: your trade idea is wrong if price breaks below that low.
+
+4. Risk-Reward Check (Very Important)
+-------------------------------------
+Before entering a trade:
+
+Risk = Entry Price − Stoploss
+Reward = Target Price − Entry Price
+Risk:Reward must be ≥ 1:2 (good trades)
+
+Example:
+Entry = 250
+Target = 264
+SL = 243
+
+Risk = 250 − 243 = 7
+Reward = 264 − 250 = 14
+R:R = 14 / 7 = 1:2   → Acceptable
+
+If R:R < 1:1.5, skip the trade.
+
+
+Summary
+--------
+Method	                When to Use	                          Formula
+------------------------------------------------------------------------------------------
+% Stoploss	            Intraday / quick trades	              SL = Entry × (1 − %/100)
+ATR Stoploss	        Stocks with volatile movement	      SL = Entry − (ATR × 1.5 or 2)
+Swing Low SL	        Swing trading & trend following	      SL = Nearest swing low
+Risk-Reward Check	    Always	                              Reward ≥ 2 × Risk
