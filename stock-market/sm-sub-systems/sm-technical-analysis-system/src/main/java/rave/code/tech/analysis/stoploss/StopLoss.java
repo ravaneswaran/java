@@ -2,18 +2,10 @@ package rave.code.tech.analysis.stoploss;
 
 public class StopLoss {
 
-    protected double entryPrice;
+    protected double price;
 
-    public StopLoss(double entryPrice){
-        this.entryPrice = entryPrice;
-    }
-
-    public double getBuyStopLossPrice(double targetPercentage){
-        return this.entryPrice - (this.entryPrice * targetPercentage);
-    }
-
-    public double getSellStopLossPrice(double targetPercentage){
-        return this.entryPrice + (this.entryPrice * targetPercentage);
+    public StopLoss(double price){
+        this.price = price;
     }
 
 }

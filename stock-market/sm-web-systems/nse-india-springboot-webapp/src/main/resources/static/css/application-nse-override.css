@@ -205,11 +205,17 @@
 
 .trade-popup-container-stock-td-left{
     width: 50%;
+    font-weight: bold;
 }
 
 .trade-popup-container-stock-td-right{
     width: 50%;
     text-indent: 5px;
+    font-weight: bold;
+}
+
+.bg-green{
+    background-color: #2CFF05;
 }
 
 

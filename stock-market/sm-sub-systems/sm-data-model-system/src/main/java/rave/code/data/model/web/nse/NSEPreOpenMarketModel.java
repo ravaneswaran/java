@@ -1,13 +1,12 @@
 package rave.code.data.model.web.nse;
 
-import rave.code.tech.analysis.indicators.IndicativeEquilibriumPriceIndicator;
-import rave.code.tech.analysis.pricelimit.LowerLimit;
-import rave.code.tech.analysis.pricelimit.UpperLimit;
-import rave.code.tech.analysis.stoploss.StopLoss;
+import rave.code.tech.analysis.pricerange.percentage.PercentagePriceRange;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class NSEPreOpenMarketModel extends NSEStockModel {
 
@@ -134,24 +133,13 @@ public class NSEPreOpenMarketModel extends NSEStockModel {
         this.newMarket52WeekLow = newMarket52WeekLow;
     }
 
-    public IndicativeEquilibriumPriceIndicator getIndicativeEquilibriumPriceIndicator() {
-        return new IndicativeEquilibriumPriceIndicator(this.getPreviousClose(), this.getIndicativeEquilibriumPrice());
+    public List<PercentagePriceRange> getPercentagePriceRanges() {
+        List<PercentagePriceRange> percentagePriceRanges = new ArrayList<>();
+        double[] percentages = {0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0};
+        for (double percentage : percentages) {
+            PercentagePriceRange percentagePriceRange = new PercentagePriceRange(percentage, this.indicativeEquilibriumPrice);
+            percentagePriceRanges.add(percentagePriceRange);
+        }
+        return percentagePriceRanges;
     }
-
-    public double getUpperLimit() {
-        return new UpperLimit(this.getIndicativeEquilibriumPrice()).getLimit(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
-    }
-
-    public double getLowerLimit() {
-        return new LowerLimit(this.getIndicativeEquilibriumPrice()).getLimit(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
-    }
-
-    public double getLongStopLossPrice(){
-        return new StopLoss(this.getIndicativeEquilibriumPrice()).getBuyStopLossPrice(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
-    }
-
-    public double getShortStopLossPrice(){
-        return new StopLoss(this.getIndicativeEquilibriumPrice()).getSellStopLossPrice(this.getIndicativeEquilibriumPriceIndicator().getPricePercentage());
-    }
-
 }

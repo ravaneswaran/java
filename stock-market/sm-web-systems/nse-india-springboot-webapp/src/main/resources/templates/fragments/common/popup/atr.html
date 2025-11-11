@@ -1,4 +1,4 @@
-<div class="trade-popup-container-stock-div" th:fragment="stopLoss(${stock})"  th:each="percentagePriceRange : ${stock.percentagePriceRanges}">
+<div class="trade-popup-container-stock-div" th:fragment="stopLoss(${stock})" >
     <div class="trade-popup-container-stock-header-div" th:text="${percentagePriceRange.percentage + ' %'}"></div>
     <div class="trade-popup-container-stock-body-div">
         <table>
@@ -26,10 +26,6 @@
             <tr>
                 <td class="trade-popup-container-stock-td-left bg-green">Stop Loss</td>
                 <td class="trade-popup-container-stock-td-right bg-green" th:text="${percentagePriceRange.stopLoss}"></td>
-            </tr>
-            <tr>
-                <td class="trade-popup-container-stock-td-left bg-green">Risk Reward</td>
-                <td class="trade-popup-container-stock-td-right bg-green" th:text="${percentagePriceRange.riskReward}"></td>
             </tr>
             </tbody>
         </table>
