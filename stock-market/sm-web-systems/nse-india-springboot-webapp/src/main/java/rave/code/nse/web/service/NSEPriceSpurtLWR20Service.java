@@ -2,6 +2,7 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
+import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
 import java.util.List;
@@ -11,9 +12,11 @@ public class NSEPriceSpurtLWR20Service extends AbstractNSEPriceSpurtService<Pric
 
     @Override
     public PriceSpurtsWebPage getWebPage() {
-        PriceSpurtsWebPage priceSpurtsPage = new PriceSpurtsWebPage();
-        priceSpurtsPage.setNsePriceSpurtDetailModels(this.transformEntities(this.getEntities()));
-        return priceSpurtsPage;
+        List<NSEPriceSpurtDetailEntity> entities = this.getEntities();
+        PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
+        priceSpurtsWebPage.setNsePriceSpurtDetailModels(this.transformEntities(entities));
+        priceSpurtsWebPage.setNseStockModels(this.getNSEStockModels(entities));
+        return priceSpurtsWebPage;
     }
 
     @Override

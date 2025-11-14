@@ -14,8 +14,10 @@ public class NSEPreOpenMarketOthersService extends AbstractNSEPreOpenMarketServi
 
     @Override
     public PreOpenMarketOthersWebPage getWebPage() {
+        List<NSEPreOpenMarketDetailEntity> entities = this.getEntities();
         PreOpenMarketOthersWebPage preOpenMarketOthersWebPage = new PreOpenMarketOthersWebPage();
-        preOpenMarketOthersWebPage.setNsePreOpenMarketModels(this.transformEntities(this.getEntities()));
+        preOpenMarketOthersWebPage.setNsePreOpenMarketModels(this.transformEntities(entities));
+        preOpenMarketOthersWebPage.setNseStockModels(this.getNSEStockModels(entities));
         return preOpenMarketOthersWebPage;
     }
 

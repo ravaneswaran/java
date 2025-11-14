@@ -1,8 +1,10 @@
 package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
+import rave.code.data.model.web.nse.NSEStockModel;
 import rave.code.data.model.web.nse.NSEVolumeSpurtDetailModel;
 import rave.code.data.model.web.nse.page.VolumeSpurtsWebPage;
+import rave.code.entity.nse.csv.NSESMEDetailEntity;
 import rave.code.entity.nse.csv.NSEVolumeSpurtDetailEntity;
 import rave.code.repository.nse.NSEVolumeSpurtDetailRepository;
 
@@ -18,9 +20,11 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
 
     @Override
     public VolumeSpurtsWebPage getWebPage() {
-        VolumeSpurtsWebPage volumeSpurtsPage = new VolumeSpurtsWebPage();
-        volumeSpurtsPage.setNseVolumeSpurtDetailModels(this.transformEntities(this.getEntities()));
-        return volumeSpurtsPage;
+        List<NSEVolumeSpurtDetailEntity> entities = this.getEntities();
+        VolumeSpurtsWebPage volumeSpurtsWebPage = new VolumeSpurtsWebPage();
+        volumeSpurtsWebPage.setNseVolumeSpurtDetailModels(this.transformEntities(entities));
+        volumeSpurtsWebPage.setNseStockModels(this.getNSEStockModels(entities));
+        return volumeSpurtsWebPage;
     }
 
     @Override
@@ -47,4 +51,8 @@ public class NSEVolumeSpurtsService extends AbstractNSEService<NSEVolumeSpurtDet
         return nseVolumeSpurtDetailModels;
     }
 
+    @Override
+    public List<NSEStockModel> getNSEStockModels(List<NSEVolumeSpurtDetailEntity> entities) {
+        return new ArrayList<>();
+    }
 }

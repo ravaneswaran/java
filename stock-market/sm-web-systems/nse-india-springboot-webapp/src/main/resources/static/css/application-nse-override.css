@@ -23,8 +23,8 @@
     display: grid;
     place-items: center;
     background-color: #353839;
-    border: 2px solid #FB6188;
-    color: #FB6188;
+    border: 2px solid #f71302;
+    color: #f71302;
     height: 85%;
     font-weight:bold;
     cursor:pointer;
@@ -84,7 +84,7 @@
     width: 40%;
 }
 
-/******************** arrow styles ******************/
+/******************** arrow and checks styles ******************/
 .arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -114,11 +114,57 @@
   -webkit-transform: rotate(45deg);
 }
 
+.green {
+    border:solid #2cff05;
+    border-width: 0 3px 3px 0;
+}
+
+.red {
+    border:solid #f71302;
+    border-width: 0 3px 3px 0;
+}
+
+.check {
+   height: 14px;
+   width: 8px;
+   border-bottom: 4px solid #2cff05;
+   border-right: 4px solid #2cff05;
+   transform: rotate(45deg);
+   display: grid;
+   place-items:center;
+}
+
+.red-cross{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+}
+
+.red-cross::before,
+.red-cross::after{
+    content: '';
+    position: absolute;
+    background-color:#f71302;
+}
+
+.red-cross::before{
+    width: 20%;
+    height:100%;
+    left:40%;
+}
+
+.red-cross::after{
+    width: 100%;
+    height: 20%;
+    top:40%;
+}
+
 /******************** Popup styles ******************/
 .popup-container-div{
     border:5px solid #353839;
-    width: 1000px;
-    height:600px;
+    width: 50%;
+    height: 61.8%;
     border-radius: 10px;
     display:none;
     position: absolute; /* or relative / fixed */
@@ -166,6 +212,7 @@
     width: 93.7%;
     height: 89.2%;
     background-color: white;
+    overflow: auto;
 }
 
 .popup-right-container-item-div{
@@ -179,8 +226,8 @@
 /******************** stock popup styles ******************/
 
 .trade-popup-container-stock-div{
-    width: 22%;
-    height: 48%;
+    width: 23.5%;
+    height: 44%;
     border: 1px solid #353839;
     border-radius: 5px;
     float: left;
@@ -194,8 +241,39 @@
     background-color:#353839;
     border-radius: 5px;
     font-weight: bold;
+    float:left;
+}
+
+.trade-popup-container-stock-header-left-div{
+    width: 15%;
+    height: 99.9%;
+    background-color:#353839;
     display: grid;
     place-items: center;
+    border: 0px solid green;
+    float: left;
+}
+
+.trade-popup-container-stock-header-middle-div{
+    width: 67%;
+    height: 99.9%;
+    color: white;
+    background-color:#353839;
+    font-weight: bold;
+    display: grid;
+    place-items: center;
+    border: 0px solid red;
+    float: left;
+}
+
+.trade-popup-container-stock-header-right-div{
+    width: 15%;
+    height: 99.9%;
+    background-color:#353839;
+    display: grid;
+    place-items: center;
+    border: 0px solid cyan;
+    float: left;
 }
 
 .trade-popup-container-stock-body-div{
@@ -205,18 +283,22 @@
 
 .trade-popup-container-stock-td-left{
     width: 50%;
-    font-weight: bold;
+    font-size: 15px;
+    text-indent: 5px;
+    color:black;
 }
 
 .trade-popup-container-stock-td-right{
     width: 50%;
     text-indent: 5px;
+    font-size: 15px;
+    color:black;
+}
+
+.td-bold {
     font-weight: bold;
 }
 
-.bg-green{
-    background-color: #2CFF05;
-}
 
 
 

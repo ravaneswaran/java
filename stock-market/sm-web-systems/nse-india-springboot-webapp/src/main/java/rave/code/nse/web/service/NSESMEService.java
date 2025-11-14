@@ -2,7 +2,9 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.NSESMEDetailModel;
+import rave.code.data.model.web.nse.NSEStockModel;
 import rave.code.data.model.web.nse.page.SMEWebPage;
+import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.entity.nse.csv.NSESMEDetailEntity;
 import rave.code.repository.nse.NSESMEDetailRepository;
 
@@ -16,9 +18,11 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESME
 
     @Override
     public SMEWebPage getWebPage() {
-        SMEWebPage smePage = new SMEWebPage();
-        smePage.setNseSMEDetailModels(this.transformEntities(this.getEntities()));
-        return smePage;
+        List<NSESMEDetailEntity> entities = this.getEntities();
+        SMEWebPage smeWebPage = new SMEWebPage();
+        smeWebPage.setNseSMEDetailModels(this.transformEntities(entities));
+        smeWebPage.setNseStockModels(this.getNSEStockModels(entities));
+        return smeWebPage;
     }
 
     @Override
@@ -47,6 +51,21 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESME
         }
 
         return nseSMEDetailModels;
+    }
+
+    @Override
+    public List<NSEStockModel> getNSEStockModels(List<NSESMEDetailEntity> entities) {
+        List<NSEStockModel> nseStockModels = new ArrayList<>();
+        for (NSESMEDetailEntity nseSMEDetailEntity: entities) {
+            NSEStockModel nseStockModel = new NSEStockModel();
+            nseStockModel.setStockDivId(nseSMEDetailEntity.getId());
+            nseStockModel.setSymbol(nseSMEDetailEntity.getSymbol());
+            nseStockModel.setPreviousClosePrice(nseSMEDetailEntity.getPreviousClosePrice());
+            nseStockModel.setPercentageChange(nseSMEDetailEntity.getPercentageChange());
+            nseStockModel.setOpenPrice(nseSMEDetailEntity.getOpenPrice());
+            nseStockModels.add(nseStockModel);
+        }
+        return nseStockModels;
     }
 
 }

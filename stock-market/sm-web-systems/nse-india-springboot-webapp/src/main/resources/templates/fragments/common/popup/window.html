@@ -1,9 +1,9 @@
-<div th:each="stock : ${webpage.nsePreOpenMarketModels}" th:id="${'tech-analysis-div-' + stock.stockDivId}" class="popup-container-div" >
-    <div class="popup-title-div" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|" th:style="${stock.pricePercentageChange >= 0 ? 'color: #2CFF05;' : 'color: #FB6188;'}"></div>
+<div th:each="stock : ${webpage.nseStockModels}" th:id="${'tech-analysis-div-' + stock.stockDivId}" class="popup-container-div" >
+    <div class="popup-title-div" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|" th:style="${stock.percentageChange >= 0 ? 'color: #2cff05;' : 'color: #f71302;'}"></div>
     <div class="popup-body-div">
         <div class="popup-left-container-div">
-            <div class="popup-left-container-item-div" th:attr="onclick=|showInnerPopUp('${stock.stockDivId}-sl', '${stock.stockDivId}')|">
-                SL
+            <div class="popup-left-container-item-div" th:attr="onclick=|showInnerPopUp('${stock.stockDivId}-pb', '${stock.stockDivId}')|">
+                PB
             </div>
             <div class="popup-left-container-item-div" th:attr="onclick=|showInnerPopUp('${stock.stockDivId}-atr', '${stock.stockDivId}')|">
                 ATR
@@ -13,8 +13,8 @@
             </div>
         </div>
         <div class="popup-right-container-div">
-            <div th:id="${stock.stockDivId + '-sl'}" class="popup-right-container-item-div" style="display:block" >
-                <div th:replace="~{fragments/common/popup/stop_loss :: stopLoss(stock)}"></div>
+            <div th:id="${stock.stockDivId + '-pb'}" class="popup-right-container-item-div" style="display:block" >
+                <div th:replace="~{fragments/common/popup/percentage_based_trade :: percentageBasedTrade(stock)}"></div>
             </div>
             <div th:id="${stock.stockDivId + '-atr'}" class="popup-right-container-item-div">
                 ATR
@@ -40,20 +40,20 @@
     var showInnerPopUp = function(innerPopUpId, id){
         var innerPopupElement = document.getElementById(innerPopUpId);
 
-        var slDivElement = document.getElementById(id + "-sl");
+        var pbDivElement = document.getElementById(id + "-pb");
         var atrDivElement = document.getElementById(id + "-atr");
         var smaDivElement = document.getElementById(id + "-sma");
 
-        if(innerPopUpId == (id + "-sl")){
+        if(innerPopUpId == (id + "-pb")){
             atrDivElement.style = "display:none";
             smaDivElement.style = "display:none";
         }
         if(innerPopUpId == (id + "-atr")){
-            slDivElement.style = "display:none";
+            pbDivElement.style = "display:none";
             smaDivElement.style = "display:none";
         }
         if(innerPopUpId == (id + "-sma")){
-            slDivElement.style = "display:none";
+            pbDivElement.style = "display:none";
             atrDivElement.style = "display:none";
         }
 

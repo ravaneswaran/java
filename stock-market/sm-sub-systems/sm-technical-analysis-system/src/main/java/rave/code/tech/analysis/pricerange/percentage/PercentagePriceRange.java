@@ -42,7 +42,38 @@ public class PercentagePriceRange {
                 .doubleValue();
     }
 
+    public double getTargetPrice() {
+        return new BigDecimal(this.price + (this.price * this.percentage / 100))
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
+
     public String getRiskReward() {
-        return "0:0";
+        double risk = new BigDecimal(this.getTargetPrice() - this.getStopLoss())
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+        double reward = new BigDecimal(this.getTargetPrice() - this.price)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+        double riskRewardRatio = 0;
+        if (reward > 0) {
+            riskRewardRatio = new BigDecimal(risk / reward)
+                    .setScale(2, RoundingMode.HALF_UP)
+                    .doubleValue();
+        }
+
+        return String.format("%s", riskRewardRatio);
+    }
+
+    public double getCapitalRequired() {
+        return new BigDecimal(100 * this.getTargetPrice())
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
+
+    public double getProfit() {
+        return new BigDecimal(this.getCapitalRequired() - (this.price * 100))
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 }

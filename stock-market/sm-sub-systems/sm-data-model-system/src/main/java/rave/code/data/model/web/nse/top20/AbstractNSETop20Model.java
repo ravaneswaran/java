@@ -4,7 +4,6 @@ import rave.code.data.model.web.nse.NSEStockModel;
 
 public class AbstractNSETop20Model extends NSEStockModel {
 
-    private String symbol;
     private double openPrice;
     private double highPrice;
     private double lowPrice;
@@ -13,14 +12,6 @@ public class AbstractNSETop20Model extends NSEStockModel {
     private double percentageChange;
     private int volumeInShares;
     private double valueInLakhs;
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
 
     public double getOpenPrice() {
         return openPrice;

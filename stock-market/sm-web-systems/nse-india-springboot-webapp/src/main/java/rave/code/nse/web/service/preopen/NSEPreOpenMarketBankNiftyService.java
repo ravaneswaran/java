@@ -14,8 +14,10 @@ public class NSEPreOpenMarketBankNiftyService extends AbstractNSEPreOpenMarketSe
 
     @Override
     public PreOpenMarketBankNiftyWebPage getWebPage() {
+        List<NSEPreOpenMarketDetailEntity> entities = this.getEntities();
         PreOpenMarketBankNiftyWebPage preOpenMarketBankNiftyWebPage = new PreOpenMarketBankNiftyWebPage();
-        preOpenMarketBankNiftyWebPage.setNsePreOpenMarketModels(this.transformEntities(this.getEntities()));
+        preOpenMarketBankNiftyWebPage.setNsePreOpenMarketModels(this.transformEntities(entities));
+        preOpenMarketBankNiftyWebPage.setNseStockModels(this.getNSEStockModels(entities));
         return preOpenMarketBankNiftyWebPage;
     }
 

@@ -1,18 +1,13 @@
 package rave.code.data.model.web.nse;
 
-import rave.code.tech.analysis.pricerange.percentage.PercentagePriceRange;
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class NSEPreOpenMarketModel extends NSEStockModel {
 
     private Date businessDate;
     private String preOpenType;
-    private String symbol;
     private double previousClose;
     private double indicativeEquilibriumPrice;
     private double priceChange;
@@ -43,14 +38,6 @@ public class NSEPreOpenMarketModel extends NSEStockModel {
 
     public void setPreOpenType(String preOpenType) {
         this.preOpenType = preOpenType;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 
     public double getPreviousClose() {
@@ -133,13 +120,18 @@ public class NSEPreOpenMarketModel extends NSEStockModel {
         this.newMarket52WeekLow = newMarket52WeekLow;
     }
 
-    public List<PercentagePriceRange> getPercentagePriceRanges() {
-        List<PercentagePriceRange> percentagePriceRanges = new ArrayList<>();
-        double[] percentages = {0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0};
-        for (double percentage : percentages) {
-            PercentagePriceRange percentagePriceRange = new PercentagePriceRange(percentage, this.indicativeEquilibriumPrice);
-            percentagePriceRanges.add(percentagePriceRange);
-        }
-        return percentagePriceRanges;
+    @Override
+    public double getPreviousClosePrice() {
+        return this.getPreviousClose();
+    }
+
+    @Override
+    public double getOpenPrice() {
+        return this.getIndicativeEquilibriumPrice();
+    }
+
+    @Override
+    public double getPercentageChange() {
+        return this.getPricePercentageChange();
     }
 }

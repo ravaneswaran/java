@@ -2,31 +2,11 @@ package rave.code.data.model.web.nse;
 
 public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
-    private String symbol;
-    private double openPrice;
     private double highPrice;
     private double lowPrice;
-    private double previousClosePrice;
     private double lastTradedPrice;
-    private double percentageChange;
     private int volume;
     private double value;
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public double getOpenPrice() {
-        return openPrice;
-    }
-
-    public void setOpenPrice(double openPrice) {
-        this.openPrice = openPrice;
-    }
 
     public double getHighPrice() {
         return highPrice;
@@ -44,28 +24,12 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
         this.lowPrice = lowPrice;
     }
 
-    public double getPreviousClosePrice() {
-        return previousClosePrice;
-    }
-
-    public void setPreviousClosePrice(double previousClosePrice) {
-        this.previousClosePrice = previousClosePrice;
-    }
-
     public double getLastTradedPrice() {
         return lastTradedPrice;
     }
 
     public void setLastTradedPrice(double lastTradedPrice) {
         this.lastTradedPrice = lastTradedPrice;
-    }
-
-    public double getPercentageChange() {
-        return percentageChange;
-    }
-
-    public void setPercentageChange(double percentageChange) {
-        this.percentageChange = percentageChange;
     }
 
     public int getVolume() {

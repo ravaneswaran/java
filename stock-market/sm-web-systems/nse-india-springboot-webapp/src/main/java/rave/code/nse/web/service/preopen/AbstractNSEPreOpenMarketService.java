@@ -1,6 +1,7 @@
 package rave.code.nse.web.service.preopen;
 
 import rave.code.data.model.web.nse.NSEPreOpenMarketModel;
+import rave.code.data.model.web.nse.NSEStockModel;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.nse.web.service.AbstractNSEService;
 
@@ -31,5 +32,21 @@ public abstract class AbstractNSEPreOpenMarketService<W> extends AbstractNSEServ
             nsePreOpenMarketModels.add(nsePreOpenMarketModel);
         }
         return nsePreOpenMarketModels;
+    }
+
+    @Override
+    public List<NSEStockModel> getNSEStockModels(List<NSEPreOpenMarketDetailEntity> entities) {
+        List<NSEStockModel> nseStockModels = new ArrayList<>();
+        for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity: entities) {
+            NSEStockModel nseStockModel = new NSEStockModel();
+            nseStockModel.setStockDivId(nsePreOpenMarketDetailEntity.getId());
+            nseStockModel.setSymbol(nsePreOpenMarketDetailEntity.getSymbol());
+            nseStockModel.setPreviousClosePrice(nsePreOpenMarketDetailEntity.getPreviousClose());
+            nseStockModel.setPercentageChange(nsePreOpenMarketDetailEntity.getPricePercentageChange());
+            nseStockModel.setOpenPrice(nsePreOpenMarketDetailEntity.getIndicativeEquilibriumPrice());
+            nseStockModels.add(nseStockModel);
+
+        }
+        return nseStockModels;
     }
 }

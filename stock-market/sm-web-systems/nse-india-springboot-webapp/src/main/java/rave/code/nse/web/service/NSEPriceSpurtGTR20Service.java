@@ -11,9 +11,11 @@ public class NSEPriceSpurtGTR20Service extends AbstractNSEPriceSpurtService<Pric
 
     @Override
     public PriceSpurtsWebPage getWebPage() {
-        PriceSpurtsWebPage priceSpurtsPage = new PriceSpurtsWebPage();
-        priceSpurtsPage.setNsePriceSpurtDetailModels(this.transformEntities(this.getEntities()));
-        return priceSpurtsPage;
+        List<NSEPriceSpurtDetailEntity> entities = this.getEntities();
+        PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
+        priceSpurtsWebPage.setNsePriceSpurtDetailModels(this.transformEntities(entities));
+        priceSpurtsWebPage.setNseStockModels(this.getNSEStockModels(entities));
+        return priceSpurtsWebPage;
     }
 
     @Override

@@ -2,18 +2,9 @@ package rave.code.data.model.web.nse;
 
 public class NSEVolumeSpurtDetailModel extends NSEStockModel {
 
-    private String symbol;
     private int volume;
     private int oneWeekAverageVolume;
     private double noOfTimes;
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
 
     public int getVolume() {
         return volume;

@@ -1,6 +1,8 @@
 package rave.code.nse.web.service;
 
 import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
+import rave.code.data.model.web.nse.NSEStockModel;
+import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
 
@@ -32,5 +34,20 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
         }
 
         return nsePriceSpurtDetailModels;
+    }
+
+    @Override
+    public List<NSEStockModel> getNSEStockModels(List<NSEPriceSpurtDetailEntity> entities) {
+        List<NSEStockModel> nseStockModels = new ArrayList<>();
+        for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity: entities) {
+            NSEStockModel nseStockModel = new NSEStockModel();
+            nseStockModel.setStockDivId(nsePriceSpurtDetailEntity.getId());
+            nseStockModel.setSymbol(nsePriceSpurtDetailEntity.getSymbol());
+            nseStockModel.setPreviousClosePrice(nsePriceSpurtDetailEntity.getPreviousClosePrice());
+            nseStockModel.setPercentageChange(nsePriceSpurtDetailEntity.getPercentageChange());
+            nseStockModel.setOpenPrice(nsePriceSpurtDetailEntity.getOpenPrice());
+            nseStockModels.add(nseStockModel);
+        }
+        return nseStockModels;
     }
 }

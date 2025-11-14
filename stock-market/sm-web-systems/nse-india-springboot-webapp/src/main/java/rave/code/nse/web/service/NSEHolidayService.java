@@ -2,6 +2,7 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.HolidayDetailModel;
+import rave.code.data.model.web.nse.NSEStockModel;
 import rave.code.entity.groww.HolidayEntity;
 import rave.code.repository.groww.HolidayRepository;
 
@@ -49,5 +50,10 @@ public class NSEHolidayService extends AbstractNSEService<HolidayEntity, Holiday
             }
         }
         return holidayDetailModels;
+    }
+
+    @Override
+    public List<NSEStockModel> getNSEStockModels(List<HolidayEntity> entities) {
+        return new ArrayList<>();
     }
 }
