@@ -16,8 +16,10 @@ public class NSETop20BankNiftyService extends AbstractNSETop20Service<NSETop20Ba
 
     @Override
     public Top20BankNiftyWebPage getWebPage() {
+        List<NSETop20DetailEntity> entities = this.getEntities();
         Top20BankNiftyWebPage top20BankNiftyPage = new Top20BankNiftyWebPage();
-        top20BankNiftyPage.setNseTop20BankNiftyModels(this.transformEntities(this.getEntities()));
+        top20BankNiftyPage.setNseTop20BankNiftyModels(this.transformEntities(entities));
+        top20BankNiftyPage.setNseStockModels(this.getNSEStockModels(entities));
         return top20BankNiftyPage;
     }
 

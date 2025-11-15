@@ -2,16 +2,17 @@ package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NSETop20DetailRepository extends AbstractNSERepositoryManager<NSETop20DetailEntity> {
+
+    private static final Logger LOGGER = Logger.getLogger(NSETop20DetailRepository.class.getName());
 
     private Date from;
     private Date to;
@@ -26,79 +27,109 @@ public class NSETop20DetailRepository extends AbstractNSERepositoryManager<NSETo
         try {
             this.from = simpleDateFormat.parse(todayMorningAt_09_15);
             this.to = simpleDateFormat.parse(todayNoonAt_13_30);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
         }
     }
 
     public List<NSETop20DetailEntity> findTop20NiftyFifty() {
-        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
         Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), "NIFTY50");
         Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), this.from, this.to);
         Predicate whereClausePredicate = criteriaBuilder.and(top20SubTypePredicate, createdDatePredicate);
         criteriaQuery.select(root).where(whereClausePredicate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
 
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        return this.findDistinctTop20Details("NIFTY50");
     }
 
     public List<NSETop20DetailEntity> findTop20NiftyNext50() {
-        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
         Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), "NIFTYNEXT50");
         Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), this.from, this.to);
         Predicate whereClausePredicate = criteriaBuilder.and(top20SubTypePredicate, createdDatePredicate);
         criteriaQuery.select(root).where(whereClausePredicate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
 
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        return this.findDistinctTop20Details("NIFTYNEXT50");
     }
 
     public List<NSETop20DetailEntity> findTop20BankNifty() {
-        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
         Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), "BANKNIFTY");
         Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), this.from, this.to);
         Predicate whereClausePredicate = criteriaBuilder.and(top20SubTypePredicate, createdDatePredicate);
         criteriaQuery.select(root).where(whereClausePredicate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
 
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        return this.findDistinctTop20Details("BANKNIFTY");
     }
 
     public List<NSETop20DetailEntity> findTop20SecurityLWR20() {
-        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
         Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), "SECURITY<20");
         Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), this.from, this.to);
         Predicate whereClausePredicate = criteriaBuilder.and(top20SubTypePredicate, createdDatePredicate);
         criteriaQuery.select(root).where(whereClausePredicate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
 
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        return this.findDistinctTop20Details("SECURITY<20");
     }
 
     public List<NSETop20DetailEntity> findTop20SecurityGTR20() {
-        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
         Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), "SECURITY>20");
         Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), this.from, this.to);
         Predicate whereClausePredicate = criteriaBuilder.and(top20SubTypePredicate, createdDatePredicate);
         criteriaQuery.select(root).where(whereClausePredicate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
 
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        return this.findDistinctTop20Details("SECURITY>20");
     }
 
     public List<NSETop20DetailEntity> findTop20FOSecurities() {
-        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
         Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
         Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), "FOSecurity");
         Predicate createdDatePredicate = criteriaBuilder.between(root.get("createdDate"), this.from, this.to);
         Predicate whereClausePredicate = criteriaBuilder.and(top20SubTypePredicate, createdDatePredicate);
         criteriaQuery.select(root).where(whereClausePredicate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
+
+        return this.findDistinctTop20Details("FOSecurity");
+    }
+
+    private List<NSETop20DetailEntity> findDistinctTop20Details(String top20SubType) {
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSETop20DetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSETop20DetailEntity.class);
+        Root<NSETop20DetailEntity> root = criteriaQuery.from(NSETop20DetailEntity.class);
+
+        // Sub query to get max created_date per symbol
+        Subquery<Date> subQuery = criteriaQuery.subquery(Date.class);
+        Root<NSETop20DetailEntity> subRoot = subQuery.from(NSETop20DetailEntity.class);
+        Predicate top20SubTypePredicate = criteriaBuilder.equal(root.get("top20SubType"), top20SubType);
+        Predicate symbolPredicate = criteriaBuilder.equal(subRoot.get("symbol"), root.get("symbol"));
+        Expression<Date> createdDateExpression = subRoot.get("createdDate");
+        subQuery.select(criteriaBuilder.greatest(createdDateExpression))
+                .where(criteriaBuilder.and(top20SubTypePredicate, symbolPredicate));
+
+        // Main query: select rows where createdDate = sub-query result
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.equal(root.get("createdDate"), subQuery));
+
+        // If you want sorting:
+        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createdDate")));
 
         return this.getEntityManager().createQuery(criteriaQuery).getResultList();
     }

@@ -16,8 +16,10 @@ public class NSETop20SecuritiesGtr20Service extends AbstractNSETop20Service<NSET
 
     @Override
     public Top20SecuritiesGTR20WebPage getWebPage() {
+        List<NSETop20DetailEntity> entities = this.getEntities();
         Top20SecuritiesGTR20WebPage top20SecuritiesGTR20Page = new Top20SecuritiesGTR20WebPage();
-        top20SecuritiesGTR20Page.setNseTop20SecurityGTR20Models(this.transformEntities(this.getEntities()));
+        top20SecuritiesGTR20Page.setNseTop20SecurityGTR20Models(this.transformEntities(entities));
+        top20SecuritiesGTR20Page.setNseStockModels(this.getNSEStockModels(entities));
         return top20SecuritiesGTR20Page;
     }
 

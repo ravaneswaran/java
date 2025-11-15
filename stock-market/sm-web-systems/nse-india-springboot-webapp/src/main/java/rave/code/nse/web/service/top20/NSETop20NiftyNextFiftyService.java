@@ -16,8 +16,10 @@ public class NSETop20NiftyNextFiftyService extends AbstractNSETop20Service<NSETo
 
     @Override
     public Top20NiftyNextFiftyWebPage getWebPage() {
+        List<NSETop20DetailEntity> entities = this.getEntities();
         Top20NiftyNextFiftyWebPage top20NiftyNextFiftyPage = new Top20NiftyNextFiftyWebPage();
-        top20NiftyNextFiftyPage.setNseTop20NiftyNextFiftyModels(this.transformEntities(this.getEntities()));
+        top20NiftyNextFiftyPage.setNseTop20NiftyNextFiftyModels(this.transformEntities(entities));
+        top20NiftyNextFiftyPage.setNseStockModels(this.getNSEStockModels(entities));
         return top20NiftyNextFiftyPage;
     }
 

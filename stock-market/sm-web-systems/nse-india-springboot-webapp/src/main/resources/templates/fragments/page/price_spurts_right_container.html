@@ -7,7 +7,6 @@
                     <div class="right-container-company-title-div" th:text="${stock.symbol}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
                     <div th:class="${stock.percentageChange >= 0 ? 'right-container-company-stock-market-chart-div-green' : 'right-container-company-stock-market-chart-div-red'}"  th:attr="onclick=|showPopUp('${stock.stockDivId}')|" th:text="${stock.percentageChange + '%'}"></div>
                 </div>
-                <!--width: 100%; height: 70%;-->
                 <div>
                     <div th:id="${stock.stockDivId}" class="right-container-company-table-div">
                         <table>
@@ -40,16 +39,9 @@
                                 <td class="td-left">Shares(Vol)</td>
                                 <td class="td-right" th:text="${stock.volume}"></td>
                             </tr>
-                            <!--<tr>
-                                <td class="td-left">Val in Lakhs</td>
-                                <td class="td-right" th:text="${stock.valueInLakhs}"></td>
-                            </tr>-->
                             </tbody>
                         </table>
                     </div>
-                    <!--<div th:id="${stock.stockStatDivId}" class="right-container-company-table-div" style="height:0%; width:0%;">
-                        this is the div
-                    </div>-->
                 </div>
                 <div class="right-container-company-trading-stats-div">
                     Trading Statistics

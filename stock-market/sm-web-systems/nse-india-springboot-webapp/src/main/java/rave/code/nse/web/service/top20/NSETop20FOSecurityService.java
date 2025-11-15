@@ -16,8 +16,10 @@ public class NSETop20FOSecurityService extends AbstractNSETop20Service<NSETop20F
 
     @Override
     public Top20FOSecurityWebPage getWebPage() {
+        List<NSETop20DetailEntity> entities = this.getEntities();
         Top20FOSecurityWebPage top20FOSecurityPage = new Top20FOSecurityWebPage();
-        top20FOSecurityPage.setNseTop20FOSecurityModels(this.transformEntities(this.getEntities()));
+        top20FOSecurityPage.setNseTop20FOSecurityModels(this.transformEntities(entities));
+        top20FOSecurityPage.setNseStockModels(this.getNSEStockModels(entities));
         return top20FOSecurityPage;
     }
 
