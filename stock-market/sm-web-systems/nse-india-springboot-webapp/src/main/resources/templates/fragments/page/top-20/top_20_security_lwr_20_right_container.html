@@ -39,19 +39,14 @@
                                 <td class="td-left">Shares(Vol)</td>
                                 <td class="td-right" th:text="${stock.volumeInShares}"></td>
                             </tr>
-                            <!--<tr>
-                                <td class="td-left">Val in Lakhs</td>
-                                <td class="td-right" th:text="${stock.valueInLakhs}"></td>
-                            </tr>-->
                             </tbody>
                         </table>
                     </div>
-                    <!--<div th:id="${stock.stockStatDivId}" class="right-container-company-table-div" style="height:0%; width:0%;">
-                        this is the div
-                    </div>-->
                 </div>
                 <div class="right-container-company-trading-stats-div">
-                    Trading Statistics
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'pb')|">PB</div>
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'atr')|">ATR</div>
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'sma')|">SMA</div>
                 </div>
             </div>
         </div>

@@ -32,6 +32,22 @@
         popUpDiv.style = 'display:block';
     }
 
+    var showPopUpAndDetail = function(id, detail){
+        showPopUp(id);
+        if("pb" == detail){
+            var innerPopupId = id + "-pb";
+            showInnerPopUp(innerPopupId, id);
+        }
+        if("atr" == detail){
+            var innerPopupId = id + "-atr";
+            showInnerPopUp(innerPopupId, id);
+        }
+        if("sma" == detail){
+            var innerPopupId = id + "-sma";
+            showInnerPopUp(innerPopupId, id);
+        }
+    }
+
     var closePopUp = function(id){
         var popUpDiv = document.getElementById('tech-analysis-div-'+id);
         popUpDiv.style = 'display:none';

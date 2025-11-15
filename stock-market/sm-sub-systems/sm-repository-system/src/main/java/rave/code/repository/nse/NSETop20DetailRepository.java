@@ -22,11 +22,12 @@ public class NSETop20DetailRepository extends AbstractNSERepositoryManager<NSETo
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String nowString = simpleDateFormat.format(new Date());
         String nowStringWithOutTime = nowString.split(" ")[0];
-        String todayMorningAt_09_15 = String.format("%s %s", nowStringWithOutTime, "09:15:00");
-        String todayNoonAt_13_30 = String.format("%s %s", nowStringWithOutTime, "13:30:00");
+        String today_SOS_At_09_15 = String.format("%s %s", nowStringWithOutTime, "09:15:00");
+        String today_Noon_At_13_30 = String.format("%s %s", nowStringWithOutTime, "13:30:00");
+        String today_EOS_At_15_30 = String.format("%s %s", nowStringWithOutTime, "15:30:00");
         try {
-            this.from = simpleDateFormat.parse(todayMorningAt_09_15);
-            this.to = simpleDateFormat.parse(todayNoonAt_13_30);
+            this.from = simpleDateFormat.parse(today_SOS_At_09_15);
+            this.to = simpleDateFormat.parse(today_EOS_At_15_30);
         } catch (ParseException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
         }

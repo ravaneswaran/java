@@ -48,7 +48,9 @@
                     </div>
                 </div>
                 <div class="right-container-company-trading-stats-div">
-                    Trading Statistics
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'pb')|">PB</div>
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'atr')|">ATR</div>
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'sma')|">SMA</div>
                 </div>
             </div>
         </div>
