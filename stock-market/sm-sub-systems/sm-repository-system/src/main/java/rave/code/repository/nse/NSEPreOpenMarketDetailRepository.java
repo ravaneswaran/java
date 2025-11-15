@@ -1,13 +1,9 @@
 package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
-import rave.code.entity.nse.csv.NSETop20DetailEntity;
 
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +16,7 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
         super(NSEPreOpenMarketDetailEntity.class);
     }
 
-    public Query getQuery(String preOpenType){
+    public Query getQuery(String preOpenType) {
         String query = "SELECT * FROM NSEPreOpenMarketDetailEntity openMarketEntity WHERE openMarketEntity.preOpenType = :preOpenType";
         Query preOpenMarketDetailQuery = this.getEntityManager().createQuery(query);
         preOpenMarketDetailQuery.setParameter("preOpenType", preOpenType);
@@ -28,27 +24,27 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
         return preOpenMarketDetailQuery;
     }
 
-    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketFOs(){
-        return this.findPreOpenMarketDetails("FO");
+    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketFOs() {
+        return this.findDistinctPreOpenMarketDetails("FO");
     }
 
-    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketOthers(){
-        return this.findPreOpenMarketDetails("OTHERS");
+    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketOthers() {
+        return this.findDistinctPreOpenMarketDetails("OTHERS");
     }
 
-    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketSMEs(){
-        return this.findPreOpenMarketDetails("SME");
+    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketSMEs() {
+        return this.findDistinctPreOpenMarketDetails("SME");
     }
 
-    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketBankNiftys(){
-        return this.findPreOpenMarketDetails("BANKNIFTY");
+    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketBankNiftys() {
+        return this.findDistinctPreOpenMarketDetails("BANKNIFTY");
     }
 
-    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketNIfty50s(){
-        return this.findPreOpenMarketDetails("NIFTY");
+    public List<NSEPreOpenMarketDetailEntity> findPreOpenMarketNIfty50s() {
+        return this.findDistinctPreOpenMarketDetails("NIFTY");
     }
 
-    private List<NSEPreOpenMarketDetailEntity> findPreOpenMarketDetails(String preOpenType){
+    private List<NSEPreOpenMarketDetailEntity> findPreOpenMarketDetails(String preOpenType) {
 
         Date from = null;
         Date to = null;
@@ -79,5 +75,29 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
         } catch (ParseException exception) {
             return new ArrayList<>();
         }
+    }
+
+    private List<NSEPreOpenMarketDetailEntity> findDistinctPreOpenMarketDetails(String preOpenType) {
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEPreOpenMarketDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPreOpenMarketDetailEntity.class);
+        Root<NSEPreOpenMarketDetailEntity> root = criteriaQuery.from(NSEPreOpenMarketDetailEntity.class);
+
+        // Sub query to get max created_date per symbol
+        Subquery<Date> subQuery = criteriaQuery.subquery(Date.class);
+        Root<NSEPreOpenMarketDetailEntity> subRoot = subQuery.from(NSEPreOpenMarketDetailEntity.class);
+        Predicate preOpenMarketTypePredicate = criteriaBuilder.equal(root.get("preOpenType"), preOpenType);
+        Predicate symbolPredicate = criteriaBuilder.equal(subRoot.get("symbol"), root.get("symbol"));
+        Expression<Date> createdDateExpression = subRoot.get("createdDate");
+        subQuery.select(criteriaBuilder.greatest(createdDateExpression))
+                .where(criteriaBuilder.and(preOpenMarketTypePredicate, symbolPredicate));
+
+        // Main query: select rows where createdDate = sub-query result
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.equal(root.get("createdDate"), subQuery));
+
+        // If you want sorting:
+        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createdDate")));
+
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 }
