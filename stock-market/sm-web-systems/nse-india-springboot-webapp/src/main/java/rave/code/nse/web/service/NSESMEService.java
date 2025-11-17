@@ -47,6 +47,7 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESME
             nseSMEDetailModel.setValueInLakhs(nseSMEDetailEntity.getValueInLakhs());
             nseSMEDetailModel.setPreviousClosePrice(nseSMEDetailEntity.getPreviousClosePrice());
 
+
             nseSMEDetailModels.add(nseSMEDetailModel);
         }
 
@@ -63,6 +64,7 @@ public class NSESMEService extends AbstractNSEService<NSESMEDetailEntity, NSESME
             nseStockModel.setPreviousClosePrice(nseSMEDetailEntity.getPreviousClosePrice());
             nseStockModel.setPercentageChange(nseSMEDetailEntity.getPercentageChange());
             nseStockModel.setOpenPrice(nseSMEDetailEntity.getOpenPrice());
+            nseStockModel.setLastTradedPrice(nseSMEDetailEntity.getLastTradedPrice());
             nseStockModels.add(nseStockModel);
         }
         return nseStockModels;

@@ -46,6 +46,7 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
             nseStockModel.setPreviousClosePrice(nsePriceSpurtDetailEntity.getPreviousClosePrice());
             nseStockModel.setPercentageChange(nsePriceSpurtDetailEntity.getPercentageChange());
             nseStockModel.setOpenPrice(nsePriceSpurtDetailEntity.getOpenPrice());
+            nseStockModel.setLastTradedPrice(nsePriceSpurtDetailEntity.getLastTradedPrice());
             nseStockModels.add(nseStockModel);
         }
         return nseStockModels;

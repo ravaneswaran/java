@@ -13,6 +13,7 @@ public class NSEStockModel {
     private double openPrice;
     private double previousClosePrice;
     private double percentageChange;
+    private double lastTradedPrice;
 
     public String getSymbol() {
         return symbol;
@@ -52,6 +53,18 @@ public class NSEStockModel {
 
     public void setStockDivId(String stockDivId) {
         this.stockDivId = stockDivId;
+    }
+
+    public double getLastTradedPrice() {
+        return lastTradedPrice;
+    }
+
+    public void setLastTradedPrice(double lastTradedPrice) {
+        this.lastTradedPrice = lastTradedPrice;
+    }
+
+    public boolean getLTPAboveOpenPrice(){
+        return this.lastTradedPrice >= this.openPrice;
     }
 
     public List<PercentagePriceRange> getPercentagePriceRanges() {

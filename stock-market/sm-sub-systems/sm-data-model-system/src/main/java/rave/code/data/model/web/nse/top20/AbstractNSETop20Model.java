@@ -8,7 +8,6 @@ public class AbstractNSETop20Model extends NSEStockModel {
     private double highPrice;
     private double lowPrice;
     private double previousClosePrice;
-    private double lastTradedPrice;
     private double percentageChange;
     private int volumeInShares;
     private double valueInLakhs;
@@ -43,14 +42,6 @@ public class AbstractNSETop20Model extends NSEStockModel {
 
     public void setPreviousClosePrice(double previousClosePrice) {
         this.previousClosePrice = previousClosePrice;
-    }
-
-    public double getLastTradedPrice() {
-        return lastTradedPrice;
-    }
-
-    public void setLastTradedPrice(double lastTradedPrice) {
-        this.lastTradedPrice = lastTradedPrice;
     }
 
     public double getPercentageChange() {

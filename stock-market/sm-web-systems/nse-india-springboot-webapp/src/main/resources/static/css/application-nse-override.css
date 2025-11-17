@@ -100,7 +100,7 @@
 
 /******************** arrow and checks styles ******************/
 .arrow {
-  border: solid black;
+  border: solid #353839;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 4px;
@@ -298,7 +298,7 @@
 .trade-popup-container-stock-td-left{
     width: 50%;
     font-size: 15px;
-    text-indent: 5px;
+    text-indent: 3px;
     color:black;
 }
 
@@ -309,8 +309,12 @@
     color:black;
 }
 
-.td-bold {
-    font-weight: bold;
+.yellow-bg {
+    background-color:yellow;
+}
+
+.green-bg {
+    background-color: #2CFF05;
 }
 
 

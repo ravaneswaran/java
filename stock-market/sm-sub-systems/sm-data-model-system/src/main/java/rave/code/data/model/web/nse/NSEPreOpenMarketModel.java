@@ -134,4 +134,9 @@ public class NSEPreOpenMarketModel extends NSEStockModel {
     public double getPercentageChange() {
         return this.getPricePercentageChange();
     }
+
+    @Override
+    public boolean getLTPAboveOpenPrice() {
+        return false;
+    }
 }

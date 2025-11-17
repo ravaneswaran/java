@@ -21,6 +21,7 @@ public abstract class AbstractNSETop20Service<T, W> extends AbstractNSEService<N
             nseStockModel.setPreviousClosePrice(nseTop20DetailEntity.getPreviousClosePrice());
             nseStockModel.setPercentageChange(nseTop20DetailEntity.getPercentageChange());
             nseStockModel.setOpenPrice(nseTop20DetailEntity.getOpenPrice());
+            nseStockModel.setLastTradedPrice(nseTop20DetailEntity.getLastTradedPrice());
             nseStockModels.add(nseStockModel);
         }
         return nseStockModels;

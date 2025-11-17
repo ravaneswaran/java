@@ -4,7 +4,6 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     private double highPrice;
     private double lowPrice;
-    private double lastTradedPrice;
     private int volume;
     private double value;
 
@@ -22,14 +21,6 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     public void setLowPrice(double lowPrice) {
         this.lowPrice = lowPrice;
-    }
-
-    public double getLastTradedPrice() {
-        return lastTradedPrice;
-    }
-
-    public void setLastTradedPrice(double lastTradedPrice) {
-        this.lastTradedPrice = lastTradedPrice;
     }
 
     public int getVolume() {
