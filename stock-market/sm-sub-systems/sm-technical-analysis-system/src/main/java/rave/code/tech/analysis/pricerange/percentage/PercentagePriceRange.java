@@ -9,41 +9,47 @@ import java.math.RoundingMode;
 public class PercentagePriceRange {
 
     private double percentage;
-    private double price;
+    private double openPrice;
+    private double lastTradedPrice;
 
-    public PercentagePriceRange(double percentage, double price) {
+    public PercentagePriceRange(double percentage, double openPrice, double lastTradedPrice) {
         this.percentage = percentage;
-        this.price = price;
+        this.openPrice = openPrice;
+        this.lastTradedPrice = lastTradedPrice;
     }
 
     public double getPercentage() {
         return percentage;
     }
 
-    public double getPrice() {
-        return price;
+    public double getOpenPrice() {
+        return openPrice;
     }
 
     public double getUpperPriceRange() {
-        return new BigDecimal(new UpperPriceRange(this.percentage).getRange(this.price))
+        return new BigDecimal(new UpperPriceRange(this.getPercentage()).getRange(this.getOpenPrice()))
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
     }
 
     public double getLowerPriceRange() {
-        return new BigDecimal(new LowerPriceRange(this.percentage).getRange(this.price))
+        return new BigDecimal(new LowerPriceRange(this.getPercentage()).getRange(this.getOpenPrice()))
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
     }
 
+    public double getLastTradedPrice() {
+        return this.lastTradedPrice;
+    }
+
     public double getStopLoss() {
-        return new BigDecimal(this.price * (1 - percentage / 100))
+        return new BigDecimal(this.getLastTradedPrice() * (1 - this.getPercentage() / 100))
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
     }
 
     public double getTargetPrice() {
-        return new BigDecimal(this.price + (this.price * this.percentage / 100))
+        return new BigDecimal(this.getLastTradedPrice() + (this.getLastTradedPrice() * this.getPercentage() / 100))
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
     }
@@ -52,7 +58,7 @@ public class PercentagePriceRange {
         double risk = new BigDecimal(this.getTargetPrice() - this.getStopLoss())
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
-        double reward = new BigDecimal(this.getTargetPrice() - this.price)
+        double reward = new BigDecimal(this.getTargetPrice() - this.getOpenPrice())
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
         double riskRewardRatio = 0;
@@ -72,8 +78,12 @@ public class PercentagePriceRange {
     }
 
     public double getProfit() {
-        return new BigDecimal(this.getCapitalRequired() - (this.price * 100))
+        return new BigDecimal(this.getCapitalRequired() - (this.getOpenPrice() * 100))
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();
+    }
+
+    public boolean getHasLTPEqualsOrOverTargetPrice(){
+        return this.getLastTradedPrice() >= this.getTargetPrice();
     }
 }

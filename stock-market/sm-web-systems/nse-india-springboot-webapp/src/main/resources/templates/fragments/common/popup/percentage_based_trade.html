@@ -1,11 +1,14 @@
+
+
+
 <div class="trade-popup-container-stock-div" th:fragment="percentageBasedTrade(${stock})"  th:each="percentagePriceRange : ${stock.percentagePriceRanges}">
     <div class="trade-popup-container-stock-header-div">
         <div class="trade-popup-container-stock-header-left-div">
-            <li th:class="${stock.LTPAboveOpenPrice ? 'arrow up green' : 'arrow down red'}"></li>
+            <li th:class="${stock.hasLTPEqualsOrOverOpenPrice ? 'arrow up green' : 'arrow down red'}"></li>
         </div>
         <div class="trade-popup-container-stock-header-middle-div" th:text="${percentagePriceRange.percentage + ' %'}"></div>
         <div class="trade-popup-container-stock-header-right-div">
-            <div class="red-cross" th:class="${stock.LTPAboveOpenPrice ? 'check' : 'red-cross'}"></div>
+            <div class="red-cross" th:class="${percentagePriceRange.HasLTPEqualsOrOverTargetPrice ? 'red-cross' : 'check'}"></div>
         </div>
     </div>
     <div class="trade-popup-container-stock-body-div">
@@ -24,8 +27,16 @@
                 <td class="trade-popup-container-stock-td-right" th:text="${stock.percentageChange}"></td>
             </tr>
             <tr>
+                <td class="trade-popup-container-stock-td-left">LTP</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${stock.lastTradedPrice}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left green-bg">Tgt Price</td>
+                <td class="trade-popup-container-stock-td-right green-bg" th:text="${percentagePriceRange.targetPrice}"></td>
+            </tr>
+            <tr>
                 <td class="trade-popup-container-stock-td-left green-bg">Buy Price</td>
-                <td class="trade-popup-container-stock-td-right green-bg" th:text="${percentagePriceRange.price}"></td>
+                <td class="trade-popup-container-stock-td-right green-bg" th:text="${percentagePriceRange.lastTradedPrice}"></td>
             </tr>
             <tr>
                 <td class="trade-popup-container-stock-td-left green-bg">Sell Price</td>
@@ -35,14 +46,14 @@
                 <td class="trade-popup-container-stock-td-left green-bg">Stop Loss</td>
                 <td class="trade-popup-container-stock-td-right green-bg" th:text="${percentagePriceRange.stopLoss}"></td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td class="trade-popup-container-stock-td-left green-bg">Cap(100-Shr)</td>
                 <td class="trade-popup-container-stock-td-right green-bg" th:text="${percentagePriceRange.capitalRequired}">0</td>
             </tr>
             <tr>
                 <td class="trade-popup-container-stock-td-left green-bg">Profit(100-Shr)</td>
                 <td class="trade-popup-container-stock-td-right green-bg" th:text="${percentagePriceRange.profit}">0</td>
-            </tr>
+            </tr>-->
             </tbody>
         </table>
     </div>

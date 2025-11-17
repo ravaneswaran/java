@@ -136,7 +136,12 @@ public class NSEPreOpenMarketModel extends NSEStockModel {
     }
 
     @Override
-    public boolean getLTPAboveOpenPrice() {
+    public double getLastTradedPrice() {
+        return this.getOpenPrice();
+    }
+
+    @Override
+    public boolean getHasLTPEqualsOrOverOpenPrice() {
         return false;
     }
 }
