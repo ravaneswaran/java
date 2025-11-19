@@ -1,31 +1,13 @@
 package rave.code.repository.nse;
 
-import junit.framework.TestCase;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
-public class TestNSEPreOpenMarketDetailTest extends TestCase {
+public class TestNSEPreOpenMarketDetailTest extends NSERepositoryTestCase {
 
-    NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
-
-    public NSEStockBaseEntity createNSEStockBaseEntity(){
-        NSEStockBaseEntity nseStockBaseEntity = new NSEStockBaseEntity();
-
-        Date now = new Date();
-        nseStockBaseEntity.setSymbol(String.format("%s-%s", "QWERTY", now.getTime()));
-        nseStockBaseEntity.setISINumber(String.valueOf(now.getTime()));
-        nseStockBaseEntity.setCompanyName(String.format("Mannar-and-Mannar-%s", now.getTime()));
-        nseStockBaseEntity.setDateOfListing(new Date());
-        nseStockBaseEntity.setPaidUpValue(34);
-        nseStockBaseEntity.setFaceValue(345);
-        nseStockBaseEntity.setMarketLot(30);
-
-        return this.nseStockBaseRepository.save(nseStockBaseEntity);
-    }
 
     public void testSaveMethod() {
         NSEStockBaseEntity nseStockBaseEntity = this.createNSEStockBaseEntity();
@@ -44,7 +26,7 @@ public class TestNSEPreOpenMarketDetailTest extends TestCase {
         nsePreOpenMarketDetailEntity.setNewMarket52WeekLow(345.00);
 
         this.nsePreOpenMarketDetailRepository.save(nsePreOpenMarketDetailEntity);
-        NSEPreOpenMarketDetailEntity returnEntity = this.nsePreOpenMarketDetailRepository.findBy(nsePreOpenMarketDetailEntity.getId());
-        assertNotNull(returnEntity);
+        NSEPreOpenMarketDetailEntity findFromDB = this.nsePreOpenMarketDetailRepository.findBy(nsePreOpenMarketDetailEntity.getId());
+        assertNotNull(findFromDB);
     }
 }

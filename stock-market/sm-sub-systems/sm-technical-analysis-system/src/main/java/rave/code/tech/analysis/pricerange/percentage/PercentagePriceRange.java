@@ -19,11 +19,11 @@ public class PercentagePriceRange {
     }
 
     public double getPercentage() {
-        return percentage;
+        return this.percentage;
     }
 
     public double getOpenPrice() {
-        return openPrice;
+        return this.openPrice;
     }
 
     public double getUpperPriceRange() {
