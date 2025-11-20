@@ -4,7 +4,7 @@ import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.entity.nse.system.NSEInvestorsChoiceDetailEntity;
 import rave.code.repository.nse.NSERepositoryTestCase;
 
-public class TestNSEInvestorsChoiceDetailRepositoryTest extends NSERepositoryTestCase {
+public class TestNSEInvestorsChoiceDetailRepository extends NSERepositoryTestCase {
 
     private NSEInvestorsChoiceDetailRepository nseInvestorsChoiceDetailRepository = new NSEInvestorsChoiceDetailRepository();
 

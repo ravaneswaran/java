@@ -40,6 +40,7 @@
     <include relativeToChangelogFile="true" file="nse/nse-day-price-last-run-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-traders-choice-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-investors-choice-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-price-to-earning-ratio-detail-changelog.xml"/>
 
     <include relativeToChangelogFile="true" file="quartz/quartz-scheduler-changelog.xml"/>
 </databaseChangeLog>
