@@ -4,7 +4,7 @@
         <div class="right-container-company-frame-div-0 right-container-company-frame-div-0-ps" th:each="stock : ${webpage.nsePriceSpurtDetailModels}">
             <div class="right-container-company-div">
                 <div class="right-container-company-title-container">
-                    <div class="right-container-company-title-div" th:text="${stock.symbol}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
+                    <div class="right-container-company-title-div" th:text="${stock.title}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
                     <div th:class="${stock.percentageChange >= 0 ? 'right-container-company-stock-market-chart-div-green' : 'right-container-company-stock-market-chart-div-red'}"  th:attr="onclick=|showPopUp('${stock.stockDivId}')|" th:text="${stock.percentageChange + '%'}"></div>
                 </div>
                 <div>

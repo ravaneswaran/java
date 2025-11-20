@@ -43,6 +43,12 @@ public class NSETop20SecuritiesGtr20Service extends AbstractNSETop20Service<NSET
             nseTop20SecurityGTR20Model.setPreviousClosePrice(nseTop20DetailEntity.getPreviousClosePrice());
             nseTop20SecurityGTR20Model.setVolumeInShares(nseTop20DetailEntity.getVolumeInShares());
             nseTop20SecurityGTR20Model.setValueInLakhs(nseTop20DetailEntity.getValueInLakhs());
+            String series = nseTop20DetailEntity.getNseStockBaseEntity().getSeries();
+            if (null != series && !"".equals(series) && !"null".equals(series)) {
+                nseTop20SecurityGTR20Model.setTitle(String.format("%s:%s", series, nseTop20DetailEntity.getSymbol()));
+            } else {
+                nseTop20SecurityGTR20Model.setTitle(nseTop20DetailEntity.getSymbol());
+            }
 
             nseTop20SecurityGTR20Models.add(nseTop20SecurityGTR20Model);
         }

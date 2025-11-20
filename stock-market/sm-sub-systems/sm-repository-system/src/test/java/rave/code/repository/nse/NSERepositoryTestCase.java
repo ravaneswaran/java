@@ -5,7 +5,7 @@ import rave.code.entity.nse.csv.NSEStockBaseEntity;
 
 import java.util.Date;
 
-public class NSERepositoryTestCase extends TestCase {
+public abstract class NSERepositoryTestCase extends TestCase {
 
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 

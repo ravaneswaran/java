@@ -44,7 +44,12 @@ public class NSETop20NiftyFiftyService extends AbstractNSETop20Service<NSETop20N
             nseTop20NiftyFiftyModel.setPreviousClosePrice(nseTop20DetailEntity.getPreviousClosePrice());
             nseTop20NiftyFiftyModel.setVolumeInShares(nseTop20DetailEntity.getVolumeInShares());
             nseTop20NiftyFiftyModel.setValueInLakhs(nseTop20DetailEntity.getValueInLakhs());
-
+            String series = nseTop20DetailEntity.getNseStockBaseEntity().getSeries();
+            if (null != series && !"".equals(series) && !"null".equals(series)) {
+                nseTop20NiftyFiftyModel.setTitle(String.format("%s:%s", series, nseTop20DetailEntity.getSymbol()));
+            } else {
+                nseTop20NiftyFiftyModel.setTitle(nseTop20DetailEntity.getSymbol());
+            }
 
             nseTop20NiftyFiftyModels.add(nseTop20NiftyFiftyModel);
         }

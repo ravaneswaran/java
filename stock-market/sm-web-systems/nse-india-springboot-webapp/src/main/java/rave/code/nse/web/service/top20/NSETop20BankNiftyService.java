@@ -43,6 +43,12 @@ public class NSETop20BankNiftyService extends AbstractNSETop20Service<NSETop20Ba
             nseTop20BankNiftyModel.setPreviousClosePrice(nseTop20DetailEntity.getPreviousClosePrice());
             nseTop20BankNiftyModel.setVolumeInShares(nseTop20DetailEntity.getVolumeInShares());
             nseTop20BankNiftyModel.setValueInLakhs(nseTop20DetailEntity.getValueInLakhs());
+            String series = nseTop20DetailEntity.getNseStockBaseEntity().getSeries();
+            if (null != series && !"".equals(series) && !"null".equals(series)) {
+                nseTop20BankNiftyModel.setTitle(String.format("%s:%s", series, nseTop20DetailEntity.getSymbol()));
+            } else {
+                nseTop20BankNiftyModel.setTitle(nseTop20DetailEntity.getSymbol());
+            }
 
             nseTop20BankNiftyModels.add(nseTop20BankNiftyModel);
         }

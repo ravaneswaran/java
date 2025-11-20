@@ -43,7 +43,12 @@ public class NSETop20FOSecurityService extends AbstractNSETop20Service<NSETop20F
             nseTop20FOSecurityModel.setPreviousClosePrice(nseTop20DetailEntity.getPreviousClosePrice());
             nseTop20FOSecurityModel.setVolumeInShares(nseTop20DetailEntity.getVolumeInShares());
             nseTop20FOSecurityModel.setValueInLakhs(nseTop20DetailEntity.getValueInLakhs());
-
+            String series = nseTop20DetailEntity.getNseStockBaseEntity().getSeries();
+            if (null != series && !"".equals(series) && !"null".equals(series)) {
+                nseTop20FOSecurityModel.setTitle(String.format("%s:%s", series, nseTop20DetailEntity.getSymbol()));
+            } else {
+                nseTop20FOSecurityModel.setTitle(nseTop20DetailEntity.getSymbol());
+            }
             nseTop20FOSecurityModels.add(nseTop20FOSecurityModel);
         }
         return nseTop20FOSecurityModels;

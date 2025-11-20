@@ -10,6 +10,8 @@ public class NSEStockModel {
     private String stockDivId;
 
     private String symbol;
+    private String series;
+    private String title;
     private double openPrice;
     private double previousClosePrice;
     private double percentageChange;
@@ -21,6 +23,22 @@ public class NSEStockModel {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public double getPercentageChange() {

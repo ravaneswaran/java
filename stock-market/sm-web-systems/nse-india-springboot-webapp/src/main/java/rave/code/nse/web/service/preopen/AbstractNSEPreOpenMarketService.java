@@ -13,7 +13,7 @@ public abstract class AbstractNSEPreOpenMarketService<W> extends AbstractNSEServ
     @Override
     public List<NSEPreOpenMarketModel> transformEntities(List<NSEPreOpenMarketDetailEntity> entities) {
         List<NSEPreOpenMarketModel> nsePreOpenMarketModels = new ArrayList<>();
-        for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity: entities) {
+        for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity : entities) {
             NSEPreOpenMarketModel nsePreOpenMarketModel = new NSEPreOpenMarketModel();
             nsePreOpenMarketModel.setStockDivId(nsePreOpenMarketDetailEntity.getId());
             nsePreOpenMarketModel.setBusinessDate(nsePreOpenMarketDetailEntity.getBusinessDate());
@@ -29,6 +29,13 @@ public abstract class AbstractNSEPreOpenMarketService<W> extends AbstractNSEServ
             nsePreOpenMarketModel.setSymbol(nsePreOpenMarketDetailEntity.getSymbol());
             nsePreOpenMarketModel.setIndicativeEquilibriumPrice(nsePreOpenMarketDetailEntity.getIndicativeEquilibriumPrice());
             nsePreOpenMarketModel.setNewMarket52WeekHigh(nsePreOpenMarketDetailEntity.getNewMarket52WeekHigh());
+            String series = nsePreOpenMarketDetailEntity.getNseStockBaseEntity().getSeries();
+            if (null != series && !"".equals(series) && !"null".equals(series)) {
+                nsePreOpenMarketModel.setTitle(String.format("%s:%s", series, nsePreOpenMarketDetailEntity.getSymbol()));
+            } else {
+                nsePreOpenMarketModel.setTitle(nsePreOpenMarketDetailEntity.getSymbol());
+            }
+
             nsePreOpenMarketModels.add(nsePreOpenMarketModel);
         }
         return nsePreOpenMarketModels;
@@ -37,7 +44,7 @@ public abstract class AbstractNSEPreOpenMarketService<W> extends AbstractNSEServ
     @Override
     public List<NSEStockModel> getNSEStockModels(List<NSEPreOpenMarketDetailEntity> entities) {
         List<NSEStockModel> nseStockModels = new ArrayList<>();
-        for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity: entities) {
+        for (NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntity : entities) {
             NSEStockModel nseStockModel = new NSEStockModel();
             nseStockModel.setStockDivId(nsePreOpenMarketDetailEntity.getId());
             nseStockModel.setSymbol(nsePreOpenMarketDetailEntity.getSymbol());
