@@ -1,4 +1,4 @@
-package rave.code.stockmarket.repository;
+package rave.code.repository.bse;
 
 import junit.framework.TestCase;
 import rave.code.entity.bse.BSEActive100Entity;
