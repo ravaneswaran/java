@@ -25,21 +25,9 @@ public class TestBSEActive200Repository extends TestCase {
         bseActive200Entity.setModifiedBy("SYSTEM");
 
         BSEActive200Repository bseActive200Repository = new BSEActive200Repository(BSEActive200Entity.class);
-
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getStockName());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getCategory());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getHigh());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getLastPrice());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getPercentageChange());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getValueInCrores());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getLow());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getCreatedDate());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getCreatedBy());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getModifiedDate());
-        System.out.println("------------------------>>>>>>> " + bseActive200Entity.getModifiedBy());
-
         bseActive200Repository.save(bseActive200Entity);
         BSEActive200Entity returnElement = bseActive200Repository.findBy(bseActive200Entity.getStockName());
+
         assertNotNull(returnElement);
     }
 

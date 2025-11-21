@@ -25,22 +25,9 @@ public class TestBSEActive500Repository extends TestCase {
         bseActive500Entity.setModifiedBy("SYSTEM");
 
         BSEActive500Repository bseActive500Repository = new BSEActive500Repository(BSEActive500Entity.class);
-
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getStockName());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getCategory());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getHigh());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getLastPrice());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getPercentageChange());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getValueInCrores());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getLow());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getCreatedDate());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getCreatedBy());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getModifiedDate());
-        System.out.println("------------------------>>>>>>> " + bseActive500Entity.getModifiedBy());
-
         bseActive500Repository.save(bseActive500Entity);
         BSEActive500Entity returnElement = bseActive500Repository.findBy(bseActive500Entity.getStockName());
+
         assertNotNull(returnElement);
     }
-
 }

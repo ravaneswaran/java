@@ -26,22 +26,9 @@ public class TestBSETopDividendRepository extends TestCase {
         bseTopDividendEntity.setModifiedBy("SYSTEM");
 
         BSETopDividendRepository bseTopDividendRepository = new BSETopDividendRepository(BSETopDividendEntity.class);
-
-
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getStockName());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getLastPrice());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getLatestDividendPercentage());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getDividendYieldPercentage52High());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getDividendYieldPercentage52Low());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getDividendYieldPercentageAtCurrent());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getCreatedDate());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getCreatedBy());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getModifiedDate());
-        System.out.println("------------------------>>>>>>> " + bseTopDividendEntity.getModifiedBy());
-
         bseTopDividendRepository.save(bseTopDividendEntity);
         BSETopDividendEntity returnElement = bseTopDividendRepository.findBy(bseTopDividendEntity.getStockName());
+
         assertNotNull(returnElement);
     }
-
 }

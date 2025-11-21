@@ -25,22 +25,9 @@ public class TestBSESmallCapGainerRepository extends TestCase {
         bseSmallCapGainerEntity.setModifiedBy("SYSTEM");
 
         BSESmallCapGainerRepository bseSmallCapGainerRepository = new BSESmallCapGainerRepository(BSESmallCapGainerEntity.class);
-
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getVariation());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getStockName());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getHigh());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getLastPrice());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getPercentageGain());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getPreviousClose());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getLow());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getCreatedDate());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getCreatedBy());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getModifiedDate());
-        System.out.println("------------------------>>>>>>> " + bseSmallCapGainerEntity.getModifiedBy());
-
         bseSmallCapGainerRepository.save(bseSmallCapGainerEntity);
         BSESmallCapGainerEntity returnElement = bseSmallCapGainerRepository.findBy(bseSmallCapGainerEntity.getStockName());
+
         assertNotNull(returnElement);
     }
-
 }

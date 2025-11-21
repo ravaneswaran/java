@@ -106,7 +106,8 @@ public enum QuartzJob {
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_SECURITY_LWR_20_LOSER_TOP_20_JOB("NSE SP < 20 Loser Top-20 T+0 Live Session", "J-S2-T20-SP<20-L-T+0-Live"),
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_SECURITY_LWR_20_LOSER_TOP_20_JOB("NSE SP < 20 Loser Top-20 T+0 Live Session", "J-S3-T20-SP<20-L-T+0-Live"),
 
-    NSE_POST_MARKET_CLOSE_JOB("NSE Post Market Close", "J-POST-MARKET-CLOSE");
+    NSE_POST_MARKET_CLOSE_BHAVCOPY_JOB("NSE Post Market Close Bhavcopy", "J-POST-MARKET-CLOSE-BHAVCOPY"),
+    NSE_POST_MARKET_CLOSE_PE_RATIO_JOB("NSE Post Market Close PE Ratio", "J-POST-MARKET-CLOSE-PE-RATIO");
 
     private String name;
     private String shortName;

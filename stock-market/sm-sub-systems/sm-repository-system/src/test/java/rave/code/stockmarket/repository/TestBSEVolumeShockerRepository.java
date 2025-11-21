@@ -36,29 +36,9 @@ public class TestBSEVolumeShockerRepository extends TestCase {
         bseVolumeShockerEntity.setModifiedBy("SYSTEM");
 
         BSEVolumeShockerRepository bseVolumeShockerRepository = new BSEVolumeShockerRepository(BSEVolumeShockerEntity.class);
-
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getStockName());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getCategory());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getSector());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getLastPrice());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getPercentageChange());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getAverageVolume5Days());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getAverageVolume10Days());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getAverageVolume30Days());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getDisplacedMovingAverage30D());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getDisplacedMovingAverage50D());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getDisplacedMovingAverage150D());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getDisplacedMovingAverage200D());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getPriceToEarningRatio());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getPriceToBookRatio());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getLowerCircuit());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getUpperCircuit());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getModifiedDate());
-        System.out.println("------------------------>>>>>>> " + bseVolumeShockerEntity.getModifiedBy());
-
         bseVolumeShockerRepository.save(bseVolumeShockerEntity);
         BSEVolumeShockerEntity returnElement = bseVolumeShockerRepository.findBy(bseVolumeShockerEntity.getStockName());
+
         assertNotNull(returnElement);
     }
-
 }
