@@ -3,11 +3,16 @@ package rave.code.quartz.jobs.nse.csv.ratios;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPriceToEarningRatioDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.process.SubProcess;
 import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEPriceToEarningRatioDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
+import rave.code.utility.log.JavaUtilLogDecor;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -20,27 +25,67 @@ public class NSEPriceToEarningRatioEntityMakerJob extends AbstractNSECSVEntityMa
     private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
     private NSEPriceToEarningRatioDetailRepository nsePriceToEarningRatioDetailRepository = new NSEPriceToEarningRatioDetailRepository();
 
+    private Date date;
+
     public NSEPriceToEarningRatioEntityMakerJob() {
         super("");
-        this.setDownloadPageUrl("");
+        this.setDownloadPageUrl("https://www.nseindia.com/all-reports");
+        this.initialize(new Date());
+    }
+
+    private void initialize(Date date) {
+        this.date = date;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyy");
+        String formattedDate = simpleDateFormat.format(this.date);
+        this.setCsvDownloadUrl(String.format("https://nsearchives.nseindia.com/content/equities/peDetail/PE_%s.csv", formattedDate));
     }
 
     @Override
     public List<NSEPriceToEarningRatioDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
+
         List<NSEPriceToEarningRatioDetailEntity> nsePriceToEarningRatioDetailEntities = new ArrayList<>();
+        Map<String, NSEPriceToEarningRatioDetailEntity> entityMap = this.nsePriceToEarningRatioDetailRepository.getEntityMap();
+
         if (sourceData.size() > 0) {
             CSVRecord header = sourceData.remove(0);
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
         for (CSVRecord csvRecord : sourceData) {
-            NSEPriceToEarningRatioDetailEntity nsePriceToEarningRatioDetailEntity = new NSEPriceToEarningRatioDetailEntity();
+            int recordSize = csvRecord.size();
+            if (recordSize >= 3) {
+                String symbol = csvRecord.get(0);
+                String symbolPE = csvRecord.get(1);
+                String adjustedPE = csvRecord.get(2);
 
-            String symbol = csvRecord.get(0);
-            nsePriceToEarningRatioDetailEntity.setSymbol(symbol);
-            nsePriceToEarningRatioDetailEntity.setSymbolPE(Double.parseDouble(csvRecord.get(1)));
-            nsePriceToEarningRatioDetailEntity.setAdjustedPE(Double.parseDouble(csvRecord.get(2)));
+                if (null == symbolPE || "".equals(symbolPE.trim())) {
+                    symbolPE = "0.0";
+                }
+                if (null == adjustedPE || "".equals(adjustedPE.trim())) {
+                    adjustedPE = symbolPE;
+                }
 
-            nsePriceToEarningRatioDetailEntities.add(nsePriceToEarningRatioDetailEntity);
+                NSEPriceToEarningRatioDetailEntity nsePriceToEarningRatioDetailEntity = entityMap.get(symbol);
+                if(null == nsePriceToEarningRatioDetailEntity){
+                    LOGGER.info(String.format("NSEPriceToEarningRatioDetailEntity for symbol %s does now exist...hence creating new one.", symbol));
+                    nsePriceToEarningRatioDetailEntity = new NSEPriceToEarningRatioDetailEntity();
+                } else {
+                    LOGGER.info(String.format("NSEPriceToEarningRatioDetailEntity for symbol %s does exist...using the existing one.", symbol));
+                }
+
+                nsePriceToEarningRatioDetailEntity.setSymbol(symbol);
+                try {
+                    nsePriceToEarningRatioDetailEntity.setSymbolPE(Double.parseDouble(symbolPE));
+                } catch (NumberFormatException exception) {
+                    LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+                }
+                try {
+                    nsePriceToEarningRatioDetailEntity.setAdjustedPE(Double.parseDouble(adjustedPE));
+                } catch (NumberFormatException exception) {
+                    LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+                }
+
+                nsePriceToEarningRatioDetailEntities.add(nsePriceToEarningRatioDetailEntity);
+            }
         }
         return nsePriceToEarningRatioDetailEntities;
     }
@@ -72,5 +117,20 @@ public class NSEPriceToEarningRatioEntityMakerJob extends AbstractNSECSVEntityMa
 
         this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nsePriceToEarningRatioDetailRepository.bulkUpsert(nsePriceToEarningRatioDetailEntities);
+    }
+
+    @Override
+    public SubProcess action() throws IOException {
+        this.saveTransformedData(this.transformSourceData(this.getDataFromSource()));
+        return this;
+    }
+
+    public static void main(String[] args) {
+        JavaUtilLogDecor.setupLogDecor();
+        /*try {
+            new NSEPriceToEarningRatioEntityMakerJob().action();
+        } catch (IOException ioException) {
+            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
+        }*/
     }
 }
