@@ -102,7 +102,9 @@ stock-market/sm-sub-systems/sm-technical-analysis-system/sm-technical-analysis-s
 stock-market/sm-web-systems/sm-web-systems.iml
 stock-market/.username-and-passwords
 
+stock-market/target
 stock-market/sm-maven-plugin/target
+stock-market/sm-sub-systems/target
 stock-market/sm-sub-systems/sm-ai-system/target/
 stock-market/sm-sub-systems/sm-repository-system/target/
 stock-market/sm-sub-systems/sm-table-generation-system/target/
@@ -112,6 +114,7 @@ stock-market/sm-sub-systems/sm-data-model-system/target/
 stock-market/sm-sub-systems/sm-data-parser-system/target/
 stock-market/sm-sub-systems/sm-technical-analysis-system/target/
 stock-market/sm-sub-systems/sm-utility-system/target/
+stock-market/sm-web-systems/target
 stock-market/sm-web-systems/nse-india-springboot-webapp/target
 stock-market/sm-web-systems/bse-india-springboot-webapp/target
 stock-market/sm-web-systems/sm-admin-springboot-webapp/target

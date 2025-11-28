@@ -1,0 +1,47 @@
+USE stock_market_dev;
+
+DELETE FROM QUARTZ_BLOB_TRIGGERS;
+DELETE FROM QUARTZ_CALENDARS;
+DELETE FROM QUARTZ_CRON_TRIGGERS;
+DELETE FROM QUARTZ_FIRED_TRIGGERS;
+DELETE FROM QUARTZ_LOCKS;
+DELETE FROM QUARTZ_PAUSED_TRIGGER_GRPS;
+DELETE FROM QUARTZ_SCHEDULER_STATE;
+DELETE FROM QUARTZ_SIMPLE_TRIGGERS;
+DELETE FROM QUARTZ_SIMPROP_TRIGGERS;
+DELETE FROM QUARTZ_TRIGGERS;
+DELETE FROM QUARTZ_JOB_DETAILS;
+
+DELETE FROM nse_day_block_deal_detail;
+DELETE FROM nse_day_bulk_deal_detail;
+DELETE FROM nse_day_price_detail;
+DELETE FROM nse_day_price_last_run_detail;
+DELETE FROM nse_day_short_sell_detail;
+DELETE FROM nse_etf_detail;
+DELETE FROM nse_main_board_detail;
+DELETE FROM nse_pre_open_market_detail;
+DELETE FROM nse_price_spurt_detail;
+DELETE FROM nse_sme_detail;
+DELETE FROM nse_top20_detail;
+DELETE FROM nse_volume_spurt_detail;
+DELETE FROM nse_stock_base;
+
+DELETE FROM bse_active_100;
+DELETE FROM bse_active_100_history;
+DELETE FROM bse_active_200;
+DELETE FROM bse_active_200_history;
+DELETE FROM bse_active_500;
+DELETE FROM bse_active_500_history;
+DELETE FROM bse_day_price_detail;
+DELETE FROM bse_day_price_last_run_detail;
+DELETE FROM bse_mid_cap_gainer;
+DELETE FROM bse_price_shockers;
+DELETE FROM bse_price_shockers_history;
+DELETE FROM bse_sensex;
+DELETE FROM bse_small_cap_gainer;
+DELETE FROM bse_stock_base;
+DELETE FROM bse_top_dividend;
+DELETE FROM bse_volume_shockers;
+DELETE FROM bse_volume_shockers_history;
+
+COMMIT;

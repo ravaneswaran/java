@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS stock_market_dev;
+
+COMMIT;

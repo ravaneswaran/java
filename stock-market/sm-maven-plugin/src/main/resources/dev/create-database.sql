@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS  stock_market_dev;
+
+COMMIT;
