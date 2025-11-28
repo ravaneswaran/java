@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Ravaneswaran Chinnasamy">
+        <createTable tableName="bse_volume_shockers_history">
+            <column name="stock_name" type="varchar2(100)"/>
+            <column name="category" type="varchar2(100)"/>
+            <column name="sector" type="varchar2(100)"/>
+            <column name="last_price" type="varchar2(100)"/>
+            <column name="last_price_movement" type="varchar2(1000)"/>
+            <column name="percentage_change" type="varchar2(100)"/>
+            <column name="average_volume" type="varchar2(100)"/>
+            <column name="average_volume_5d" type="varchar2(100)"/>
+            <column name="average_volume_10d" type="varchar2(100)"/>
+            <column name="average_volume_30d" type="varchar2(100)"/>
+            <column name="price_to_earning_ratio" type="varchar2(100)"/>
+            <column name="price_to_book_ratio" type="varchar2(100)"/>
+            <column name="upper_circuit" type="varchar2(100)"/>
+            <column name="lower_circuit" type="varchar2(100)"/>
+            <column name="volume_weighted_average_price" type="varchar2(100)"/>
+            <column name="displaced_moving_average_30d" type="varchar2(100)"/>
+            <column name="displaced_moving_average_50d" type="varchar2(100)"/>
+            <column name="displaced_moving_average_150d" type="varchar2(100)"/>
+            <column name="displaced_moving_average_200d" type="varchar2(100)"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="created_by" type="varchar2(100)"/>
+            <column name="modified_by" type="varchar2(100)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

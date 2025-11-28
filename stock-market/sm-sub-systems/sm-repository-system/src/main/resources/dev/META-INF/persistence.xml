@@ -1,0 +1,45 @@
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+    <persistence-unit name="stock_market" transaction-type="RESOURCE_LOCAL">
+
+        <class>rave.code.entity.bse.BSEActive100Entity</class>
+        <class>rave.code.entity.bse.BSEActive100HistoryEntity</class>
+        <class>rave.code.entity.bse.BSEActive200Entity</class>
+        <class>rave.code.entity.bse.BSEActive200HistoryEntity</class>
+        <class>rave.code.entity.bse.BSEActive500Entity</class>
+        <class>rave.code.entity.bse.BSEActive500HistoryEntity</class>
+        <class>rave.code.entity.bse.BSEPriceShockerEntity</class>
+        <class>rave.code.entity.bse.BSEVolumeShockerEntity</class>
+        <class>rave.code.entity.bse.BSESmallCapGainerEntity</class>
+        <class>rave.code.entity.bse.BSEMidCapGainerEntity</class>
+        <class>rave.code.entity.bse.BSETopDividendEntity</class>
+        <class>rave.code.stockmarket.entity.StockBase10Entity</class>
+        <class>rave.code.entity.bse.BSEStockBaseEntity</class>
+        <class>rave.code.entity.nse.csv.NSEStockBaseEntity</class>
+        <class>rave.code.entity.nse.csv.NSEDayPriceDetailEntity</class>
+        <class>rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity</class>
+        <class>rave.code.entity.quartz.QuartzBlobTriggerEntity</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/stock_market_dev"/>
+            <property name="javax.persistence.jdbc.user" value="admin"/>
+            <property name="javax.persistence.jdbc.password" value="admin"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+
+            <property name="eclipselink.connection-pool.default.initial" value="1"/>
+            <property name="eclipselink.connection-pool.default.min" value="100"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.connection.pool_size" value="20"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>

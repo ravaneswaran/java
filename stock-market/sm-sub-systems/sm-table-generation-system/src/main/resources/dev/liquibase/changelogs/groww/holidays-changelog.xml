@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Ravaneswaran Chinnasamy">
+        <createTable tableName="holidays">
+            <column name="id" type="varchar2(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="holidate" type="varchar2(100)"/>
+            <column name="holiday" type="varchar2(100)"/>
+            <column name="description" type="varchar2(100)"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="created_by" type="varchar2(100)"/>
+            <column name="modified_by" type="varchar2(100)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Ravaneswaran Chinnasamy">
+        <createTable tableName="nse_stock_base">
+            <column name="id" type="varchar2(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="isi_number" type="varchar2(100)"/>
+            <column name="symbol" type="varchar2(100)"/>
+            <column name="company_name" type="varchar2(100)"/>
+            <column name="series" type="varchar2(100)"/>
+            <column name="date_of_listing" type="datetime"/>
+            <column name="paid_up_value" type="int"/>
+            <column name="face_value" type="int"/>
+            <column name="market_lot" type="int"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="created_by" type="varchar2(100)"/>
+            <column name="modified_by" type="varchar2(100)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

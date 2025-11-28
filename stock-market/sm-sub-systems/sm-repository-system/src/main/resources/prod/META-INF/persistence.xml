@@ -17,11 +17,9 @@
         <class>rave.code.entity.bse.BSETopDividendEntity</class>
         <class>rave.code.stockmarket.entity.StockBase10Entity</class>
         <class>rave.code.entity.bse.BSEStockBaseEntity</class>
-
         <class>rave.code.entity.nse.csv.NSEStockBaseEntity</class>
         <class>rave.code.entity.nse.csv.NSEDayPriceDetailEntity</class>
         <class>rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity</class>
-
         <class>rave.code.entity.quartz.QuartzBlobTriggerEntity</class>
 
         <properties>
@@ -41,7 +39,7 @@
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.connection.pool_size" value="20"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-
         </properties>
+
     </persistence-unit>
 </persistence>
