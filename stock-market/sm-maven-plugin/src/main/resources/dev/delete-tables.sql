@@ -24,6 +24,9 @@ DELETE FROM nse_price_spurt_detail;
 DELETE FROM nse_sme_detail;
 DELETE FROM nse_top20_detail;
 DELETE FROM nse_volume_spurt_detail;
+DELETE FROM nse_investors_choice_detail;
+DELETE FROM nse_traders_choice_detail;
+DELETE FROM nse_price_to_earning_ratio_detail;
 DELETE FROM nse_stock_base;
 
 DELETE FROM bse_active_100;
