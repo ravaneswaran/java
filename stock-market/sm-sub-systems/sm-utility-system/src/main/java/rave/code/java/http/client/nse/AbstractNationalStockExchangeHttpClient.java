@@ -52,8 +52,14 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
                     body = bis.readAllBytes();
                 }
             }
-            return Files.write(Path.of(System.getProperty("java.io.tmpdir"), "/", fileName), body).toFile();
+
+            File theFile = Files.write(Path.of(System.getProperty("java.io.tmpdir"), "/", fileName), body).toFile();
+            if (null != theFile) {
+                LOGGER.log(Level.INFO, String.format("***** downloaded file (%s/%s) *****", theFile.getAbsolutePath(), fileName));
+                return theFile;
+            }
         }
+
         return null;
     }
 
@@ -74,7 +80,7 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
         return this.stringResponseOf(url);
     }
 
-    public void logHttpErrorMessage(int httpStatusCode, String url){
+    public void logHttpErrorMessage(int httpStatusCode, String url) {
         if (!(200 == httpStatusCode)) {
             String message = String.format("ERROR => %s : HTTP[%s]...trying again from the start.", url, httpStatusCode);
             LOGGER.log(Level.SEVERE, message);
