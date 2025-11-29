@@ -52,7 +52,7 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
                     body = bis.readAllBytes();
                 }
             }
-            return Files.write(Path.of(fileName), body).toFile();
+            return Files.write(Path.of(System.getProperty("java.io.tmpdir"), "/", fileName), body).toFile();
         }
         return null;
     }
