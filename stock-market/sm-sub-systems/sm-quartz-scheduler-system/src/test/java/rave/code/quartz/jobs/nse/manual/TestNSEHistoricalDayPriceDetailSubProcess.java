@@ -22,7 +22,7 @@ public class TestNSEHistoricalDayPriceDetailSubProcess {
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
 
-        int noOfDaysInPast = 100;
+        int noOfDaysInPast = 400;
         int subListItemCount = (noOfDaysInPast * 10) / 100;
 
         LocalDate today = LocalDate.now();
@@ -32,7 +32,6 @@ public class TestNSEHistoricalDayPriceDetailSubProcess {
             Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             historicalDates.add(pastDate);
         }
-        Collections.reverse(historicalDates);
 
         int end = subListItemCount;
         int start = 1;

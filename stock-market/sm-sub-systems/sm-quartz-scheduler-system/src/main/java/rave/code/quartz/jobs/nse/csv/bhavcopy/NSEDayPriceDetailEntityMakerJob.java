@@ -1,5 +1,6 @@
 package rave.code.quartz.jobs.nse.csv.bhavcopy;
 
+import rave.code.entity.nse.NSEDayPriceLastRunDetailEntity;
 import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.process.SubProcess;
@@ -64,7 +65,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             } catch (IOException exception) {
                 LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
             }
-            if(null != zipFileEntryCsvInputStream){
+            if (null != zipFileEntryCsvInputStream) {
                 try {
                     lines = new SimpleFileReader().read(zipFileEntryCsvInputStream);
                 } catch (IOException exception) {
@@ -112,8 +113,8 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             LOGGER.log(Level.SEVERE, String.format("Resource(%s) not found...", url));
             LOGGER.log(Level.SEVERE, "Possibly could be the following reason(s)...");
-            LOGGER.log(Level.SEVERE, String.format("the day the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY)", sdf.format(this.date)));
-            LOGGER.log(Level.SEVERE, String.format("the system expects the file now but will be made available only after market closes(approximately after 04:15 PM)..", sdf.format(this.date)));
+            LOGGER.log(Level.SEVERE, String.format("1. the day the date(%s) referring to could be either HOLIDAY or WEEKEND(SATURDAY or SUNDAY)", sdf.format(this.date)));
+            LOGGER.log(Level.SEVERE, String.format("2. the system expects the file now but will be made available only after market closes(approximately after 04:15 PM)..", sdf.format(this.date)));
         }
         return lines;
     }
@@ -227,6 +228,18 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             this.initialize(date);
             this.saveTransformedData(this.transformSourceData(this.getDataFromSource()));
         }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        Date now = new Date();
+        NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = this.nseDayPriceLastRunDetailRepository.find();
+        if (null == nseDayPriceLastRunDetailEntity) {
+            nseDayPriceLastRunDetailEntity = new NSEDayPriceLastRunDetailEntity();
+        }
+        nseDayPriceLastRunDetailEntity.setLastRunAtStr(simpleDateFormat.format(now));
+        nseDayPriceLastRunDetailEntity.setLastRunAt(now);
+
+        this.nseDayPriceLastRunDetailRepository.upsert(nseDayPriceLastRunDetailEntity);
+
         return this;
     }
 
