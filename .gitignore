@@ -100,6 +100,8 @@ stock-market/sm-sub-systems/sm-ai-system/sm-ai-system.iml
 stock-market/sm-sub-systems/sm-email-system/sm-email-system.iml
 stock-market/sm-sub-systems/sm-technical-analysis-system/sm-technical-analysis-system.iml
 stock-market/sm-web-systems/sm-web-systems.iml
+stock-market/sm-web-systems/nse-india-springboot-webapp/stock_market.sql
+stock-market/sm-web-systems/nse-india-springboot-webapp/stock_market_dev.sql
 stock-market/.username-and-passwords
 
 stock-market/target

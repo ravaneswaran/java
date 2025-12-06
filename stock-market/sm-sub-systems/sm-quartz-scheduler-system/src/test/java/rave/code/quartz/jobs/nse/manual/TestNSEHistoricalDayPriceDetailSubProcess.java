@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -60,4 +59,36 @@ public class TestNSEHistoricalDayPriceDetailSubProcess {
 
         } while (end <= noOfDaysInPast);
     }
+
+    /*public static void main(String[] args) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date one = simpleDateFormat.parse("03-12-2025");
+            Date two = simpleDateFormat.parse("04-12-2025");
+            List<Date> dates = new ArrayList<>();
+            dates.add(one);
+            dates.add(two);
+
+            try {
+                NSEDayPriceDetailEntityMakerJob subProcess = (NSEDayPriceDetailEntityMakerJob) SubProcessor.createSubProcess(NSEDayPriceDetailEntityMakerJob.class);
+                subProcess.setDates(dates);
+                subProcess.setUp().start().action().exit();
+            } catch (InterruptedException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+            } catch (IOException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+            } catch (NoSuchMethodException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+            } catch (InvocationTargetException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+            } catch (InstantiationException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+            } catch (IllegalAccessException exception) {
+                LOGGER.log(Level.SEVERE, exception.getMessage());
+            }
+
+        } catch (ParseException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        }
+    }*/
 }
