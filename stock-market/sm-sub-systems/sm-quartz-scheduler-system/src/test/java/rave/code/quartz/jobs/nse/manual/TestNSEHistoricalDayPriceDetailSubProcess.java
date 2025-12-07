@@ -1,12 +1,17 @@
 package rave.code.quartz.jobs.nse.manual;
 
+import rave.code.entity.nse.NSEDayPriceLastRunDetailEntity;
 import rave.code.process.SubProcessor;
 import rave.code.quartz.jobs.nse.csv.bhavcopy.NSEDayPriceDetailEntityMakerJob;
+import rave.code.repository.nse.NSEDayPriceLastRunDetailRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,74 +26,84 @@ public class TestNSEHistoricalDayPriceDetailSubProcess {
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();
 
-        int noOfDaysInPast = 400;
-        int subListItemCount = (noOfDaysInPast * 10) / 100;
+        NSEDayPriceLastRunDetailRepository nseDayPriceLastRunDetailRepository = new NSEDayPriceLastRunDetailRepository();
+        NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = nseDayPriceLastRunDetailRepository.find();
 
-        LocalDate today = LocalDate.now();
-        List<Date> historicalDates = new ArrayList<>();
-        for (int index = noOfDaysInPast; index >= 1; index--) {
-            LocalDate pastLocalDate = today.minusDays(index);
-            Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            historicalDates.add(pastDate);
-        }
+        if (null != nseDayPriceLastRunDetailEntity) {
+            List<Date> dates = new ArrayList<>();
+            Date lastRun = nseDayPriceLastRunDetailEntity.getLastRunAt();
 
-        int end = subListItemCount;
-        int start = 1;
+            SimpleDateFormat simpleDateFormatOne = new SimpleDateFormat("yyyy-MM-dd");
+            String lastRunWithoutTimeStr = simpleDateFormatOne.format(lastRun);
 
-        do {
-            List<Date> subHistoricalDates = historicalDates.subList(start - 1, end - 1);
+            SimpleDateFormat simpleDateFormatTwo = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {
-                NSEDayPriceDetailEntityMakerJob subProcess = (NSEDayPriceDetailEntityMakerJob) SubProcessor.createSubProcess(NSEDayPriceDetailEntityMakerJob.class);
-                subProcess.setDates(subHistoricalDates);
-                subProcess.setUp().start().action().exit();
-            } catch (InterruptedException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (IOException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (NoSuchMethodException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (InvocationTargetException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (InstantiationException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (IllegalAccessException exception) {
+                Date lastRunAt5PM = simpleDateFormatTwo.parse(String.format("%s %s", lastRunWithoutTimeStr, "17:00:00"));
+                if (lastRunAt5PM.after(lastRun)) {
+                    // include the date last run one in the array list
+                    dates.add(lastRun);
+                }
+            } catch (ParseException exception) {
                 LOGGER.log(Level.SEVERE, exception.getMessage());
             }
-            start = end + 1;
-            end = end + subListItemCount;
 
-        } while (end <= noOfDaysInPast);
+            LocalDate lastRunLocalDate = LocalDate.parse(lastRunWithoutTimeStr);
+            LocalDate now = LocalDate.now();
+            Period period = Period.between(lastRunLocalDate, now);
+            int noOfDays = period.getDays();
+            for (int index = noOfDays; index >= 0; index--) {
+                LocalDate pastLocalDate = now.minusDays(index);
+                Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                String pastDateStr = simpleDateFormatOne.format(pastDate);
+                if (!lastRunWithoutTimeStr.equals(pastDateStr)) {
+                    dates.add(pastDate);
+                }
+            }
+
+            runNSEDayPriceDetailEntityMakerJob(dates);
+
+        } else {
+            int noOfDaysInPast = 400;
+            int subListItemCount = (noOfDaysInPast * 10) / 100;
+
+            LocalDate today = LocalDate.now();
+            List<Date> historicalDates = new ArrayList<>();
+            for (int index = noOfDaysInPast; index >= 1; index--) {
+                LocalDate pastLocalDate = today.minusDays(index);
+                Date pastDate = Date.from(pastLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                historicalDates.add(pastDate);
+            }
+
+            int end = subListItemCount;
+            int start = 1;
+
+            do {
+                List<Date> subHistoricalDates = historicalDates.subList(start - 1, end - 1);
+                runNSEDayPriceDetailEntityMakerJob(subHistoricalDates);
+                start = end + 1;
+                end = end + subListItemCount;
+
+            } while (end <= noOfDaysInPast);
+        }
     }
 
-    /*public static void main(String[] args) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    public static void runNSEDayPriceDetailEntityMakerJob(List<Date> dates) {
         try {
-            Date one = simpleDateFormat.parse("03-12-2025");
-            Date two = simpleDateFormat.parse("04-12-2025");
-            List<Date> dates = new ArrayList<>();
-            dates.add(one);
-            dates.add(two);
-
-            try {
-                NSEDayPriceDetailEntityMakerJob subProcess = (NSEDayPriceDetailEntityMakerJob) SubProcessor.createSubProcess(NSEDayPriceDetailEntityMakerJob.class);
-                subProcess.setDates(dates);
-                subProcess.setUp().start().action().exit();
-            } catch (InterruptedException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (IOException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (NoSuchMethodException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (InvocationTargetException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (InstantiationException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            } catch (IllegalAccessException exception) {
-                LOGGER.log(Level.SEVERE, exception.getMessage());
-            }
-
-        } catch (ParseException exception) {
+            NSEDayPriceDetailEntityMakerJob subProcess = (NSEDayPriceDetailEntityMakerJob) SubProcessor.createSubProcess(NSEDayPriceDetailEntityMakerJob.class);
+            subProcess.setDates(dates);
+            subProcess.setUp().start().action().exit();
+        } catch (InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        } catch (IOException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        } catch (NoSuchMethodException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        } catch (InvocationTargetException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        } catch (InstantiationException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+        } catch (IllegalAccessException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
-    }*/
+    }
 }
