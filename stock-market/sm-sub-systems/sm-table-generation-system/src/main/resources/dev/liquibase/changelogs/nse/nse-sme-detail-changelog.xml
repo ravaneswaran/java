@@ -33,4 +33,20 @@
                 referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="002" author="Ravaneswaran Chinnasamy">
+        <dropForeignKeyConstraint
+                baseTableName="nse_sme_detail"
+                constraintName="fk_nse_sme_detail_nse_stock_base"/>
+    </changeSet>
+
+    <changeSet id="003" author="Ravaneswaran Chinnasamy">
+        <addForeignKeyConstraint
+                baseTableName="nse_sme_detail"
+                baseColumnNames="stock_base_id"
+                constraintName="fk_nse_sme_detail_nse_stock_base"
+                referencedTableName="nse_stock_base"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
 </databaseChangeLog>
