@@ -9,6 +9,6 @@ DELETE FROM QUARTZ_JOB_DETAILS WHERE JOB_NAME LIKE 'TEST%';
 
 DELETE FROM nse_pre_open_market_detail WHERE symbol LIKE 'TEST%';
 DELETE FROM nse_price_to_earning_ratio_detail WHERE symbol LIKE 'TEST%';
-DELETE FROM nse_stock_base WHERE symbol LIKE 'TEST-STOCK-BASE-ENTITY%';
+DELETE FROM nse_stock_base WHERE symbol LIKE 'TEST-%';
 
 COMMIT;
