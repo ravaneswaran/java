@@ -1,8 +1,5 @@
 package rave.code.tech.analysis.pricerange.percentage;
 
-import rave.code.tech.analysis.pricerange.LowerPriceRange;
-import rave.code.tech.analysis.pricerange.UpperPriceRange;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

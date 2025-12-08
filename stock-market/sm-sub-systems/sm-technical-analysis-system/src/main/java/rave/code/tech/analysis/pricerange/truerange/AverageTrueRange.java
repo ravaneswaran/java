@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.pricerange.percentage.truerange;
+package rave.code.tech.analysis.pricerange.truerange;
 
 import java.util.List;
 
