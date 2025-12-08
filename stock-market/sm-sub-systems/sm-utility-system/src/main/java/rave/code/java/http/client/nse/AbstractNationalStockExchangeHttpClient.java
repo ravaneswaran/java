@@ -55,7 +55,7 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
 
             File theFile = Files.write(Path.of(System.getProperty("java.io.tmpdir"), "/", fileName), body).toFile();
             if (null != theFile) {
-                LOGGER.log(Level.INFO, String.format("***** downloaded file (%s/%s) *****", theFile.getAbsolutePath(), fileName));
+                LOGGER.log(Level.INFO, String.format("***** downloaded file (%s) *****", theFile.getAbsolutePath()));
                 return theFile;
             }
         }
