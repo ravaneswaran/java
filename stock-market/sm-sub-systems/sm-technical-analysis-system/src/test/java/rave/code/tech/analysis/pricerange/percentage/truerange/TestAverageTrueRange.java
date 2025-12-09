@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.pricerange.percentabe.truerange;
+package rave.code.tech.analysis.pricerange.percentage.truerange;
 
 import org.junit.jupiter.api.Test;
 import rave.code.tech.analysis.pricerange.truerange.AverageTrueRange;
