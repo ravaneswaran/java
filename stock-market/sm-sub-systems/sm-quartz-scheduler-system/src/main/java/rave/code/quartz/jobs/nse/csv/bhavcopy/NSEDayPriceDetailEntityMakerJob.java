@@ -229,7 +229,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             this.saveTransformedData(this.transformSourceData(this.getDataFromSource()));
         }
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date now = new Date();
         NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = this.nseDayPriceLastRunDetailRepository.find();
         if (null == nseDayPriceLastRunDetailEntity) {
@@ -237,6 +237,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         }
         nseDayPriceLastRunDetailEntity.setLastRunAtStr(simpleDateFormat.format(now));
         nseDayPriceLastRunDetailEntity.setLastRunAt(now);
+        nseDayPriceLastRunDetailEntity.setModifiedDate(now);
 
         this.nseDayPriceLastRunDetailRepository.upsert(nseDayPriceLastRunDetailEntity);
 
