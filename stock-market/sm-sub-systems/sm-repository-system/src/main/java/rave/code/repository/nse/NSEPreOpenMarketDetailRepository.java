@@ -100,4 +100,9 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
 
         return this.getEntityManager().createQuery(criteriaQuery).getResultList();
     }
+
+    @Override
+    public List<NSEPreOpenMarketDetailEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
+        return new ArrayList<>();
+    }
 }

@@ -13,24 +13,10 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
     }
 
     public List<NSEPriceSpurtDetailEntity> findPriceSpurtsLWR20() {
-        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
-        Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
-        Predicate spurtTypePredicate = criteriaBuilder.equal(root.get("spurtType"), "STOCK-PRICE<20");
-        criteriaQuery.select(root).where(spurtTypePredicate);
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
-
         return this.findDistinctPriceSpurtDetails("STOCK-PRICE<20");
     }
 
     public List<NSEPriceSpurtDetailEntity> findPriceSpurtsGTR20() {
-        /*CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
-        Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
-        Predicate spurtTypePredicate = criteriaBuilder.equal(root.get("spurtType"), "STOCK-PRICE>20");
-        criteriaQuery.select(root).where(spurtTypePredicate);
-        return this.getEntityManager().createQuery(criteriaQuery).getResultList();*/
-
         return this.findDistinctPriceSpurtDetails("STOCK-PRICE>20");
     }
 
@@ -56,6 +42,21 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createdDate")));
 
         return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+    }
+
+    @Override
+    public List<NSEPriceSpurtDetailEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
+        Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
+
+        Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
+        Predicate seriesPredicate = criteriaBuilder.equal(root.get("series"), "EQ");
+
+        criteriaQuery.select(root).where(criteriaBuilder.and(symbolPredicate, seriesPredicate));
+        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("businessDate")));
+
+        return this.getEntityManager().createQuery(criteriaQuery).setMaxResults(limit).getResultList();
     }
 
 }

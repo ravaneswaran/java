@@ -2,6 +2,7 @@ package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSEPriceToEarningRatioDetailEntity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,5 +24,10 @@ public class NSEPriceToEarningRatioDetailRepository extends AbstractNSERepositor
         }
 
         return entityMap;
+    }
+
+    @Override
+    public List<NSEPriceToEarningRatioDetailEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
+        return new ArrayList<>();
     }
 }

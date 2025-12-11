@@ -3,6 +3,7 @@ package rave.code.repository.nse;
 import rave.code.entity.nse.csv.NSESMEDetailEntity;
 
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,5 +39,10 @@ public class NSESMEDetailRepository extends AbstractNSERepositoryManager<NSESMED
         criteriaQuery.orderBy(criteriaBuilder.desc(root.get("createdDate")));
 
         return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+    }
+
+    @Override
+    public List<NSESMEDetailEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
+        return new ArrayList<>();
     }
 }

@@ -4,6 +4,7 @@ import rave.code.entity.nse.csv.NSEStockBaseEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,11 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
             }
         }
         return mappedStockBaseEntity;
+    }
+
+    @Override
+    public List<NSEStockBaseEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
+        return new ArrayList<>();
     }
 
     public Map<String, NSEStockBaseEntity> getEntityMapForDayPriceDetails() {
