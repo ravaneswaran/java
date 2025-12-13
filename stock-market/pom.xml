@@ -13,6 +13,7 @@
         <module>sm-maven-plugin</module>
         <module>sm-sub-systems</module>
         <module>sm-web-systems</module>
+        <module>sm-desktop-systems</module>
     </modules>
 
     <build>

@@ -121,6 +121,8 @@ stock-market/sm-web-systems/nse-india-springboot-webapp/target
 stock-market/sm-web-systems/bse-india-springboot-webapp/target
 stock-market/sm-web-systems/sm-admin-springboot-webapp/target
 stock-market/sm-web-systems/sm-static-hub-springboot-webapp/target
+stock-market/sm-desktop-systems/target
+stock-market/sm-desktop-systems/sm-zerodha-desktop-system/target
 
 utilities/utilities.iml
 utilities/google-zxing-qrcode/target/
