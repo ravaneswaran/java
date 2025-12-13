@@ -140,5 +140,6 @@ utilities/file-readers/user-credentials-file-reader/target/
 utilities/log-decors/java-util-log-decor/target/
 utilities/proxy-server/target/
 utilities/sub-processor/target/
+utilities/totp-auth/target
 
 stock-market/db-export/exported_stock_market_db-02-11-2025.sql

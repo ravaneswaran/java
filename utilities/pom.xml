@@ -25,6 +25,7 @@
         <module>log-decors</module>
         <module>proxy-server</module>
         <module>sub-processor</module>
+        <module>totp-auth</module>
     </modules>
 
 </project>
