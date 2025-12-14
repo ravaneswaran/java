@@ -15,7 +15,7 @@ public class GoogleTOTPAuthenticator extends TOTPAuthenticator {
         UserCredentialsFileReader userCredentialsFileReader = new UserCredentialsFileReader();
         try {
             Map<String, String> keyValue = userCredentialsFileReader.read(new File("stock-market/.username-and-passwords"));
-            String base32Secret = keyValue.get("google-auth-totp");
+            String base32Secret = keyValue.get("google-auth-base32-secret");
             return super.getTOTP(base32Secret);
         } catch (Exception exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage(), exception);

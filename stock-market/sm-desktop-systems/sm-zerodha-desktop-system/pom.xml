@@ -33,11 +33,22 @@
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-        <!--<dependency>
+        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.10.0</version>
-        </dependency>-->
+            <version>4.39.0</version>
+        </dependency>
+        <!-- utility module dependency -->
+        <dependency>
+            <groupId>rave.code.java.utilities.file-readers</groupId>
+            <artifactId>user-credentials-file-reader</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>rave.code.java.utilities</groupId>
+            <artifactId>totp-auth</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
 
         <dependency>
