@@ -10,9 +10,6 @@ import java.time.Instant;
 public class TOTPAuthenticator {
 
     public int getTOTP(String base32Secret) throws Exception {
-        // Base32 secret from Google Authenticator / Zerodha external TOTP
-        //String base32Secret = "SKIO5E6QA2QKFEFARCCKS7SC6ALWWUGB";
-
         // Decode Base32
         Base32 base32 = new Base32();
         byte[] decodedKey = base32.decode(base32Secret);
