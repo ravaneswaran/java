@@ -10,54 +10,41 @@ import rave.code.utilities.file.UserCredentialsFileReader;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DashboardPage extends WebPage {
 
     private static final Logger LOGGER = Logger.getLogger(DashboardPage.class.getName());
-    private static final String LOGOUT_URL = "https://kite.zerodha.com/logout";
 
     public DashboardPage(WebDriver webDriver) {
         super(webDriver);
     }
 
     public void clickUserNavigation() {
-        List<WebElement> webElements = this.webDriver.findElements(By.className("right-nav"));
-        LOGGER.info(String.format("clickUserNavigation [web elements count : %s ...]", webElements.size()));
-        for (WebElement webElement : webElements) {
-            List<WebElement> subElements = webElement.findElements(By.className("user-nav"));
-            LOGGER.info(String.format("clickUserNavigation [sub elements count : %s ...]", subElements.size()));
-            for (WebElement subElement : subElements) {
-                subElement.click();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException exception) {
-                    LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
-                }
-                break;
-            }
-        }
+        WebElement webElement = this.webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/div[2]/div/nav/a"));
+        webElement.click();
     }
 
     public void clickLogout() {
-        List<WebElement> webElements = this.webDriver.findElements(By.className("dropdown-nav-list"));
-        LOGGER.info(String.format("clickLogout [web elements count : %s ...]", webElements.size()));
-        for (WebElement webElement : webElements) {
-            List<WebElement> subElements = webElement.findElements(By.tagName("a"));
-            LOGGER.info(String.format("clickLogout [sub elements count : %s ...]", subElements.size()));
-            for (WebElement subElement : subElements) {
-                String value = subElement.getAttribute("href");
-                if(LOGOUT_URL.equals(value.trim())){
-                    LOGGER.info(String.format("clickLogout [logout element found...]", subElements.size()));
-                    subElement.click();
-                    break;
-                }
-            }
+        WebElement webElement = this.webDriver.findElement(By.xpath("//*[@id=\"account-nav-items\"]/ul/li[7]/a"));
+        webElement.click();
+    }
+
+    public void clickTradingStocks() {
+        WebElement webElement = this.webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[2]/div[1]/div/div[3]/div/div/div/a[7]"));
+        webElement.click();
+        this.pause(500);
+    }
+
+    public void clearTradingStocks() {
+        List<WebElement> webElements = this.webDriver.findElements(By.cssSelector("div[data-id]"));
+        int size = webElements.size();
+        for (int index = size - 1; index >= 0; index--) {
+            this.actions.moveToElement(webElements.get(index)).pause(200).perform();
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         UserCredentialsFileReader userCredentialsFileReader = new UserCredentialsFileReader();
         Map<String, String> keyValue = userCredentialsFileReader.read(new File("stock-market/.username-and-passwords"));
         String userId = keyValue.get("zerodha-kite-userid");
@@ -66,6 +53,6 @@ public class DashboardPage extends WebPage {
         String totp = String.valueOf(googleTOTPAuthenticator.getGoogleAuthenticatorTOTP());
 
         ZerodhaWebDriver zerodhaWebDriver = ZerodhaWebDriver.get();
-        zerodhaWebDriver.login(userId, password).totp(totp).riskDisclosureOnDerivativesPopUp().logout();
+        zerodhaWebDriver.login(userId, password).totp(totp).riskDisclosureOnDerivativesPopUp().clickTradingStocks().clearTradingStocks();
     }
 }

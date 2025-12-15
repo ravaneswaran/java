@@ -8,7 +8,6 @@ import rave.code.java.zerodha.webdriver.ZerodhaWebDriver;
 import rave.code.utilities.file.UserCredentialsFileReader;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -18,19 +17,11 @@ public class RiskDisclosureOnDerivativesWebPage extends WebPage{
 
     public RiskDisclosureOnDerivativesWebPage(WebDriver webDriver) {
         super(webDriver);
-        this.webDriver.get("https://kite.zerodha.com/dashboard");
     }
 
     public void clickIUnderstand() {
-        List<WebElement> webElements = this.webDriver.findElements(By.tagName("button"));
-        for (WebElement webElement: webElements) {
-            String iUnderstand = webElement.getText();
-            if("I understand".equals(iUnderstand.trim())){
-                LOGGER.info(String.format("button(%s) found...", "I Understand"));
-                webElement.click();
-                break;
-            }
-        }
+        WebElement webElement = this.webDriver.findElement(By.xpath("//*[@id=\"app\"]/div[6]/div/div[3]/div/div/div/button"));
+        webElement.click();
     }
 
     public static void main(String[] args) throws Exception{

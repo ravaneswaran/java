@@ -83,4 +83,18 @@ public class ZerodhaWebDriver {
         dashboardPage.clickLogout();
         return this;
     }
+
+    public ZerodhaWebDriver clickTradingStocks(){
+        LOGGER.info(this.webDriver.getCurrentUrl());
+        DashboardPage dashboardPage = new DashboardPage(this.webDriver);
+        dashboardPage.clickTradingStocks();
+        return this;
+    }
+
+    public ZerodhaWebDriver clearTradingStocks(){
+        LOGGER.info(this.webDriver.getCurrentUrl());
+        DashboardPage dashboardPage = new DashboardPage(this.webDriver);
+        dashboardPage.clearTradingStocks();
+        return this;
+    }
 }

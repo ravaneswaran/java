@@ -8,11 +8,10 @@ import rave.code.java.zerodha.webdriver.ZerodhaWebDriver;
 import rave.code.utilities.file.UserCredentialsFileReader;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-public class TOTPPage extends WebPage{
+public class TOTPPage extends WebPage {
 
     private static final Logger LOGGER = Logger.getLogger(TOTPPage.class.getName());
 
@@ -20,23 +19,16 @@ public class TOTPPage extends WebPage{
         super(webDriver);
     }
 
-    public void fillTOTP(String totp){
-        this.webDriver.findElement(By.id("userid")).sendKeys(totp);
+    public void fillTOTP(String totp) {
+        WebElement totpTextBox = this.webDriver.findElement(By.id("userid"));
+        totpTextBox.sendKeys(totp);
+        this.clickContinue();
     }
 
-    public void clickContinue(){
-        List<WebElement> webElements = this.webDriver.findElements(By.tagName("button"));
-        for (WebElement webElement: webElements) {
-            String continueTxt = webElement.getText();
-            if("Continue".equals(continueTxt.trim())){
-                LOGGER.info(String.format("button(%s) found...", "Continue"));
-                webElement.click();
-                break;
-            }
-        }
+    public void clickContinue() {
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         UserCredentialsFileReader userCredentialsFileReader = new UserCredentialsFileReader();
         Map<String, String> keyValue = userCredentialsFileReader.read(new File("stock-market/.username-and-passwords"));
         String userId = keyValue.get("zerodha-kite-userid");
