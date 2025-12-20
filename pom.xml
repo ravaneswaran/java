@@ -16,6 +16,7 @@
         <module>maven-plugins</module>
         <module>education</module>
         <module>bhairava-siddhar-org</module>
+        <module>payment-gateway-plugins</module>
     </modules>
 
 </project>
