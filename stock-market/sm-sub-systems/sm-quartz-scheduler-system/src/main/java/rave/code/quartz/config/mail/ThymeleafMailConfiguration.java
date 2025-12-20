@@ -1,4 +1,4 @@
-package rave.code.quartz.jobs.mailer.config;
+package rave.code.quartz.config.mail;
 
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
