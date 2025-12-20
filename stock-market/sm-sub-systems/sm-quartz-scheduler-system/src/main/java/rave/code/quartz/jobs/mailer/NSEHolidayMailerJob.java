@@ -1,0 +1,67 @@
+package rave.code.quartz.jobs.mailer;
+
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import rave.code.entity.groww.HolidayEntity;
+import rave.code.java.system.StockMarketSystemProperties;
+import rave.code.mail.java.ElectronicMail;
+import rave.code.quartz.jobs.AbstractQuartzJob;
+import rave.code.quartz.jobs.mailer.config.ThymeleafMailConfiguration;
+import rave.code.repository.groww.HolidayRepository;
+import rave.code.utility.log.JavaUtilLogDecor;
+
+import javax.mail.MessagingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class NSEHolidayMailerJob extends AbstractQuartzJob {
+
+    private static final Logger LOGGER = Logger.getLogger(NSEHolidayMailerJob.class.getName());
+
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+
+        Date toDate = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, YYYY");
+        String formattedToDate = simpleDateFormat.format(toDate);
+        ResourceBundle quartzResourceBundle = ResourceBundle.getBundle("quartz");
+
+        HolidayRepository stockMarketHolidayDataAccess = new HolidayRepository();
+        List<HolidayEntity> entities = stockMarketHolidayDataAccess.findAll();
+
+        for (HolidayEntity entity : entities) {
+            if (formattedToDate.trim().equals(entity.getHolidate().trim())) {
+
+                Context context = new Context();
+                context.setVariable("holiday", entity.getHoliday());
+                context.setVariable("description", entity.getDescription());
+
+                ThymeleafMailConfiguration thymeleafMailConfiguration = new ThymeleafMailConfiguration();
+                TemplateEngine templateEngine = thymeleafMailConfiguration.mailTemplateEngine();
+                String mailContent = templateEngine.process("daily_trade_details_template", context);
+
+                try {
+                    LOGGER.log(Level.INFO, "SENDING MAIL....");
+                    ElectronicMail electronicMail = new ElectronicMail();
+                    electronicMail.connect(System.getProperty("smtp.mail.host"), System.getProperty("smtp.mail.port"), System.getProperty("smtp.mail.username"), System.getProperty("smtp.mail.password"));
+                    electronicMail.sendMail(System.getProperty("smtp.mail.from"), System.getProperty("smtp.mail.username"), System.getProperty("holiday.mail.remainder.subject"), mailContent);
+                } catch (MessagingException messagingException) {
+                    LOGGER.log(Level.SEVERE, messagingException.getMessage(), messagingException);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws JobExecutionException {
+        StockMarketSystemProperties.loadProperties();
+        JavaUtilLogDecor.setupLogDecor();
+        NSEHolidayMailerJob holidayMailerJob = new NSEHolidayMailerJob();
+        holidayMailerJob.execute(null);
+    }
+}

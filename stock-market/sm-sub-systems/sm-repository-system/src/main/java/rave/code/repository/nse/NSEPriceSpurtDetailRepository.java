@@ -20,6 +20,11 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.findDistinctPriceSpurtDetails("STOCK-PRICE>20");
     }
 
+    @Override
+    public List<NSEPriceSpurtDetailEntity> findAll() {
+        return this.findDistinctPriceSpurtDetails(null);
+    }
+
     private List<NSEPriceSpurtDetailEntity> findDistinctPriceSpurtDetails(String spurtType) {
         CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
@@ -28,11 +33,19 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         // Sub query to get max created_date per symbol
         Subquery<Date> subQuery = criteriaQuery.subquery(Date.class);
         Root<NSEPriceSpurtDetailEntity> subRoot = subQuery.from(NSEPriceSpurtDetailEntity.class);
-        Predicate spurtTypePredicate = criteriaBuilder.equal(root.get("spurtType"), spurtType);
+
         Predicate symbolPredicate = criteriaBuilder.equal(subRoot.get("symbol"), root.get("symbol"));
         Expression<Date> createdDateExpression = subRoot.get("createdDate");
-        subQuery.select(criteriaBuilder.greatest(createdDateExpression))
-                .where(criteriaBuilder.and(spurtTypePredicate, symbolPredicate));
+
+        // condition introduced for mail details...
+        if(null != spurtType){
+            Predicate spurtTypePredicate = criteriaBuilder.equal(root.get("spurtType"), spurtType);
+            subQuery.select(criteriaBuilder.greatest(createdDateExpression))
+                    .where(criteriaBuilder.and(spurtTypePredicate, symbolPredicate));
+        } else {
+            subQuery.select(criteriaBuilder.greatest(createdDateExpression))
+                    .where(symbolPredicate);
+        }
 
         // Main query: select rows where createdDate = sub-query result
         criteriaQuery.select(root)

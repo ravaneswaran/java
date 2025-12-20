@@ -82,19 +82,8 @@
             <artifactId>thymeleaf-spring6</artifactId>
             <version>3.1.2.RELEASE</version>
         </dependency>
-        <!--<dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>2.0.17</version>
-        </dependency>-->
 
         <!-- Module dependencies  -->
-
         <dependency>
             <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-repository-system</artifactId>
@@ -108,6 +97,11 @@
         <dependency>
             <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-quartz-scheduler-system</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
+            <artifactId>sm-utility-system</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

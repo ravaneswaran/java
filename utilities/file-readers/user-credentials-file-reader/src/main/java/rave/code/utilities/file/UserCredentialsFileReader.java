@@ -23,21 +23,22 @@ public class UserCredentialsFileReader {
         String[] lines = result.toString().split("\n");
         Map<String, String> keyValuePairs = new HashMap<>();
         for (String line : lines) {
-            String[] lineDetails = line.split("=");
-            keyValuePairs.put(lineDetails[0], lineDetails[1]);
+            if(null != line && !"".equals(line.trim())) {
+                String[] lineDetails = line.split("=");
+                keyValuePairs.put(lineDetails[0], lineDetails[1]);
+            }
         }
-
         return keyValuePairs;
     }
 
     public static void main(String[] args) throws IOException {
-        Path filePath = Paths.get("stock-market/.username-and-passwords");
+        Path filePath = Paths.get("/home/ravaneswaran/.username-and-passwords");
         File file = filePath.toFile();
         System.out.println(filePath.toAbsolutePath());
         UserCredentialsFileReader userCredentialsFileReader = new UserCredentialsFileReader();
         Map<String, String> keyValuePairs = userCredentialsFileReader.read(file);
         Set<String> keySet = keyValuePairs.keySet();
-        for (String key: keySet) {
+        for (String key : keySet) {
             System.out.println(String.format("%s -> %s", key, keyValuePairs.get(key)));
         }
     }

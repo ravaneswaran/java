@@ -26,7 +26,7 @@ public class RiskDisclosureOnDerivativesWebPage extends WebPage{
 
     public static void main(String[] args) throws Exception{
         UserCredentialsFileReader userCredentialsFileReader = new UserCredentialsFileReader();
-        Map<String, String> keyValue = userCredentialsFileReader.read(new File("stock-market/.username-and-passwords"));
+        Map<String, String> keyValue = userCredentialsFileReader.read(new File("/home/ravaneswaran/.username-and-passwords"));
         String userId = keyValue.get("zerodha-kite-userid");
         String password = keyValue.get("zerodha-kite-password");
         GoogleTOTPAuthenticator googleTOTPAuthenticator = new GoogleTOTPAuthenticator();

@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import rave.code.java.system.StockMarketSystemProperties;
+
 
 @SpringBootApplication
 public class NSEIndiaSpringBootWebApplication extends SpringBootServletInitializer {
@@ -14,6 +16,7 @@ public class NSEIndiaSpringBootWebApplication extends SpringBootServletInitializ
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        StockMarketSystemProperties.loadProperties();
         return builder.sources(NSEIndiaSpringBootWebApplication.class);
     }
 

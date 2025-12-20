@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+<div>
+    hai how are you
+    <table th:each="mailerModel : ${nseDailyTradeDetailMailerModels}">
+        <thead>
+        <tr>
+            <td colspan="6">${mailerModel.symbol}</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Open Price</td>
+            <td>High Price</td>
+            <td>Low Price</td>
+            <td>Prev Close Price</td>
+            <td>Last Traded Price</td>
+            <td>Percentage Change</td>
+        </tr>
+        <tr>
+            <td>${mailerModel.openPrice}</td>
+            <td>${mailerModel.highPrice}</td>
+            <td>${mailerModel.lowPrice}</td>
+            <td>${mailerModel.previousClosePrice}</td>
+            <td>${mailerModel.lastTradedPrice}</td>
+            <td>${mailerModel.percentageChange}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
