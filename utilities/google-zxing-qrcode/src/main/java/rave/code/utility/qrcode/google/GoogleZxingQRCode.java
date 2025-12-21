@@ -7,7 +7,12 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import rave.code.utility.qrcode.QRCode;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Date;
 
 public class GoogleZxingQRCode implements QRCode {
 
@@ -24,5 +29,13 @@ public class GoogleZxingQRCode implements QRCode {
                 new BufferedImageLuminanceSource(bufferedImage)));
         Result qrCodeResult = new MultiFormatReader().decode(binaryBitmap);
         return qrCodeResult.getText();
+    }
+
+    public File writeToFile(BufferedImage bufferedImage, Path path) throws IOException {
+        long time = new Date().getTime();
+        String fileName = String.format("qr-code-%s.%s", time, "png");
+        File outputFile = new File(String.format("%s/%s", path.toFile().getAbsolutePath(), fileName));
+        ImageIO.write(bufferedImage, "png", outputFile);
+        return outputFile;
     }
 }
