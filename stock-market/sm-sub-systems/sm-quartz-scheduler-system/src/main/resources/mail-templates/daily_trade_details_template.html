@@ -1,31 +1,72 @@
 <html>
 <head>
+    <style>
+       table{
+    		width: 100%;
+    	}
+
+        td{
+            border: 0px;
+            border-radius: 5px;
+            text-indent: 10px;
+            background-color:#FFFFFF;
+            height:25px;
+        }
+
+        .stock-symbol-header{
+            border: 0px;
+        	background-color: #b5e550;
+        	color: #000000;
+        	font-weight: bold;
+        }
+
+        .col-header{
+        	text-align: center;
+        	background-color: #000000;
+        	color: #FFFFFF;
+        	font-weight: bold;
+        }
+
+        .stock-details-container{
+            background-color: #b5e550;
+            border-radius:5px;
+            border:0px;
+            margin:4px;
+        }
+
+        .end{
+        	background-color: #b5e550;
+        	border: 2px solid #b5e550;
+        }
+    </style>
 </head>
 <body>
-<div>
-    hai how are you
-    <table th:each="mailerModel : ${nseDailyTradeDetailMailerModels}">
+<div th:each="mailerModel : ${nseDailyTradeDetailMailerModels}" class="stock-details-container">
+    <table>
         <thead>
         <tr>
-            <td colspan="6">${mailerModel.symbol}</td>
+            <td class="stock-symbol-header" colspan="6" th:text="${mailerModel.symbol}"></td>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>Open Price</td>
-            <td>High Price</td>
-            <td>Low Price</td>
-            <td>Prev Close Price</td>
-            <td>Last Traded Price</td>
-            <td>Percentage Change</td>
+            <td class="col-header">Open Price</td>
+            <td class="col-header">High Price</td>
+            <td class="col-header">Low Price</td>
+            <td class="col-header">Prev Close Price</td>
+            <td class="col-header">Last Traded Price</td>
+            <td class="col-header">Percentage Change</td>
         </tr>
         <tr>
-            <td>${mailerModel.openPrice}</td>
-            <td>${mailerModel.highPrice}</td>
-            <td>${mailerModel.lowPrice}</td>
-            <td>${mailerModel.previousClosePrice}</td>
-            <td>${mailerModel.lastTradedPrice}</td>
-            <td>${mailerModel.percentageChange}</td>
+            <td th:text="${mailerModel.openPrice}"></td>
+            <td th:text="${mailerModel.highPrice}"></td>
+            <td th:text="${mailerModel.lowPrice}"></td>
+            <td th:text="${mailerModel.previousClosePrice}"></td>
+            <td th:text="${mailerModel.lastTradedPrice}"></td>
+            <td th:text="${mailerModel.percentageChange}"></td>
+        </tr>
+        <tr>
+            <td colspan="6" class="end"></td>
         </tr>
         </tbody>
     </table>

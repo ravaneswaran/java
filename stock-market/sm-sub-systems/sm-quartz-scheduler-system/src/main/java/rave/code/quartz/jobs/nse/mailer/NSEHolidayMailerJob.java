@@ -29,6 +29,7 @@ public class NSEHolidayMailerJob extends AbstractQuartzJob {
         Date toDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, YYYY");
         String formattedToDate = simpleDateFormat.format(toDate);
+        String mailSubject = System.getProperty("nse.holiday.remainder.mail.subject");
 
         HolidayRepository stockMarketHolidayDataAccess = new HolidayRepository();
         List<HolidayEntity> entities = stockMarketHolidayDataAccess.findAll();
@@ -45,10 +46,10 @@ public class NSEHolidayMailerJob extends AbstractQuartzJob {
                 String mailContent = templateEngine.process("daily_trade_details_template", context);
 
                 try {
-                    LOGGER.log(Level.INFO, "SENDING MAIL....");
+                    LOGGER.log(Level.INFO, String.format("SENDING (%s) MAIL....", mailSubject));
                     JavaMailer javaMailer = new JavaMailer();
                     javaMailer.connect(System.getProperty("smtp.mail.host"), System.getProperty("smtp.mail.port"), System.getProperty("smtp.mail.username"), System.getProperty("smtp.mail.password"));
-                    javaMailer.sendMail(System.getProperty("smtp.mail.from"), System.getProperty("smtp.mail.username"), System.getProperty("holiday.mail.remainder.subject"), mailContent);
+                    javaMailer.sendMail(System.getProperty("smtp.mail.from"), System.getProperty("smtp.mail.username"), mailSubject, mailContent);
                 } catch (MessagingException messagingException) {
                     LOGGER.log(Level.SEVERE, messagingException.getMessage(), messagingException);
                 }
