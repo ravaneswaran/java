@@ -36,12 +36,13 @@ public class JavaMailer implements Mail {
         Properties props = new Properties();
         props.put(MAIL_HOST_PROPERTY, host);
         props.put("mail.smtp.port", port);
-        props.put("mail.smtp.starttls.enable", "false");
+        props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.ssl.trust", host);
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
         this.session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
+                new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(userName, password);
@@ -60,28 +61,28 @@ public class JavaMailer implements Mail {
         Message mimeMessage = new MimeMessage(this.getSession());
         mimeMessage.setFrom(new InternetAddress(from));
 
-        InternetAddress[]  toAddresses = new InternetAddress[tos.length];
-        for(int i = 0; i < tos.length; i++){
+        InternetAddress[] toAddresses = new InternetAddress[tos.length];
+        for (int i = 0; i < tos.length; i++) {
             toAddresses[i] = new InternetAddress(tos[i]);
         }
-        mimeMessage.setRecipients(Message.RecipientType.TO,toAddresses);
+        mimeMessage.setRecipients(Message.RecipientType.TO, toAddresses);
 
-        InternetAddress[]  ccAddresses = new InternetAddress[ccs.length];
-        for(int i = 0; i < ccs.length; i++){
+        InternetAddress[] ccAddresses = new InternetAddress[ccs.length];
+        for (int i = 0; i < ccs.length; i++) {
             ccAddresses[i] = new InternetAddress(ccs[i]);
         }
-        mimeMessage.setRecipients(Message.RecipientType.CC,ccAddresses);
+        mimeMessage.setRecipients(Message.RecipientType.CC, ccAddresses);
 
-        InternetAddress[]  bccAddresses = new InternetAddress[bccs.length];
-        for(int i = 0; i < bccs.length; i++){
+        InternetAddress[] bccAddresses = new InternetAddress[bccs.length];
+        for (int i = 0; i < bccs.length; i++) {
             bccAddresses[i] = new InternetAddress(bccs[i]);
         }
-        mimeMessage.setRecipients(Message.RecipientType.BCC,bccAddresses);
+        mimeMessage.setRecipients(Message.RecipientType.BCC, bccAddresses);
 
         mimeMessage.setSubject(subject);
         BodyPart mimeBodyPart = new MimeBodyPart();
         mimeBodyPart.setHeader("Content-Type", "text/html; charset=utf-8");
-        mimeBodyPart.setText(message);
+        mimeBodyPart.setContent(message, "text/html; charset=utf-8");
         Multipart mimeMultipart = new MimeMultipart();
         mimeMultipart.addBodyPart(mimeBodyPart);
 
@@ -93,6 +94,7 @@ public class JavaMailer implements Mail {
             mimeBodyPart.setFileName(file.getName());
             mimeMultipart.addBodyPart(mimeBodyPart);
         }
+
         mimeMessage.setContent(mimeMultipart);
         mimeMessage.saveChanges();
         Transport.send(mimeMessage);
@@ -100,28 +102,28 @@ public class JavaMailer implements Mail {
 
     public void sendMail(String from, String to, String subject, String message)
             throws MessagingException {
-        String[] tos = { to };
+        String[] tos = {to};
         this.sendMail(from, tos, new String[0], new String[0], new String[0],
                 subject, message);
     }
 
     public void sendMail(String from, String to, String[] ccs, String subject,
                          String message) throws MessagingException {
-        String[] tos = { to };
+        String[] tos = {to};
         this.sendMail(from, tos, ccs, new String[0], new String[0], subject,
                 message);
     }
 
     public void sendMail(String from, String to, String[] ccs, String[] bccs,
                          String subject, String message) throws MessagingException {
-        String[] tos = { to };
+        String[] tos = {to};
         this.sendMail(from, tos, ccs, bccs, new String[0], subject, message);
     }
 
     public void sendMail(String from, String to, String[] ccs, String[] bccs,
                          String[] attachments, String subject, String message)
             throws MessagingException {
-        String[] tos = { to };
+        String[] tos = {to};
         this.sendMail(from, tos, ccs, bccs, attachments, subject, message);
     }
 
