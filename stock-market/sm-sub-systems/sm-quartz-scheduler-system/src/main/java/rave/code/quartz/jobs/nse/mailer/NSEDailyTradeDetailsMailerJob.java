@@ -6,11 +6,11 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.java.system.StockMarketSystemProperties;
-import rave.code.mail.java.ElectronicMail;
-import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.quartz.config.mail.ThymeleafMailConfiguration;
+import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.quartz.jobs.nse.mailer.model.NSEDailyTradeDetailMailerModel;
 import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
+import rave.code.utility.email.JavaMailer;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import javax.mail.MessagingException;
@@ -39,9 +39,9 @@ public class NSEDailyTradeDetailsMailerJob extends AbstractQuartzJob {
 
         try {
             LOGGER.log(Level.INFO, "SENDING MAIL....");
-            ElectronicMail electronicMail = new ElectronicMail();
-            electronicMail.connect(System.getProperty("smtp.mail.host"), System.getProperty("smtp.mail.port"), System.getProperty("smtp.mail.username"), System.getProperty("smtp.mail.password"));
-            electronicMail.sendMail(System.getProperty("smtp.mail.from"), System.getProperty("smtp.mail.username"), System.getProperty("holiday.mail.remainder.subject"), mailContent);
+            JavaMailer javaMailer = new JavaMailer();
+            javaMailer.connect(System.getProperty("smtp.mail.host"), System.getProperty("smtp.mail.port"), System.getProperty("smtp.mail.username"), System.getProperty("smtp.mail.password"));
+            javaMailer.sendMail(System.getProperty("smtp.mail.from"), System.getProperty("smtp.mail.username"), System.getProperty("holiday.mail.remainder.subject"), mailContent);
         } catch (MessagingException messagingException) {
             LOGGER.log(Level.SEVERE, messagingException.getMessage(), messagingException);
         }
