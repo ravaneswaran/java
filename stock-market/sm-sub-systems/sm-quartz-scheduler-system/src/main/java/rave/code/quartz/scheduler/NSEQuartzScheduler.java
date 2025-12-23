@@ -20,5 +20,6 @@ public class NSEQuartzScheduler extends AbstractQuartzScheduler {
         new NSELiveSessionScheduler(this.scheduler).scheduleJobs();
         new NSESecondBlockDealSessionScheduler(this.scheduler).scheduleJobs();
         new NSEPostMarketCloseScheduler(this.scheduler).scheduleJobs();
+        new NSEDailyTradeDetailsMailerScheduler(this.scheduler).scheduleJobs();
     }
 }
