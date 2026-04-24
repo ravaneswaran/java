@@ -17,6 +17,9 @@
         <module>education</module>
         <module>bhairava-siddhar-org</module>
         <module>payment-gateway-plugins</module>
+        <module>my-docs</module>
+        <module>my-docs/md-sub-systems</module>
+        <module>my-docs/md-web-systems/rental-agreements</module>
     </modules>
 
 </project>

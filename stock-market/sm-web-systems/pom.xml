@@ -10,7 +10,6 @@
     </parent>
     <groupId>rave.code.java.stock-market</groupId>
     <artifactId>sm-web-systems</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sm-web-systems</name>
 

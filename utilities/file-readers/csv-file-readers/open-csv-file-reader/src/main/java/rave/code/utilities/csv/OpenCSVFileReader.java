@@ -16,10 +16,12 @@ public class OpenCSVFileReader {
     private List<String> normalFileReadStyle(InputStream inputStream) throws IOException, CsvValidationException {
         List<String> lineList = new ArrayList<>();
         StringBuilder result = new StringBuilder();
-        try (Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
-            int ch;
-            while ((ch = reader.read()) != -1) {
-                result.append((char) ch);
+        if(null != inputStream) {
+            try (Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
+                int ch;
+                while ((ch = reader.read()) != -1) {
+                    result.append((char) ch);
+                }
             }
         }
         String[] lines = result.toString().split("\n");

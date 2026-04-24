@@ -45,6 +45,7 @@
             <artifactId>JDBC</artifactId>
             <version>11.2-latest-cubrid</version>
         </dependency>
+         <!--Source: https://mvnrepository.com/artifact/cubrid/cubrid-jdbc -->
     </dependencies>
     <build>
         <plugins>
