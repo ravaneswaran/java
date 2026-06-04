@@ -1,0 +1,23 @@
+package rave.code.tech.analysis.pattern.bullish;
+
+import org.junit.jupiter.api.Test;
+import rave.code.tech.analysis.pattern.Candle;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class TestBullishThreeWhiteSoldiersDetector {
+
+    @Test
+    public void testThreeWhiteSoldiers() {
+        Candle c1 = new Candle(100, 105, 106, 99);
+        Candle c2 = new Candle(103, 110, 111, 102);
+        Candle c3 = new Candle(108, 116, 117, 107);
+
+        boolean result =
+                BullishThreeWhiteSoldiersDetector.isThreeWhiteSoldiers(
+                        c1, c2, c3);
+
+        assertTrue(result);
+    }
+
+}

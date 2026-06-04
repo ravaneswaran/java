@@ -12,7 +12,7 @@ public class TestBullishSeparatingLinesDetector {
         Candle c1 = new Candle(100, 95, 102, 94);
         Candle c2 = new Candle(100.05, 108, 109, 99);
 
-        boolean result = BullishSeparatingLinesDetector.isBullishSeparatingLines(c1, c2);
+        boolean result = BullishSeparatingLinesDetector.isSeparatingLines(c1, c2);
 
         assertTrue(result);
     }

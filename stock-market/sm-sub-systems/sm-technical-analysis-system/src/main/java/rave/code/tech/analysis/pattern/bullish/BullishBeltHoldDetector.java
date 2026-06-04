@@ -1,10 +1,17 @@
 package rave.code.tech.analysis.pattern.bullish;
 
+import rave.code.tech.analysis.pattern.AbstractPatternDetector;
 import rave.code.tech.analysis.pattern.Candle;
 
-public class BullishBeltHoldDetector {
+import java.util.List;
 
-    public static boolean isBullishBeltHold(Candle candle) {
+public class BullishBeltHoldDetector extends AbstractPatternDetector {
+
+    public BullishBeltHoldDetector() {
+        super(1);
+    }
+
+    public static boolean isBeltHold(Candle candle) {
         // Must be bullish
         boolean bullish = candle.isBullish();
 
@@ -19,5 +26,14 @@ public class BullishBeltHoldDetector {
         boolean longBody = body >= range * 0.60;
 
         return bullish && noLowerShadow && longBody;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishBeltHoldDetector.isBeltHold(candles.get(0));
+        } else {
+            return false;
+        }
     }
 }

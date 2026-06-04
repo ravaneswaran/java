@@ -1,10 +1,17 @@
 package rave.code.tech.analysis.pattern.bullish;
 
+import rave.code.tech.analysis.pattern.AbstractPatternDetector;
 import rave.code.tech.analysis.pattern.Candle;
 
-public class BullishKickerDetector {
+import java.util.List;
 
-    public static boolean isBullishKicker(Candle c1, Candle c2) {
+public class BullishKickerDetector extends AbstractPatternDetector {
+
+    public BullishKickerDetector() {
+        super(2);
+    }
+
+    public static boolean isKicker(Candle c1, Candle c2) {
         // First candle bearish
         boolean firstBearish = c1.isBearish();
 
@@ -21,5 +28,14 @@ public class BullishKickerDetector {
         boolean strongClose = c2.getClose() > c1.getOpen();
 
         return firstBearish && secondBullish && gapUp && strongBullish && strongClose;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishKickerDetector.isKicker(candles.get(0), candles.get(1));
+        } else {
+            return false;
+        }
     }
 }

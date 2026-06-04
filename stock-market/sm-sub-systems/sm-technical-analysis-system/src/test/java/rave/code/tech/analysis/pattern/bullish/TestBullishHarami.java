@@ -12,7 +12,7 @@ public class TestBullishHarami {
         Candle c1 = new Candle(100, 90, 102, 88);
         Candle c2 = new Candle(92, 96, 97, 91);
 
-        boolean result = BullishHaramiDetector.isBullishHarami(c1, c2);
+        boolean result = BullishHaramiDetector.isHarami(c1, c2);
 
         assertTrue(result);
     }

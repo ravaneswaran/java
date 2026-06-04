@@ -1,10 +1,17 @@
 package rave.code.tech.analysis.pattern.bullish;
 
+import rave.code.tech.analysis.pattern.AbstractPatternDetector;
 import rave.code.tech.analysis.pattern.Candle;
 
-public class BullishAbandonedBabyDetector {
+import java.util.List;
 
-    public static boolean isBullishAbandonedBaby(
+public class BullishAbandonedBabyDetector extends AbstractPatternDetector {
+
+    public BullishAbandonedBabyDetector() {
+        super(3);
+    }
+
+    public static boolean isAbandonedBaby(
             Candle c1,
             Candle c2,
             Candle c3) {
@@ -34,5 +41,14 @@ public class BullishAbandonedBabyDetector {
                 thirdBullish &&
                 gapDown &&
                 gapUp;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishAbandonedBabyDetector.isAbandonedBaby(candles.get(0), candles.get(1), candles.get(2));
+        } else {
+            return false;
+        }
     }
 }

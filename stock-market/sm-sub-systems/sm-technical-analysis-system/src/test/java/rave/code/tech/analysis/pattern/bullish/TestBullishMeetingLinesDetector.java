@@ -5,15 +5,16 @@ import rave.code.tech.analysis.pattern.Candle;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestBullishKickerDetector {
+public class TestBullishMeetingLinesDetector {
 
     @Test
-    public void testBullishKickerDetector(){
+    public void testTestMeetingLinesDetector(){
         Candle c1 = new Candle(100, 90, 101, 89);
-        Candle c2 = new Candle(102, 112, 113, 101);
+        Candle c2 = new Candle(85, 90.10, 91, 84);
 
-        boolean result = BullishKickerDetector.isKicker(c1, c2);
+        boolean result = BullishMeetingLinesDetector.isMeetingLines(c1, c2);
 
         assertTrue(result);
     }
+
 }

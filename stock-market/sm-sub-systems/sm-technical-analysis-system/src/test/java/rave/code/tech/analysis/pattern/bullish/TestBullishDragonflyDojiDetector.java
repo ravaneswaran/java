@@ -5,15 +5,14 @@ import rave.code.tech.analysis.pattern.Candle;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestBullishBeltHoldDetector {
+public class TestBullishDragonflyDojiDetector {
 
     @Test
-    public void testBullishBeltHoldDetector(){
-        Candle candle = new Candle(100, 112, 114, 100);
-
-        boolean result = BullishBeltHoldDetector.isBeltHold(candle);
+    public void testDragonflyDojiDetector() {
+        Candle candle = new Candle(100, 101, 101, 85);
+        boolean result = BullishDragonflyDojiDetector.isDragonflyDoji(candle);
 
         assertTrue(result);
-    }
 
+    }
 }

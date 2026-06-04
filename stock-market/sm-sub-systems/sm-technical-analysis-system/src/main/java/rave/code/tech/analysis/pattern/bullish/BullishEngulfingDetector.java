@@ -1,10 +1,17 @@
 package rave.code.tech.analysis.pattern.bullish;
 
+import rave.code.tech.analysis.pattern.AbstractPatternDetector;
 import rave.code.tech.analysis.pattern.Candle;
 
-public class BullishEngulfingDetector {
+import java.util.List;
 
-    public static boolean isBullishEngulfing(Candle first, Candle second) {
+public class BullishEngulfingDetector extends AbstractPatternDetector {
+
+    public BullishEngulfingDetector() {
+        super(2);
+    }
+
+    public static boolean isEngulfing(Candle first, Candle second) {
         // First candle bearish
         boolean firstBearish = first.getClose() < first.getOpen();
 
@@ -17,5 +24,14 @@ public class BullishEngulfingDetector {
                         second.getClose() > first.getOpen();
 
         return firstBearish && secondBullish && engulfing;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishEngulfingDetector.isEngulfing(candles.get(0), candles.get(1));
+        } else {
+            return false;
+        }
     }
 }

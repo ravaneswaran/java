@@ -1,10 +1,17 @@
 package rave.code.tech.analysis.pattern.bullish;
 
+import rave.code.tech.analysis.pattern.AbstractPatternDetector;
 import rave.code.tech.analysis.pattern.Candle;
 
-public class BullishHaramiDetector {
+import java.util.List;
 
-    public static boolean isBullishHarami(
+public class BullishHaramiDetector extends AbstractPatternDetector {
+
+    public BullishHaramiDetector() {
+        super(2);
+    }
+
+    public static boolean isHarami(
             Candle first,
             Candle second) {
 
@@ -30,5 +37,14 @@ public class BullishHaramiDetector {
                 secondBullish &&
                 insideBody &&
                 smallerBody;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishHaramiDetector.isHarami(candles.get(0), candles.get(1));
+        } else {
+            return false;
+        }
     }
 }
