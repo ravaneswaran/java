@@ -13,6 +13,8 @@ public class PatternScanner {
     private List<Pattern> patterns = new ArrayList<>();
 
     public PatternScanner(){
+
+        /* Registering Bullish Patterns */
         this.registerPattern(new BullishEngulfingPattern());
         this.registerPattern(new BullishAbandonedBabyPattern());
         this.registerPattern(new BullishBeltHoldPattern());
