@@ -1,33 +1,30 @@
 package rave.code.tech.analysis.pattern.scanner;
 
+import rave.code.tech.analysis.pattern.Pattern;
+
 public class PatternResult {
 
-    private String symbol;
-    private String pattern;
+    private String patternName;
+    private Pattern pattern;
 
-    public PatternResult(String symbol, String pattern) {
-        this.symbol = symbol;
+    public PatternResult(String patternName, Pattern pattern) {
+        this.patternName = patternName;
         this.pattern = pattern;
     }
 
-    @Override
-    public String toString() {
-        return symbol + " -> " + pattern;
+    public String getPatternName() {
+        return patternName;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public void setPatternName(String patternName) {
+        this.patternName = patternName;
     }
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getPattern() {
+    public Pattern getPattern() {
         return pattern;
     }
 
-    public void setPattern(String pattern) {
+    public void setPattern(Pattern pattern) {
         this.pattern = pattern;
     }
 }
