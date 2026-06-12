@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.average;
+package rave.code.tech.analysis.units;
 
 public class LastTradedPrice {
 

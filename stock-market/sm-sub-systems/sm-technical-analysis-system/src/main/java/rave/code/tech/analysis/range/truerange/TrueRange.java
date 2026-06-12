@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.pricerange.truerange;
+package rave.code.tech.analysis.range.truerange;
 
 public class TrueRange {
 

@@ -1,6 +1,7 @@
 package rave.code.tech.analysis.average;
 
 import org.junit.jupiter.api.Test;
+import rave.code.tech.analysis.units.LastTradedPrice;
 
 import java.util.ArrayList;
 import java.util.List;

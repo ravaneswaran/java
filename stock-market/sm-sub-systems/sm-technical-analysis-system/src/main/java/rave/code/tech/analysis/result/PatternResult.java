@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.pattern.scanner;
+package rave.code.tech.analysis.result;
 
 import rave.code.tech.analysis.pattern.Pattern;
 
