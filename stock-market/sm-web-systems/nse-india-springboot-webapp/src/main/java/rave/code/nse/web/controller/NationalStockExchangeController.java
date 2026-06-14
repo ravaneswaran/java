@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.data.model.web.nse.page.NSEWebPage;
-import rave.code.nse.web.service.NSEPriceSpurtGTR20Service;
-import rave.code.nse.web.service.NSEPriceSpurtLWR20Service;
-import rave.code.nse.web.service.NSESMEService;
-import rave.code.nse.web.service.NSEVolumeSpurtsService;
+import rave.code.nse.web.service.*;
 import rave.code.nse.web.service.top20.*;
 
 @Controller
@@ -34,6 +31,8 @@ public class NationalStockExchangeController {
     private NSETop20SecuritiesGtr20Service nseTop20SecuritiesGtr20Service;
     @Autowired
     private NSETop20BankNiftyService nseTop20BankNiftyService;
+    @Autowired
+    private NSEPriceSpurtService nsePriceSpurtService;
 
     @GetMapping("/test")
     public ModelAndView test() {
@@ -127,5 +126,4 @@ public class NationalStockExchangeController {
         modelAndView.addObject("webpage", top20BankNiftyPage);
         return modelAndView;
     }
-
 }

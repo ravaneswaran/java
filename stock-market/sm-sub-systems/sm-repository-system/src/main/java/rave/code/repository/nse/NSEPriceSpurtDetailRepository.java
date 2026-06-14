@@ -4,7 +4,9 @@ import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
 import javax.persistence.criteria.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<NSEPriceSpurtDetailEntity> {
 
@@ -18,6 +20,31 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
 
     public List<NSEPriceSpurtDetailEntity> findPriceSpurtsGTR20() {
         return this.findDistinctPriceSpurtDetails("STOCK-PRICE>20");
+    }
+
+    public Map<String, List<NSEPriceSpurtDetailEntity>> findForMarketOnOpen(){
+
+        CriteriaBuilder mainCriteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEPriceSpurtDetailEntity> mainCriteriaQuery = mainCriteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
+        Root<NSEPriceSpurtDetailEntity> mainRoot = mainCriteriaQuery.from(NSEPriceSpurtDetailEntity.class);
+
+        mainCriteriaQuery.select(mainRoot);
+        mainCriteriaQuery.orderBy(mainCriteriaBuilder.asc(mainRoot.get("symbol")));
+        List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.getEntityManager().createQuery(mainCriteriaQuery).getResultList();
+
+        Map<String, List<NSEPriceSpurtDetailEntity>> resultList = new HashMap<>();
+        for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity : nsePriceSpurtDetailEntities){
+            String symbol = nsePriceSpurtDetailEntity.getSymbol();
+            CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = mainCriteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
+            Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
+            Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
+            criteriaQuery.select(root).where(symbolPredicate);
+            List<NSEPriceSpurtDetailEntity> priceSpurtDetailEntities = this.getEntityManager().createQuery(criteriaQuery).getResultList();
+            resultList.put(symbol, priceSpurtDetailEntities);
+        }
+
+        return resultList;
     }
 
     @Override

@@ -1,12 +1,14 @@
 package rave.code.entity.nse.csv;
 
+import lombok.NonNull;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "nse_price_spurt_detail")
 @Access(AccessType.FIELD)
-public class NSEPriceSpurtDetailEntity extends AbstractNSECSVEntity{
+public class NSEPriceSpurtDetailEntity extends AbstractNSECSVEntity implements Comparable<NSEPriceSpurtDetailEntity> {
 
     @ManyToOne
     @JoinColumn(name = "stock_base_id", nullable=false)
@@ -132,5 +134,15 @@ public class NSEPriceSpurtDetailEntity extends AbstractNSECSVEntity{
 
     public String getKey(){
         return this.getSymbol();
+    }
+
+    @Override
+    public int compareTo(@NonNull NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity) {
+        if (this.getLastTradedPrice() > nsePriceSpurtDetailEntity.getLastTradedPrice()) {
+            return 1;
+        } else if (this.getLastTradedPrice() < nsePriceSpurtDetailEntity.getLastTradedPrice()) {
+            return -1;
+        }
+        return 0;
     }
 }
