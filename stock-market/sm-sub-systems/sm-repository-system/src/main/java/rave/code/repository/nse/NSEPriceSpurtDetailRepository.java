@@ -39,33 +39,36 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         Date endDateTime = null;
         try {
             startDateTime = simpleDateFormatWithTime.parse(toDateStartTimeString);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (ParseException parseException) {
+            throw new RuntimeException(parseException);
         }
         try {
             endDateTime = simpleDateFormatWithTime.parse(toDateEndTimeString);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (ParseException parseException) {
+            throw new RuntimeException(parseException);
         }
 
         CriteriaBuilder mainCriteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSEPriceSpurtDetailEntity> mainCriteriaQuery = mainCriteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
         Root<NSEPriceSpurtDetailEntity> mainRoot = mainCriteriaQuery.from(NSEPriceSpurtDetailEntity.class);
         Predicate dateRangePredicate = mainCriteriaBuilder.between(mainRoot.get("createdDate"), startDateTime, endDateTime);
-
         mainCriteriaQuery.select(mainRoot);
         mainCriteriaQuery.where(dateRangePredicate).orderBy(mainCriteriaBuilder.asc(mainRoot.get("symbol")));
+
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.getEntityManager().createQuery(mainCriteriaQuery).getResultList();
 
         Map<String, List<NSEPriceSpurtDetailEntity>> resultList = new HashMap<>();
         for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity : nsePriceSpurtDetailEntities) {
             String symbol = nsePriceSpurtDetailEntity.getSymbol();
+
             CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
             CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = mainCriteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
             Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
             Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
             criteriaQuery.select(root).where(criteriaBuilder.and(dateRangePredicate, symbolPredicate));
+
             List<NSEPriceSpurtDetailEntity> priceSpurtDetailEntities = this.getEntityManager().createQuery(criteriaQuery).getResultList();
+
             resultList.put(symbol, priceSpurtDetailEntities);
         }
 
