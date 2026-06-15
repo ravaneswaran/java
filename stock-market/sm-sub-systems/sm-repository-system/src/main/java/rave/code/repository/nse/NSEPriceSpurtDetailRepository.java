@@ -3,6 +3,11 @@ package rave.code.repository.nse;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
 import javax.persistence.criteria.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,24 +27,44 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.findDistinctPriceSpurtDetails("STOCK-PRICE>20");
     }
 
-    public Map<String, List<NSEPriceSpurtDetailEntity>> findForMarketOnOpen(){
+    public Map<String, List<NSEPriceSpurtDetailEntity>> findForMarketOnOpen() {
+
+        SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
+        String toDateString = simpleDateFormatWithoutTime.format(new Date());
+        String toDateStartTimeString = String.format("%s %s", toDateString, "09:15:00");
+        String toDateEndTimeString = String.format("%s %s", toDateString, "10:00:00");
+
+        SimpleDateFormat simpleDateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date startDateTime = null;
+        Date endDateTime = null;
+        try {
+            startDateTime = simpleDateFormatWithTime.parse(toDateStartTimeString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            endDateTime = simpleDateFormatWithTime.parse(toDateEndTimeString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         CriteriaBuilder mainCriteriaBuilder = this.getEntityManager().getCriteriaBuilder();
         CriteriaQuery<NSEPriceSpurtDetailEntity> mainCriteriaQuery = mainCriteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
         Root<NSEPriceSpurtDetailEntity> mainRoot = mainCriteriaQuery.from(NSEPriceSpurtDetailEntity.class);
+        Predicate dateRangePredicate = mainCriteriaBuilder.between(mainRoot.get("createdDate"), startDateTime, endDateTime);
 
         mainCriteriaQuery.select(mainRoot);
-        mainCriteriaQuery.orderBy(mainCriteriaBuilder.asc(mainRoot.get("symbol")));
+        mainCriteriaQuery.where(dateRangePredicate).orderBy(mainCriteriaBuilder.asc(mainRoot.get("symbol")));
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.getEntityManager().createQuery(mainCriteriaQuery).getResultList();
 
         Map<String, List<NSEPriceSpurtDetailEntity>> resultList = new HashMap<>();
-        for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity : nsePriceSpurtDetailEntities){
+        for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity : nsePriceSpurtDetailEntities) {
             String symbol = nsePriceSpurtDetailEntity.getSymbol();
             CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
             CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = mainCriteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
             Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
             Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
-            criteriaQuery.select(root).where(symbolPredicate);
+            criteriaQuery.select(root).where(criteriaBuilder.and(dateRangePredicate, symbolPredicate));
             List<NSEPriceSpurtDetailEntity> priceSpurtDetailEntities = this.getEntityManager().createQuery(criteriaQuery).getResultList();
             resultList.put(symbol, priceSpurtDetailEntities);
         }
@@ -65,7 +90,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         Expression<Date> createdDateExpression = subRoot.get("createdDate");
 
         // condition introduced for mail details...
-        if(null != spurtType){
+        if (null != spurtType) {
             Predicate spurtTypePredicate = criteriaBuilder.equal(root.get("spurtType"), spurtType);
             subQuery.select(criteriaBuilder.greatest(createdDateExpression))
                     .where(criteriaBuilder.and(spurtTypePredicate, symbolPredicate));
