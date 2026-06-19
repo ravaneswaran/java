@@ -16,13 +16,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
-        <java.version>17</java.version>
-        <jdbcUrl>jdbc:mysql://localhost:3306/</jdbcUrl>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -114,7 +107,7 @@
                 <artifactId>sm-maven-plugin</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <configuration>
-                    <jdbcUrl>${jdbcUrl}</jdbcUrl>
+                    <dbServerUrl>jdbc:mysql://localhost:3306/stock_market</dbServerUrl>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
                     <username>admin</username>
                     <password>admin</password>
@@ -135,13 +128,13 @@
         <profile>
             <id>create-tables</id>
             <properties>
-                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+                <dbServerUrl>jdbc:mysql://localhost:3306/stock_market</dbServerUrl>
             </properties>
         </profile>
         <profile>
             <id>delete-tables</id>
             <properties>
-                <jdbcUrl>jdbc:mysql://localhost:3306/stock_market</jdbcUrl>
+                <dbServerUrl>jdbc:mysql://localhost:3306/stock_market</dbServerUrl>
             </properties>
         </profile>
     </profiles>

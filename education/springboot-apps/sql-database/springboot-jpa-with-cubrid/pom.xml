@@ -3,12 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <name>springboot-jpa-with-cubrid</name>
     <artifactId>springboot-jpa-with-cubrid</artifactId>
     <groupId>rave.code.java.education.springboot-apps.sql-database</groupId>
@@ -44,16 +46,22 @@
         </dependency>
         <dependency>
             <groupId>cubrid</groupId>
-            <artifactId>JDBC</artifactId>
-            <version>11.2-latest-cubrid</version>
+            <artifactId>cubrid-jdbc</artifactId>
+            <version>11.2.1.0040</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>cubrid</id>
+            <url>https://maven.cubrid.org/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

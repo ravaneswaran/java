@@ -1,7 +1,5 @@
 package rave.code.entity.nse.csv;
 
-import lombok.NonNull;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -137,7 +135,7 @@ public class NSEPriceSpurtDetailEntity extends AbstractNSECSVEntity implements C
     }
 
     @Override
-    public int compareTo(@NonNull NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity) {
+    public int compareTo(NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity) {
         if (this.getLastTradedPrice() > nsePriceSpurtDetailEntity.getLastTradedPrice()) {
             return 1;
         } else if (this.getLastTradedPrice() < nsePriceSpurtDetailEntity.getLastTradedPrice()) {

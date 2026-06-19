@@ -29,6 +29,6 @@ public class FileDownloaderTest {
             inputStream = fileDownload.downloadFile(url);
         } catch (IOException e) {
         }
-        assertTrue(null == inputStream);
+        assertTrue(null != inputStream);
     }
 }

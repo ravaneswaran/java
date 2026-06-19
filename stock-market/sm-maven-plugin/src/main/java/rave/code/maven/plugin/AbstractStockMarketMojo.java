@@ -49,12 +49,8 @@ public abstract class AbstractStockMarketMojo extends AbstractMojo {
                     sqlBuilder.setLength(0); // reset buffer
                 }
             }
-        } catch (SQLException sqlException) {
-            getLog().error(sqlException.getMessage(), sqlException);
-        } catch (FileNotFoundException fileNotFoundException) {
-            getLog().error(fileNotFoundException.getMessage(), fileNotFoundException);
-        } catch (IOException ioException) {
-            getLog().error(ioException.getMessage(), ioException);
+        } catch (SQLException | IOException exception) {
+            getLog().error(exception.getMessage(), exception);
         }
     }
 }
