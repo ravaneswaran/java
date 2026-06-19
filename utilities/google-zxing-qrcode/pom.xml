@@ -3,20 +3,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>rave.code.java</groupId>
         <artifactId>utilities</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
     <groupId>rave.code.java.utilities</groupId>
     <artifactId>google-zxing-qrcode</artifactId>
     <name>google-zxing-qrcode</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
-
         <com.google.zxing.version>3.4.0</com.google.zxing.version>
     </properties>
 

@@ -16,11 +16,6 @@
     <groupId>rave.code.java.utilities.file-readers.csv-file-readers</groupId>
     <packaging>jar</packaging>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>17</maven.compiler.release>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
