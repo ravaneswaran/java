@@ -3,10 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>rave.code</groupId>
+        <artifactId>java</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
     <packaging>pom</packaging>
     <groupId>rave.code.java</groupId>
     <artifactId>maven-plugins</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <name>maven-plugins</name>
 
     <modules>
@@ -26,14 +33,22 @@
         <module>quartz-sapdb-maven-plugin</module>
         <module>quartz-solid-maven-plugin</module>
         <module>quartz-sqlite-maven-plugin</module>
-        <!--<module>quartz-cubrid-maven-plugin</module>
-        <module>quartz-sybase-maven-plugin</module>-->
+        <!--<module>quartz-sybase-maven-plugin</module>
+        <module>quartz-cubrid-maven-plugin</module>-->
     </modules>
 
-    <!--
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.15.2</version>
+            </plugin>
+        </plugins>
+    </build>
 
+    <!--
     mvn archetype:generate -DgroupId=rave.code -DartifactId=quartz-mysql-maven-plugin -Dversion=1.0.0 -DarchetypeArtifactId=maven-archetype-plugin
     https://github.com/quartz-scheduler/quartz/blob/main/quartz/src/main/resources/org/quartz/impl/jdbcjobstore/tables_cloudscape.sql
-
     -->
 </project>
