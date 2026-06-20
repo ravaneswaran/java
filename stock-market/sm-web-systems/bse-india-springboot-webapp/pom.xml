@@ -86,9 +86,7 @@
             <artifactId>thymeleaf-spring6</artifactId>
             <version>3.1.2.RELEASE</version>
         </dependency>
-
         <!-- Module dependencies  -->
-
         <dependency>
             <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-repository-system</artifactId>

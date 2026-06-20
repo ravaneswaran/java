@@ -73,7 +73,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-
         <!-- Thymeleaf dependencies -->
         <dependency>
             <groupId>org.thymeleaf</groupId>
@@ -85,9 +84,7 @@
             <artifactId>thymeleaf-spring6</artifactId>
             <version>3.1.2.RELEASE</version>
         </dependency>
-
         <!-- Module dependencies  -->
-
         <dependency>
             <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
             <artifactId>sm-repository-system</artifactId>
@@ -119,7 +116,6 @@
                 </includes>
             </resource>
         </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
