@@ -27,6 +27,10 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.findDistinctPriceSpurtDetails("STOCK-PRICE>20");
     }
 
+    public List<NSEPriceSpurtDetailEntity> findPriceSpurts() {
+        return this.findDistinctPriceSpurtDetails(null);
+    }
+
     public Map<String, List<NSEPriceSpurtDetailEntity>> findForMarketOnOpen() {
 
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");

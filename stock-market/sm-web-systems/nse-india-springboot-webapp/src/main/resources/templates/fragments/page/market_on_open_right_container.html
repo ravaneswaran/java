@@ -1,0 +1,55 @@
+<div class="right-container">
+    <div th:replace="~{fragments/common/stock_group_tip_container}"></div>
+    <div class="right-container-stock-listing-container">
+        <div class="right-container-company-frame-div-0 right-container-company-frame-div-0-ps" th:each="stock : ${webpage.nsePriceSpurtDetailModels}">
+            <div class="right-container-company-div">
+                <div class="right-container-company-title-container">
+                    <div class="right-container-company-title-div" th:text="${stock.title}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
+                    <div th:class="${stock.percentageChange >= 0 ? 'right-container-company-stock-market-chart-div-green' : 'right-container-company-stock-market-chart-div-red'}"  th:attr="onclick=|showPopUp('${stock.stockDivId}')|" th:text="${stock.percentageChange + '%'}"></div>
+                </div>
+                <div>
+                    <div th:id="${stock.stockDivId}" class="right-container-company-table-div">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="td-left">Open Price</td>
+                                <td class="td-right" th:text="${stock.openPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">High Price</td>
+                                <td class="td-right" th:text="${stock.highPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Low Price</td>
+                                <td class="td-right" th:text="${stock.lowPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Prev Close</td>
+                                <td class="td-right" th:text="${stock.previousClosePrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">LTP</td>
+                                <td class="td-right" th:text="${stock.lastTradedPrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">% Change</td>
+                                <td class="td-right" th:text="${stock.percentageChange}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">Shares(Vol)</td>
+                                <td class="td-right" th:text="${stock.volume}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="right-container-company-trading-stats-div">
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'pb')|">PB</div>
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'atr')|">ATR</div>
+                    <div class="right-container-company-trading-stats-div-item" th:attr="onclick=|showPopUpAndDetail('${stock.stockDivId}', 'sma')|">SMA</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/common/popup/window}"></div>
+</div>

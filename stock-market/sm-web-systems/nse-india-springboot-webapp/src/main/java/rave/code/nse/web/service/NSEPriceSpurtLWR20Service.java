@@ -2,7 +2,6 @@ package rave.code.nse.web.service;
 
 import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
-import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
 import java.util.List;

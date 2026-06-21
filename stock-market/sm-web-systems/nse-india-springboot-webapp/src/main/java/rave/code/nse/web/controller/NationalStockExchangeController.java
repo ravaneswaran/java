@@ -6,15 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.data.model.web.nse.page.NSEWebPage;
 import rave.code.nse.web.service.*;
+import rave.code.nse.web.service.NSEPriceSpurtService;
 import rave.code.nse.web.service.top20.*;
 
 @Controller
 public class NationalStockExchangeController {
 
     @Autowired
-    private NSEPriceSpurtLWR20Service nsePriceSpurtLWR20Service;
+    private NSEPriceSpurtService nsePriceSpurtService;
     @Autowired
-    private NSEPriceSpurtGTR20Service nsePriceSpurtGTR20Service;
+    private NSEPriceSpurtLWR20Service nsePriceSpurtLWR20Service;
     @Autowired
     private NSEVolumeSpurtsService nseVolumeSpurtsService;
     @Autowired
@@ -31,8 +32,6 @@ public class NationalStockExchangeController {
     private NSETop20SecuritiesGtr20Service nseTop20SecuritiesGtr20Service;
     @Autowired
     private NSETop20BankNiftyService nseTop20BankNiftyService;
-    @Autowired
-    private NSEPriceSpurtService nsePriceSpurtService;
 
     @GetMapping("/test")
     public ModelAndView test() {
@@ -124,6 +123,15 @@ public class NationalStockExchangeController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("top_20_bank_nifty");
         modelAndView.addObject("webpage", top20BankNiftyPage);
+        return modelAndView;
+    }
+
+    @GetMapping("/market-on-open")
+    public ModelAndView marketOnOpen(){
+        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getWebPage();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("market_on_open");
+        modelAndView.addObject("webpage", marketOnOpenPage);
         return modelAndView;
     }
 }
