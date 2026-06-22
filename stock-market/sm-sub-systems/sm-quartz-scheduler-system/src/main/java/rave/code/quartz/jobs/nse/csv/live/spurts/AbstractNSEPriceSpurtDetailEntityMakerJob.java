@@ -111,12 +111,12 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
             if (null != nseStockBaseEntity) {
                 LOGGER.log(Level.INFO, String.format("%s : stock base entity exists...", key));
                 nsePriceSpurtsDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
-                nsePriceSpurtsDetailEntities.add(nsePriceSpurtsDetailEntity);
             } else {
                 LOGGER.log(Level.SEVERE, String.format("%s : stock base entity for(%s) does not exists...hence creating it.", key, nsePriceSpurtsDetailEntity.getSymbol()));
                 NSEStockBaseEntity nseStockBaseEntityToCreate = NSEStockBaseEntity.newInstance(nsePriceSpurtsDetailEntity.getSymbol(), null, null, null, -1, -1, -1);
                 nseStockBaseEntities.add(nseStockBaseEntityToCreate);
             }
+            nsePriceSpurtsDetailEntities.add(nsePriceSpurtsDetailEntity);
         }
         this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nsePriceSpurtsDetailRepository.bulkUpsert(nsePriceSpurtsDetailEntities);
