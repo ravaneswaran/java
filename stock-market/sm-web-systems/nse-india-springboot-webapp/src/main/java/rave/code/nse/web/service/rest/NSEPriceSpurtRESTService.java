@@ -5,10 +5,8 @@ import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.nse.web.service.AbstractNSEPriceSpurtService;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Service
 public class NSEPriceSpurtRESTService<MarketOnOpenWebPage> extends AbstractNSEPriceSpurtService<MarketOnOpenWebPage> {
@@ -20,12 +18,7 @@ public class NSEPriceSpurtRESTService<MarketOnOpenWebPage> extends AbstractNSEPr
 
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
-        return this.nsePriceSpurtDetailRepository.findPriceSpurts();
-    }
-
-    @Override
-    public Map<String, List<NSEPriceSpurtDetailEntity>> getMappedEntities() {
-        return this.nsePriceSpurtDetailRepository.findForMarketOnOpen();
+        return this.nsePriceSpurtDetailRepository.findTodayDistinctPriceSpurtDetails();
     }
 
     @Override
@@ -33,16 +26,8 @@ public class NSEPriceSpurtRESTService<MarketOnOpenWebPage> extends AbstractNSEPr
         return super.transformEntities(entities);
     }
 
-    public Map<String, List<NSEPriceSpurtDetailModel>> getMappedModels(){
-        Map<String, List<NSEPriceSpurtDetailModel>> returnMap = new HashMap<>();
-
-        Map<String, List<NSEPriceSpurtDetailEntity>> source = this.getMappedEntities();
-        Set<String> keys = source.keySet();
-        for (String key : keys){
-            List<NSEPriceSpurtDetailModel> nsePriceSpurtDetailModels = this.transformEntities(source.get(key));
-            returnMap.put(key, nsePriceSpurtDetailModels);
-        }
-
-        return returnMap;
+    @Override
+    public Map<String, List<NSEPriceSpurtDetailEntity>> getMappedEntities() {
+        return null;
     }
 }

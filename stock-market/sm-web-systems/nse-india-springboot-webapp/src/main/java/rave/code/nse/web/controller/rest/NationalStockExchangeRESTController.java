@@ -15,8 +15,4 @@ public class NationalStockExchangeRESTController {
     @Autowired
     private NSEPriceSpurtRESTService nsePriceSpurtRESTService;
 
-    @GetMapping("/rest/market-on-open")
-    public Map<String, List<NSEPriceSpurtDetailModel>> marketOnOpenTrade(){
-        return this.nsePriceSpurtRESTService.getMappedModels();
-    }
 }

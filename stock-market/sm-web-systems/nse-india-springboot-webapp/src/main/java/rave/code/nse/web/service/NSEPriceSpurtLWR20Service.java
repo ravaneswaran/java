@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -12,6 +13,7 @@ public class NSEPriceSpurtLWR20Service extends AbstractNSEPriceSpurtService<Pric
     @Override
     public PriceSpurtsWebPage getWebPage() {
         List<NSEPriceSpurtDetailEntity> entities = this.getEntities();
+        entities.sort(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice));
         PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
         priceSpurtsWebPage.setNsePriceSpurtDetailModels(this.transformEntities(entities));
         priceSpurtsWebPage.setNseStockModels(this.getNSEStockModels(entities));
@@ -20,6 +22,6 @@ public class NSEPriceSpurtLWR20Service extends AbstractNSEPriceSpurtService<Pric
 
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
-        return this.nsePriceSpurtDetailRepository.findPriceSpurtsLWR20();
+        return this.nsePriceSpurtDetailRepository.findTodayDistinctPriceSpurtDetails().stream().filter(nsePriceSpurtDetailEntity -> "STOCK-PRICE<20".equals(nsePriceSpurtDetailEntity.getSpurtType())).toList();
     }
 }

@@ -13,7 +13,7 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     @Override
     public PriceSpurtsWebPage getWebPage() {
         List<NSEPriceSpurtDetailEntity> entities = this.getEntities();
-        entities.sort(Comparator.comparing(NSEPriceSpurtDetailEntity::getLastTradedPrice));
+        entities.sort(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice));
         PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
         priceSpurtsWebPage.setPriceSpurt(false);
         priceSpurtsWebPage.setNsePriceSpurtDetailModels(this.transformEntities(entities));
@@ -23,6 +23,6 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
-        return this.nsePriceSpurtDetailRepository.findPriceSpurts();
+        return this.nsePriceSpurtDetailRepository.findTodayDistinctPriceSpurtDetails();
     }
 }
