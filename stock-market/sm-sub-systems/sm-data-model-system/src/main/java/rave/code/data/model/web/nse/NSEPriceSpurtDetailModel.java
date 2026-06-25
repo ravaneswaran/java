@@ -1,11 +1,14 @@
 package rave.code.data.model.web.nse;
 
+import java.util.List;
+
 public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     private double highPrice;
     private double lowPrice;
     private int volume;
     private double value;
+    private List<NSEPriceSpurtDetailModel> history;
 
     public double getHighPrice() {
         return highPrice;
@@ -37,5 +40,13 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public List<NSEPriceSpurtDetailModel> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<NSEPriceSpurtDetailModel> history) {
+        this.history = history;
     }
 }

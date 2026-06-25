@@ -12,11 +12,9 @@ public class NSEPriceSpurtLWR20Service extends AbstractNSEPriceSpurtService<Pric
 
     @Override
     public PriceSpurtsWebPage getWebPage() {
-        List<NSEPriceSpurtDetailEntity> entities = this.getEntities();
-        entities.sort(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice));
+        List<NSEPriceSpurtDetailEntity> entities = this.getEntities().stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice)).toList();
         PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
         priceSpurtsWebPage.setNsePriceSpurtDetailModels(this.transformEntities(entities));
-        priceSpurtsWebPage.setNseStockModels(this.getNSEStockModels(entities));
         return priceSpurtsWebPage;
     }
 

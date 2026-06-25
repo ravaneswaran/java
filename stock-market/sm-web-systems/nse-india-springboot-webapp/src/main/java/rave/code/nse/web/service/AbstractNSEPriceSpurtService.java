@@ -12,13 +12,38 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
 
     protected NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
 
+    public NSEPriceSpurtDetailModel transformEntity(NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity) {
+        NSEPriceSpurtDetailModel nsePriceSpurtDetailModel = new NSEPriceSpurtDetailModel();
+        nsePriceSpurtDetailModel.setStockDivId(nsePriceSpurtDetailEntity.getId());
+        nsePriceSpurtDetailModel.setSymbol(nsePriceSpurtDetailEntity.getSymbol());
+        nsePriceSpurtDetailModel.setOpenPrice(nsePriceSpurtDetailEntity.getOpenPrice());
+        nsePriceSpurtDetailModel.setHighPrice(nsePriceSpurtDetailEntity.getHighPrice());
+        nsePriceSpurtDetailModel.setLowPrice(nsePriceSpurtDetailEntity.getLowPrice());
+        nsePriceSpurtDetailModel.setPreviousClosePrice(nsePriceSpurtDetailEntity.getPreviousClosePrice());
+        nsePriceSpurtDetailModel.setPercentageChange(nsePriceSpurtDetailEntity.getPercentageChange());
+        nsePriceSpurtDetailModel.setLastTradedPrice(nsePriceSpurtDetailEntity.getLastTradedPrice());
+        nsePriceSpurtDetailModel.setValue(nsePriceSpurtDetailEntity.getValue());
+        nsePriceSpurtDetailModel.setVolume(nsePriceSpurtDetailEntity.getVolume());
+        String series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries();
+
+        if (null != series && !series.equals("null") && !"".equals(series)) {
+            nsePriceSpurtDetailModel.setTitle(String.format("%s:%s", series, nsePriceSpurtDetailEntity.getSymbol()));
+        } else {
+            nsePriceSpurtDetailModel.setTitle(nsePriceSpurtDetailEntity.getSymbol());
+        }
+
+        return nsePriceSpurtDetailModel;
+    }
+
     @Override
     public List<NSEPriceSpurtDetailModel> transformEntities(List<NSEPriceSpurtDetailEntity> entities) {
         List<NSEPriceSpurtDetailModel> nsePriceSpurtDetailModels = new ArrayList();
+
         for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity : entities) {
             NSEPriceSpurtDetailModel nsePriceSpurtDetailModel = new NSEPriceSpurtDetailModel();
+            String symbol = nsePriceSpurtDetailEntity.getSymbol();
             nsePriceSpurtDetailModel.setStockDivId(nsePriceSpurtDetailEntity.getId());
-            nsePriceSpurtDetailModel.setSymbol(nsePriceSpurtDetailEntity.getSymbol());
+            nsePriceSpurtDetailModel.setSymbol(symbol);
             nsePriceSpurtDetailModel.setOpenPrice(nsePriceSpurtDetailEntity.getOpenPrice());
             nsePriceSpurtDetailModel.setHighPrice(nsePriceSpurtDetailEntity.getHighPrice());
             nsePriceSpurtDetailModel.setLowPrice(nsePriceSpurtDetailEntity.getLowPrice());
@@ -28,6 +53,7 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
             nsePriceSpurtDetailModel.setValue(nsePriceSpurtDetailEntity.getValue());
             nsePriceSpurtDetailModel.setVolume(nsePriceSpurtDetailEntity.getVolume());
             String series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries();
+
             if (null != series && !series.equals("null") && !"".equals(series)) {
                 nsePriceSpurtDetailModel.setTitle(String.format("%s:%s", series, nsePriceSpurtDetailEntity.getSymbol()));
             } else {

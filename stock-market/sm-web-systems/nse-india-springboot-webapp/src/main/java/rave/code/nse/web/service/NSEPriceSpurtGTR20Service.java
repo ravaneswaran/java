@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -11,10 +12,9 @@ public class NSEPriceSpurtGTR20Service extends AbstractNSEPriceSpurtService<Pric
 
     @Override
     public PriceSpurtsWebPage getWebPage() {
-        List<NSEPriceSpurtDetailEntity> entities = this.getEntities();
+        List<NSEPriceSpurtDetailEntity> entities = this.getEntities().stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice)).toList();
         PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
         priceSpurtsWebPage.setNsePriceSpurtDetailModels(this.transformEntities(entities));
-        priceSpurtsWebPage.setNseStockModels(this.getNSEStockModels(entities));
         return priceSpurtsWebPage;
     }
 
