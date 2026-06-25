@@ -1,10 +1,12 @@
 package rave.code.repository.nse;
 
+import javassist.Loader;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -53,12 +55,13 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         StringBuffer queryBuffer = new StringBuffer();
         queryBuffer.append("SELECT * FROM nse_price_spurt_detail WHERE symbol=").append("'").append(symbol).append("'");
         queryBuffer.append(" ");
+        queryBuffer.append("AND");
+        queryBuffer.append(" ");
         queryBuffer.append("created_date").append(" ").append(">=").append(" ").append("'").append(toDateStartTimeString).append("'");
         queryBuffer.append(" ").append("AND").append(" ");
         queryBuffer.append("created_date").append(" ").append("<=").append(" ").append("'").append(toDateEndTimeString).append("'");
         queryBuffer.append(" ").append("ORDER BY").append(" ").append("symbol").append(" ").append("ASC").append(",").append(" ");
         queryBuffer.append("created_date").append(" ").append("DESC");
-
 
         return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
