@@ -20,7 +20,6 @@ public class AbstractOneEntityRepositoryManager<T> extends AbstractRepositoryMan
         throw new RuntimeException("Operation prohibited...");
     }
 
-    @Override
     public List<T> findAll() {
         throw new RuntimeException("Operation prohibited...");
     }

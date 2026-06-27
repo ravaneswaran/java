@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
+@Deprecated
 public abstract class NotThreadSafeDatabaseManager<T> {
 
     private static final String PERSISTENCE_UNIT_NAME = "stock_market";

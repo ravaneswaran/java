@@ -65,7 +65,7 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
         return mappedStockBaseEntity;
     }
 
-    public Map<String, NSEStockBaseEntity> mapSymbolToStockBaseEntities() {
+    public Map<String, NSEStockBaseEntity>  mapSymbolToStockBaseEntities() {
         EntityManager entityManager = this.getEntityManager();
         Query query = entityManager.createQuery("SELECT nseStockBaseEntity FROM NSEStockBaseEntity nseStockBaseEntity");
         Map<String, NSEStockBaseEntity> mappedStockBaseEntity = new HashMap<>();

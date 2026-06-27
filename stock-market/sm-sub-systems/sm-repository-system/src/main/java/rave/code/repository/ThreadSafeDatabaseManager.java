@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
+@Deprecated
 public abstract class ThreadSafeDatabaseManager<T> extends NotThreadSafeDatabaseManager<T> {
 
     private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("stock_market");;

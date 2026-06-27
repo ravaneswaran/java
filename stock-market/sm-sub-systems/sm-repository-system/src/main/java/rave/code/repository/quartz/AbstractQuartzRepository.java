@@ -1,8 +1,8 @@
 package rave.code.repository.quartz;
 
-import rave.code.repository.NotThreadSafeDatabaseManager;
+import rave.code.repository.AbstractRepositoryManager;
 
-public abstract class AbstractQuartzRepository<T> extends NotThreadSafeDatabaseManager<T> {
+public abstract class AbstractQuartzRepository<T> extends AbstractRepositoryManager<T> {
 
     public AbstractQuartzRepository(Class<T> type) {
         super(type);
