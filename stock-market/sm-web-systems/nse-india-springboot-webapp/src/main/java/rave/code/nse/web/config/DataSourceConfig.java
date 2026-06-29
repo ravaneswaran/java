@@ -21,7 +21,10 @@ public class DataSourceConfig {
         config.setJdbcUrl("jdbc:mysql://localhost:3306/stock_market_dev");
         config.setUsername("admin");
         config.setPassword("admin");
-        config.setMaximumPoolSize(150);
+        config.setMaximumPoolSize(20);
+        config.setMinimumIdle(5);
+        config.setIdleTimeout(300000);
+        config.setMaxLifetime(1800000);
 
         return new HikariDataSource(config);
     }

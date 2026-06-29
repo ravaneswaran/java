@@ -8,17 +8,19 @@ import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractRepositoryManager<T>{
+public abstract class AbstractRepositoryManager<T> {
 
-    private final EntityManager entityManager;
-    protected  Class<T> type;
+    private EntityManager entityManager;
+    protected Class<T> type;
 
     public AbstractRepositoryManager(Class<T> type) {
         this.type = type;
-        this.entityManager = RepositoryManager.getInstance().createEntityManager();
     }
 
     public EntityManager getEntityManager() {
+        if (!(null != this.entityManager && this.entityManager.isOpen())) {
+            this.entityManager = RepositoryManager.getInstance().createEntityManager();
+        }
         return this.entityManager;
     }
 
@@ -31,7 +33,7 @@ public abstract class AbstractRepositoryManager<T>{
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
-        //entityManager.close();
+        entityManager.close();
         return entity;
     }
 
@@ -40,7 +42,7 @@ public abstract class AbstractRepositoryManager<T>{
         entityManager.getTransaction().begin();
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
-        //entityManager.close();
+        entityManager.close();
         return entity;
     }
 
@@ -49,7 +51,7 @@ public abstract class AbstractRepositoryManager<T>{
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
-        //entityManager.close();
+        entityManager.close();
         return entity;
     }
 
@@ -61,20 +63,22 @@ public abstract class AbstractRepositoryManager<T>{
     }
 
     public void bulkUpsert(List<T> entities) {
-        EntityTransaction entityTransaction = this.getEntityManager().getTransaction();
+        EntityManager entityManager = this.getEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         for (T stockBaseEntity : entities) {
-            AbstractEntity abstractStockBaseEntity = (AbstractEntity)stockBaseEntity;
+            AbstractEntity abstractStockBaseEntity = (AbstractEntity) stockBaseEntity;
             if (abstractStockBaseEntity.isNewEntity()) {
-                this.getEntityManager().persist(stockBaseEntity);
+                entityManager.persist(stockBaseEntity);
             } else {
-                this.getEntityManager().merge(stockBaseEntity);
+                entityManager.merge(stockBaseEntity);
             }
         }
         entityTransaction.commit();
+        entityManager.close();
     }
 
-    public List<T> executeQuery(Query query){
+    public List<T> executeQuery(Query query) {
         return query.getResultList();
     }
 

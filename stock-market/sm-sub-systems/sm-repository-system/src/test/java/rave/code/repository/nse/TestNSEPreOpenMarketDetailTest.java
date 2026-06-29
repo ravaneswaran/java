@@ -26,6 +26,7 @@ public class TestNSEPreOpenMarketDetailTest extends NSERepositoryTestCase {
         nsePreOpenMarketDetailEntity.setNewMarket52WeekLow(345.00);
 
         this.nsePreOpenMarketDetailRepository.save(nsePreOpenMarketDetailEntity);
+
         NSEPreOpenMarketDetailEntity findFromDB = this.nsePreOpenMarketDetailRepository.findBy(nsePreOpenMarketDetailEntity.getId());
         assertNotNull(findFromDB);
     }

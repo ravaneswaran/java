@@ -1,6 +1,5 @@
 package rave.code.nse.web;
 
-import org.quartz.ObjectAlreadyExistsException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
@@ -31,9 +30,7 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
         SchedulerFactory schedulerFactory = null;
         try {
             schedulerFactory = new StdSchedulerFactory(new NSEQuartzOverrideProperties());
-        } catch (SchedulerException exception) {
-            LOGGER.log(Level.SEVERE, exception.getMessage());
-        } catch (IOException exception) {
+        } catch (SchedulerException | IOException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
 
@@ -55,8 +52,6 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
         }
         try {
             scheduler.addCalendar("NSECalendar", holidayCalendar, false, true);
-        } catch (ObjectAlreadyExistsException exception) {
-            LOGGER.log(Level.SEVERE, exception.getMessage());
         } catch (SchedulerException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
