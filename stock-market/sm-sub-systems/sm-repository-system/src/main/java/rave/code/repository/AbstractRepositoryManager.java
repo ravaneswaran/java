@@ -7,8 +7,12 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractRepositoryManager<T> {
+
+    private static final Logger LOGGER = Logger.getLogger(AbstractRepositoryManager.class.getName());
 
     private EntityManager entityManager;
     protected Class<T> type;
@@ -74,6 +78,8 @@ public abstract class AbstractRepositoryManager<T> {
                 } else {
                     entityManager.merge(stockBaseEntity);
                 }
+            } else {
+                LOGGER.log(Level.SEVERE, "stock base entity found to be null...");
             }
         }
         entityTransaction.commit();
