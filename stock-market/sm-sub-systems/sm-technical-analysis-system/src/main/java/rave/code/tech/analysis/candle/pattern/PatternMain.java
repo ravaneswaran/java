@@ -1,0 +1,23 @@
+package rave.code.tech.analysis.candle.pattern;
+
+import rave.code.tech.analysis.result.PatternResult;
+import rave.code.tech.analysis.scanner.PatternScanner;
+
+import java.util.List;
+
+public class PatternMain {
+
+    public static void main(String[] args) {
+
+        List<Candle> candles = List.of(new Candle(100,95,102, 94), new Candle(93,105,106,92));
+
+        PatternScanner scanner = new PatternScanner();
+
+        List<PatternResult> results = scanner.scan(candles);
+
+        results.forEach(System.out::println);
+        results.forEach(patternResult -> {
+            System.out.println(patternResult.getPatternName());
+        });
+    }
+}

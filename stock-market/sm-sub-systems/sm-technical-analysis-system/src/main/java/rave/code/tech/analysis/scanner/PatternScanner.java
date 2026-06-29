@@ -1,9 +1,9 @@
 package rave.code.tech.analysis.scanner;
 
-import rave.code.tech.analysis.pattern.Candle;
-import rave.code.tech.analysis.pattern.Pattern;
-import rave.code.tech.analysis.pattern.bearish.*;
-import rave.code.tech.analysis.pattern.bullish.*;
+import rave.code.tech.analysis.candle.pattern.Candle;
+import rave.code.tech.analysis.candle.pattern.Pattern;
+import rave.code.tech.analysis.candle.pattern.bearish.*;
+import rave.code.tech.analysis.candle.pattern.bullish.*;
 import rave.code.tech.analysis.result.PatternResult;
 
 import java.util.ArrayList;

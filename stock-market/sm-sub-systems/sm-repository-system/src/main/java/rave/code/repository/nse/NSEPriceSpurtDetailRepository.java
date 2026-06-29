@@ -21,7 +21,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
         String toDateStartTimeString = String.format("%s %s", toDateString, "09:15:00");
-        String toDateEndTimeString = String.format("%s %s", toDateString, "15:30:00");
+        String toDateEndTimeString = String.format("%s %s", toDateString, "23:50:00");
 
         StringBuffer queryBuffer = new StringBuffer();
         queryBuffer.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
@@ -46,7 +46,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
         String toDateStartTimeString = String.format("%s %s", toDateString, "09:15:00");
-        String toDateEndTimeString = String.format("%s %s", toDateString, "15:30:00");
+        String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
 
         StringBuffer queryBuffer = new StringBuffer();
         queryBuffer.append("SELECT * FROM nse_price_spurt_detail WHERE symbol=").append("'").append(symbol).append("'");

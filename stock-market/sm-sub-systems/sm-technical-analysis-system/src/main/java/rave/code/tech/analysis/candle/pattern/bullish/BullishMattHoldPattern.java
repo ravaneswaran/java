@@ -1,0 +1,55 @@
+package rave.code.tech.analysis.candle.pattern.bullish;
+
+import rave.code.tech.analysis.candle.pattern.AbstractPattern;
+import rave.code.tech.analysis.candle.pattern.Candle;
+
+import java.util.List;
+
+public class BullishMattHoldPattern extends AbstractPattern {
+
+    public BullishMattHoldPattern() {
+        super(5);
+    }
+
+    public static boolean isMattHold(Candle c1, Candle c2, Candle c3, Candle c4, Candle c5) {
+
+        // First candle strong bullish
+        boolean firstBullish = c1.isBullish();
+
+        // Gap-up on second candle
+        boolean gapUp = c2.getLow() > c1.getHigh();
+
+        // Small pullback candles
+        boolean smallBodies = c2.bodySize() < c1.bodySize() * 0.5 && c3.bodySize() < c1.bodySize() * 0.5 && c4.bodySize() < c1.bodySize() * 0.5;
+
+        // Pullback remains above first candle open
+        boolean controlledPullback = c2.getLow() > c1.getOpen() && c3.getLow() > c1.getOpen() && c4.getLow() > c1.getOpen();
+
+        // Final strong bullish candle
+        boolean fifthBullish = c5.isBullish();
+
+        // Breakout above first candle close
+        boolean breakout = c5.getClose() > c1.getClose();
+
+        return firstBullish && gapUp && smallBodies && controlledPullback && fifthBullish && breakout;
+    }
+
+    @Override
+    public String getName() {
+        return "Bullish Matt Hold";
+    }
+
+    @Override
+    public boolean matches(List<Candle> candles) {
+        return false;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishMattHoldPattern.isMattHold(candles.get(0), candles.get(1), candles.get(2), candles.get(3), candles.get(4));
+        } else {
+            return false;
+        }
+    }
+}

@@ -64,22 +64,22 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
         JobDetail nsePriceSpurtSPGtr20DetailEntityMakerJobDetail1 = newJob(NSEPriceSpurtSPGtr20DetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_PRICE_SPURT_SP_GTR_20_JOB.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName()).storeDurably()
                 .build();
-        /*JobDetail nsePriceSpurtSPGtr20DetailEntityMakerJobDetail2 = newJob(NSEPriceSpurtSPGtr20DetailEntityMakerJob.class)
+        JobDetail nsePriceSpurtSPGtr20DetailEntityMakerJobDetail2 = newJob(NSEPriceSpurtSPGtr20DetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_PRICE_SPURT_SP_GTR_20_JOB.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName()).storeDurably()
                 .build();
         JobDetail nsePriceSpurtSPGtr20DetailEntityMakerJobDetail3 = newJob(NSEPriceSpurtSPGtr20DetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_PRICE_SPURT_SP_GTR_20_JOB.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName()).storeDurably()
-                .build();*/
+                .build();
 
         JobDetail nsePriceSpurtSPLwr20DetailEntityMakerJobDetail1 = newJob(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_PRICE_SPURT_SP_LWR_20_JOB.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName()).storeDurably()
                 .build();
-        /*JobDetail nsePriceSpurtSPLwr20DetailEntityMakerJobDetail2 = newJob(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class)
+        JobDetail nsePriceSpurtSPLwr20DetailEntityMakerJobDetail2 = newJob(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_PRICE_SPURT_SP_LWR_20_JOB.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName()).storeDurably()
                 .build();
         JobDetail nsePriceSpurtSPLwr20DetailEntityMakerJobDetail3 = newJob(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_PRICE_SPURT_SP_LWR_20_JOB.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName()).storeDurably()
-                .build();*/
+                .build();
 
 
         /*JobDetail nseVolumeSpurtsDetailEntityMakerJobDetail1 = newJob(NSEVolumeSpurtsDetailEntityMakerJob.class)
@@ -265,7 +265,7 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_09_15_AM_TO_09_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.HIGH.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_SLOT_1_LIVE_SESSION.get())
                 .build();
-        /*Trigger nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerTwo = newTrigger()
+        Trigger nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerTwo = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_PRICE_SPURT_GTR_20_TRIGGER.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_10_00_AM_TO_12_59_PM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.HIGH.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_SLOT_2_LIVE_SESSION.get())
@@ -275,13 +275,12 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_13_00_PM_TO_13_30_PM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.HIGH.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_SLOT_3_LIVE_SESSION.get())
                 .build();
-*/
         Trigger nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerOne = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_PRICE_SPURT_LWR_20_TRIGGER.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_09_15_AM_TO_09_59_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.HIGH.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_SLOT_1_LIVE_SESSION.get())
                 .build();
-        /*Trigger nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerTwo = newTrigger()
+        Trigger nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerTwo = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_PRICE_SPURT_LWR_20_TRIGGER.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_10_00_AM_TO_12_59_PM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.HIGH.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_SLOT_2_LIVE_SESSION.get())
@@ -290,7 +289,7 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
                 .withIdentity(QuartzTrigger.NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_PRICE_SPURT_LWR_20_TRIGGER.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_T_PLUS_0_LIVE_SESSION_BETWEEN_13_00_PM_TO_13_30_PM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.HIGH.get()).withDescription(TriggerDescription.NSE_T_PLUS_0_SLOT_3_LIVE_SESSION.get())
-                .build();*/
+                .build();
 
         /*Trigger nseVolumeSpurtsDetailEntityMakerJobTriggerOne = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_VOLUME_SPURT_TRIGGER.getShortName(), QuartzGroup.NSE_LIVE_SESSION.getShortName())
@@ -515,12 +514,12 @@ public class NSELiveSessionScheduler extends AbstractQuartzScheduler {
             this.scheduler.scheduleJob(nseSMEDetailEntityMakerJobDetail3, nseSMEDetailEntityMakerJobTriggerThree);*/
 
             this.scheduler.scheduleJob(nsePriceSpurtSPGtr20DetailEntityMakerJobDetail1, nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerOne);
-            /*this.scheduler.scheduleJob(nsePriceSpurtSPGtr20DetailEntityMakerJobDetail2, nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerTwo);
-            this.scheduler.scheduleJob(nsePriceSpurtSPGtr20DetailEntityMakerJobDetail3, nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerThree);*/
+            this.scheduler.scheduleJob(nsePriceSpurtSPGtr20DetailEntityMakerJobDetail2, nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerTwo);
+            this.scheduler.scheduleJob(nsePriceSpurtSPGtr20DetailEntityMakerJobDetail3, nsePriceSpurtSPGtr20DetailEntityMakerJobTriggerThree);
 
             this.scheduler.scheduleJob(nsePriceSpurtSPLwr20DetailEntityMakerJobDetail1, nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerOne);
-            /*this.scheduler.scheduleJob(nsePriceSpurtSPLwr20DetailEntityMakerJobDetail2, nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerTwo);
-            this.scheduler.scheduleJob(nsePriceSpurtSPLwr20DetailEntityMakerJobDetail3, nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerThree);*/
+            this.scheduler.scheduleJob(nsePriceSpurtSPLwr20DetailEntityMakerJobDetail2, nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerTwo);
+            this.scheduler.scheduleJob(nsePriceSpurtSPLwr20DetailEntityMakerJobDetail3, nsePriceSpurtSPLwr20DetailEntityMakerJobTriggerThree);
 
             /*this.scheduler.scheduleJob(nseVolumeSpurtsDetailEntityMakerJobDetail1, nseVolumeSpurtsDetailEntityMakerJobTriggerOne);
             this.scheduler.scheduleJob(nseVolumeSpurtsDetailEntityMakerJobDetail2, nseVolumeSpurtsDetailEntityMakerJobTriggerTwo);

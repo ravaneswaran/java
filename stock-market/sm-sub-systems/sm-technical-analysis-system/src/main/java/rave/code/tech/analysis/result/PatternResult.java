@@ -1,6 +1,6 @@
 package rave.code.tech.analysis.result;
 
-import rave.code.tech.analysis.pattern.Pattern;
+import rave.code.tech.analysis.candle.pattern.Pattern;
 
 public class PatternResult {
 
