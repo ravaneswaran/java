@@ -67,11 +67,13 @@ public abstract class AbstractRepositoryManager<T> {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         for (T stockBaseEntity : entities) {
-            AbstractEntity abstractStockBaseEntity = (AbstractEntity) stockBaseEntity;
-            if (abstractStockBaseEntity.isNewEntity()) {
-                entityManager.persist(stockBaseEntity);
-            } else {
-                entityManager.merge(stockBaseEntity);
+            if (null != stockBaseEntity) {
+                AbstractEntity abstractStockBaseEntity = (AbstractEntity) stockBaseEntity;
+                if (abstractStockBaseEntity.isNewEntity()) {
+                    entityManager.persist(stockBaseEntity);
+                } else {
+                    entityManager.merge(stockBaseEntity);
+                }
             }
         }
         entityTransaction.commit();
