@@ -33,7 +33,7 @@ public abstract class AbstractRepositoryManager<T> {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
-        entityManager.close();
+        //entityManager.close();
         return entity;
     }
 
@@ -42,7 +42,7 @@ public abstract class AbstractRepositoryManager<T> {
         entityManager.getTransaction().begin();
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
-        entityManager.close();
+        //entityManager.close();
         return entity;
     }
 
@@ -51,7 +51,7 @@ public abstract class AbstractRepositoryManager<T> {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
-        entityManager.close();
+        //entityManager.close();
         return entity;
     }
 
@@ -75,7 +75,7 @@ public abstract class AbstractRepositoryManager<T> {
             }
         }
         entityTransaction.commit();
-        entityManager.close();
+        //entityManager.close();
     }
 
     public List<T> executeQuery(Query query) {
