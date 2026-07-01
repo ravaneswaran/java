@@ -7,6 +7,16 @@ public class Candle {
     private double lowPrice;
     private double closePrice;
 
+    public Candle(){
+    }
+
+    public Candle(double openPrice, double highPrice, double lowPrice,  double closePrice){
+        this.openPrice = openPrice;
+        this.highPrice = highPrice;
+        this.lowPrice = lowPrice;
+        this.closePrice = closePrice;
+    }
+
     public double getOpenPrice() {
         return openPrice;
     }
@@ -68,5 +78,9 @@ public class Candle {
         } else {
             return -1;
         }
+    }
+
+    public int getLTPProgress(Candle previousCandle) {
+        return Double.compare(this.getClosePrice(), previousCandle.getClosePrice());
     }
 }

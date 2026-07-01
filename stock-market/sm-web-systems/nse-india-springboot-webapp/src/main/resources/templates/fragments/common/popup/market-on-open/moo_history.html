@@ -1,0 +1,44 @@
+<div class="trade-popup-container-stock-div" th:fragment="history(${stock})"  th:each="history : ${stock.history}">
+    <div class="trade-popup-container-stock-header-div">
+        <div class="trade-popup-container-stock-header-left-div">&nbsp;
+        </div>
+        <div class="trade-popup-container-stock-header-middle-div" th:text="${history.at}"></div>
+        <div class="trade-popup-container-stock-header-right-div">
+            <div class="red-cross" th:class="dummy"></div>
+        </div>
+    </div>
+    <div class="trade-popup-container-stock-body-div" style="">
+        <table>
+            <tbody>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">Open Price</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.openPrice}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">High Price</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.highPrice}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">Low Price</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.lowPrice}"></td>
+            </tr>
+            <tr>
+                <td th:class="${history.ltpBackgroundCss}" >LTP</td>
+                <td th:class="${history.ltpBackgroundCss}" th:text="${history.lastTradedPrice}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">Prev Close</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.previousClosePrice}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">% Change</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.percentageChange}"></td>
+            </tr>
+            <tr>
+                <td class="trade-popup-container-stock-td-left">Shares(Vol)</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.volume}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

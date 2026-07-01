@@ -8,6 +8,8 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
     private double lowPrice;
     private int volume;
     private double value;
+    private String at;
+    private String ltpBackgroundCss;
     private List<NSEPriceSpurtDetailModel> history;
 
     public double getHighPrice() {
@@ -48,5 +50,21 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     public void setHistory(List<NSEPriceSpurtDetailModel> history) {
         this.history = history;
+    }
+
+    public String getAt() {
+        return at;
+    }
+
+    public void setAt(String at) {
+        this.at = at;
+    }
+
+    public String getLtpBackgroundCss() {
+        return ltpBackgroundCss;
+    }
+
+    public void setLtpBackgroundCss(String ltpBackgroundCss) {
+        this.ltpBackgroundCss = ltpBackgroundCss;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
+import rave.code.tech.analysis.candle.Candle;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,6 +16,7 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     @Override
     public PriceSpurtsWebPage getWebPage() {
         List<NSEPriceSpurtDetailEntity> entities = this.getEntities().stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice)).toList();
+        entities = entities.stream().filter(entity -> entity.getOpenPrice() >= 500).toList();
         PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
         priceSpurtsWebPage.setPriceSpurt(false);
 
@@ -25,6 +27,8 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
             List<NSEPriceSpurtDetailModel> historyModels = new ArrayList<>();
             List<NSEPriceSpurtDetailEntity> histories = this.nsePriceSpurtDetailRepository.findPriceSpurtDetailsForASymbol(symbol);
+            histories = histories.stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getCreatedDate)).toList();
+
             for (NSEPriceSpurtDetailEntity history : histories) {
                 NSEPriceSpurtDetailModel historyModel = this.transformEntity(history);
                 historyModels.add(historyModel);
@@ -34,8 +38,24 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
             nsePriceSpurtDetailModels.add(nsePriceSpurtDetailModel);
         }
 
+        for(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels){
+            List<NSEPriceSpurtDetailModel> histories = nsePriceSpurtDetailModel.getHistory();
+            for(int index = histories.size() - 1; index > 0; index -- ){
+                NSEPriceSpurtDetailModel currentHistory = histories.get(index);
+                int progress = getLTPProgress(histories, index, currentHistory);
+                currentHistory.setLtpBackgroundCss(progress == 1 ? "trade-popup-container-stock-td green-bg" : ((progress == -1) ? "trade-popup-container-stock-td red-bg" : "trade-popup-container-stock-td"));
+            }
+        }
+
         priceSpurtsWebPage.setNsePriceSpurtDetailModels(nsePriceSpurtDetailModels);
         return priceSpurtsWebPage;
+    }
+
+    private int getLTPProgress(List<NSEPriceSpurtDetailModel> histories, int index, NSEPriceSpurtDetailModel currentHistory) {
+        NSEPriceSpurtDetailModel previousHistory = histories.get(index -1);
+        Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getLastTradedPrice());
+        Candle previousCandle = new Candle(previousHistory.getOpenPrice(), previousHistory.getHighPrice(), previousHistory.getLowPrice(), previousHistory.getLastTradedPrice());
+        return currentCandle.getLTPProgress(previousCandle);
     }
 
     @Override

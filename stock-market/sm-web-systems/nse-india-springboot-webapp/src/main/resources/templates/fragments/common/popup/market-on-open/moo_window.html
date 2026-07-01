@@ -1,0 +1,63 @@
+<div th:each="stock : ${webpage.nsePriceSpurtDetailModels}" th:id="${'history-div-' + stock.stockDivId}" class="popup-container-div" >
+    <div class="popup-title-div" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|" th:style="${stock.percentageChange >= 0 ? 'color: #2cff05;' : 'color: #f71302;'}"></div>
+    <div class="popup-body-div">
+        <div class="moo-popup-right-container-div">
+            <div th:id="${stock.stockDivId + '-moo'}" class="popup-right-container-item-div" style="display:block" >
+                <div th:replace="~{fragments/common/popup/market-on-open/moo_history :: history(stock)}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script lang="javascript">
+
+    var showPopUp = function(id){
+        var popUpDiv = document.getElementById('history-div-'+id);
+        popUpDiv.style = 'display:block';
+    }
+
+    var closePopUp = function(id){
+        var popUpDiv = document.getElementById('history-div-'+id);
+        popUpDiv.style = 'display:none';
+    }
+
+    /*var showPopUpAndDetail = function(id, detail){
+        showPopUp(id);
+        if("pb" == detail){
+            var innerPopupId = id + "-pb";
+            showInnerPopUp(innerPopupId, id);
+        }
+        if("atr" == detail){
+            var innerPopupId = id + "-atr";
+            showInnerPopUp(innerPopupId, id);
+        }
+        if("sma" == detail){
+            var innerPopupId = id + "-sma";
+            showInnerPopUp(innerPopupId, id);
+        }
+    }
+
+    var showInnerPopUp = function(innerPopUpId, id){
+        var innerPopupElement = document.getElementById(innerPopUpId);
+
+        var pbDivElement = document.getElementById(id + "-pb");
+        var atrDivElement = document.getElementById(id + "-atr");
+        var smaDivElement = document.getElementById(id + "-sma");
+
+        if(innerPopUpId == (id + "-pb")){
+            atrDivElement.style = "display:none";
+            smaDivElement.style = "display:none";
+        }
+        if(innerPopUpId == (id + "-atr")){
+            pbDivElement.style = "display:none";
+            smaDivElement.style = "display:none";
+        }
+        if(innerPopUpId == (id + "-sma")){
+            pbDivElement.style = "display:none";
+            atrDivElement.style = "display:none";
+        }
+
+        innerPopupElement.style = "display:block";
+    }*/
+
+</script>
