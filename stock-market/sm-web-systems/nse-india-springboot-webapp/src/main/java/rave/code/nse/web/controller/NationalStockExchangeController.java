@@ -3,11 +3,14 @@ package rave.code.nse.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import rave.code.data.model.web.nse.page.NSEWebPage;
 import rave.code.nse.web.service.*;
 import rave.code.nse.web.service.NSEPriceSpurtService;
 import rave.code.nse.web.service.top20.*;
+
+import java.lang.reflect.Parameter;
 
 @Controller
 public class NationalStockExchangeController {
@@ -42,17 +45,9 @@ public class NationalStockExchangeController {
 
     @GetMapping("/")
     public ModelAndView home() {
-       return this.priceSpurts();
+       return this.priceSpurts("0", "10");
     }
 
-    @GetMapping("/price-spurts")
-    public ModelAndView priceSpurts() {
-        NSEWebPage priceSpurtPage = this.nsePriceSpurtLWR20Service.getWebPage();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("price_spurts");
-        modelAndView.addObject("webpage", priceSpurtPage);
-        return modelAndView;
-    }
 
     @GetMapping("/volume-spurts")
     public ModelAndView volumeSpurts() {
@@ -126,12 +121,31 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/market-on-open")
-    public ModelAndView marketOnOpen(){
-        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getWebPage();
+    @GetMapping("/price-spurts-temp")
+    public ModelAndView priceSpurtsTemp() {
+        NSEWebPage priceSpurtPage = this.nsePriceSpurtLWR20Service.getWebPage();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("price_spurts");
+        modelAndView.addObject("webpage", priceSpurtPage);
+        return modelAndView;
+    }
+
+    @GetMapping("/price-spurts")
+    public ModelAndView priceSpurts(@RequestParam String openPriceLwrLimit, @RequestParam String openPriceUprLimit){
+        int lowerLimit = 0;
+        int upperLimit = 5;
+        try{
+            lowerLimit =  Integer.parseInt(openPriceLwrLimit);
+            upperLimit = Integer.parseInt(openPriceUprLimit);
+        } catch (NumberFormatException numberFormatException){
+            numberFormatException.printStackTrace();
+        }
+
+        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getWebPage(lowerLimit, upperLimit);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("market_on_open");
         modelAndView.addObject("webpage", marketOnOpenPage);
         return modelAndView;
     }
+
 }

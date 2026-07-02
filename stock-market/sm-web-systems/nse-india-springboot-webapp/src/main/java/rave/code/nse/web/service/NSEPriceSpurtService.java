@@ -51,6 +51,43 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
         return priceSpurtsWebPage;
     }
 
+    public PriceSpurtsWebPage getWebPage(int lowerOpenPriceLimit, int upperOpenPriceLimit) {
+        List<NSEPriceSpurtDetailEntity> entities = this.getEntities(lowerOpenPriceLimit, upperOpenPriceLimit).stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getOpenPrice)).toList();
+        //entities = entities.stream().filter(entity -> entity.getOpenPrice() >= 500).toList();
+        PriceSpurtsWebPage priceSpurtsWebPage = new PriceSpurtsWebPage();
+        priceSpurtsWebPage.setPriceSpurt(false);
+
+        List<NSEPriceSpurtDetailModel> nsePriceSpurtDetailModels = new ArrayList<>();
+        for (NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity : entities) {
+            String symbol = nsePriceSpurtDetailEntity.getSymbol();
+            NSEPriceSpurtDetailModel nsePriceSpurtDetailModel = this.transformEntity(nsePriceSpurtDetailEntity);
+
+            List<NSEPriceSpurtDetailModel> historyModels = new ArrayList<>();
+            List<NSEPriceSpurtDetailEntity> histories = this.nsePriceSpurtDetailRepository.findPriceSpurtDetailsForASymbol(symbol);
+            histories = histories.stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getCreatedDate)).toList();
+
+            for (NSEPriceSpurtDetailEntity history : histories) {
+                NSEPriceSpurtDetailModel historyModel = this.transformEntity(history);
+                historyModels.add(historyModel);
+            }
+
+            nsePriceSpurtDetailModel.setHistory(historyModels);
+            nsePriceSpurtDetailModels.add(nsePriceSpurtDetailModel);
+        }
+
+        for(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels){
+            List<NSEPriceSpurtDetailModel> histories = nsePriceSpurtDetailModel.getHistory();
+            for(int index = histories.size() - 1; index > 0; index -- ){
+                NSEPriceSpurtDetailModel currentHistory = histories.get(index);
+                int progress = getLTPProgress(histories, index, currentHistory);
+                currentHistory.setLtpBackgroundCss(progress == 1 ? "trade-popup-container-stock-td green-bg" : ((progress == -1) ? "trade-popup-container-stock-td red-bg" : "trade-popup-container-stock-td"));
+            }
+        }
+
+        priceSpurtsWebPage.setNsePriceSpurtDetailModels(nsePriceSpurtDetailModels);
+        return priceSpurtsWebPage;
+    }
+
     private int getLTPProgress(List<NSEPriceSpurtDetailModel> histories, int index, NSEPriceSpurtDetailModel currentHistory) {
         NSEPriceSpurtDetailModel previousHistory = histories.get(index -1);
         Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getLastTradedPrice());
@@ -61,5 +98,9 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
         return this.nsePriceSpurtDetailRepository.findTodayDistinctPriceSpurtDetails();
+    }
+
+    public List<NSEPriceSpurtDetailEntity> getEntities(int lowerOpenPriceLimit, int upperOpenPriceLimit) {
+        return this.nsePriceSpurtDetailRepository.findTodayDistinctPriceSpurtDetails(lowerOpenPriceLimit, upperOpenPriceLimit);
     }
 }
