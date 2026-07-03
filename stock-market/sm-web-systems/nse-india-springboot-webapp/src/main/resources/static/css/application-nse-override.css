@@ -39,7 +39,7 @@
 }
 
 .right-container-company-frame-div-0 {
-    width: 13.5%;
+    width: 13.7%;
     height: 34.8%;
 }
 
@@ -214,8 +214,8 @@
     border-radius: 10px;
     display:none;
     position: absolute; /* or relative / fixed */
-    top: 150px;
-    left: 290px;
+    top: 135px;
+    left: 306px;
     background-color: white;
 }
 
@@ -283,7 +283,7 @@
 /******************** stock popup styles ******************/
 
 .trade-popup-container-stock-div{
-    width: 15%;
+    width: 15.5%;
     height: 36%;
     border: 1px solid #353839;
     border-radius: 5px;
