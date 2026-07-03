@@ -18,88 +18,21 @@
         </div>
     </div>
 
-    <div class="container-horizontal-separator"></div>
+    <!--<div class="container-horizontal-separator"></div>
     <div class="left-container-lounge-div">Price Spurts</div>
-    <div class="container-horizontal-separator"></div>
+    <div class="container-horizontal-separator"></div>-->
 
     <div>
-        <div class="left-container-application-link-div">
+        <div class="left-container-application-link-div" th:each="link : ${webpage.links}">
             <div class="left-container-application-link-arrow-div">
                 <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=0&openPriceUprLimit=10"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 0 - 10</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=10&openPriceUprLimit=25"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 10 - 25</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=25&openPriceUprLimit=50"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 25 - 50</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=50&openPriceUprLimit=100"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 50 - 100</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=100&openPriceUprLimit=200"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 100 - 200</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=200&openPriceUprLimit=300"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 200 - 300</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=300&openPriceUprLimit=400"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 300 - 400</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=400&openPriceUprLimit=500"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 400 - 500</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=500&openPriceUprLimit=750"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 500 - 750</a>
-            </div>
-        </div>
-        <div class="left-container-application-link-div">
-            <div class="left-container-application-link-arrow-div">
-                <i class="arrow right"></i>
-                <a class="left-container-application-link" href="/nse-india/price-spurts?openPriceLwrLimit=750&openPriceUprLimit=1000"
-                   th:style="${webpage != null && webpage.preOpenMarketNifty50 ? 'font-weight:bold' : ''}">&#x20B9; : 750 - 1000</a>
+                <a class="left-container-application-link" th:href="${link.uri}" th:style="${link.cssStyle}" th:text="${link.caption}"></a>
             </div>
         </div>
     </div>
 
+
     <!--
-    <div class="container-horizontal-separator"></div>
-    <div class="left-container-lounge-div">Pre Open Market</div>
-    <div class="container-horizontal-separator"></div>
-    
     <div>
         <div class="left-container-application-link-div">
             <div class="left-container-application-link-arrow-div">

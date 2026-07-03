@@ -11,9 +11,13 @@ import rave.code.nse.web.service.NSEPriceSpurtService;
 import rave.code.nse.web.service.top20.*;
 
 import java.lang.reflect.Parameter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 public class NationalStockExchangeController {
+
+    private static final Logger LOGGER = Logger.getLogger(NationalStockExchangeController.class.getName());
 
     @Autowired
     private NSEPriceSpurtService nsePriceSpurtService;
@@ -121,24 +125,15 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/price-spurts-temp")
-    public ModelAndView priceSpurtsTemp() {
-        NSEWebPage priceSpurtPage = this.nsePriceSpurtLWR20Service.getWebPage();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("price_spurts");
-        modelAndView.addObject("webpage", priceSpurtPage);
-        return modelAndView;
-    }
-
     @GetMapping("/price-spurts")
-    public ModelAndView priceSpurts(@RequestParam String openPriceLwrLimit, @RequestParam String openPriceUprLimit){
+    public ModelAndView priceSpurts(@RequestParam(required = false) String openPriceLwrLimit, @RequestParam(required = false) String openPriceUprLimit){
         int lowerLimit = 0;
-        int upperLimit = 5;
+        int upperLimit = 10;
         try{
             lowerLimit =  Integer.parseInt(openPriceLwrLimit);
             upperLimit = Integer.parseInt(openPriceUprLimit);
         } catch (NumberFormatException numberFormatException){
-            numberFormatException.printStackTrace();
+            LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
         }
 
         NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getWebPage(lowerLimit, upperLimit);

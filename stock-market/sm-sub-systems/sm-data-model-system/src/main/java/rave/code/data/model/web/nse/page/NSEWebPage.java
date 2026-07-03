@@ -2,7 +2,9 @@ package rave.code.data.model.web.nse.page;
 
 import rave.code.data.model.web.AbstractWebPage;
 import rave.code.data.model.web.nse.NSEStockModel;
+import rave.code.data.model.web.nse.page.links.Link;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NSEWebPage extends AbstractWebPage {
@@ -22,6 +24,41 @@ public class NSEWebPage extends AbstractWebPage {
     private boolean preOpenMarketSME;
     private boolean preOpenMarketOthers;
     private List<NSEStockModel> nseStockModels;
+    protected List<Link> links;
+
+    public NSEWebPage(){
+        Link link1 = new Link("/nse-india/pre-open-market/nifty-50", "Nifty 50", "");
+        Link link2 = new Link("/nse-india/pre-open-market/bank-nifty", "Bank Nifty", "");
+        Link link3 = new Link("/nse-india/pre-open-market/sme", "SME", "");
+        Link link4 = new Link("/nse-india/pre-open-market/fo", "FO", "");
+        Link link5 = new Link("/nse-india/pre-open-market/others", "Others", "");
+        Link link6 = new Link("/nse-india/price-spurts", "Price Spurts", "");
+        Link link7 = new Link("/nse-india/volume-spurts", "Volume Spurts", "");
+        Link link8 = new Link("/nse-india/sme", "SME", "");
+        Link link9 = new Link("/nse-india/top-20/security-lwr-20", "Security < 20", "");
+        Link link10 = new Link("/nse-india/top-20/security-gtr-20", "Security > 20", "");
+        Link link11 = new Link("/nse-india/top-20/nifty-fifty", "Nifty Fifty", "");
+        Link link12 = new Link("/nse-india/top-20/nifty-next-fifty", "Nifty Next Fifty", "");
+        Link link13 = new Link("/nse-india/top-20/fo-security", "FO Security", "");
+        Link link14 = new Link("/nse-india/top-20/bank-nifty", "Bank Nifty", "");
+
+
+        this.links = new ArrayList<>();
+        this.links.add(link1);
+        this.links.add(link2);
+        this.links.add(link3);
+        this.links.add(link4);
+        this.links.add(link5);
+        this.links.add(link6);
+        this.links.add(link7);
+        this.links.add(link8);
+        this.links.add(link9);
+        this.links.add(link10);
+        this.links.add(link11);
+        this.links.add(link12);
+        this.links.add(link13);
+        this.links.add(link14);
+    }
 
     public boolean isPreOpenMarketOthers() {
         return preOpenMarketOthers;
@@ -141,5 +178,14 @@ public class NSEWebPage extends AbstractWebPage {
 
     public void setNseStockModels(List<NSEStockModel> nseStockModels) {
         this.nseStockModels = nseStockModels;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
     }
 }
