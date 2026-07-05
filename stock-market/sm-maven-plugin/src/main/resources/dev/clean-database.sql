@@ -8,6 +8,8 @@ DELETE FROM QUARTZ_FIRED_TRIGGERS WHERE SCHED_NAME LIKE 'STOCK_MARKET_%';
 DELETE FROM QUARTZ_TRIGGERS WHERE JOB_NAME LIKE 'TEST%';
 DELETE FROM QUARTZ_JOB_DETAILS WHERE JOB_NAME LIKE 'TEST%';
 
+DELETE FROM nse_simple_moving_average_detail WHERE stock_base_id IN (SELECT id FROM nse_stock_base WHERE symbol LIKE 'TEST-STOCK-BASE%');
+DELETE FROM nse_exponential_moving_average_detail WHERE stock_base_id IN (SELECT id FROM nse_stock_base WHERE symbol LIKE 'TEST-STOCK-BASE%');
 DELETE FROM nse_pre_open_market_detail WHERE symbol LIKE 'TEST%';
 DELETE FROM nse_price_to_earning_ratio_detail WHERE symbol LIKE 'TEST%';
 DELETE FROM nse_stock_base WHERE symbol LIKE 'TEST-%';

@@ -42,6 +42,8 @@
     <include relativeToChangelogFile="true" file="nse/nse-investors-choice-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-price-to-earning-ratio-detail-changelog.xml"/>
     <include relativeToChangelogFile="true" file="nse/nse-ipo-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-simple-moving-average-detail-changelog.xml"/>
+    <include relativeToChangelogFile="true" file="nse/nse-exponential-moving-average-detail-changelog.xml"/>
 
     <include relativeToChangelogFile="true" file="quartz/quartz-scheduler-changelog.xml"/>
 </databaseChangeLog>
