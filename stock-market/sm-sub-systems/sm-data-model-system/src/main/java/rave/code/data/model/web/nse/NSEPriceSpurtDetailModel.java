@@ -71,8 +71,4 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
     public String getForegroundCss(){
         return (this.getLastTradedPrice() > this.getOpenPrice()) ? "green-fg" : (this.getLastTradedPrice() < this.getOpenPrice() ? " red-fg" : "white-fg");
     }
-
-    public boolean isLTPGreaterThanOpenPrice(){
-        return this.getLastTradedPrice() > this.getOpenPrice();
-    }
 }
