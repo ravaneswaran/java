@@ -214,8 +214,9 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
 
         this.nseStockBaseRepository.bulkUpsert(nseStockBaseEntities);
         this.nseDayPriceDetailRepository.bulkUpsert(transformedData);
-
         LOGGER.log(Level.INFO, String.format("Number of NSEDayPriceDetailEntity.... %s", transformedData.size()));
+
+        this.updateLastRun();
     }
 
     public void setDates(List<Date> dates) {
@@ -228,7 +229,11 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             this.initialize(date);
             this.saveTransformedData(this.transformSourceData(this.getDataFromSource()));
         }
+        this.updateLastRun();
+        return this;
+    }
 
+    private void updateLastRun(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date now = new Date();
         NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = this.nseDayPriceLastRunDetailRepository.find();
@@ -240,8 +245,6 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         nseDayPriceLastRunDetailEntity.setModifiedDate(now);
 
         this.nseDayPriceLastRunDetailRepository.upsert(nseDayPriceLastRunDetailEntity);
-
-        return this;
     }
 
     public static void main(String[] args) {

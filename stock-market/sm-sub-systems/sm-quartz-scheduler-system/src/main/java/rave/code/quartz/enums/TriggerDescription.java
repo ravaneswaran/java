@@ -20,7 +20,7 @@ public enum TriggerDescription {
 
 
     NSE_DAILY_TRADE_DETAILS_MAILER("Triggers the job between 09:08 - 09:20 AM."),
-    NSE_POST_MARKET_CLOSE("Triggers the job at 05:00 PM."),
+    NSE_POST_MARKET_CLOSE("Triggers the job at/after 05:00 PM."),
     NSE_PRE_OPEN_MARKET_REGULAR_SESSION("Triggers the job between 09:00 AM - 09:08 AM with 1 min frequency."),
     NSE_FIRST_BLOCK_DEAL_SESSION("Triggers the job at 08:59:59 AM."),
     NSE_SECOND_BLOCK_DEAL_SESSION("Triggers the job between 02:05 PM - 02-20 PM with 1 min frequency."),
