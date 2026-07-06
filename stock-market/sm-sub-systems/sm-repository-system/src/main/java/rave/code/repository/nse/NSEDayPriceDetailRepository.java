@@ -5,6 +5,10 @@ import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,5 +55,39 @@ public class NSEDayPriceDetailRepository extends AbstractNSERepositoryManager<NS
         int noOfRowsAffected = query.executeUpdate();
         entityTransaction.commit();
         LOGGER.log(Level.INFO, String.format("%s rows have been deleted from nse_day_price_detail table...", noOfRowsAffected));
+    }
+
+    public List<NSEDayPriceDetailEntity> findBySymbolAndSeries(String symbol, String series) {
+        /*StringBuffer queryBuffer = new StringBuffer();
+        queryBuffer.append("SELECT t.* FROM nse_day_price_detail t INNER JOIN (SELECT DISTINCT symbol, series FROM nse_stock_base) x");
+        queryBuffer.append(" ON x.symbol = t.symbol AND x.series = t.series AND t.symbol = '");
+        queryBuffer.append(symbol).append("'").append(" ");
+        queryBuffer.append("AND").append(" ");
+        queryBuffer.append("t.series").append("=").append("'");
+        queryBuffer.append(series).append("'").append(" ");
+        queryBuffer.append("ORDER BY business_date DESC");
+        return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEDayPriceDetailEntity.class).getResultList();*/
+
+        /*StringBuffer queryBuffer = new StringBuffer();
+        queryBuffer.append("SELECT * FROM nse_day_price_detail WHERE");
+        queryBuffer.append(" ");
+        queryBuffer.append("symbol").append("=").append("'").append(symbol).append("'");
+        queryBuffer.append("AND").append(" ");
+        queryBuffer.append("series").append("=").append("'").append(series).append("'");
+        queryBuffer.append(" ");
+        queryBuffer.append("ORDER BY business_date DESC");
+        return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEDayPriceDetailEntity.class).getResultList();*/
+
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEDayPriceDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEDayPriceDetailEntity.class);
+        Root<NSEDayPriceDetailEntity> root = criteriaQuery.from(NSEDayPriceDetailEntity.class);
+
+        Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
+        Predicate seriesPredicate = criteriaBuilder.equal(root.get("series"), series);
+
+        criteriaQuery.select(root).where(criteriaBuilder.and(symbolPredicate, seriesPredicate));
+        criteriaQuery.orderBy(criteriaBuilder.desc(root.get("businessDate")));
+
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 }

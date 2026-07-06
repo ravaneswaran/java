@@ -1,8 +1,8 @@
 <div th:each="stock : ${webpage.nsePriceSpurtDetailModels}" th:id="${'history-div-' + stock.stockDivId}" class="popup-container-div" >
-    <div class="popup-title-div" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|" th:style="${stock.percentageChange >= 0 ? 'color: #2cff05;' : 'color: #f71302;'}"></div>
+    <div th:class="popup-title-div + ' ' + ${stock.foregroundCss}" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|"></div>
     <div class="popup-body-div">
         <div class="moo-popup-right-container-div">
-            <div th:id="${stock.stockDivId + '-moo'}" class="popup-right-container-item-div" style="display:block" >
+            <div th:id="${stock.stockDivId + '-moo'}" class="popup-right-container-item-div" style="display:block;" >
                 <div th:replace="~{fragments/common/popup/market-on-open/moo_history :: history(stock)}"></div>
             </div>
         </div>

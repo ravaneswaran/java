@@ -109,7 +109,8 @@ public enum QuartzJob {
     NSE_DAILY_TRADE_DETAILS_MAILER_JOB("NSE Daily Trade Details Mailer", "J-NSE-DAILY-TRADE-DETAILS-MAILER"),
 
     NSE_POST_MARKET_CLOSE_BHAVCOPY_JOB("NSE Post Market Close Bhavcopy", "J-POST-MARKET-CLOSE-BHAVCOPY"),
-    NSE_POST_MARKET_CLOSE_PE_RATIO_JOB("NSE Post Market Close PE Ratio", "J-POST-MARKET-CLOSE-PE-RATIO");
+    NSE_POST_MARKET_CLOSE_PE_RATIO_JOB("NSE Post Market Close PE Ratio", "J-POST-MARKET-CLOSE-PE-RATIO"),
+    NSE_POST_MARKET_CLOSE_XXX_MOVING_AVERAGE_JOB("NSE Post Market Close XXX Moving Average Ratio", "J-POST-MARKET-CLOSE-XXX-MOVING-AVERAGE");
 
     private String name;
     private String shortName;

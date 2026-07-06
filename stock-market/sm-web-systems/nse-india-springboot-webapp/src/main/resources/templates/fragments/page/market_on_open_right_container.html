@@ -4,7 +4,7 @@
         <div class="right-container-company-frame-div-0 moo-right-container-company-frame-div-0" th:each="stock : ${webpage.nsePriceSpurtDetailModels}">
             <div class="right-container-company-div">
                 <div  class="right-container-company-title-container">
-                    <div class="right-container-company-title-div moo-right-container-company-title-div" th:text="${stock.title}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
+                    <div th:class="'right-container-company-title-div moo-right-container-company-title-div' + ' ' + ${stock.foregroundCss}" th:text="${stock.title}" th:attr="onclick=|showPopUp('${stock.stockDivId}')|"></div>
                 </div>
                 <div>
                     <div th:id="${stock.stockDivId}" class="right-container-company-table-div">

@@ -363,12 +363,24 @@
     background-color:yellow;
 }
 
+.white-fg {
+    color: white;
+}
+
 .green-bg {
     background-color: #2CFF05;
 }
 
+.green-fg {
+    color: #2CFF05;
+}
+
 .red-bg {
-    background-color: #f4aaa5;
+    background-color: #FF878D;
+}
+
+.red-fg {
+    color: #FF878D;
 }
 
 
