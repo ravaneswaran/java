@@ -40,7 +40,7 @@ public class NSEHistoricalDayPriceDetailJob extends AbstractHistoricalDayPriceDe
     public static void main(String[] args) throws JobExecutionException {
         JavaUtilLogDecor.setupLogDecor();
 
-        NSEHistoricalDayPriceDetailJob nseHistoricalDayPriceDetailJob = new NSEHistoricalDayPriceDetailJob(400);
+        NSEHistoricalDayPriceDetailJob nseHistoricalDayPriceDetailJob = new NSEHistoricalDayPriceDetailJob(450);
         nseHistoricalDayPriceDetailJob.execute(null);
     }
 }

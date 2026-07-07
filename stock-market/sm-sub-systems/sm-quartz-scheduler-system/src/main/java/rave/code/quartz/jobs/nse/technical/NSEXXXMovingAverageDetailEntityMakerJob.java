@@ -18,109 +18,97 @@ import java.util.List;
 public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
 
     private final NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
-    private final  NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         List<NSEStockBaseEntity> nseStockBaseEntities = this.nseStockBaseRepository.findAll();
-        this.processSimpleMovingAverage(nseStockBaseEntities);
-        this.processExponentialMovingAverage(nseStockBaseEntities);
+        this.processXXXMovingAverage(nseStockBaseEntities);
     }
 
-    public void processSimpleMovingAverage(List<NSEStockBaseEntity> nseStockBaseEntities){
-        List<NSESimpleMovingAverageDetailEntity> results = new ArrayList<>();
+    public void processXXXMovingAverage(List<NSEStockBaseEntity> nseStockBaseEntities) {
 
-        for(NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities){
+        List<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntities = new ArrayList<>();
+        List<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntities = new ArrayList<>();
+
+        for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
             String symbol = nseStockBaseEntity.getSymbol();
             String series = nseStockBaseEntity.getSeries();
-            List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities =  this.nseDayPriceDetailRepository.findBySymbolAndSeries(symbol, series);
-            if(nseDayPriceDetailEntities.size() > 200) {
+            List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities = this.nseDayPriceDetailRepository.findBySymbolAndSeries(symbol, series);
+            if (nseDayPriceDetailEntities.size() > 200) {
 
-                List<NSEDayPriceDetailEntity> sma5dList = nseDayPriceDetailEntities.subList(0, 5);
-                List<NSEDayPriceDetailEntity> sma10dList = nseDayPriceDetailEntities.subList(0, 10);
-                List<NSEDayPriceDetailEntity> sma20dList = nseDayPriceDetailEntities.subList(0, 20);
-                List<NSEDayPriceDetailEntity> sma50dList = nseDayPriceDetailEntities.subList(0, 50);
-                List<NSEDayPriceDetailEntity> sma100dList = nseDayPriceDetailEntities.subList(0, 100);
-                List<NSEDayPriceDetailEntity> sma200dList = nseDayPriceDetailEntities.subList(0, 200);
+                List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor5Days = nseDayPriceDetailEntities.subList(0, 5);
+                List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor10Days = nseDayPriceDetailEntities.subList(0, 10);
+                List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor20Days = nseDayPriceDetailEntities.subList(0, 20);
+                List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor50Days = nseDayPriceDetailEntities.subList(0, 50);
+                List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor100Days = nseDayPriceDetailEntities.subList(0, 100);
+                List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor200Days = nseDayPriceDetailEntities.subList(0, 200);
 
-                double sma5d = this.calculateSMA(sma5dList);
-                double sma10d = this.calculateSMA(sma10dList);
-                double sma20d = this.calculateSMA(sma20dList);
-                double sma50d = this.calculateSMA(sma50dList);
-                double sma100d = this.calculateSMA(sma100dList);
-                double sma200d = this.calculateSMA(sma200dList);
+                double simpleMovingAverageFor5Days = this.calculateSimpleMovingAverage(nseDayPriceDetailEntityFor5Days);
+                double simpleMovingAverageFor10Days = this.calculateSimpleMovingAverage(nseDayPriceDetailEntityFor10Days);
+                double simpleMovingAverageFor20Days = this.calculateSimpleMovingAverage(nseDayPriceDetailEntityFor20Days);
+                double simpleMovingAverageFor50Days = this.calculateSimpleMovingAverage(nseDayPriceDetailEntityFor50Days);
+                double simpleMovingAverageFor100Days = this.calculateSimpleMovingAverage(nseDayPriceDetailEntityFor100Days);
+                double simpleMovingAverageFor200Days = this.calculateSimpleMovingAverage(nseDayPriceDetailEntityFor200Days);
+
+                double exponentialMovingAverageFor5Days = this.calculateExponentialMovingAverage(nseDayPriceDetailEntityFor5Days);
+                double exponentialMovingAverageFor10Days = this.calculateExponentialMovingAverage(nseDayPriceDetailEntityFor10Days);
+                double exponentialMovingAverageFor20Days = this.calculateExponentialMovingAverage(nseDayPriceDetailEntityFor20Days);
+                double exponentialMovingAverageFor50Days = this.calculateExponentialMovingAverage(nseDayPriceDetailEntityFor50Days);
+                double exponentialMovingAverageFor100Days = this.calculateExponentialMovingAverage(nseDayPriceDetailEntityFor100Days);
+                double exponentialMovingAverageFor200Days = this.calculateExponentialMovingAverage(nseDayPriceDetailEntityFor200Days);
 
                 NSESimpleMovingAverageDetailEntity nseSimpleMovingAverageDetailEntity = new NSESimpleMovingAverageDetailEntity();
                 nseSimpleMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
-                nseSimpleMovingAverageDetailEntity.setSMA5D(sma5d);
-                nseSimpleMovingAverageDetailEntity.setSMA10D(sma10d);
-                nseSimpleMovingAverageDetailEntity.setSMA20D(sma20d);
-                nseSimpleMovingAverageDetailEntity.setSMA50D(sma50d);
-                nseSimpleMovingAverageDetailEntity.setSMA100D(sma100d);
-                nseSimpleMovingAverageDetailEntity.setSMA200D(sma200d);
+                nseSimpleMovingAverageDetailEntity.setSMA5D(simpleMovingAverageFor5Days);
+                nseSimpleMovingAverageDetailEntity.setSMA10D(simpleMovingAverageFor10Days);
+                nseSimpleMovingAverageDetailEntity.setSMA20D(simpleMovingAverageFor20Days);
+                nseSimpleMovingAverageDetailEntity.setSMA50D(simpleMovingAverageFor50Days);
+                nseSimpleMovingAverageDetailEntity.setSMA100D(simpleMovingAverageFor100Days);
+                nseSimpleMovingAverageDetailEntity.setSMA200D(simpleMovingAverageFor200Days);
 
-                results.add(nseSimpleMovingAverageDetailEntity);
+                NSEExponentialMovingAverageDetailEntity nseExponentialMovingAverageDetailEntity = new NSEExponentialMovingAverageDetailEntity();
+                nseExponentialMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
+                nseExponentialMovingAverageDetailEntity.setEMA5D(exponentialMovingAverageFor5Days);
+                nseExponentialMovingAverageDetailEntity.setEMA10D(exponentialMovingAverageFor10Days);
+                nseExponentialMovingAverageDetailEntity.setEMA20D(exponentialMovingAverageFor20Days);
+                nseExponentialMovingAverageDetailEntity.setEMA50D(exponentialMovingAverageFor50Days);
+                nseExponentialMovingAverageDetailEntity.setEMA100D(exponentialMovingAverageFor100Days);
+                nseExponentialMovingAverageDetailEntity.setEMA200D(exponentialMovingAverageFor200Days);
+
+                nseSimpleMovingAverageDetailEntities.add(nseSimpleMovingAverageDetailEntity);
+                nseExponentialMovingAverageDetailEntities.add(nseExponentialMovingAverageDetailEntity);
             }
         }
 
         NSESimpleMovingAverageDetailRepository nseSimpleMovingAverageDetailRepository = new NSESimpleMovingAverageDetailRepository();
-        nseSimpleMovingAverageDetailRepository.bulkUpsert(results);
-    }
-
-    public void processExponentialMovingAverage(List<NSEStockBaseEntity> nseStockBaseEntities){
-        List<NSEExponentialMovingAverageDetailEntity> results = new ArrayList<>();
-
-        for(NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities){
-            String symbol = nseStockBaseEntity.getSymbol();
-            String series = nseStockBaseEntity.getSeries();
-            List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities =  this.nseDayPriceDetailRepository.findBySymbolAndSeries(symbol, series);
-            if(nseDayPriceDetailEntities.size() > 200) {
-
-                List<NSEDayPriceDetailEntity> ema5dList = nseDayPriceDetailEntities.subList(0, 5);
-                List<NSEDayPriceDetailEntity> ema10dList = nseDayPriceDetailEntities.subList(0, 10);
-                List<NSEDayPriceDetailEntity> ema20dList = nseDayPriceDetailEntities.subList(0, 20);
-                List<NSEDayPriceDetailEntity> ema50dList = nseDayPriceDetailEntities.subList(0, 50);
-                List<NSEDayPriceDetailEntity> ema100dList = nseDayPriceDetailEntities.subList(0, 100);
-                List<NSEDayPriceDetailEntity> ema200dList = nseDayPriceDetailEntities.subList(0, 200);
-
-                double ema5d = this.calculateSMA(ema5dList);
-                double ema10d = this.calculateEMA(ema10dList);
-                double ema20d = this.calculateEMA(ema20dList);
-                double ema50d = this.calculateEMA(ema50dList);
-                double ema100d = this.calculateEMA(ema100dList);
-                double ema200d = this.calculateEMA(ema200dList);
-
-                NSEExponentialMovingAverageDetailEntity nseExponentialMovingAverageDetailEntity = new NSEExponentialMovingAverageDetailEntity();
-                nseExponentialMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
-                nseExponentialMovingAverageDetailEntity.setEMA5D(ema5d);
-                nseExponentialMovingAverageDetailEntity.setEMA10D(ema10d);
-                nseExponentialMovingAverageDetailEntity.setEMA20D(ema20d);
-                nseExponentialMovingAverageDetailEntity.setEMA50D(ema50d);
-                nseExponentialMovingAverageDetailEntity.setEMA100D(ema100d);
-                nseExponentialMovingAverageDetailEntity.setEMA200D(ema200d);
-
-                results.add(nseExponentialMovingAverageDetailEntity);
-            }
-        }
+        nseSimpleMovingAverageDetailRepository.bulkUpsert(nseSimpleMovingAverageDetailEntities);
 
         NSEExponentialMovingAverageDetailRepository nseExponentialMovingAverageDetailRepository = new NSEExponentialMovingAverageDetailRepository();
-        nseExponentialMovingAverageDetailRepository.bulkUpsert(results);
+        nseExponentialMovingAverageDetailRepository.bulkUpsert(nseExponentialMovingAverageDetailEntities);
     }
 
-    private double calculateSMA(List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities){
-        double sma = 0.0;
-        for(NSEDayPriceDetailEntity nseDayPriceDetailEntity : nseDayPriceDetailEntities){
-            sma += Double.valueOf(nseDayPriceDetailEntity.getClosePrice());
+    private double calculateSimpleMovingAverage(List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities) {
+        double simpleMovingAverage = 0.0;
+        for (NSEDayPriceDetailEntity nseDayPriceDetailEntity : nseDayPriceDetailEntities) {
+            simpleMovingAverage += Double.valueOf(nseDayPriceDetailEntity.getClosePrice());
         }
-        return sma / nseDayPriceDetailEntities.size();
+        return simpleMovingAverage / nseDayPriceDetailEntities.size();
     }
 
-    private double calculateEMA(List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities){
-        double sma = 0.0;
-        for(NSEDayPriceDetailEntity nseDayPriceDetailEntity : nseDayPriceDetailEntities){
-            sma += Double.valueOf(nseDayPriceDetailEntity.getClosePrice());
+    private double calculateExponentialMovingAverage(List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities) {
+        int period = nseDayPriceDetailEntities.size();
+        double multiplier = 2.0 / (period + 1);
+
+        double simpleMovingAverage = 0.0;
+        for (int index = 0; index < period - 1; index++) {
+            double closePrice = Double.parseDouble(nseDayPriceDetailEntities.get(index).getClosePrice());
+            simpleMovingAverage += closePrice;
         }
-        return sma / nseDayPriceDetailEntities.size();
+        simpleMovingAverage /= period;
+        double todayClosePrice = Double.parseDouble(nseDayPriceDetailEntities.getLast().getClosePrice());
+
+        return (todayClosePrice * multiplier) + (simpleMovingAverage * multiplier);
     }
 
     public static void main(String[] args) {
