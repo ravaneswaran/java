@@ -20,6 +20,6 @@ public class NSEPriceSpurtGTR20Service extends AbstractNSEPriceSpurtService<Pric
 
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
-        return this.nsePriceSpurtDetailRepository.findTodayDistinctPriceSpurtDetails().stream().filter(nsePriceSpurtDetailEntity -> "STOCK-PRICE>20".equals(nsePriceSpurtDetailEntity.getSpurtType())).toList();
+        return this.nsePriceSpurtDetailRepository.findDistinctOpenPricePriceSpurtDetails().stream().filter(nsePriceSpurtDetailEntity -> "STOCK-PRICE>20".equals(nsePriceSpurtDetailEntity.getSpurtType())).toList();
     }
 }

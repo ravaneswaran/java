@@ -34,9 +34,9 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
     private static final Logger LOGGER = Logger.getLogger(NSEDayPriceDetailEntityMakerJob.class.getName());
 
     private Date date;
-    private NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEDayPriceLastRunDetailRepository nseDayPriceLastRunDetailRepository = new NSEDayPriceLastRunDetailRepository();
+    private final NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSEDayPriceLastRunDetailRepository nseDayPriceLastRunDetailRepository = new NSEDayPriceLastRunDetailRepository();
 
     List<Date> dates = new ArrayList<>();
 
@@ -127,8 +127,8 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(simpleDateFormat.format(this.date), formatter);
         Date businessDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        if (sourceData.size() > 0) {
-            String header = sourceData.remove(0);
+        if (!sourceData.isEmpty()) {
+            String header = sourceData.removeFirst();
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
         int lineNumber = 1;
@@ -229,7 +229,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             this.initialize(date);
             this.saveTransformedData(this.transformSourceData(this.getDataFromSource()));
         }
-        this.updateLastRun();
+        //this.updateLastRun();
         return this;
     }
 

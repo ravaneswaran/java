@@ -14,27 +14,35 @@ import rave.code.repository.nse.NSEStockBaseRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
 
-    private final NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
-    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private static final Logger LOGGER = Logger.getLogger(NSEXXXMovingAverageDetailEntityMakerJob.class.getName());
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        List<NSEStockBaseEntity> nseStockBaseEntities = this.nseStockBaseRepository.findAll();
+        NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+        LOGGER.info("fetching the stock bases...");
+        List<NSEStockBaseEntity> nseStockBaseEntities = nseStockBaseRepository.findAll();
         this.processXXXMovingAverage(nseStockBaseEntities);
     }
 
     public void processXXXMovingAverage(List<NSEStockBaseEntity> nseStockBaseEntities) {
 
+        NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
+
         List<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntities = new ArrayList<>();
         List<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntities = new ArrayList<>();
 
         for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
+
             String symbol = nseStockBaseEntity.getSymbol();
             String series = nseStockBaseEntity.getSeries();
-            List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities = this.nseDayPriceDetailRepository.findBySymbolAndSeries(symbol, series);
+
+            LOGGER.info(String.format("fetching day price details for the symbol(%s : %s)", symbol, series));
+            List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities = nseDayPriceDetailRepository.findBySymbolAndSeries(symbol, series);
+
             if (nseDayPriceDetailEntities.size() > 200) {
 
                 List<NSEDayPriceDetailEntity> nseDayPriceDetailEntityFor5Days = nseDayPriceDetailEntities.subList(0, 5);
@@ -112,9 +120,9 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
     }
 
     public static void main(String[] args) {
-        NSEXXXMovingAverageDetailEntityMakerJob nseSimpleMovingAverageDetailJob = new NSEXXXMovingAverageDetailEntityMakerJob();
+        NSEXXXMovingAverageDetailEntityMakerJob nseXXXMovingAverageDetailEntityMakerJob = new NSEXXXMovingAverageDetailEntityMakerJob();
         try {
-            nseSimpleMovingAverageDetailJob.execute(null);
+            nseXXXMovingAverageDetailEntityMakerJob.execute(null);
         } catch (JobExecutionException e) {
             throw new RuntimeException(e);
         }

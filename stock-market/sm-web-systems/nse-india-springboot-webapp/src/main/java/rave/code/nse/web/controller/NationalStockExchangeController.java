@@ -10,7 +10,6 @@ import rave.code.nse.web.service.*;
 import rave.code.nse.web.service.NSEPriceSpurtService;
 import rave.code.nse.web.service.top20.*;
 
-import java.lang.reflect.Parameter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,7 +48,7 @@ public class NationalStockExchangeController {
 
     @GetMapping("/")
     public ModelAndView home() {
-       return this.priceSpurts("0", "10");
+       return this.openPricePriceSpurts("0", "10");
     }
 
 
@@ -125,8 +124,8 @@ public class NationalStockExchangeController {
         return modelAndView;
     }
 
-    @GetMapping("/price-spurts")
-    public ModelAndView priceSpurts(@RequestParam(required = false) String openPriceLwrLimit, @RequestParam(required = false) String openPriceUprLimit){
+    @GetMapping("/open-price/price-spurts")
+    public ModelAndView openPricePriceSpurts(@RequestParam(required = false) String openPriceLwrLimit, @RequestParam(required = false) String openPriceUprLimit){
         int lowerLimit = 0;
         int upperLimit = 10;
         try{
@@ -136,7 +135,24 @@ public class NationalStockExchangeController {
             LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
         }
 
-        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getWebPage(lowerLimit, upperLimit);
+        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getOpenPriceWebPage(lowerLimit, upperLimit);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("market_on_open");
+        modelAndView.addObject("webpage", marketOnOpenPage);
+        return modelAndView;
+    }
+
+    @GetMapping("/percentage-change/price-spurts")
+    public ModelAndView percentageChangePriceSpurts(@RequestParam(required = false) String percentageLowerLimit, @RequestParam(required = false) String percentageUpperLimit){
+        int lowerLimit = 0;
+        int upperLimit = 10;
+        try{
+            lowerLimit =  Integer.parseInt(percentageLowerLimit);
+            upperLimit = Integer.parseInt(percentageUpperLimit);
+        } catch (NumberFormatException numberFormatException){
+            LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
+        }
+        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getPercentageChangeWebPage(lowerLimit, upperLimit);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("market_on_open");
         modelAndView.addObject("webpage", marketOnOpenPage);
