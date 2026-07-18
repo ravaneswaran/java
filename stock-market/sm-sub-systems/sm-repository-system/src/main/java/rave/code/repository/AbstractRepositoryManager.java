@@ -1,6 +1,7 @@
 package rave.code.repository;
 
 import rave.code.entity.AbstractEntity;
+import rave.code.utilitiy.java.ObjectSizeAgent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -37,7 +38,6 @@ public abstract class AbstractRepositoryManager<T> {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
-        //entityManager.close();
         return entity;
     }
 
@@ -46,7 +46,6 @@ public abstract class AbstractRepositoryManager<T> {
         entityManager.getTransaction().begin();
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
-        //entityManager.close();
         return entity;
     }
 
@@ -55,7 +54,16 @@ public abstract class AbstractRepositoryManager<T> {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
-        //entityManager.close();
+        return entity;
+    }
+
+    public T upsert(T entity) {
+        AbstractEntity abstractEntity = (AbstractEntity)entity;
+        if(abstractEntity.isNewEntity()){
+            this.save(entity);
+        } else {
+            this.update(entity);
+        }
         return entity;
     }
 
@@ -84,6 +92,19 @@ public abstract class AbstractRepositoryManager<T> {
         }
         entityTransaction.commit();
         //entityManager.close();
+    }
+
+    public void flushEntityManager(){
+        this.getEntityManager().flush();
+
+    }
+
+    public void clearEntityManager(){
+        this.getEntityManager().clear();;
+    }
+
+    public void detachEntity(T entity){
+        this.getEntityManager().detach(entity);
     }
 
     public List<T> executeQuery(Query query) {

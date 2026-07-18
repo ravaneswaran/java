@@ -40,17 +40,17 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
 
-        StringBuffer queryBuffer = new StringBuffer();
-        queryBuffer.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
-        queryBuffer.append(" ");
-        queryBuffer.append("'").append(toDateStartTimeString).append("'");
-        queryBuffer.append(" ").append("AND");
-        queryBuffer.append(" ");
-        queryBuffer.append("'").append(toDateEndTimeString).append("'");
-        queryBuffer.append(" ");
-        queryBuffer.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date;");
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateStartTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateEndTimeString).append("'");
+        queryBuilder.append(" ");
+        queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date;");
 
-        return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
     public List<NSEPriceSpurtDetailEntity> findDistinctOpenPricePriceSpurtDetailsForADay(Date date, int lowerOpenPriceLimit, int upperOpenPriceLimit) {
@@ -60,20 +60,20 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
 
-        StringBuffer queryBuffer = new StringBuffer();
-        queryBuffer.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
-        queryBuffer.append(" ");
-        queryBuffer.append("'").append(toDateStartTimeString).append("'");
-        queryBuffer.append(" ").append("AND");
-        queryBuffer.append(" ");
-        queryBuffer.append("'").append(toDateEndTimeString).append("'");
-        queryBuffer.append(" ").append("AND");
-        queryBuffer.append(" ");
-        queryBuffer.append("open_price").append(" ").append("BETWEEN").append(" ").append(lowerOpenPriceLimit).append(" ").append("AND").append(" ").append(upperOpenPriceLimit);
-        queryBuffer.append(" ");
-        queryBuffer.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY open_price;");
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateStartTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateEndTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("open_price").append(" ").append("BETWEEN").append(" ").append(lowerOpenPriceLimit).append(" ").append("AND").append(" ").append(upperOpenPriceLimit);
+        queryBuilder.append(" ");
+        queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY open_price;");
 
-        return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
     public List<NSEPriceSpurtDetailEntity> findDistinctPercentageChangePriceSpurtDetailsForADay(Date date, int lowerPercentageChangeLimit, int upperPercentageChangeLimit) {
@@ -83,20 +83,20 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
 
-        StringBuffer queryBuffer = new StringBuffer();
-        queryBuffer.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
-        queryBuffer.append(" ");
-        queryBuffer.append("'").append(toDateStartTimeString).append("'");
-        queryBuffer.append(" ").append("AND");
-        queryBuffer.append(" ");
-        queryBuffer.append("'").append(toDateEndTimeString).append("'");
-        queryBuffer.append(" ").append("AND");
-        queryBuffer.append(" ");
-        queryBuffer.append("percentage_change").append(" ").append("BETWEEN").append(" ").append(lowerPercentageChangeLimit).append(" ").append("AND").append(" ").append(upperPercentageChangeLimit);
-        queryBuffer.append(" ");
-        queryBuffer.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY percentage_change;");
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateStartTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateEndTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("percentage_change").append(" ").append("BETWEEN").append(" ").append(lowerPercentageChangeLimit).append(" ").append("AND").append(" ").append(upperPercentageChangeLimit);
+        queryBuilder.append(" ");
+        queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY percentage_change;");
 
-        return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
     public List<NSEPriceSpurtDetailEntity> findPriceSpurtDetailsForASymbolOnAParticularDay(String symbol, Date date) {
@@ -107,17 +107,17 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
 
-        StringBuffer queryBuffer = new StringBuffer();
-        queryBuffer.append("SELECT * FROM nse_price_spurt_detail WHERE symbol=").append("'").append(symbol).append("'");
-        queryBuffer.append(" ");
-        queryBuffer.append("AND");
-        queryBuffer.append(" ");
-        queryBuffer.append("created_date").append(" ").append(">=").append(" ").append("'").append(toDateStartTimeString).append("'");
-        queryBuffer.append(" ").append("AND").append(" ");
-        queryBuffer.append("created_date").append(" ").append("<=").append(" ").append("'").append(toDateEndTimeString).append("'");
-        queryBuffer.append(" ").append("ORDER BY").append(" ").append("symbol").append(" ").append("ASC").append(",").append(" ");
-        queryBuffer.append("created_date").append(" ").append("DESC");
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT * FROM nse_price_spurt_detail WHERE symbol=").append("'").append(symbol).append("'");
+        queryBuilder.append(" ");
+        queryBuilder.append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("created_date").append(" ").append(">=").append(" ").append("'").append(toDateStartTimeString).append("'");
+        queryBuilder.append(" ").append("AND").append(" ");
+        queryBuilder.append("created_date").append(" ").append("<=").append(" ").append("'").append(toDateEndTimeString).append("'");
+        queryBuilder.append(" ").append("ORDER BY").append(" ").append("symbol").append(" ").append("ASC").append(",").append(" ");
+        queryBuilder.append("created_date").append(" ").append("DESC");
 
-        return this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 }

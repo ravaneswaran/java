@@ -5,7 +5,7 @@ import org.quartz.JobExecutionException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import rave.code.entity.groww.HolidayEntity;
-import rave.code.java.system.StockMarketSystemProperties;
+import rave.code.utilitiy.java.system.StockMarketSystemProperties;
 import rave.code.quartz.config.mail.ThymeleafMailConfiguration;
 import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.repository.groww.HolidayRepository;

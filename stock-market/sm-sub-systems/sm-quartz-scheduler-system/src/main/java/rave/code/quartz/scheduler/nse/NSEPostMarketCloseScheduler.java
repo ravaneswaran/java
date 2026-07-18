@@ -28,19 +28,19 @@ public class NSEPostMarketCloseScheduler extends AbstractQuartzScheduler {
         JobDetail nseDayPriceDetailEntityMakerJobDetail = newJob(NSEDayPriceDetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_POST_MARKET_CLOSE_BHAVCOPY_JOB.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName()).storeDurably()
                 .build();
-        JobDetail nsePriceToEarningRatioDetailEntityMakerJobDetail = newJob(NSEPriceToEarningRatioEntityMakerJob.class)
+        /*JobDetail nsePriceToEarningRatioDetailEntityMakerJobDetail = newJob(NSEPriceToEarningRatioEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_POST_MARKET_CLOSE_PE_RATIO_JOB.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName()).storeDurably()
                 .build();
         JobDetail nseXXXMovingAverageDetailEntityMakerJobDetail = newJob(NSEXXXMovingAverageDetailEntityMakerJob.class)
                 .withIdentity(QuartzJob.NSE_POST_MARKET_CLOSE_XXX_MOVING_AVERAGE_JOB.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName()).storeDurably()
-                .build();
+                .build();*/
 
         Trigger nseDayPriceDetailEntityMakerJobTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_POST_MARKET_CLOSE_BHAVCOPY_TRIGGER.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_POST_MARKET_CLOSE_MONDAY_TO_FRIDAY_1.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_POST_MARKET_CLOSE.get())
                 .build();
-        Trigger nsePriceToEarningRatioDetailEntityMakerJobTrigger = newTrigger()
+        /*Trigger nsePriceToEarningRatioDetailEntityMakerJobTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_POST_MARKET_CLOSE_PE_RATIO_TRIGGER.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_POST_MARKET_CLOSE_MONDAY_TO_FRIDAY_1.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_POST_MARKET_CLOSE.get())
@@ -49,12 +49,12 @@ public class NSEPostMarketCloseScheduler extends AbstractQuartzScheduler {
                 .withIdentity(QuartzTrigger.NSE_POST_MARKET_CLOSE_XXX_MOVING_AVERAGE_TRIGGER.getShortName(), QuartzGroup.NSE_POST_MARKET_CLOSE.getShortName())
                 .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_POST_MARKET_CLOSE_MONDAY_TO_FRIDAY_2.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_POST_MARKET_CLOSE.get())
-                .build();
+                .build();*/
 
         try {
             this.scheduler.scheduleJob(nseDayPriceDetailEntityMakerJobDetail, nseDayPriceDetailEntityMakerJobTrigger);
-            this.scheduler.scheduleJob(nsePriceToEarningRatioDetailEntityMakerJobDetail, nsePriceToEarningRatioDetailEntityMakerJobTrigger);
-            this.scheduler.scheduleJob(nseXXXMovingAverageDetailEntityMakerJobDetail, nseXXXMovingAverageDetailEntityMakerJobTrigger);
+            /*this.scheduler.scheduleJob(nsePriceToEarningRatioDetailEntityMakerJobDetail, nsePriceToEarningRatioDetailEntityMakerJobTrigger);
+            this.scheduler.scheduleJob(nseXXXMovingAverageDetailEntityMakerJobDetail, nseXXXMovingAverageDetailEntityMakerJobTrigger);*/
         } catch (ObjectAlreadyExistsException objectAlreadyExistsException) {
             LOGGER.log(Level.INFO, objectAlreadyExistsException.getMessage());
         } catch (SchedulerException schedulerException) {

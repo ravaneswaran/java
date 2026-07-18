@@ -5,7 +5,7 @@ import org.quartz.JobExecutionException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
-import rave.code.java.system.StockMarketSystemProperties;
+import rave.code.utilitiy.java.system.StockMarketSystemProperties;
 import rave.code.quartz.config.mail.ThymeleafMailConfiguration;
 import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.quartz.jobs.nse.mailer.model.NSEDailyTradeDetailMailerModel;

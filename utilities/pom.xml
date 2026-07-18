@@ -27,6 +27,7 @@
         <module>proxy-server</module>
         <module>sub-processor</module>
         <module>totp-auth</module>
+        <module>java-object-internal</module>
     </modules>
 
 </project>
