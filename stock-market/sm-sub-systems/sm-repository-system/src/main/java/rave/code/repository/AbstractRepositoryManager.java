@@ -1,7 +1,6 @@
 package rave.code.repository;
 
 import rave.code.entity.AbstractEntity;
-import rave.code.utilitiy.java.ObjectSizeAgent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

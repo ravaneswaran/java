@@ -1,7 +1,7 @@
 package rave.code.quartz.jobs.nse.csv;
 
 import org.apache.commons.csv.CSVRecord;
-import rave.code.utilitiy.java.http.client.nse.NationalStockExchangeHttpClient;
+import rave.code.java.http.client.nse.NationalStockExchangeHttpClient;
 import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
 import rave.code.utility.csv.ApacheCommonsCSVFileReader;
 
