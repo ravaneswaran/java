@@ -21,19 +21,18 @@ import java.util.logging.Logger;
 public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
 
     private static final Logger LOGGER = Logger.getLogger(NSEQuartzLifeCycleComponent.class.getName());
-
     private Scheduler scheduler;
     private boolean running = false;
-    private NSEHolidayService nseHolidayService = new NSEHolidayService();
+    private final NSEHolidayService nseHolidayService = new NSEHolidayService();
 
     public NSEQuartzLifeCycleComponent() {
         SchedulerFactory schedulerFactory = null;
         try {
-            schedulerFactory = new StdSchedulerFactory(new NSEQuartzOverrideProperties());
+            NSEQuartzOverrideProperties nseQuartzOverrideProperties = new NSEQuartzOverrideProperties();
+            schedulerFactory = new StdSchedulerFactory(nseQuartzOverrideProperties);
         } catch (SchedulerException | IOException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
-
         if (null != schedulerFactory) {
             try {
                 this.scheduler = schedulerFactory.getScheduler();
@@ -51,7 +50,7 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
             holidayCalendar.addExcludedDate(holidayDetailModel.getHolidate());
         }
         try {
-            scheduler.addCalendar("NSECalendar", holidayCalendar, false, true);
+            this.scheduler.addCalendar("NSECalendar", holidayCalendar, false, true);
         } catch (SchedulerException exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
