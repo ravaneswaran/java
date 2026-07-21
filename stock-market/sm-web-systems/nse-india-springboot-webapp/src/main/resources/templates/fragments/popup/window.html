@@ -14,7 +14,7 @@
         </div>
         <div class="popup-right-container-div">
             <div th:id="${stock.stockDivId + '-pb'}" class="popup-right-container-item-div" style="display:block" >
-                <div th:replace="~{fragments/common/popup/percentage_based_trade :: percentageBasedTrade(stock)}"></div>
+                <div th:replace="~{fragments/popup/percentage_based_trade :: percentageBasedTrade(stock)}"></div>
             </div>
             <div th:id="${stock.stockDivId + '-atr'}" class="popup-right-container-item-div">
                 <!--<div th:replace="~{fragments/common/popup/atr_trade :: averageTrueRange(stock)}"></div>-->
