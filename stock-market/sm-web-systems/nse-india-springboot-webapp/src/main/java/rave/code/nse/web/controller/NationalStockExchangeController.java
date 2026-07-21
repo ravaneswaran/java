@@ -137,7 +137,7 @@ public class NationalStockExchangeController {
 
         NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getOpenPriceWebPage(lowerLimit, upperLimit);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("market_on_open");
+        modelAndView.setViewName("price_spurts");
         modelAndView.addObject("webpage", marketOnOpenPage);
         return modelAndView;
     }
@@ -154,7 +154,7 @@ public class NationalStockExchangeController {
         }
         NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getPercentageChangeWebPage(lowerLimit, upperLimit);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("market_on_open");
+        modelAndView.setViewName("price_spurts");
         modelAndView.addObject("webpage", marketOnOpenPage);
         return modelAndView;
     }

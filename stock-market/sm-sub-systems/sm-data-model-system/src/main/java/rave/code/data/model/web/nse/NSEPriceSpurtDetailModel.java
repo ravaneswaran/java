@@ -68,7 +68,16 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
         this.ltpBackgroundCss = ltpBackgroundCss;
     }
 
-    public String getForegroundCss(){
+    public String getForegroundCss() {
         return (this.getLastTradedPrice() > this.getOpenPrice()) ? "green-fg" : (this.getLastTradedPrice() < this.getOpenPrice() ? " red-fg" : "white-fg");
+    }
+
+    public int getMinuteMomentum() {
+        double momentum = ((this.getLastTradedPrice() - this.getOpenPrice()) / this.getOpenPrice()) * 100;
+        if (momentum > 4) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

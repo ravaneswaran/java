@@ -66,11 +66,11 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
 
                     NSESimpleMovingAverageDetailEntity nseSimpleMovingAverageDetailEntity = nseSimpleMovingAverageDetailRepository.findByForeignKey(nseStockBaseEntity.getId());
                     if (null == nseSimpleMovingAverageDetailEntity) {
-                        LOGGER.info("creating new entity to have SMA");
+                        LOGGER.info(String.format("creating a new Simple Moving Average for the stock %s", nseStockBaseEntity.getSymbol()));
                         nseSimpleMovingAverageDetailEntity = new NSESimpleMovingAverageDetailEntity();
                         nseSimpleMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                     } else {
-                        LOGGER.info("found existing entity to update SMA");
+                        String.format("updating the old Simple Moving Average for the stock %s", nseStockBaseEntity.getSymbol());
                         nseSimpleMovingAverageDetailEntity.setNewEntity(false);
                         nseSimpleMovingAverageDetailEntity.setModifiedDate(new Date());
                     }
@@ -83,11 +83,11 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
 
                     NSEExponentialMovingAverageDetailEntity nseExponentialMovingAverageDetailEntity = nseExponentialMovingAverageDetailRepository.findByForeignKey(nseStockBaseEntity.getId());
                     if (null == nseExponentialMovingAverageDetailEntity) {
-                        LOGGER.info("creating new entity to have EMA");
+                        LOGGER.info(String.format("creating a new Exponential Moving Average for the stock %s", nseStockBaseEntity.getSymbol()));
                         nseExponentialMovingAverageDetailEntity = new NSEExponentialMovingAverageDetailEntity();
                         nseExponentialMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                     } else {
-                        LOGGER.info("found existing entity to update EMA");
+                        String.format("updating the old Exponential Moving Average for the stock %s", nseStockBaseEntity.getSymbol());
                         nseExponentialMovingAverageDetailEntity.setNewEntity(false);
                         nseExponentialMovingAverageDetailEntity.setModifiedDate(new Date());
                     }
