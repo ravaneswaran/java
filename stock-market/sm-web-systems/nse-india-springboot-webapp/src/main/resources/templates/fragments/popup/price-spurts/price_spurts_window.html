@@ -9,8 +9,8 @@
         <div style="width:89%;height:94%;float:left;" th:class="popup-title-div + ' ' + ${stock.foregroundCss}" th:text="${stock.symbol}" th:attr="onclick=|closePopUp('${stock.stockDivId}')|"></div>
     </div>
     <div class="popup-body-div">
-        <div class="moo-popup-right-container-div">
-            <div th:id="${stock.stockDivId + '-moo'}" class="popup-right-container-item-div" style="display:block;" >
+        <div class="ps-popup-right-container-div">
+            <div th:id="${stock.stockDivId + '-ps'}" class="popup-right-container-item-div" style="display:block;" >
                 <div th:replace="~{fragments/popup/price-spurts/price_spurts_history :: history(stock)}"></div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <div class="trade-popup-container-stock-div" th:fragment="history(${stock})"  th:each="history : ${stock.history}">
     <div class="trade-popup-container-stock-header-div">
         <div class="trade-popup-container-stock-header-left-div">&nbsp;
+            <li class="arrow up green"></li>
         </div>
         <div class="trade-popup-container-stock-header-middle-div" th:text="${history.at}"></div>
         <div class="trade-popup-container-stock-header-right-div">
