@@ -16,7 +16,7 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource dataSource() {
-        LOGGER.log(Level.INFO, "**************** Configuring Hikari DataSource *******************");
+        LOGGER.log(Level.INFO, "[[[ *************** Configuring Hikari DataSource *************** ]]]");
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:mysql://localhost:3306/stock_market_dev");
         config.setUsername("admin");

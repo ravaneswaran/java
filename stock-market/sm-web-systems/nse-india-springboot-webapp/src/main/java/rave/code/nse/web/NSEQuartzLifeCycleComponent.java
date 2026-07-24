@@ -44,6 +44,14 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
 
     @Override
     public void start() {
+        // clearing the quartz database tables.....
+        try {
+            LOGGER.info("[[[ *************** Clearing Quartz Database Tables *************** ]]]");
+            this.scheduler.clear();
+        } catch (SchedulerException schedulerException) {
+            LOGGER.log(Level.SEVERE, schedulerException.getMessage());
+        }
+
         HolidayCalendar holidayCalendar = new HolidayCalendar();
         List<HolidayDetailModel> holidayDetailModels = this.nseHolidayService.listHolidays();
         for (HolidayDetailModel holidayDetailModel : holidayDetailModels) {
@@ -59,9 +67,9 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
         try {
             this.scheduler.start();
             this.running = true;
-            LOGGER.info("***** NSE Quartz Scheduler started... *****");
+            LOGGER.info("[[[ *************** NSE Quartz Scheduler started *************** ]]]");
         } catch (Exception exception) {
-            LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+            LOGGER.log(Level.SEVERE, exception.getMessage());
         }
     }
 
@@ -70,9 +78,9 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
         try {
             this.scheduler.shutdown(true); // wait for jobs to complete
             this.running = false;
-            LOGGER.info("***** NSE Quartz Scheduler stopped... *****");
+            LOGGER.info("[[[ *************** NSE Quartz Scheduler stopped *************** ]]]");
         } catch (Exception exception) {
-            LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
+            LOGGER.log(Level.SEVERE, exception.getMessage());
         }
     }
 
