@@ -13,6 +13,11 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
 
     protected NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
 
+    @Override
+    public List<NSEPriceSpurtDetailEntity> getEntities() {
+        return this.nsePriceSpurtDetailRepository.findDistinctOpenPricePriceSpurtDetails();
+    }
+
     public NSEPriceSpurtDetailModel transformEntity(NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         NSEPriceSpurtDetailModel nsePriceSpurtDetailModel = new NSEPriceSpurtDetailModel();
@@ -29,7 +34,7 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
         String series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries();
 
         if (null != series && !series.equals("null") && !"".equals(series)) {
-            nsePriceSpurtDetailModel.setTitle(String.format("%s:%s", series, nsePriceSpurtDetailEntity.getSymbol()));
+            nsePriceSpurtDetailModel.setTitle(String.format("%s : %s", series, nsePriceSpurtDetailEntity.getSymbol()));
         } else {
             nsePriceSpurtDetailModel.setTitle(nsePriceSpurtDetailEntity.getSymbol());
         }
