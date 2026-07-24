@@ -8,6 +8,7 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
     private double lowPrice;
     private int volume;
     private double value;
+    private String minuteMomentumCss;
     private String at;
     private String ltpBackgroundCss;
     private List<NSEPriceSpurtDetailModel> history;
@@ -72,12 +73,11 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
         return (this.getLastTradedPrice() > this.getOpenPrice()) ? "green-fg" : (this.getLastTradedPrice() < this.getOpenPrice() ? " red-fg" : "white-fg");
     }
 
-    public int getMinuteMomentum() {
-        double momentum = ((this.getLastTradedPrice() - this.getOpenPrice()) / this.getOpenPrice()) * 100;
-        if (momentum > 4) {
-            return 1;
-        } else {
-            return -1;
-        }
+    public void setMinuteMomentumCss(String minuteMomentumCss) {
+        this.minuteMomentumCss = minuteMomentumCss;
+    }
+
+    public String getMinuteMomentumCss() {
+        return this.minuteMomentumCss;
     }
 }

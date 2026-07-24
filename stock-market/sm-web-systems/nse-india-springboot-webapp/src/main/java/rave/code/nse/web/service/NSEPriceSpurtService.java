@@ -44,6 +44,7 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
             for (NSEPriceSpurtDetailEntity history : histories) {
                 NSEPriceSpurtDetailModel historyModel = this.transformEntity(history);
+                historyModel.setMinuteMomentumCss(this.getMinuteMomentumCss(historyModel));
                 historyModels.add(historyModel);
             }
 
@@ -51,9 +52,9 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
             nsePriceSpurtDetailModels.add(nsePriceSpurtDetailModel);
         }
 
-        for(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels){
+        for (NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels) {
             List<NSEPriceSpurtDetailModel> histories = nsePriceSpurtDetailModel.getHistory();
-            for(int index = histories.size() - 1; index > 0; index -- ){
+            for (int index = histories.size() - 1; index > 0; index--) {
                 NSEPriceSpurtDetailModel currentHistory = histories.get(index);
                 int progress = getLTPProgress(histories, index, currentHistory);
                 currentHistory.setLtpBackgroundCss(progress == 1 ? "trade-popup-container-stock-td green-bg" : ((progress == -1) ? "trade-popup-container-stock-td red-bg" : "trade-popup-container-stock-td"));
@@ -80,6 +81,7 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
             for (NSEPriceSpurtDetailEntity history : histories) {
                 NSEPriceSpurtDetailModel historyModel = this.transformEntity(history);
+                historyModel.setMinuteMomentumCss(this.getMinuteMomentumCss(historyModel));
                 historyModels.add(historyModel);
             }
 
@@ -87,9 +89,9 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
             nsePriceSpurtDetailModels.add(nsePriceSpurtDetailModel);
         }
 
-        for(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels){
+        for (NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels) {
             List<NSEPriceSpurtDetailModel> histories = nsePriceSpurtDetailModel.getHistory();
-            for(int index = histories.size() - 1; index > 0; index -- ){
+            for (int index = histories.size() - 1; index > 0; index--) {
                 NSEPriceSpurtDetailModel currentHistory = histories.get(index);
                 int progress = getLTPProgress(histories, index, currentHistory);
                 currentHistory.setLtpBackgroundCss(progress == 1 ? "trade-popup-container-stock-td green-bg" : ((progress == -1) ? "trade-popup-container-stock-td red-bg" : "trade-popup-container-stock-td"));
@@ -116,6 +118,7 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
             for (NSEPriceSpurtDetailEntity history : histories) {
                 NSEPriceSpurtDetailModel historyModel = this.transformEntity(history);
+                historyModel.setMinuteMomentumCss(this.getMinuteMomentumCss(historyModel));
                 historyModels.add(historyModel);
             }
 
@@ -123,9 +126,9 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
             nsePriceSpurtDetailModels.add(nsePriceSpurtDetailModel);
         }
 
-        for(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels){
+        for (NSEPriceSpurtDetailModel nsePriceSpurtDetailModel : nsePriceSpurtDetailModels) {
             List<NSEPriceSpurtDetailModel> histories = nsePriceSpurtDetailModel.getHistory();
-            for(int index = histories.size() - 1; index > 0; index -- ){
+            for (int index = histories.size() - 1; index > 0; index--) {
                 NSEPriceSpurtDetailModel currentHistory = histories.get(index);
                 int progress = getLTPProgress(histories, index, currentHistory);
                 currentHistory.setLtpBackgroundCss(progress == 1 ? "trade-popup-container-stock-td green-bg" : ((progress == -1) ? "trade-popup-container-stock-td red-bg" : "trade-popup-container-stock-td"));
@@ -137,9 +140,14 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     }
 
     private int getLTPProgress(List<NSEPriceSpurtDetailModel> histories, int index, NSEPriceSpurtDetailModel currentHistory) {
-        NSEPriceSpurtDetailModel previousHistory = histories.get(index -1);
+        NSEPriceSpurtDetailModel previousHistory = histories.get(index - 1);
         Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getLastTradedPrice());
         Candle previousCandle = new Candle(previousHistory.getOpenPrice(), previousHistory.getHighPrice(), previousHistory.getLowPrice(), previousHistory.getLastTradedPrice());
         return currentCandle.getLTPProgress(previousCandle);
+    }
+
+    private String getMinuteMomentumCss(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel) {
+        double momentum = ((nsePriceSpurtDetailModel.getLastTradedPrice() - nsePriceSpurtDetailModel.getOpenPrice()) / nsePriceSpurtDetailModel.getOpenPrice()) * 100;
+        return (momentum > 4) ? "arrow up green" : "arrow down red";
     }
 }
