@@ -132,7 +132,7 @@
 
 /******************** arrow and checks styles ******************/
 .arrow {
-  border: solid #353839;
+  border:solid #353839;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 4px;
@@ -305,10 +305,14 @@
     width: 15%;
     height: 99.9%;
     background-color:#353839;
-    display: grid;
     place-items: center;
-    border: 0px solid green;
+    border: 0 solid green;
     float: left;
+    /* following properties are to center a html element inside an other...*/
+    display: flex;
+    justify-content: center;
+    align-items: center
+    /**/
 }
 
 .trade-popup-container-stock-header-middle-div{
