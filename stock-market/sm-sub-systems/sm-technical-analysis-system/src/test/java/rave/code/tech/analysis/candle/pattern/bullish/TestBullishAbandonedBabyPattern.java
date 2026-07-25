@@ -1,8 +1,8 @@
 package rave.code.tech.analysis.candle.pattern.bullish;
 
 import org.junit.jupiter.api.Test;
-import rave.code.tech.analysis.candle.pattern.Candle;
-import rave.code.tech.analysis.candle.pattern.bullish.BullishAbandonedBabyPattern;
+import rave.code.tech.analysis.Candle;
+import rave.code.tech.analysis.pattern.bullish.BullishAbandonedBabyPattern;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -10,9 +10,9 @@ public class TestBullishAbandonedBabyPattern {
 
     @Test
     public void testBullishAbandonedBabyPattern(){
-        Candle c1 = new Candle(100, 90, 101, 89);
-        Candle c2 = new Candle(84, 84.5, 85, 83);
-        Candle c3 = new Candle(88, 98, 99, 87);
+        Candle c1 = new Candle(100, 90, 101, 89, 0);
+        Candle c2 = new Candle(84, 84.5, 85, 83, 0);
+        Candle c3 = new Candle(88, 98, 99, 87, 0);
 
         boolean result =
                 BullishAbandonedBabyPattern.isAbandonedBaby(
@@ -20,5 +20,4 @@ public class TestBullishAbandonedBabyPattern {
 
         assertFalse(result);
     }
-
 }

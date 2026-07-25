@@ -1,0 +1,59 @@
+package rave.code.tech.analysis.pattern.bullish;
+
+import rave.code.tech.analysis.pattern.AbstractPattern;
+import rave.code.tech.analysis.Candle;
+
+import java.util.List;
+
+public class BullishMorningStarPattern extends AbstractPattern {
+
+    public BullishMorningStarPattern() {
+        super(3);
+    }
+
+    public static boolean isMorningStar(Candle c1, Candle c2, Candle c3) {
+
+        // First candle bearish
+        boolean firstBearish =
+                c1.getClosePrice() < c1.getOpenPrice();
+
+        // Second candle small body
+        boolean smallSecondBody =
+                c2.bodySize() < (c1.bodySize() * 0.5);
+
+        // Third candle bullish
+        boolean thirdBullish =
+                c3.getClosePrice() > c3.getOpenPrice();
+
+        // Third candle closes above midpoint of first candle
+        double midpoint =
+                (c1.getOpenPrice() + c1.getClosePrice()) / 2;
+
+        boolean closesAboveMidpoint =
+                c3.getClosePrice() > midpoint;
+
+        return firstBearish &&
+                smallSecondBody &&
+                thirdBullish &&
+                closesAboveMidpoint;
+    }
+
+    @Override
+    public String getName() {
+        return "Bullish Morning Star";
+    }
+
+    @Override
+    public boolean matches(List<Candle> candles) {
+        return false;
+    }
+
+    @Override
+    public boolean detect(List<Candle> candles) {
+        if (null != candles && candles.size() >= this.minimumCandles) {
+            return BullishMorningStarPattern.isMorningStar(candles.get(0), candles.get(1), candles.get(2));
+        } else {
+            return false;
+        }
+    }
+}

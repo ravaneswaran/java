@@ -1,29 +1,29 @@
 package rave.code.tech.analysis.average;
 
-import rave.code.tech.analysis.units.LastTradedPrice;
+import rave.code.tech.analysis.Candle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExponentialMovingAverage {
 
-    private List<LastTradedPrice> lastTradedPrices;
+    private List<Candle> candles;
     private int period;
 
-    public ExponentialMovingAverage(List<LastTradedPrice> lastTradedPrices) {
-        this.lastTradedPrices = lastTradedPrices;
+    public ExponentialMovingAverage(List<Candle> candles) {
+        this.candles = candles;
         this.period = 5;
     }
 
-    public ExponentialMovingAverage(List<LastTradedPrice> lastTradedPrices, int period) {
-        this.lastTradedPrices = lastTradedPrices;
+    public ExponentialMovingAverage(List<Candle> candles, int period) {
+        this.candles = candles;
         this.period = period;
     }
 
     public List<Double> getValue() {
         List<Double> exponentialMovingAverages = new ArrayList<>();
 
-        if (this.lastTradedPrices == null || this.lastTradedPrices.size() < this.period) {
+        if (this.candles == null || this.candles.size() < this.period) {
             return exponentialMovingAverages; // Not enough data
         }
 
@@ -33,14 +33,14 @@ public class ExponentialMovingAverage {
         // Start with the SMA of the first 'period' prices
         double simpleMovingAverage = 0.0;
         for (int index = 0; index < this.period; index++) {
-            simpleMovingAverage += this.lastTradedPrices.get(index).getValue();
+            simpleMovingAverage += this.candles.get(index).getLastTradedPrice();
         }
         simpleMovingAverage /= period;
         exponentialMovingAverages.add(simpleMovingAverage);
 
         // Calculate EMA for remaining values
-        for (int index = this.period; index < this.lastTradedPrices.size(); index++) {
-            double price = this.lastTradedPrices.get(index).getValue();
+        for (int index = this.period; index < this.candles.size(); index++) {
+            double price = this.candles.get(index).getLastTradedPrice();
             double exponentialMovingAveragePrev = exponentialMovingAverages.get(exponentialMovingAverages.size() - 1);
             double exponentialMovingAverage = (price - exponentialMovingAveragePrev) * multiplier + exponentialMovingAveragePrev;
             exponentialMovingAverages.add(exponentialMovingAverage);

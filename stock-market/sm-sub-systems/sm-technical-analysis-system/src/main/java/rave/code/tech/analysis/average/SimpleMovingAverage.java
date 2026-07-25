@@ -1,37 +1,37 @@
 package rave.code.tech.analysis.average;
 
-import rave.code.tech.analysis.units.LastTradedPrice;
+import rave.code.tech.analysis.Candle;
 
 import java.util.List;
 
 public class SimpleMovingAverage {
 
-    private List<LastTradedPrice> lastTradedPrices;
+    private List<Candle> candles;
     private int period;
 
-    public SimpleMovingAverage(List<LastTradedPrice> lastTradedPrices) {
-        this.lastTradedPrices = lastTradedPrices;
+    public SimpleMovingAverage(List<Candle> candles) {
+        this.candles = candles;
         this.period = 5;
     }
 
-    public SimpleMovingAverage(List<LastTradedPrice> lastTradedPrices, int period) {
-        this.lastTradedPrices = lastTradedPrices;
+    public SimpleMovingAverage(List<Candle> candles, int period) {
+        this.candles = candles;
         this.period = period;
     }
 
     public double getValue() {
-        if (null != this.lastTradedPrices) {
-            int size = this.lastTradedPrices.size();
-            List<LastTradedPrice> tempList = null;
+        if (null != this.candles) {
+            int size = this.candles.size();
+            List<Candle> tempList = null;
             if (size > this.period) {
                 int startIndex = size - this.period;
-                tempList = this.lastTradedPrices.subList(startIndex, size);
+                tempList = this.candles.subList(startIndex, size);
             } else {
-                tempList = this.lastTradedPrices;
+                tempList = this.candles;
             }
             double sum = 0;
-            for (LastTradedPrice lastTradedPrice : tempList) {
-                sum += lastTradedPrice.getValue();
+            for (Candle candle : tempList) {
+                sum += candle.getLastTradedPrice();
             }
             return sum / tempList.size();
         } else {

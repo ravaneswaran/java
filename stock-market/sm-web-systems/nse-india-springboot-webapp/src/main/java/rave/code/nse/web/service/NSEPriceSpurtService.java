@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
-import rave.code.tech.analysis.candle.Candle;
+import rave.code.tech.analysis.Candle;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -69,9 +69,9 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
     private int getLTPProgress(List<NSEPriceSpurtDetailModel> histories, int index, NSEPriceSpurtDetailModel currentHistory) {
         NSEPriceSpurtDetailModel previousHistory = histories.get(index - 1);
-        Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getLastTradedPrice());
-        Candle previousCandle = new Candle(previousHistory.getOpenPrice(), previousHistory.getHighPrice(), previousHistory.getLowPrice(), previousHistory.getLastTradedPrice());
-        return currentCandle.getLTPProgress(previousCandle);
+        Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getLastTradedPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getPercentageChange());
+        Candle previousCandle = new Candle(previousHistory.getOpenPrice(), previousHistory.getLastTradedPrice(), previousHistory.getHighPrice(), previousHistory.getLowPrice(), previousHistory.getPercentageChange());
+        return currentCandle.getLastTradedPriceProgress(previousCandle);
     }
 
     private String getMinuteMomentumCss(NSEPriceSpurtDetailModel nsePriceSpurtDetailModel) {

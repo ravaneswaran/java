@@ -1,7 +1,5 @@
 package rave.code.tech.analysis.range.percentage;
 
-import rave.code.tech.analysis.range.percentage.PriceRange;
-
 public class UpperPriceRange extends PriceRange {
 
     public UpperPriceRange(double percentage) {

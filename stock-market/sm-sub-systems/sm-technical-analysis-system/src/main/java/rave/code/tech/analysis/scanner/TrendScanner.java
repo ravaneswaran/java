@@ -1,9 +1,9 @@
 package rave.code.tech.analysis.scanner;
 
-import rave.code.tech.analysis.candle.trend.DownTrend;
-import rave.code.tech.analysis.candle.trend.SideWayTrend;
-import rave.code.tech.analysis.candle.trend.Trend;
-import rave.code.tech.analysis.candle.trend.UpTrend;
+import rave.code.tech.analysis.trend.DownTrend;
+import rave.code.tech.analysis.trend.SideWayTrend;
+import rave.code.tech.analysis.trend.Trend;
+import rave.code.tech.analysis.trend.UpTrend;
 
 public class TrendScanner {
 

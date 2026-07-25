@@ -1,7 +1,7 @@
 package rave.code.tech.analysis.average;
 
 import org.junit.jupiter.api.Test;
-import rave.code.tech.analysis.units.LastTradedPrice;
+import rave.code.tech.analysis.Candle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +12,19 @@ public class TestExponentialMovingAverage {
 
     @Test
     public void testGetValueForLast_05_LTP() {
-        List<LastTradedPrice> lastTradedPrices = new ArrayList<>();
-        lastTradedPrices.add(new LastTradedPrice(10.0));
-        lastTradedPrices.add(new LastTradedPrice(20.0));
-        lastTradedPrices.add(new LastTradedPrice(30.0));
-        lastTradedPrices.add(new LastTradedPrice(40.0));
-        lastTradedPrices.add(new LastTradedPrice(50.0));
-        lastTradedPrices.add(new LastTradedPrice(60.0));
-        lastTradedPrices.add(new LastTradedPrice(70.0));
-        lastTradedPrices.add(new LastTradedPrice(80.0));
-        lastTradedPrices.add(new LastTradedPrice(90.0));
-        lastTradedPrices.add(new LastTradedPrice(100.0));
+        List<Candle> candles = new ArrayList<>();
+        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4));
 
-        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(lastTradedPrices, 5);
+        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(candles, 5);
         List<Double> result = exponentialMovingAverage.getValue();
 
         assertTrue(null != result);
@@ -32,19 +32,19 @@ public class TestExponentialMovingAverage {
 
     @Test
     public void testGetValueForLast_10_LTP() {
-        List<LastTradedPrice> lastTradedPrices = new ArrayList<>();
-        lastTradedPrices.add(new LastTradedPrice(10.0));
-        lastTradedPrices.add(new LastTradedPrice(20.0));
-        lastTradedPrices.add(new LastTradedPrice(30.0));
-        lastTradedPrices.add(new LastTradedPrice(40.0));
-        lastTradedPrices.add(new LastTradedPrice(50.0));
-        lastTradedPrices.add(new LastTradedPrice(60.0));
-        lastTradedPrices.add(new LastTradedPrice(70.0));
-        lastTradedPrices.add(new LastTradedPrice(80.0));
-        lastTradedPrices.add(new LastTradedPrice(90.0));
-        lastTradedPrices.add(new LastTradedPrice(100.0));
+        List<Candle> candles = new ArrayList<>();
+        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4));
 
-        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(lastTradedPrices, 10);
+        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(candles, 10);
         List<Double> result = exponentialMovingAverage.getValue();
 
         assertTrue(null != result);
@@ -52,19 +52,19 @@ public class TestExponentialMovingAverage {
 
     @Test
     public void testGetValueForLast_20_LTP() {
-        List<LastTradedPrice> lastTradedPrices = new ArrayList<>();
-        lastTradedPrices.add(new LastTradedPrice(10.0));
-        lastTradedPrices.add(new LastTradedPrice(20.0));
-        lastTradedPrices.add(new LastTradedPrice(30.0));
-        lastTradedPrices.add(new LastTradedPrice(40.0));
-        lastTradedPrices.add(new LastTradedPrice(50.0));
-        lastTradedPrices.add(new LastTradedPrice(60.0));
-        lastTradedPrices.add(new LastTradedPrice(70.0));
-        lastTradedPrices.add(new LastTradedPrice(80.0));
-        lastTradedPrices.add(new LastTradedPrice(90.0));
-        lastTradedPrices.add(new LastTradedPrice(100.0));
+        List<Candle> candles = new ArrayList<>();
+        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4));
 
-        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(lastTradedPrices, 10);
+        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(candles, 10);
         List<Double> result = exponentialMovingAverage.getValue();
 
         assertTrue(null != result);

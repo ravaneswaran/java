@@ -1,6 +1,5 @@
 package rave.code.tech.analysis.range.percentage;
 
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
