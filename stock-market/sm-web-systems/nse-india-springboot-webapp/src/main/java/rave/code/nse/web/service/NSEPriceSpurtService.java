@@ -69,8 +69,8 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
     private int getLTPProgress(List<NSEPriceSpurtDetailModel> histories, int index, NSEPriceSpurtDetailModel currentHistory) {
         NSEPriceSpurtDetailModel previousHistory = histories.get(index - 1);
-        Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getLastTradedPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getPercentageChange());
-        Candle previousCandle = new Candle(previousHistory.getOpenPrice(), previousHistory.getLastTradedPrice(), previousHistory.getHighPrice(), previousHistory.getLowPrice(), previousHistory.getPercentageChange());
+        Candle currentCandle = new Candle(currentHistory.getOpenPrice(), currentHistory.getLastTradedPrice(), currentHistory.getHighPrice(), currentHistory.getLowPrice(), currentHistory.getPreviousClosePrice(), currentHistory.getPercentageChange());
+        Candle previousCandle = new Candle(previousHistory.getOpenPrice(), previousHistory.getLastTradedPrice(), previousHistory.getHighPrice(), previousHistory.getLowPrice(), previousHistory.getPreviousClosePrice(), previousHistory.getPercentageChange());
         return currentCandle.getLastTradedPriceProgress(previousCandle);
     }
 

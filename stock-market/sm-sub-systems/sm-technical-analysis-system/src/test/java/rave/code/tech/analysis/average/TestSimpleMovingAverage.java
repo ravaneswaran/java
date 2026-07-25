@@ -13,16 +13,16 @@ public class TestSimpleMovingAverage {
     @Test
     public void testGetValueForLast_05_LTP() {
         List<Candle> candles = new ArrayList<>();
-        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4, 3));
 
         SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage(candles);
         double result = simpleMovingAverage.getValue();
@@ -34,16 +34,16 @@ public class TestSimpleMovingAverage {
     @Test
     public void testGetValueForLast_10_LTP() {
         List<Candle> candles = new ArrayList<>();
-        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4, 3));
 
         SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage(candles, 10);
         double result = simpleMovingAverage.getValue();
@@ -55,16 +55,16 @@ public class TestSimpleMovingAverage {
     @Test
     public void testGetValueForLast_20_LTP() {
         List<Candle> candles = new ArrayList<>();
-        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4));
-        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4));
+        candles.add(new Candle(11.0, 10.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 20.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 30.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 40.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 50.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 60.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 70.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 80.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4, 3));
+        candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4, 3));
 
         SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage(candles, 20);
         double result = simpleMovingAverage.getValue();

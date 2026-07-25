@@ -10,7 +10,7 @@ public class PatternMain {
 
     public static void main(String[] args) {
 
-        List<Candle> candles = List.of(new Candle(100, 95, 102, 94, 0), new Candle(93, 105, 106, 92, 0));
+        List<Candle> candles = List.of(new Candle(100, 95, 102, 94, 0,0), new Candle(93, 105, 106, 92, 0, 0));
 
         PatternScanner scanner = new PatternScanner();
 

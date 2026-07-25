@@ -1,0 +1,25 @@
+package rave.code.tech.analysis.pattern.bullish;
+
+import org.junit.jupiter.api.Test;
+import rave.code.tech.analysis.Candle;
+import rave.code.tech.analysis.pattern.bullish.BullishRisingThreeMethodsPattern;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class TestBullishRisingThreeMethodsPattern {
+
+    @Test
+    public void testBullishRisingThreeMethodsPattern() {
+        Candle c1 = new Candle(100, 110, 112, 99, 0, 0);
+        Candle c2 = new Candle(109, 107, 110, 105, 0, 0);
+        Candle c3 = new Candle(108, 106, 109, 104, 0, 0);
+        Candle c4 = new Candle(107, 105, 108, 103, 0, 0);
+        Candle c5 = new Candle(106, 115, 116, 105, 0, 0);
+
+        boolean result =
+                BullishRisingThreeMethodsPattern.isRisingThreeMethods(c1, c2, c3, c4, c5);
+
+        assertTrue(result);
+    }
+
+}
