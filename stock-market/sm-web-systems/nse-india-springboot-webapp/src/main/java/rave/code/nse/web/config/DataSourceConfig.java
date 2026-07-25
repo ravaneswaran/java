@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import javax.sql.DataSource;
 import java.util.logging.Level;
@@ -16,7 +17,8 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource dataSource() {
-        LOGGER.log(Level.INFO, "[[[ *************** Configuring Hikari DataSource *************** ]]]");
+        JavaUtilLogMessage logMessage = new JavaUtilLogMessage("Configuring Hikari DataSource");
+        LOGGER.log(Level.INFO, logMessage.getDecoratedLogMessage());
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:mysql://localhost:3306/stock_market_dev");
         config.setUsername("admin");

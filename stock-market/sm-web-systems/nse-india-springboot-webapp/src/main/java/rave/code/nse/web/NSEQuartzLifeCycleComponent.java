@@ -11,6 +11,7 @@ import rave.code.data.model.web.HolidayDetailModel;
 import rave.code.nse.web.properties.NSEQuartzOverrideProperties;
 import rave.code.nse.web.service.NSEHolidayService;
 import rave.code.quartz.scheduler.NSEQuartzScheduler;
+import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import java.io.IOException;
 import java.util.List;
@@ -46,7 +47,8 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
     public void start() {
         // clearing the quartz database tables.....
         try {
-            LOGGER.info("[[[ *************** Clearing Quartz Database Tables *************** ]]]");
+            JavaUtilLogMessage logMessage = new JavaUtilLogMessage("Clearing Quartz Database Tables");
+            LOGGER.info(logMessage.getDecoratedLogMessage());
             this.scheduler.clear();
         } catch (SchedulerException schedulerException) {
             LOGGER.log(Level.SEVERE, schedulerException.getMessage());
@@ -67,7 +69,8 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
         try {
             this.scheduler.start();
             this.running = true;
-            LOGGER.info("[[[ *************** NSE Quartz Scheduler started *************** ]]]");
+            JavaUtilLogMessage logMessage = new JavaUtilLogMessage("NSE Quartz Scheduler started");
+            LOGGER.info(logMessage.getDecoratedLogMessage());
         } catch (Exception exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
@@ -78,7 +81,8 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
         try {
             this.scheduler.shutdown(true); // wait for jobs to complete
             this.running = false;
-            LOGGER.info("[[[ *************** NSE Quartz Scheduler stopped *************** ]]]");
+            JavaUtilLogMessage logMessage = new JavaUtilLogMessage("NSE Quartz Scheduler stopped");
+            LOGGER.info(logMessage.getDecoratedLogMessage());
         } catch (Exception exception) {
             LOGGER.log(Level.SEVERE, exception.getMessage());
         }
