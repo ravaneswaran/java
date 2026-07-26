@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.average;
+package rave.code.tech.analysis.indicators.movingaverage;
 
 import rave.code.tech.analysis.Candle;
 

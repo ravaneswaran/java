@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.range.truerange;
+package rave.code.tech.analysis.indicators.truerange;
 
 import java.util.List;
 

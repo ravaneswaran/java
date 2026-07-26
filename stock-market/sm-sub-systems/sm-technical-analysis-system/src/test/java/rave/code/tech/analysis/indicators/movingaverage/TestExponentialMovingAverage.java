@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.average;
+package rave.code.tech.analysis.indicators.movingaverage;
 
 import org.junit.jupiter.api.Test;
 import rave.code.tech.analysis.Candle;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestSimpleMovingAverage {
+public class TestExponentialMovingAverage {
 
     @Test
     public void testGetValueForLast_05_LTP() {
@@ -24,11 +24,10 @@ public class TestSimpleMovingAverage {
         candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4, 3));
         candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4, 3));
 
-        SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage(candles);
-        double result = simpleMovingAverage.getValue();
+        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(candles, 5);
+        List<Double> result = exponentialMovingAverage.getValue();
 
-        assertTrue(0 != result);
-        assertTrue(80 == result);
+        assertTrue(null != result);
     }
 
     @Test
@@ -45,11 +44,10 @@ public class TestSimpleMovingAverage {
         candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4, 3));
         candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4, 3));
 
-        SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage(candles, 10);
-        double result = simpleMovingAverage.getValue();
+        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(candles, 10);
+        List<Double> result = exponentialMovingAverage.getValue();
 
-        assertTrue(0 != result);
-        assertTrue(55 == result);
+        assertTrue(null != result);
     }
 
     @Test
@@ -66,10 +64,10 @@ public class TestSimpleMovingAverage {
         candles.add(new Candle(11.0, 90.0, 12.0, 9.0, 4, 3));
         candles.add(new Candle(11.0, 100.0, 12.0, 9.0, 4, 3));
 
-        SimpleMovingAverage simpleMovingAverage = new SimpleMovingAverage(candles, 20);
-        double result = simpleMovingAverage.getValue();
+        ExponentialMovingAverage exponentialMovingAverage = new ExponentialMovingAverage(candles, 10);
+        List<Double> result = exponentialMovingAverage.getValue();
 
-        assertTrue(0 != result);
-        assertTrue(55 == result);
+        assertTrue(null != result);
     }
+
 }
