@@ -77,20 +77,19 @@ public abstract class AbstractRepositoryManager<T> {
         EntityManager entityManager = this.getEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        for (T stockBaseEntity : entities) {
-            if (null != stockBaseEntity) {
-                AbstractEntity abstractStockBaseEntity = (AbstractEntity) stockBaseEntity;
-                if (abstractStockBaseEntity.isNewEntity()) {
-                    entityManager.persist(stockBaseEntity);
+        for (T entity : entities) {
+            if (null != entity) {
+                AbstractEntity abstractEntity = (AbstractEntity) entity;
+                if (abstractEntity.isNewEntity()) {
+                    entityManager.persist(entity);
                 } else {
-                    entityManager.merge(stockBaseEntity);
+                    entityManager.merge(entity);
                 }
             } else {
                 LOGGER.log(Level.SEVERE, "stock base entity found to be null...");
             }
         }
         entityTransaction.commit();
-        //entityManager.close();
     }
 
     public void flushEntityManager(){

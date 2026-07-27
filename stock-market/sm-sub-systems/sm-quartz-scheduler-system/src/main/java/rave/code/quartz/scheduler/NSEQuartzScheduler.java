@@ -16,7 +16,7 @@ public class NSEQuartzScheduler extends AbstractQuartzScheduler {
     @Override
     public void scheduleJobs() {
         //new NSEFirstBlockDealSessionScheduler(this.scheduler).scheduleJobs();
-        //new NSERegularPreOpenSessionScheduler(this.scheduler).scheduleJobs();
+        new NSERegularPreOpenSessionScheduler(this.scheduler).scheduleJobs();
         new NSELiveSessionScheduler(this.scheduler).scheduleJobs();
         //new NSESecondBlockDealSessionScheduler(this.scheduler).scheduleJobs();
         new NSEPostMarketCloseScheduler(this.scheduler).scheduleJobs();

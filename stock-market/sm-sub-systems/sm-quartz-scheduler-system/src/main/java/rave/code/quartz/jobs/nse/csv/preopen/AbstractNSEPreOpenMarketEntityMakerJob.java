@@ -18,8 +18,8 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNSEPreOpenMarketEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
 
     protected String preOpenType;
 
@@ -36,8 +36,8 @@ public abstract class AbstractNSEPreOpenMarketEntityMakerJob extends AbstractNSE
     @Override
     public List<NSEPreOpenMarketDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = new ArrayList<>();
-        if(sourceData.size() > 0) {
-            CSVRecord header = sourceData.remove(0);
+        if (!sourceData.isEmpty()) {
+            CSVRecord header = sourceData.removeFirst();
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
         for (CSVRecord csvRecord : sourceData) {

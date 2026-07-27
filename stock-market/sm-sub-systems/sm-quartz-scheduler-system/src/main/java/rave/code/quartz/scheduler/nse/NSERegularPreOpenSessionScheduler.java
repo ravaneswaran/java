@@ -41,31 +41,31 @@ public class NSERegularPreOpenSessionScheduler extends AbstractQuartzScheduler {
 
         Trigger preOpenMarketNifty50RegularSessionTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_NIFTY_50_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_09_TO_09_14_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketBankNiftyRegularSessionTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_BANK_NIFTY_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_09_TO_09_14_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularSMESessionTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_SME_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_09_TO_09_14_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularFOSessionTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_09_TO_09_14_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 
         Trigger preOpenMarketRegularOthersSessionTrigger = newTrigger()
                 .withIdentity(QuartzTrigger.NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_TRIGGER.getShortName(), QuartzGroup.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.getShortName())
-                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_00_TO_09_08_AM_MONDAY_TO_FRIDAY.toString()))
+                .withSchedule(CronScheduleBuilder.cronSchedule(CronExpression.NSE_PRE_OPEN_SESSION_BETWEEN_09_09_TO_09_14_AM_MONDAY_TO_FRIDAY.toString()))
                 .withPriority(Priorities.MID.get()).withDescription(TriggerDescription.NSE_PRE_OPEN_MARKET_REGULAR_SESSION.get())
                 .build();
 

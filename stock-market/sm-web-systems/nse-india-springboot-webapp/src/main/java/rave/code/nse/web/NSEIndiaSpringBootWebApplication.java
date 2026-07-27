@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import rave.code.java.system.StockMarketSystemProperties;
+import rave.code.utility.log.JavaUtilLogDecor;
 import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import java.util.logging.Logger;
@@ -16,6 +17,7 @@ public class NSEIndiaSpringBootWebApplication extends SpringBootServletInitializ
     private static final Logger LOGGER = Logger.getLogger(NSEIndiaSpringBootWebApplication.class.getName());
 
     public static void main(String[] args) {
+        JavaUtilLogDecor.setupLogDecor();
         SpringApplication.run(NSEIndiaSpringBootWebApplication.class, args);
         JavaUtilLogMessage logMessage = new JavaUtilLogMessage("NSE-India Web Application has been started");
         LOGGER.info(logMessage.getDecoratedLogMessage());
