@@ -9,8 +9,12 @@ import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractStockMarketHttpClient {
+
+    private static final Logger LOGGER = Logger.getLogger(AbstractStockMarketHttpClient.class.getName());
 
     protected HttpClient client;
 
@@ -21,26 +25,46 @@ public abstract class AbstractStockMarketHttpClient {
                 .build();
     }
 
-    public HttpResponse<String> stringResponseOf(String url) throws IOException, InterruptedException {
-        HttpRequest request = this.buildHttpRequest(url);
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
+    public HttpResponse<String> stringResponseOf(String url) {
+        try {
+            HttpRequest request = this.buildHttpRequest(url);
+            return client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+            return null;
+        }
     }
 
-    public HttpResponse<InputStream> inputStreamResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<InputStream> inputStreamResponseOf(String url) {
         HttpRequest request = this.buildHttpRequest(url);
-        return this.client.send(request, HttpResponse.BodyHandlers.ofInputStream());
+        try {
+            return this.client.send(request, HttpResponse.BodyHandlers.ofInputStream());
+        } catch (IOException | InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+            return null;
+        }
     }
 
-    public HttpResponse<Path> pathResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<Path> pathResponseOf(String url) {
         String fileName = String.format("downloaded-file-%s.csv", new Date().getTime());
         Path destination = Paths.get(fileName);
         HttpRequest request = this.buildHttpRequest(url);
-        return this.client.send(request, HttpResponse.BodyHandlers.ofFile(destination));
+        try {
+            return this.client.send(request, HttpResponse.BodyHandlers.ofFile(destination));
+        } catch (IOException | InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+            return null;
+        }
     }
 
-    public HttpResponse<byte[]> byteArrayResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<byte[]> byteArrayResponseOf(String url) {
         HttpRequest request = this.buildHttpRequest(url);
-        return this.client.send(request, HttpResponse.BodyHandlers.ofByteArray());
+        try {
+            return this.client.send(request, HttpResponse.BodyHandlers.ofByteArray());
+        } catch (IOException | InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+            return null;
+        }
     }
 
     public abstract HttpRequest buildHttpRequest(String url);

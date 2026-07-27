@@ -1,4 +1,4 @@
-package rave.code.tech.analysis.range.percentage;
+package rave.code.tech.analysis.percentage;
 
 public abstract class PriceRange {
 

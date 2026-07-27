@@ -1,6 +1,6 @@
 package rave.code.data.model.web.nse;
 
-import rave.code.tech.analysis.range.percentage.PercentagePriceRange;
+import rave.code.tech.analysis.percentage.PercentagePriceRange;
 
 import java.util.ArrayList;
 import java.util.List;

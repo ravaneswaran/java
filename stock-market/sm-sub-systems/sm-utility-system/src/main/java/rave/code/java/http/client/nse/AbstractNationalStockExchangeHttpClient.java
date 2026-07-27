@@ -76,9 +76,14 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
                 .build();
     }
 
-    public HttpResponse<String> retryDownloadLinkAvailablePage(String url) throws IOException, InterruptedException {
-        this.gotoHomePage();
-        return this.stringResponseOf(url);
+    public HttpResponse<String> retryDownloadLinkAvailablePage(String url) /*throws IOException, InterruptedException*/ {
+        try {
+            this.gotoHomePage();
+            return this.stringResponseOf(url);
+        } catch (IOException | InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage());
+            return null;
+        }
     }
 
     public void logHttpErrorMessage(int httpStatusCode, String url) {

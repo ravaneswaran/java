@@ -18,29 +18,29 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
         super();
     }
 
-    public HttpResponse<String> stringResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<String> stringResponseOf(String url) {
         HttpResponse<String> response = super.stringResponseOf(url);
         return (HttpResponse<String>) this.logMessageAndRetry(response, url);
     }
 
     @Override
-    public HttpResponse<Path> pathResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<Path> pathResponseOf(String url) {
         HttpResponse<Path> response = super.pathResponseOf(url);
         return (HttpResponse<Path>) this.logMessageAndRetry(response, url);
     }
 
     @Override
-    public HttpResponse<InputStream> inputStreamResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<InputStream> inputStreamResponseOf(String url) {
         HttpResponse<InputStream> response = super.inputStreamResponseOf(url);
         return (HttpResponse<InputStream>) this.logMessageAndRetry(response, url);
     }
 
-    public HttpResponse<byte[]> byteArrayResponseOf(String url) throws IOException, InterruptedException {
+    public HttpResponse<byte[]> byteArrayResponseOf(String url) {
         HttpResponse<byte[]> response = super.byteArrayResponseOf(url);
         return (HttpResponse<byte[]>) this.logMessageAndRetry(response, url);
     }
 
-    public HttpResponse<?> logMessageAndRetry(HttpResponse<?> response, String url) throws IOException, InterruptedException {
+    public HttpResponse<?> logMessageAndRetry(HttpResponse<?> response, String url) {
         int httpStatusCode = response.statusCode();
         if (200 == httpStatusCode) {
             LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus200()));

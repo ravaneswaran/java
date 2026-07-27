@@ -8,6 +8,7 @@ public class Candle {
     private double closePrice;
     private double percentageChange;
     private double previousClose;
+    private int volume;
 
     public Candle(){
     }
@@ -58,40 +59,45 @@ public class Candle {
         return openPrice;
     }
 
-    public void setOpenPrice(double openPrice) {
+    public Candle setOpenPrice(double openPrice) {
         this.openPrice = openPrice;
+        return this;
     }
 
     public double getHighPrice() {
         return highPrice;
     }
 
-    public void setHighPrice(double highPrice) {
+    public Candle setHighPrice(double highPrice) {
         this.highPrice = highPrice;
+        return this;
     }
 
     public double getLowPrice() {
         return lowPrice;
     }
 
-    public void setLowPrice(double lowPrice) {
+    public Candle setLowPrice(double lowPrice) {
         this.lowPrice = lowPrice;
+        return this;
     }
 
     public double getClosePrice() {
         return closePrice;
     }
 
-    public void setClosePrice(double closePrice) {
+    public Candle setClosePrice(double closePrice) {
         this.closePrice = closePrice;
+        return this;
     }
 
     public double getPreviousClose() {
         return previousClose;
     }
 
-    public void setPreviousClose(double previousClose) {
+    public Candle setPreviousClose(double previousClose) {
         this.previousClose = previousClose;
+        return this;
     }
 
     public double getLastTradedPrice() {
@@ -102,8 +108,18 @@ public class Candle {
         return percentageChange;
     }
 
-    public void setPercentageChange(double percentageChange) {
+    public Candle setPercentageChange(double percentageChange) {
         this.percentageChange = percentageChange;
+        return this;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public Candle setVolume(int volume) {
+        this.volume = volume;
+        return this;
     }
 
     public int getStrength() {
