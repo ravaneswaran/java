@@ -41,6 +41,10 @@ public class NationalStockExchangeHttpClient extends AbstractNationalStockExchan
     }
 
     public HttpResponse<?> logMessageAndRetry(HttpResponse<?> response, String url) {
+        if(null == response){
+            LOGGER.log(Level.SEVERE, "response is null...");
+            return null;
+        }
         int httpStatusCode = response.statusCode();
         if (200 == httpStatusCode) {
             LOGGER.log(Level.INFO, String.format("%s : HTTP[%s]", url, this.customizeHttpStatus200()));
