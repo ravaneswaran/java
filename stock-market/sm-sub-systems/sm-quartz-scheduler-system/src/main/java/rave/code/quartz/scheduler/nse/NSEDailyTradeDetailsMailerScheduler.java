@@ -5,6 +5,7 @@ import rave.code.quartz.enums.*;
 import rave.code.quartz.enums.CronExpression;
 import rave.code.quartz.jobs.nse.mailer.NSEDailyTradeDetailsMailerJob;
 import rave.code.quartz.scheduler.AbstractQuartzScheduler;
+import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,9 @@ public class NSEDailyTradeDetailsMailerScheduler extends AbstractQuartzScheduler
 
     @Override
     public void scheduleJobs() {
-        JobDetail nseDailyTradeDetailsMailerJobDetail = newJob(NSEDailyTradeDetailsMailerJob.class)
+        JavaUtilLogMessage logMessage = new JavaUtilLogMessage("NSEDailyTradeDetailsMailer is under construction....");
+        LOGGER.info(logMessage.getDecoratedLogMessage());
+        /*JobDetail nseDailyTradeDetailsMailerJobDetail = newJob(NSEDailyTradeDetailsMailerJob.class)
                 .withIdentity(QuartzJob.NSE_DAILY_TRADE_DETAILS_MAILER_JOB.getShortName(), QuartzGroup.NSE_DAILY_TRADE_DETAILS_MAILER.getShortName()).storeDurably()
                 .build();
         Trigger nseDailyTradeDetailsMailerJobTrigger = newTrigger()
@@ -36,6 +39,6 @@ public class NSEDailyTradeDetailsMailerScheduler extends AbstractQuartzScheduler
             LOGGER.log(Level.INFO, objectAlreadyExistsException.getMessage());
         } catch (SchedulerException schedulerException) {
             LOGGER.log(Level.SEVERE, schedulerException.getMessage());
-        }
+        }*/
     }
 }
