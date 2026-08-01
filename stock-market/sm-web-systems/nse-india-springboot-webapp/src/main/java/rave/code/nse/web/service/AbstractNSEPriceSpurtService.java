@@ -3,6 +3,7 @@ package rave.code.nse.web.service;
 import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
 import rave.code.data.model.web.nse.NSEStockModel;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
+import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.repository.nse.NSEPriceSpurtDetailRepository;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +32,11 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
         nsePriceSpurtDetailModel.setLastTradedPrice(nsePriceSpurtDetailEntity.getLastTradedPrice());
         nsePriceSpurtDetailModel.setValue(nsePriceSpurtDetailEntity.getValue());
         nsePriceSpurtDetailModel.setVolume(nsePriceSpurtDetailEntity.getVolume());
-        String series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries();
+        NSEStockBaseEntity nseStockBaseEntity = nsePriceSpurtDetailEntity.getNseStockBaseEntity();
+        String series = "";
+        if (null != nseStockBaseEntity) {
+            series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries().trim();
+        }
 
         if (null != series && !series.equals("null") && !"".equals(series)) {
             nsePriceSpurtDetailModel.setTitle(String.format("%s : %s", series, nsePriceSpurtDetailEntity.getSymbol()));
@@ -40,7 +45,7 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
         }
 
         String time = simpleDateFormat.format(nsePriceSpurtDetailEntity.getCreatedDate()).split(" ")[1];
-        nsePriceSpurtDetailModel.setAt(String.format("%s %s", "at ",time));
+        nsePriceSpurtDetailModel.setAt(String.format("%s %s", "at ", time));
 
         return nsePriceSpurtDetailModel;
     }
