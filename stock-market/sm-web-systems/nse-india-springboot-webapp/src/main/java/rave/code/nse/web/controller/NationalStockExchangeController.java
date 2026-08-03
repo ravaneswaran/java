@@ -27,7 +27,7 @@ public class NationalStockExchangeController {
     @Autowired
     private NSESMEService nseSMEService;
     @Autowired
-    private  NSETop20NiftyFiftyService nseTop20NiftyFiftyService;
+    private NSETop20NiftyFiftyService nseTop20NiftyFiftyService;
     @Autowired
     private NSETop20NiftyNextFiftyService nseTop20NiftyNextFiftyService;
     @Autowired
@@ -48,7 +48,7 @@ public class NationalStockExchangeController {
 
     @GetMapping("/")
     public ModelAndView home() {
-       return this.openPricePriceSpurts("0", "10");
+        return this.openPricePriceSpurts("0", "10");
     }
 
 
@@ -125,37 +125,52 @@ public class NationalStockExchangeController {
     }
 
     @GetMapping("/open-price/price-spurts")
-    public ModelAndView openPricePriceSpurts(@RequestParam(required = false) String openPriceLwrLimit, @RequestParam(required = false) String openPriceUprLimit){
+    public ModelAndView openPricePriceSpurts(@RequestParam(required = false) String openPriceLwrLimit, @RequestParam(required = false) String openPriceUprLimit) {
         int lowerLimit = 0;
         int upperLimit = 10;
-        try{
-            lowerLimit =  Integer.parseInt(openPriceLwrLimit);
+        try {
+            lowerLimit = Integer.parseInt(openPriceLwrLimit);
             upperLimit = Integer.parseInt(openPriceUprLimit);
-        } catch (NumberFormatException numberFormatException){
+        } catch (NumberFormatException numberFormatException) {
             LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
         }
 
-        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getOpenPriceWebPage(lowerLimit, upperLimit);
+        NSEWebPage nseWebPage = this.nsePriceSpurtService.getOpenPriceWebPage(lowerLimit, upperLimit);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("price_spurts");
-        modelAndView.addObject("webpage", marketOnOpenPage);
+        modelAndView.addObject("webpage", nseWebPage);
         return modelAndView;
     }
 
     @GetMapping("/percentage-change/price-spurts")
-    public ModelAndView percentageChangePriceSpurts(@RequestParam(required = false) String percentageLowerLimit, @RequestParam(required = false) String percentageUpperLimit){
+    public ModelAndView percentageChangePriceSpurts(@RequestParam(required = false) String percentageLowerLimit, @RequestParam(required = false) String percentageUpperLimit) {
         int lowerLimit = 0;
         int upperLimit = 10;
-        try{
-            lowerLimit =  Integer.parseInt(percentageLowerLimit);
+        try {
+            lowerLimit = Integer.parseInt(percentageLowerLimit);
             upperLimit = Integer.parseInt(percentageUpperLimit);
-        } catch (NumberFormatException numberFormatException){
+        } catch (NumberFormatException numberFormatException) {
             LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
         }
-        NSEWebPage marketOnOpenPage = this.nsePriceSpurtService.getPercentageChangeWebPage(lowerLimit, upperLimit);
+        NSEWebPage nseWebPage = this.nsePriceSpurtService.getPercentageChangeWebPage(lowerLimit, upperLimit);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("price_spurts");
-        modelAndView.addObject("webpage", marketOnOpenPage);
+        modelAndView.addObject("webpage", nseWebPage);
+        return modelAndView;
+    }
+
+    @GetMapping("/price-difference/price-spurts")
+    public ModelAndView priceDifferencePriceSpurts(@RequestParam(required = false) String priceDiff) {
+        int priceDifference = 2;
+        try {
+            priceDifference = Integer.parseInt(priceDiff);
+        } catch (NumberFormatException numberFormatException) {
+            LOGGER.log(Level.SEVERE, numberFormatException.getMessage());
+        }
+        NSEWebPage nseWebPage = this.nsePriceSpurtService.getPriceDifferenceWebPage(priceDifference);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("price_spurts");
+        modelAndView.addObject("webpage", nseWebPage);
         return modelAndView;
     }
 

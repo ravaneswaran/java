@@ -27,6 +27,7 @@ public class PriceSpurtsWebPage extends NSEWebPage {
         Link link10 = new Link("/nse-india/open-price/price-spurts?openPriceLwrLimit=750&openPriceUprLimit=1000", "\u20B9 : 750 - 1000", "");
 
         Link link11 = new Link("/nse-india/percentage-change/price-spurts?percentageLowerLimit=5&percentageUpperLimit=15", "5% - 15%", "");
+        Link link12 = new Link("/nse-india/price-difference/price-spurts?priceDiff=2", "\u20B9 : 2", "");
 
         this.links = new ArrayList<>();
         this.links.add(link1);
@@ -40,6 +41,7 @@ public class PriceSpurtsWebPage extends NSEWebPage {
         this.links.add(link9);
         this.links.add(link10);
         this.links.add(link11);
+        this.links.add(link12);
 
     }
 

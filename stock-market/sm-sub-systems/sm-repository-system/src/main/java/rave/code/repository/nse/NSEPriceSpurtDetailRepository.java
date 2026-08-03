@@ -99,6 +99,29 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
+    public List<NSEPriceSpurtDetailEntity> findDistinctPriceDifferencePriceSpurtDetailsForADay(Date date, int priceDifference) {
+        SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
+        String toDateString = simpleDateFormatWithoutTime.format(date);
+
+        String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
+        String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateStartTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("'").append(toDateEndTimeString).append("'");
+        queryBuilder.append(" ").append("AND");
+        queryBuilder.append(" ");
+        queryBuilder.append("(").append("last_traded_price - open_price").append(") >= ").append(priceDifference);
+        queryBuilder.append(" ");
+        queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY last_traded_price;");
+
+        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+    }
+
     public List<NSEPriceSpurtDetailEntity> findPriceSpurtDetailsForASymbolOnAParticularDay(String symbol, Date date) {
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         date = (date == null) ? new Date() : date;

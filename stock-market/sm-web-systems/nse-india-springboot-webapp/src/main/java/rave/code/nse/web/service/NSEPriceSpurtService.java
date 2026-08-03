@@ -8,6 +8,7 @@ import rave.code.tech.analysis.Candle;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +28,11 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
     public PriceSpurtsWebPage getPercentageChangeWebPage(int lowerPercentageChangeLimit, int upperPercentageChangeLimit) {
         List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctPercentageChangePriceSpurtDetails(lowerPercentageChangeLimit, upperPercentageChangeLimit);
+        return this.getPriceSpurtsWebPage(entities);
+    }
+
+    public PriceSpurtsWebPage getPriceDifferenceWebPage(int priceDifference) {
+        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctPriceDifferencePriceSpurtDetailsForADay(new Date(), priceDifference);
         return this.getPriceSpurtsWebPage(entities);
     }
 
