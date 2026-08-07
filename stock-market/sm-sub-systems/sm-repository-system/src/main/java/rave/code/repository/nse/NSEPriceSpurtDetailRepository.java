@@ -1,12 +1,17 @@
 package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
+import rave.code.utility.log.JavaUtilLogDecor;
+import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<NSEPriceSpurtDetailEntity> {
+
+    private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtDetailRepository.class.getName());
 
     public NSEPriceSpurtDetailRepository() {
         super(NSEPriceSpurtDetailEntity.class);
@@ -96,6 +101,9 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         queryBuilder.append(" ");
         queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY percentage_change;");
 
+        JavaUtilLogMessage javaUtilLogMessage = new JavaUtilLogMessage(queryBuilder.toString());
+        LOGGER.info(javaUtilLogMessage.getDecoratedLogMessage());
+
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
@@ -107,7 +115,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
 
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE created_date BETWEEN");
+        queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE open_price <= 500 AND created_date BETWEEN");
         queryBuilder.append(" ");
         queryBuilder.append("'").append(toDateStartTimeString).append("'");
         queryBuilder.append(" ").append("AND");
@@ -118,6 +126,9 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         queryBuilder.append("(").append("last_traded_price - open_price").append(") >= ").append(priceDifference);
         queryBuilder.append(" ");
         queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY last_traded_price;");
+
+        JavaUtilLogMessage javaUtilLogMessage = new JavaUtilLogMessage(queryBuilder.toString());
+        LOGGER.info(javaUtilLogMessage.getDecoratedLogMessage());
 
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
