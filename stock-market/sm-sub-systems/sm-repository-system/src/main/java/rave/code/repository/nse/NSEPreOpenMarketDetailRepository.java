@@ -9,8 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManager<NSEPreOpenMarketDetailEntity> {
+
+    public static final Logger LOGGER = Logger.getLogger(NSEPreOpenMarketDetailRepository.class.getName());
 
     public NSEPreOpenMarketDetailRepository() {
         super(NSEPreOpenMarketDetailEntity.class);
@@ -104,5 +108,61 @@ public class NSEPreOpenMarketDetailRepository extends AbstractNSERepositoryManag
     @Override
     public List<NSEPreOpenMarketDetailEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
         return new ArrayList<>();
+    }
+
+   /* public List<String> findDistinctSymbolsOfPreOpenMarketDetailOnADay() {
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEPreOpenMarketDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPreOpenMarketDetailEntity.class);
+        Root<NSEPreOpenMarketDetailEntity> root = criteriaQuery.from(NSEPreOpenMarketDetailEntity.class);
+        return null;
+    }*/
+
+    public List<NSEPreOpenMarketDetailEntity> findBySymbolOnADay(String symbol, Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = simpleDateFormat.format(date);
+        String dateStringWithOutTime = dateString.split(" ")[0];
+        String morningAt_09_00 = String.format("%s %s", dateStringWithOutTime, "09:00:00");
+        String morningAt_09_10 = String.format("%s %s", dateStringWithOutTime, "09:10:00");
+
+        try {
+            Date from = simpleDateFormat.parse(morningAt_09_00);
+            Date to = simpleDateFormat.parse(morningAt_09_10);
+            CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<NSEPreOpenMarketDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPreOpenMarketDetailEntity.class);
+            Root<NSEPreOpenMarketDetailEntity> root = criteriaQuery.from(NSEPreOpenMarketDetailEntity.class);
+            Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
+            Predicate betweenDatePredicate = criteriaBuilder.between(root.get("createdDate"), from, to);
+            Order ascendingOrder = criteriaBuilder.asc(root.get("createdDate"));
+
+            criteriaQuery.select(root).where(symbolPredicate, betweenDatePredicate).orderBy(ascendingOrder);
+
+            return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        } catch (ParseException parseException) {
+            LOGGER.log(Level.SEVERE, parseException.getMessage());
+            return List.of();
+        }
+    }
+
+    public List<String> findDistinctSymbolsOnADay(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = simpleDateFormat.format(date);
+        String dateStringWithOutTime = dateString.split(" ")[0];
+        String morningAt_09_00 = String.format("%s %s", dateStringWithOutTime, "09:00:00");
+        String morningAt_09_10 = String.format("%s %s", dateStringWithOutTime, "09:10:00");
+        try {
+            Date from = simpleDateFormat.parse(morningAt_09_00);
+            Date to = simpleDateFormat.parse(morningAt_09_10);
+            CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<String> criteriaQuery = criteriaBuilder.createQuery(String.class);
+            Root<NSEPreOpenMarketDetailEntity> root = criteriaQuery.from(NSEPreOpenMarketDetailEntity.class);
+            Predicate betweenDatePredicate = criteriaBuilder.between(root.get("createdDate"), from, to);
+            Order bySymbol = criteriaBuilder.asc(root.get("symbol"));
+            criteriaQuery.select(root.get("symbol")).distinct(true).where(betweenDatePredicate).orderBy(bySymbol);
+
+            return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        } catch (ParseException parseException) {
+            LOGGER.log(Level.SEVERE, parseException.getMessage());
+            return List.of();
+        }
     }
 }

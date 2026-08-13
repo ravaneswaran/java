@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Ravaneswaran Chinnasamy">
+        <createTable tableName="nse_pre_open_market_detail_history">
+            <column name="id" type="varchar2(100)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="stock_base_id" type="varchar2(100)"/>
+            <column name="business_date" type="datetime"/>
+            <column name="pre_open_type" type="varchar2(30)"/>
+            <column name="symbol" type="varchar2(100)"/>
+            <column name="previous_close" type="double"/>
+            <column name="indicative_equilibrium_price_of_first_instance" type="double"/>
+            <column name="indicative_equilibrium_price_of_last_instance" type="double"/>
+            <column name="price_change_of_first_instance" type="double"/>
+            <column name="price_change_of_last_instance" type="double"/>
+            <column name="price_percentage_change_of_first_instance" type="double"/>
+            <column name="price_percentage_change_of_last_instance" type="double"/>
+            <column name="final_price" type="double"/>
+            <column name="final_quantity" type="double"/>
+            <column name="value_in_crores" type="decimal(20, 2)"/>
+            <column name="free_float_market_capitalization" type="decimal(20, 2)"/>
+            <column name="new_market_52_week_high" type="double"/>
+            <column name="new_market_52_week_low" type="double"/>
+            <column name="created_date" type="datetime"/>
+            <column name="modified_date" type="datetime"/>
+            <column name="created_by" type="varchar2(100)"/>
+            <column name="modified_by" type="varchar2(100)"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="nse_pre_open_market_detail_history"
+                baseColumnNames="stock_base_id"
+                constraintName="fk_nse_pre_open_market_detail_history_nse_stock_base"
+                referencedTableName="nse_stock_base"
+                referencedColumnNames="id"/>
+
+    </changeSet>
+
+</databaseChangeLog>
