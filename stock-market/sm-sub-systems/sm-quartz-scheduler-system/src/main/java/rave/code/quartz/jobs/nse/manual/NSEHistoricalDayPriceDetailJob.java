@@ -16,7 +16,7 @@ public class NSEHistoricalDayPriceDetailJob extends AbstractHistoricalDayPriceDe
 
     private static final Logger LOGGER = Logger.getLogger(NSEHistoricalDayPriceDetailJob.class.getName());
 
-    private NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
+    private final NSEDayPriceDetailRepository nseDayPriceDetailRepository = new NSEDayPriceDetailRepository();
 
     public NSEHistoricalDayPriceDetailJob(){
         this(1);
@@ -40,7 +40,7 @@ public class NSEHistoricalDayPriceDetailJob extends AbstractHistoricalDayPriceDe
     public static void main(String[] args) throws JobExecutionException {
         JavaUtilLogDecor.setupLogDecor();
 
-        NSEHistoricalDayPriceDetailJob nseHistoricalDayPriceDetailJob = new NSEHistoricalDayPriceDetailJob(500);
+        NSEHistoricalDayPriceDetailJob nseHistoricalDayPriceDetailJob = new NSEHistoricalDayPriceDetailJob(550);
         nseHistoricalDayPriceDetailJob.execute(null);
     }
 }

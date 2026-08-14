@@ -35,11 +35,11 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
         NSEStockBaseEntity nseStockBaseEntity = nsePriceSpurtDetailEntity.getNseStockBaseEntity();
         String series = "";
         if (null != nseStockBaseEntity) {
-            series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries().trim();
+            series = nsePriceSpurtDetailEntity.getNseStockBaseEntity().getSeries();
         }
 
         if (null != series && !series.equals("null") && !"".equals(series)) {
-            nsePriceSpurtDetailModel.setTitle(String.format("%s : %s", series, nsePriceSpurtDetailEntity.getSymbol()));
+            nsePriceSpurtDetailModel.setTitle(String.format("%s : %s", series.trim(), nsePriceSpurtDetailEntity.getSymbol()));
         } else {
             nsePriceSpurtDetailModel.setTitle(nsePriceSpurtDetailEntity.getSymbol());
         }

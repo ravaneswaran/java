@@ -8,6 +8,7 @@ import rave.code.entity.nse.histories.NSEPreOpenMarketDetailHistoryEntity;
 import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.repository.nse.NSEPreOpenMarketDetailHistoryRepository;
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
+import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,8 +26,8 @@ public class NSEPreOpenMarketDetailHistoryEntityMakerJob extends AbstractQuartzJ
     public void executeJob(JobExecutionContext context) throws JobExecutionException {
         NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
         NSEPreOpenMarketDetailHistoryRepository nsePreOpenMarketDetailHistoryRepository = new NSEPreOpenMarketDetailHistoryRepository();
-        Date today = getDate();
-        List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = nsePreOpenMarketDetailRepository.findEntitiesOnADay(today);
+        /*Date today = getDate();*/
+        List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = nsePreOpenMarketDetailRepository.findEntitiesOnADay(new Date());
         List<NSEPreOpenMarketDetailHistoryEntity> historyEntities = new ArrayList<>();
         LOGGER.info(String.format("Total number of symbol is %s...", nsePreOpenMarketDetailEntities.size()));
         int size = nsePreOpenMarketDetailEntities.size();
@@ -86,6 +87,7 @@ public class NSEPreOpenMarketDetailHistoryEntityMakerJob extends AbstractQuartzJ
     }
 
     public static void main(String[] args) {
+        JavaUtilLogDecor.setupLogDecor();
         NSEPreOpenMarketDetailHistoryEntityMakerJob nsePreOpenMarketDetailHistoryEntityMakerJob = new NSEPreOpenMarketDetailHistoryEntityMakerJob();
         try {
             nsePreOpenMarketDetailHistoryEntityMakerJob.execute(null);
