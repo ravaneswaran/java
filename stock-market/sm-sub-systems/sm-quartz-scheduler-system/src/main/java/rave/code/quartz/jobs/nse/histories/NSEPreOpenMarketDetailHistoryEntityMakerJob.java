@@ -1,4 +1,4 @@
-package rave.code.quartz.jobs.nse.technical;
+package rave.code.quartz.jobs.nse.histories;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -9,6 +9,8 @@ import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.repository.nse.NSEPreOpenMarketDetailHistoryRepository;
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,25 +22,45 @@ public class NSEPreOpenMarketDetailHistoryEntityMakerJob extends AbstractQuartzJ
     private static final Logger LOGGER = Logger.getLogger(NSEPreOpenMarketDetailHistoryEntityMakerJob.class.getName());
 
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void executeJob(JobExecutionContext context) throws JobExecutionException {
         NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
         NSEPreOpenMarketDetailHistoryRepository nsePreOpenMarketDetailHistoryRepository = new NSEPreOpenMarketDetailHistoryRepository();
-        Date today = new Date();
-        List<String> symbolList = nsePreOpenMarketDetailRepository.findDistinctSymbolsOnADay(today);
-        LOGGER.info(String.format("Total number of symbol is %s...", symbolList.size()));
-
-        List<NSEPreOpenMarketDetailHistoryEntity> entites = new ArrayList<>();
-        for (String symbol : symbolList) {
-            List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = nsePreOpenMarketDetailRepository.findBySymbolOnADay(symbol, today);
-
-            NSEPreOpenMarketDetailEntity firstInstance = nsePreOpenMarketDetailEntities.getFirst();
-            NSEPreOpenMarketDetailEntity lastInstance = nsePreOpenMarketDetailEntities.getLast();
-            NSEStockBaseEntity nseStockBaseEntity = firstInstance.getNseStockBaseEntity();
-
-            NSEPreOpenMarketDetailHistoryEntity nsePreOpenMarketDetailHistoryEntity = createNSEPreOpenMarketDetailHistoryEntity(nseStockBaseEntity, firstInstance, lastInstance);
-            entites.add(nsePreOpenMarketDetailHistoryEntity);
+        Date today = getDate();
+        List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = nsePreOpenMarketDetailRepository.findEntitiesOnADay(today);
+        List<NSEPreOpenMarketDetailHistoryEntity> historyEntities = new ArrayList<>();
+        LOGGER.info(String.format("Total number of symbol is %s...", nsePreOpenMarketDetailEntities.size()));
+        int size = nsePreOpenMarketDetailEntities.size();
+        int startIndex = 0;
+        int endIndex = 1;
+        for (; endIndex < size; endIndex++) {
+            NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntityOne = nsePreOpenMarketDetailEntities.get(startIndex);
+            NSEPreOpenMarketDetailEntity nsePreOpenMarketDetailEntityTwo = nsePreOpenMarketDetailEntities.get(endIndex);
+            if (nsePreOpenMarketDetailEntityOne.getSymbol().equals(nsePreOpenMarketDetailEntityTwo.getSymbol())) {
+                continue;
+            }
+            addHistories(historyEntities, nsePreOpenMarketDetailEntities, startIndex, endIndex);
+            startIndex = endIndex;
         }
-        nsePreOpenMarketDetailHistoryRepository.bulkUpsert(entites);
+        addHistories(historyEntities, nsePreOpenMarketDetailEntities, startIndex, endIndex);
+        nsePreOpenMarketDetailHistoryRepository.bulkUpsert(historyEntities);
+    }
+
+    private static void addHistories(List<NSEPreOpenMarketDetailHistoryEntity> historyEntities, List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities, int startIndex, int endIndex) {
+        List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntitiesSubList = nsePreOpenMarketDetailEntities.subList(startIndex, endIndex);
+        NSEPreOpenMarketDetailEntity firstInstance = nsePreOpenMarketDetailEntitiesSubList.getFirst();
+        NSEPreOpenMarketDetailEntity lastInstance = nsePreOpenMarketDetailEntitiesSubList.getLast();
+        NSEStockBaseEntity nseStockBaseEntity = firstInstance.getNseStockBaseEntity();
+        NSEPreOpenMarketDetailHistoryEntity nsePreOpenMarketDetailHistoryEntity = createNSEPreOpenMarketDetailHistoryEntity(nseStockBaseEntity, firstInstance, lastInstance);
+        historyEntities.add(nsePreOpenMarketDetailHistoryEntity);
+    }
+
+    private static Date getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return simpleDateFormat.parse("2026-08-13");
+        } catch (ParseException e) {
+            return new Date();
+        }
     }
 
     private static NSEPreOpenMarketDetailHistoryEntity createNSEPreOpenMarketDetailHistoryEntity(NSEStockBaseEntity nseStockBaseEntity, NSEPreOpenMarketDetailEntity firstInstance, NSEPreOpenMarketDetailEntity lastInstance) {
@@ -68,7 +90,7 @@ public class NSEPreOpenMarketDetailHistoryEntityMakerJob extends AbstractQuartzJ
         try {
             nsePreOpenMarketDetailHistoryEntityMakerJob.execute(null);
         } catch (JobExecutionException jobExecutionException) {
-           LOGGER.log(Level.SEVERE, jobExecutionException.getMessage(), jobExecutionException);
+            LOGGER.log(Level.SEVERE, jobExecutionException.getMessage(), jobExecutionException);
         }
     }
 }
