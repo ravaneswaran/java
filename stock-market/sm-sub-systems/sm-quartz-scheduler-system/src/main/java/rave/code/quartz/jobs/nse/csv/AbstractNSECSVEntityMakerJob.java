@@ -32,7 +32,7 @@ public abstract class AbstractNSECSVEntityMakerJob<T> extends AbstractCSVEntityM
         nationalStockExchangeHttpClient.gotoHomePage();
         nationalStockExchangeHttpClient.stringResponseOf(this.downloadPageUrl);
         if(seconds > 0) {
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(seconds * 1000L);
         }
         return nationalStockExchangeHttpClient.getFile(this.csvDownloadUrl);
     }
@@ -51,10 +51,8 @@ public abstract class AbstractNSECSVEntityMakerJob<T> extends AbstractCSVEntityM
         File downloadedFile = null;
         try {
             downloadedFile = this.downloadFile();
-        } catch (IOException ioException) {
-            LOGGER.log(Level.SEVERE, ioException.getMessage(), ioException);
-        } catch (InterruptedException interruptedException) {
-            LOGGER.log(Level.SEVERE, interruptedException.getMessage(), interruptedException);
+        } catch (IOException | InterruptedException exception) {
+            LOGGER.log(Level.SEVERE, exception.getMessage(), exception);
         }
 
         List<CSVRecord> csvRecords = new ArrayList<>();

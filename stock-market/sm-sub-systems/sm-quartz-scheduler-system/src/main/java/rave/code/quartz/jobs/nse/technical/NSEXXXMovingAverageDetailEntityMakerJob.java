@@ -23,7 +23,7 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
     private static final Logger LOGGER = Logger.getLogger(NSEXXXMovingAverageDetailEntityMakerJob.class.getName());
 
     @Override
-    public void execute(JobExecutionContext context) throws JobExecutionException {
+    public void executeJob(JobExecutionContext context) throws JobExecutionException {
         this.processXXXMovingAverage();
     }
 

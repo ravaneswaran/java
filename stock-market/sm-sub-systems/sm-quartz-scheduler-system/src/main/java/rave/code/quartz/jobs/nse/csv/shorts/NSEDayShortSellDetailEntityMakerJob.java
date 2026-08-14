@@ -24,8 +24,8 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
 
     private static final Logger LOGGER = Logger.getLogger(NSEDayShortSellDetailEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEDayShortSellDetailRepository nseDayShortSellDetailRepository = new NSEDayShortSellDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSEDayShortSellDetailRepository nseDayShortSellDetailRepository = new NSEDayShortSellDetailRepository();
 
     public NSEDayShortSellDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/historicalOR/bulk-block-short-deals?csv=true&optionType=short_selling&from=%s&to=%s");
@@ -45,8 +45,8 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
     @Override
     public List<NSEDayShortSellDetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSEDayShortSellDetailEntity> nseDayShortSellDetailEntities = new ArrayList<>();
-        if (sourceData.size() > 0) {
-            CSVRecord header = sourceData.remove(0);
+        if (!sourceData.isEmpty()) {
+            CSVRecord header = sourceData.removeFirst();
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
         for (CSVRecord csvRecord : sourceData) {

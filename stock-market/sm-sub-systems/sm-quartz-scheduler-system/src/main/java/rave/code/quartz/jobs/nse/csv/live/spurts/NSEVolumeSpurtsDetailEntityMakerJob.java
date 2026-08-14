@@ -19,8 +19,8 @@ public class NSEVolumeSpurtsDetailEntityMakerJob extends AbstractNSELiveMarketEn
 
     private static final Logger LOGGER = Logger.getLogger(NSEPriceSpurtSPLwr20DetailEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEVolumeSpurtDetailRepository nseVolumeSpurtsDetailRepository = new NSEVolumeSpurtDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSEVolumeSpurtDetailRepository nseVolumeSpurtsDetailRepository = new NSEVolumeSpurtDetailRepository();
 
     public NSEVolumeSpurtsDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-volume-gainers?csv=true");

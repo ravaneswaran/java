@@ -27,7 +27,7 @@ public class NSEHistoricalDayPriceDetailJob extends AbstractHistoricalDayPriceDe
     }
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public void executeJob(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         LOGGER.log(Level.FINE, "Deleting NSE day price detail repository...");
         this.nseDayPriceDetailRepository.deleteAll();
         List<Date> dates = this.getHistoricalDates(this.noOfDaysInPast);

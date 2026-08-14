@@ -22,8 +22,8 @@ public class NSEPriceToEarningRatioEntityMakerJob extends AbstractNSECSVEntityMa
 
     private static final Logger LOGGER = Logger.getLogger(NSEPriceToEarningRatioEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEPriceToEarningRatioDetailRepository nsePriceToEarningRatioDetailRepository = new NSEPriceToEarningRatioDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSEPriceToEarningRatioDetailRepository nsePriceToEarningRatioDetailRepository = new NSEPriceToEarningRatioDetailRepository();
 
     private Date date;
 
@@ -46,8 +46,8 @@ public class NSEPriceToEarningRatioEntityMakerJob extends AbstractNSECSVEntityMa
         List<NSEPriceToEarningRatioDetailEntity> nsePriceToEarningRatioDetailEntities = new ArrayList<>();
         Map<String, NSEPriceToEarningRatioDetailEntity> entityMap = this.nsePriceToEarningRatioDetailRepository.getEntityMap();
 
-        if (sourceData.size() > 0) {
-            CSVRecord header = sourceData.remove(0);
+        if (!sourceData.isEmpty()) {
+            CSVRecord header = sourceData.removeFirst();
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
         for (CSVRecord csvRecord : sourceData) {

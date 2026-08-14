@@ -19,8 +19,8 @@ public abstract class AbstractNSEPriceSpurtDetailEntityMakerJob extends Abstract
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNSEPriceSpurtDetailEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSEPriceSpurtDetailRepository nsePriceSpurtsDetailRepository = new NSEPriceSpurtDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final  NSEPriceSpurtDetailRepository nsePriceSpurtsDetailRepository = new NSEPriceSpurtDetailRepository();
 
     protected String spurtType;
 

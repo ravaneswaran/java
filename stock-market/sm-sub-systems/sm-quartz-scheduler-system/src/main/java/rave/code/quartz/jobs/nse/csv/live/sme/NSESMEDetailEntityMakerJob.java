@@ -19,8 +19,8 @@ public class NSESMEDetailEntityMakerJob extends AbstractNSELiveMarketEntityMaker
 
     private static final Logger LOGGER = Logger.getLogger(NSESMEDetailEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSESMEDetailRepository nseSmeDetailRepository = new NSESMEDetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSESMEDetailRepository nseSmeDetailRepository = new NSESMEDetailRepository();
 
     public NSESMEDetailEntityMakerJob() {
         super("https://www.nseindia.com/api/live-analysis-most-active-sme-csv?index=volume&csv=true");

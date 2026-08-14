@@ -25,10 +25,10 @@ public class NSEDailyTradeDetailsMailerJob extends AbstractQuartzJob {
 
     private static final Logger LOGGER = Logger.getLogger(NSEDailyTradeDetailsMailerJob.class.getName());
 
-    private NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
+    private final NSEPriceSpurtDetailRepository nsePriceSpurtDetailRepository = new NSEPriceSpurtDetailRepository();
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public void executeJob(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.nsePriceSpurtDetailRepository.findAll();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");

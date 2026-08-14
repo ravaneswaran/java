@@ -24,7 +24,7 @@ public class NSEHolidayMailerJob extends AbstractQuartzJob {
     private static final Logger LOGGER = Logger.getLogger(NSEHolidayMailerJob.class.getName());
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public void executeJob(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         Date toDate = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, YYYY");

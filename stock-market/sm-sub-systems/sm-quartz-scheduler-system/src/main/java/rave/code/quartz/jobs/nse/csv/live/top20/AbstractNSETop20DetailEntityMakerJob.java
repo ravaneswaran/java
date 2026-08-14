@@ -19,8 +19,8 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNSETop20DetailEntityMakerJob.class.getName());
 
-    private NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
-    private NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
+    private final NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
+    private final NSETop20DetailRepository nseTop20DetailRepository = new NSETop20DetailRepository();
     protected String top20Type;
     protected String top20SubType;
 
@@ -40,8 +40,8 @@ public class AbstractNSETop20DetailEntityMakerJob extends AbstractNSELiveMarketE
     @Override
     public List<NSETop20DetailEntity> transformSourceData(List<CSVRecord> sourceData) {
         List<NSETop20DetailEntity> nseTop20DetailEntities = new ArrayList<>();
-        if(sourceData.size() > 0) {
-            CSVRecord header = sourceData.remove(0);
+        if(!sourceData.isEmpty()) {
+            CSVRecord header = sourceData.removeFirst();
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
 
