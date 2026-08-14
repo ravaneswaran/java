@@ -34,6 +34,8 @@ public enum QuartzJob {
     NSE_PRE_OPEN_MARKET_FO_REGULAR_SESSION_JOB("NSE Pre Open Market FO Regular Session", "J-PRE-FO-REG"),
     NSE_PRE_OPEN_MARKET_OTHERS_REGULAR_SESSION_JOB("NSE Pre Open Market Others Regular Session", "J-PRE-OTHERS-REG"),
 
+    NSE_PRE_OPEN_MARKET_HISTORY_JOB("NSE Pre Open Market History", "J-PRE-OPEN-HISTORY"),
+
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_1_ETF_JOB("NSE ETF T+0 Live Session", "J-S1-ETF-T+0-Live"),
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_2_ETF_JOB("NSE ETF T+0 Live Session", "J-S2-ETF-T+0-Live"),
     NSE_T_PLUS_0_LIVE_SESSION_SLOT_3_ETF_JOB("NSE ETF T+0 Live Session", "J-S3-ETF-T+0-Live"),
