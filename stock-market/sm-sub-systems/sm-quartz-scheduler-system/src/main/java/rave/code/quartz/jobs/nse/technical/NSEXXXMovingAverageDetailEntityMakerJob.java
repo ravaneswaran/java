@@ -13,6 +13,7 @@ import rave.code.repository.nse.NSESimpleMovingAverageDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -33,11 +34,14 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
         NSESimpleMovingAverageDetailRepository nseSimpleMovingAverageDetailRepository = new NSESimpleMovingAverageDetailRepository();
         NSEExponentialMovingAverageDetailRepository nseExponentialMovingAverageDetailRepository = new NSEExponentialMovingAverageDetailRepository();
 
+        List<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntities = new ArrayList<>();
+        List<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntities = new ArrayList<>();
 
         List<NSEStockBaseEntity> nseStockBaseEntities = nseStockBaseRepository.findAll();
         for (NSEStockBaseEntity nseStockBaseEntity : nseStockBaseEntities) {
+
             String symbol = nseStockBaseEntity.getSymbol();
-            try (Stream<NSEDayPriceDetailEntity> nseDayPriceDetailStream = nseDayPriceDetailRepository.findEquitiesForSymbol(symbol)) {
+            try (Stream<NSEDayPriceDetailEntity> nseDayPriceDetailStream = nseDayPriceDetailRepository.findStreamedEntitiesBySymbol(symbol)) {
                 List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities = nseDayPriceDetailStream.toList();
                 int size = nseDayPriceDetailEntities.size();
 
@@ -70,7 +74,7 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
                         nseSimpleMovingAverageDetailEntity = new NSESimpleMovingAverageDetailEntity();
                         nseSimpleMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                     } else {
-                        String.format("updating the old Simple Moving Average for the stock %s", nseStockBaseEntity.getSymbol());
+                        LOGGER.info(String.format("updating the old Simple Moving Average for the stock %s", nseStockBaseEntity.getSymbol()));
                         nseSimpleMovingAverageDetailEntity.setNewEntity(false);
                         nseSimpleMovingAverageDetailEntity.setModifiedDate(new Date());
                     }
@@ -87,7 +91,7 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
                         nseExponentialMovingAverageDetailEntity = new NSEExponentialMovingAverageDetailEntity();
                         nseExponentialMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                     } else {
-                        String.format("updating the old Exponential Moving Average for the stock %s", nseStockBaseEntity.getSymbol());
+                        LOGGER.info(String.format("updating the old Exponential Moving Average for the stock %s", nseStockBaseEntity.getSymbol()));
                         nseExponentialMovingAverageDetailEntity.setNewEntity(false);
                         nseExponentialMovingAverageDetailEntity.setModifiedDate(new Date());
                     }
@@ -99,11 +103,13 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
                     nseExponentialMovingAverageDetailEntity.setEMA100D(exponentialMovingAverageFor100Days);
                     nseExponentialMovingAverageDetailEntity.setEMA200D(exponentialMovingAverageFor200Days);
 
-                    nseSimpleMovingAverageDetailRepository.upsert(nseSimpleMovingAverageDetailEntity);
-                    nseExponentialMovingAverageDetailRepository.upsert(nseExponentialMovingAverageDetailEntity);
+                    nseSimpleMovingAverageDetailEntities.add(nseSimpleMovingAverageDetailEntity);
+                    nseExponentialMovingAverageDetailEntities.add(nseExponentialMovingAverageDetailEntity);
                 }
             }
         }
+        nseSimpleMovingAverageDetailRepository.bulkUpsert(nseSimpleMovingAverageDetailEntities);
+        nseExponentialMovingAverageDetailRepository.bulkUpsert(nseExponentialMovingAverageDetailEntities);
     }
 
     private double calculateSimpleMovingAverage(List<NSEDayPriceDetailEntity> nseDayPriceDetailEntities) {

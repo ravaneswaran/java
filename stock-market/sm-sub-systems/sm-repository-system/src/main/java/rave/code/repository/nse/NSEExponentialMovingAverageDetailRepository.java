@@ -19,16 +19,18 @@ public class NSEExponentialMovingAverageDetailRepository extends AbstractNSERepo
     }
 
     public NSEExponentialMovingAverageDetailEntity findByForeignKey(String foreignKey) {
-        CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<NSEExponentialMovingAverageDetailEntity> cq = cb.createQuery(NSEExponentialMovingAverageDetailEntity.class);
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEExponentialMovingAverageDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEExponentialMovingAverageDetailEntity.class);
 
-        Root<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntityRoot = cq.from(NSEExponentialMovingAverageDetailEntity.class);
-        cq.where(cb.equal(nseExponentialMovingAverageDetailEntityRoot.get("nseStockBaseEntity").get("id"), foreignKey));
+        Root<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntityRoot = criteriaQuery.from(NSEExponentialMovingAverageDetailEntity.class);
+        criteriaQuery.where(criteriaBuilder.equal(nseExponentialMovingAverageDetailEntityRoot.get("nseStockBaseEntity").get("id"), foreignKey));
 
-        List<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntities = this.getEntityManager().createQuery(cq).getResultList();
+        List<NSEExponentialMovingAverageDetailEntity> nseExponentialMovingAverageDetailEntities = this.getEntityManager().createQuery(criteriaQuery).getResultList();
 
         if (nseExponentialMovingAverageDetailEntities.size() == 1) {
-            return nseExponentialMovingAverageDetailEntities.get(0);
+            NSEExponentialMovingAverageDetailEntity nseExponentialMovingAverageDetailEntity = nseExponentialMovingAverageDetailEntities.getFirst();
+            nseExponentialMovingAverageDetailEntity.setNewEntity(false);
+            return nseExponentialMovingAverageDetailEntity;
         } else {
             return null;
         }

@@ -19,16 +19,18 @@ public class NSESimpleMovingAverageDetailRepository extends AbstractNSERepositor
     }
 
     public NSESimpleMovingAverageDetailEntity findByForeignKey(String foreignKey) {
-        CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<NSESimpleMovingAverageDetailEntity> cq = cb.createQuery(NSESimpleMovingAverageDetailEntity.class);
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSESimpleMovingAverageDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSESimpleMovingAverageDetailEntity.class);
 
-        Root<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntityRoot = cq.from(NSESimpleMovingAverageDetailEntity.class);
-        cq.where(cb.equal(nseSimpleMovingAverageDetailEntityRoot.get("nseStockBaseEntity").get("id"), foreignKey));
+        Root<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntityRoot = criteriaQuery.from(NSESimpleMovingAverageDetailEntity.class);
+        criteriaQuery.where(criteriaBuilder.equal(nseSimpleMovingAverageDetailEntityRoot.get("nseStockBaseEntity").get("id"), foreignKey));
 
-        List<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntities = this.getEntityManager().createQuery(cq).getResultList();
+        List<NSESimpleMovingAverageDetailEntity> nseSimpleMovingAverageDetailEntities = this.getEntityManager().createQuery(criteriaQuery).getResultList();
 
         if (nseSimpleMovingAverageDetailEntities.size() == 1) {
-            return nseSimpleMovingAverageDetailEntities.get(0);
+            NSESimpleMovingAverageDetailEntity nseSimpleMovingAverageDetailEntity = nseSimpleMovingAverageDetailEntities.getFirst();
+            nseSimpleMovingAverageDetailEntity.setNewEntity(false);
+            return nseSimpleMovingAverageDetailEntity;
         } else {
             return null;
         }

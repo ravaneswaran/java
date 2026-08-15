@@ -5,6 +5,7 @@ import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,21 +55,25 @@ public class NSEDayPriceDetailRepository extends AbstractNSERepositoryManager<NS
         LOGGER.log(Level.INFO, String.format("%s rows have been deleted from nse_day_price_detail table...", noOfRowsAffected));
     }
 
-    public Stream<NSEDayPriceDetailEntity> findEquitiesForSymbol(String symbol){
-        StringBuffer queryBuffer = new StringBuffer();
-        queryBuffer.append("SELECT * FROM nse_day_price_detail WHERE");
-        queryBuffer.append(" ");
-        queryBuffer.append("series").append("=").append("'").append("EQ").append("'");
-        queryBuffer.append("AND").append(" ");
-        queryBuffer.append("symbol").append("=").append("'").append(symbol).append("'");
-        queryBuffer.append(" ");
-        queryBuffer.append("ORDER BY business_date DESC");
+    @Override
+    public List<NSEDayPriceDetailEntity> findAll() {
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEDayPriceDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEDayPriceDetailEntity.class);
+        Root<NSEDayPriceDetailEntity> root = criteriaQuery.from(NSEDayPriceDetailEntity.class);
+        Order symbol = criteriaBuilder.asc(root.get("symbol"));
+        Order businessDate = criteriaBuilder.asc(root.get("businessDate"));
+        criteriaQuery.select(root).orderBy(symbol, businessDate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+    }
 
-        Query query = this.getEntityManager().createNativeQuery(queryBuffer.toString(), NSEDayPriceDetailEntity.class);
-        query.setHint("org.hibernate.fetchSize", 10000000);
-        query.setHint("org.hibernate.readOnly", true);
-
-        return query.getResultStream();
-
+    public Stream<NSEDayPriceDetailEntity> findStreamedEntitiesBySymbol(String symbol){
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEDayPriceDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEDayPriceDetailEntity.class);
+        Root<NSEDayPriceDetailEntity> root = criteriaQuery.from(NSEDayPriceDetailEntity.class);
+        Predicate seriesPredicate = criteriaBuilder.equal(root.get("series"), "EQ");
+        Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
+        Order businessDate = criteriaBuilder.desc(root.get("businessDate"));
+        criteriaQuery.select(root).where(seriesPredicate, symbolPredicate).orderBy(businessDate);
+        return this.getEntityManager().createQuery(criteriaQuery).getResultStream();
     }
 }

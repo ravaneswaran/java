@@ -1,9 +1,11 @@
 package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.entity.nse.histories.NSEPreOpenMarketDetailHistoryEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,5 +84,15 @@ public class NSEStockBaseRepository extends AbstractNSERepositoryManager<NSEStoc
             }
         }
         return mappedStockBaseEntity;
+    }
+
+    public List<NSEStockBaseEntity> findAll(){
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<NSEStockBaseEntity> criteriaQuery = criteriaBuilder.createQuery(NSEStockBaseEntity.class);
+        Root<NSEStockBaseEntity> root = criteriaQuery.from(NSEStockBaseEntity.class);
+        Order symbol = criteriaBuilder.asc(root.get("symbol"));
+        criteriaQuery.select(root).distinct(true).orderBy(symbol);
+
+        return this.getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 }
