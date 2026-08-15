@@ -6,6 +6,8 @@ import rave.code.entity.groww.HolidayEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -89,14 +91,22 @@ public abstract class AbstractRepositoryManager<T> {
         entityTransaction.commit();
     }
 
+    public void deleteAll(){
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaDelete<T> criteriaDelete = criteriaBuilder.createCriteriaDelete(this.type);
+        criteriaDelete.from(this.type);
+        this.getEntityManager().getTransaction().begin();
+        int noOfDeletes = this.getEntityManager().createQuery(criteriaDelete).executeUpdate();
+        this.getEntityManager().getTransaction().commit();;
+        LOGGER.info(String.format("%s entity(s) of type( %s ) are deleted/removed...", noOfDeletes, this.type.getName()));
+    }
+
     public void flushEntityManager() {
         this.getEntityManager().flush();
-
     }
 
     public void clearEntityManager() {
         this.getEntityManager().clear();
-        ;
     }
 
     public void detachEntity(T entity) {

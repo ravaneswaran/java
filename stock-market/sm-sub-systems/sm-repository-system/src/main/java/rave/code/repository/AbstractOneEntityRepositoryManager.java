@@ -32,10 +32,10 @@ public class AbstractOneEntityRepositoryManager<T> extends AbstractRepositoryMan
             throw new RuntimeException("Illicit item found...only one entity should present in the table.");
         } else {
             List<T> listItems = query.getResultList();
-            if (listItems.size() == 0) {
+            if (listItems.isEmpty()) {
                 return null;
             } else {
-                return (T) listItems.get(0);
+                return (T) listItems.getFirst();
             }
         }
     }
