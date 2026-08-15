@@ -1,6 +1,7 @@
 package rave.code.repository;
 
 import rave.code.entity.AbstractEntity;
+import rave.code.entity.groww.HolidayEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -57,8 +58,8 @@ public abstract class AbstractRepositoryManager<T> {
     }
 
     public T upsert(T entity) {
-        AbstractEntity abstractEntity = (AbstractEntity)entity;
-        if(abstractEntity.isNewEntity()){
+        AbstractEntity abstractEntity = (AbstractEntity) entity;
+        if (abstractEntity.isNewEntity()) {
             this.save(entity);
         } else {
             this.update(entity);
@@ -78,30 +79,27 @@ public abstract class AbstractRepositoryManager<T> {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         for (T entity : entities) {
-            if (null != entity) {
-                AbstractEntity abstractEntity = (AbstractEntity) entity;
-                if (abstractEntity.isNewEntity()) {
-                    entityManager.persist(entity);
-                } else {
-                    entityManager.merge(entity);
-                }
+            AbstractEntity abstractEntity = (AbstractEntity) entity;
+            if (abstractEntity.isNewEntity()) {
+                entityManager.persist(entity);
             } else {
-                LOGGER.log(Level.SEVERE, "stock base entity found to be null...");
+                entityManager.merge(entity);
             }
         }
         entityTransaction.commit();
     }
 
-    public void flushEntityManager(){
+    public void flushEntityManager() {
         this.getEntityManager().flush();
 
     }
 
-    public void clearEntityManager(){
-        this.getEntityManager().clear();;
+    public void clearEntityManager() {
+        this.getEntityManager().clear();
+        ;
     }
 
-    public void detachEntity(T entity){
+    public void detachEntity(T entity) {
         this.getEntityManager().detach(entity);
     }
 

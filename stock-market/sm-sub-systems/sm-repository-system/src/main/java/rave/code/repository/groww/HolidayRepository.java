@@ -2,9 +2,13 @@ package rave.code.repository.groww;
 
 import rave.code.entity.groww.HolidayEntity;
 
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import java.util.logging.Logger;
 
 public class HolidayRepository extends AbstractGrowwRepositoryManager<HolidayEntity> {
+
+    private static final Logger LOGGER = Logger.getLogger(HolidayRepository.class.getName());
 
     public HolidayRepository() {
         this(HolidayEntity.class);
@@ -14,8 +18,13 @@ public class HolidayRepository extends AbstractGrowwRepositoryManager<HolidayEnt
         super(type);
     }
 
-    @Override
-    public void bulkUpsert(List<HolidayEntity> entities) {
-        throw new RuntimeException("Implementation not required....");
+    public void deleteAll(){
+        CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+        CriteriaDelete<HolidayEntity> criteriaDelete = criteriaBuilder.createCriteriaDelete(HolidayEntity.class);
+        criteriaDelete.from(HolidayEntity.class);
+        this.getEntityManager().getTransaction().begin();
+        int noOfDeletes = this.getEntityManager().createQuery(criteriaDelete).executeUpdate();
+        this.getEntityManager().getTransaction().commit();;
+        LOGGER.info(String.format("%s numbers of HolidayEntities are removed/deleted...", noOfDeletes));
     }
 }

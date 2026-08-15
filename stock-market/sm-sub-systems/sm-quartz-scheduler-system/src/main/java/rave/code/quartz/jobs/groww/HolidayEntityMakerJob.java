@@ -6,6 +6,7 @@ import rave.code.data.parser.html.groww.HolidayListParser;
 import rave.code.entity.groww.HolidayEntity;
 import rave.code.quartz.jobs.AbstractWebPageEntityMakerJob;
 import rave.code.repository.groww.HolidayRepository;
+import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class HolidayEntityMakerJob extends AbstractWebPageEntityMakerJob<HolidayModel, HolidayEntity> {
 
     public static void main(String[] args) throws JobExecutionException {
+        JavaUtilLogDecor.setupLogDecor();
         new HolidayEntityMakerJob().execute(null);
     }
 
@@ -47,9 +49,7 @@ public class HolidayEntityMakerJob extends AbstractWebPageEntityMakerJob<Holiday
 
     @Override
     public void saveTransformedData(List<HolidayEntity> transformedData) {
-        HolidayRepository stockMarketHolidayDataAccess = new HolidayRepository();
-        for (HolidayEntity entity : transformedData) {
-            stockMarketHolidayDataAccess.save(entity);
-        }
+        HolidayRepository holidayRepository = new HolidayRepository();
+        holidayRepository.bulkUpsert(transformedData);
     }
 }

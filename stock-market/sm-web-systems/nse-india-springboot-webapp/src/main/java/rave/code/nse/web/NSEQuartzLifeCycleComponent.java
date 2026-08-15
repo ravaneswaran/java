@@ -1,5 +1,6 @@
 package rave.code.nse.web;
 
+import org.quartz.JobExecutionException;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Component;
 import rave.code.data.model.web.HolidayDetailModel;
 import rave.code.nse.web.properties.NSEQuartzOverrideProperties;
 import rave.code.nse.web.service.NSEHolidayService;
+import rave.code.quartz.jobs.groww.HolidayEntityMakerJob;
 import rave.code.quartz.scheduler.NSEQuartzScheduler;
+import rave.code.repository.groww.HolidayRepository;
 import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import java.io.IOException;
@@ -52,6 +55,15 @@ public class NSEQuartzLifeCycleComponent implements SmartLifecycle {
             this.scheduler.clear();
         } catch (SchedulerException schedulerException) {
             LOGGER.log(Level.SEVERE, schedulerException.getMessage());
+        }
+
+        HolidayRepository holidayRepository = new HolidayRepository();
+        holidayRepository.deleteAll();
+        HolidayEntityMakerJob holidayEntityMakerJob = new HolidayEntityMakerJob();
+        try {
+            holidayEntityMakerJob.execute(null);
+        } catch (JobExecutionException jobExecutionException) {
+            LOGGER.log(Level.SEVERE, jobExecutionException.getMessage());
         }
 
         HolidayCalendar holidayCalendar = new HolidayCalendar();

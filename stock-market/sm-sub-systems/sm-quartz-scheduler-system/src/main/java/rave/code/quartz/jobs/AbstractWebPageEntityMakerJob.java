@@ -14,7 +14,7 @@ public abstract class AbstractWebPageEntityMakerJob<S, T> extends AbstractQuartz
     public abstract void saveTransformedData(List<T> transformedData);
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public void executeJob(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         List<S> sourceData = this.getDataFromSource();
         List<T> transformedData = this.transformSourceData(sourceData);
         saveTransformedData(transformedData);
