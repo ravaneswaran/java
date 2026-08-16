@@ -1,12 +1,14 @@
 package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
-import rave.code.utility.log.JavaUtilLogDecor;
 import rave.code.utility.log.message.JavaUtilLogMessage;
 
+import javax.persistence.criteria.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<NSEPriceSpurtDetailEntity> {
@@ -17,28 +19,34 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         super(NSEPriceSpurtDetailEntity.class);
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctOpenPricePriceSpurtDetails() {
-        return this.findDistinctOpenPricePriceSpurtDetailsForADay(new Date());
-    }
-
     @Override
     public List<NSEPriceSpurtDetailEntity> findLimitedEntitiesBySymbol(String symbol, int limit) {
         return List.of();
     }
 
-    public List<NSEPriceSpurtDetailEntity> findPriceSpurtDetailsForASymbol(String symbol) {
-        return this.findPriceSpurtDetailsForASymbolOnAParticularDay(symbol, null);
+    public List<NSEPriceSpurtDetailEntity> findDistinctNSEPricePriceSpurtDetails() {
+        return this.findByDate(new Date());
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctOpenPricePriceSpurtDetails(int lowerOpenPriceLimit, int upperOpenPriceLimit) {
-        return this.findDistinctOpenPricePriceSpurtDetailsForADay(new Date(), lowerOpenPriceLimit, upperOpenPriceLimit);
+    public List<NSEPriceSpurtDetailEntity> findBySymbol(String symbol) {
+        return this.findBySymbolAndDate(symbol, new Date());
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctPercentageChangePriceSpurtDetails(int lowerPercentageChangeLimit, int upperPercentageChangeLimit) {
-        return this.findDistinctPercentageChangePriceSpurtDetailsForADay(new Date(), lowerPercentageChangeLimit, upperPercentageChangeLimit);
+    public List<NSEPriceSpurtDetailEntity> findDistinctNSEPricePriceSpurtDetailsByOpenPriceRange(int lowerOpenPrice, int upperOpenPrice) {
+        return this.findByOpenPriceRangeAndDate(lowerOpenPrice, upperOpenPrice, new Date());
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctOpenPricePriceSpurtDetailsForADay(Date date) {
+    public List<NSEPriceSpurtDetailEntity> findDistinctNSEPriceSpurtDetailsByPercentageChange(int lowerPercentageChange, int upperPercentageChange) {
+        return this.findByPercentageChangeRangeAndDate(lowerPercentageChange, upperPercentageChange, new Date());
+    }
+
+    /**
+     * Method to find list of distinct NSEPriceSpurtDetailEntity on a particular day
+     *
+     * @param date  :- criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
+     * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
+     **/
+    public List<NSEPriceSpurtDetailEntity> findByDate(Date date) {
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
@@ -58,7 +66,16 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctOpenPricePriceSpurtDetailsForADay(Date date, int lowerOpenPriceLimit, int upperOpenPriceLimit) {
+    /**
+     * Method to find list of distinct NSEPriceSpurtDetailEntity on a particular day that falls between open price range
+     *
+     * @param lowerOpenPrice :- criteria to filter out NSEPriceSpurtDetailEntity
+     * @param upperOpenPrice :- criteria to filter out NSEPriceSpurtDetailEntity
+     * @param date           :- criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
+     * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
+     **/
+    public List<NSEPriceSpurtDetailEntity> findByOpenPriceRangeAndDate(int lowerOpenPrice, int upperOpenPrice, Date date) {
+        date = (date == null) ? new Date() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
@@ -74,14 +91,23 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         queryBuilder.append("'").append(toDateEndTimeString).append("'");
         queryBuilder.append(" ").append("AND");
         queryBuilder.append(" ");
-        queryBuilder.append("open_price").append(" ").append("BETWEEN").append(" ").append(lowerOpenPriceLimit).append(" ").append("AND").append(" ").append(upperOpenPriceLimit);
+        queryBuilder.append("open_price").append(" ").append("BETWEEN").append(" ").append(lowerOpenPrice).append(" ").append("AND").append(" ").append(upperOpenPrice);
         queryBuilder.append(" ");
         queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY open_price;");
 
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctPercentageChangePriceSpurtDetailsForADay(Date date, int lowerPercentageChangeLimit, int upperPercentageChangeLimit) {
+    /**
+     * Method to find list of distinct NSEPriceSpurtDetailEntity on a particular day that falls between percentage change range
+     *
+     * @param lowerPercentageChange :- criteria to filter out NSEPriceSpurtDetailEntity
+     * @param upperPercentageChange :- criteria to filter out NSEPriceSpurtDetailEntity
+     * @param date                  :- criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
+     * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
+     **/
+    public List<NSEPriceSpurtDetailEntity> findByPercentageChangeRangeAndDate(int lowerPercentageChange, int upperPercentageChange, Date date) {
+        date = (date == null) ? new Date() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
@@ -97,7 +123,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         queryBuilder.append("'").append(toDateEndTimeString).append("'");
         queryBuilder.append(" ").append("AND");
         queryBuilder.append(" ");
-        queryBuilder.append("percentage_change").append(" ").append("BETWEEN").append(" ").append(lowerPercentageChangeLimit).append(" ").append("AND").append(" ").append(upperPercentageChangeLimit);
+        queryBuilder.append("percentage_change").append(" ").append("BETWEEN").append(" ").append(lowerPercentageChange).append(" ").append("AND").append(" ").append(upperPercentageChange);
         queryBuilder.append(" ");
         queryBuilder.append("GROUP BY symbol) x ON t.symbol = x.symbol AND t.created_date = x.max_created_date ORDER BY percentage_change;");
 
@@ -107,12 +133,49 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
-    public List<NSEPriceSpurtDetailEntity> findDistinctPriceDifferencePriceSpurtDetailsForADay(Date date, int priceDifference) {
-        SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
-        String toDateString = simpleDateFormatWithoutTime.format(date);
 
+    /**
+     * Method to find list of distinct NSEPriceSpurtDetailEntity for a symbol on a particular day and with price difference between
+     * LastTradedPrice and OpenPrice
+     *
+     * @param priceDifference :- criteria to filter out NSEPriceSpurtDetailEntity
+     * @param date            :- criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
+     * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
+     **/
+    public List<NSEPriceSpurtDetailEntity> findByPriceDifferenceAndDate(int priceDifference, Date date) {
+        date = (date == null) ? new Date() : date;
+        SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String toDateString = simpleDateFormatWithoutTime.format(date);
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
+
+        /*try {
+            Date fromDate = simpleDateFormatWithTime.parse(toDateStartTimeString);
+            Date toDate = simpleDateFormatWithTime.parse(toDateEndTimeString);
+
+            CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
+            Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
+
+            // Creating a subquery
+            Subquery<LocalDateTime> subquery = criteriaQuery.subquery(LocalDateTime.class);
+            Root<NSEPriceSpurtDetailEntity> subRoot = subquery.from(NSEPriceSpurtDetailEntity.class);
+            Expression<LocalDateTime> createdDateExpression = subRoot.<LocalDateTime>get("createdDate");
+            subquery.select(criteriaBuilder.greatest(createdDateExpression)).where(criteriaBuilder.equal(subRoot.get("symbol"), root.get("symbol"))
+                    , criteriaBuilder.lessThanOrEqualTo(subRoot.get("openPrice"), new BigDecimal("500"))
+                    , criteriaBuilder.between(subRoot.get("createdDate"), fromDate, toDate)
+                    , criteriaBuilder.greaterThanOrEqualTo(criteriaBuilder.diff(subRoot.get("lastTradedPrice"), subRoot.get("openPrice")), criteriaBuilder.literal((double) priceDifference)));
+
+            Predicate createdDatePredicate = criteriaBuilder.equal(root.get("createdDate"), subquery);
+            Order lastTradedPriceOrder = criteriaBuilder.asc(root.get("lastTradedPrice"));
+            criteriaQuery.select(root).where(createdDatePredicate).orderBy(lastTradedPriceOrder);
+
+            return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        } catch (ParseException parseException) {
+            LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+            return List.of();
+        }*/
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE open_price <= 500 AND created_date BETWEEN");
@@ -133,25 +196,37 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
     }
 
-    public List<NSEPriceSpurtDetailEntity> findPriceSpurtDetailsForASymbolOnAParticularDay(String symbol, Date date) {
-        SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
+    /**
+     * Method to find list of NSEPriceSpurtDetailEntity for a symbol on a particular day
+     *
+     * @param symbol :- first criteria to filter out NSEPriceSpurtDetailEntity
+     * @param date   :- second criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
+     * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
+     **/
+    public List<NSEPriceSpurtDetailEntity> findBySymbolAndDate(String symbol, Date date) {
         date = (date == null) ? new Date() : date;
+        SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String toDateString = simpleDateFormatWithoutTime.format(date);
-
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
+        try {
+            Date fromDate = simpleDateFormatWithTime.parse(toDateStartTimeString);
+            Date toDate = simpleDateFormatWithTime.parse(toDateEndTimeString);
 
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT * FROM nse_price_spurt_detail WHERE symbol=").append("'").append(symbol).append("'");
-        queryBuilder.append(" ");
-        queryBuilder.append("AND");
-        queryBuilder.append(" ");
-        queryBuilder.append("created_date").append(" ").append(">=").append(" ").append("'").append(toDateStartTimeString).append("'");
-        queryBuilder.append(" ").append("AND").append(" ");
-        queryBuilder.append("created_date").append(" ").append("<=").append(" ").append("'").append(toDateEndTimeString).append("'");
-        queryBuilder.append(" ").append("ORDER BY").append(" ").append("symbol").append(" ").append("ASC").append(",").append(" ");
-        queryBuilder.append("created_date").append(" ").append("DESC");
+            CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+            CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
+            Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
+            Predicate symbolPredicate = criteriaBuilder.equal(root.get("symbol"), symbol);
+            Predicate datePredicate = criteriaBuilder.between(root.get("createdDate"), fromDate, toDate);
+            Order symbolOrder = criteriaBuilder.asc(root.get("symbol"));
+            Order createDateOrder = criteriaBuilder.desc(root.get("createdDate"));
+            criteriaQuery.select(root).where(symbolPredicate, datePredicate).orderBy(symbolOrder, createDateOrder);
 
-        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+            return this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        } catch (ParseException parseException) {
+            LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+            return List.of();
+        }
     }
 }

@@ -6,6 +6,8 @@ import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.tech.analysis.Candle;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -22,18 +24,24 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     }
 
     public PriceSpurtsWebPage getOpenPriceWebPage(int lowerOpenPriceLimit, int upperOpenPriceLimit) {
-        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctOpenPricePriceSpurtDetails(lowerOpenPriceLimit, upperOpenPriceLimit);
+        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctNSEPricePriceSpurtDetailsByOpenPriceRange(lowerOpenPriceLimit, upperOpenPriceLimit);
         return this.getPriceSpurtsWebPage(entities);
     }
 
     public PriceSpurtsWebPage getPercentageChangeWebPage(int lowerPercentageChangeLimit, int upperPercentageChangeLimit) {
-        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctPercentageChangePriceSpurtDetails(lowerPercentageChangeLimit, upperPercentageChangeLimit);
+        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctNSEPriceSpurtDetailsByPercentageChange(lowerPercentageChangeLimit, upperPercentageChangeLimit);
         return this.getPriceSpurtsWebPage(entities);
     }
 
     public PriceSpurtsWebPage getPriceDifferenceWebPage(int priceDifference) {
-        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findDistinctPriceDifferencePriceSpurtDetailsForADay(new Date(), priceDifference);
-        return this.getPriceSpurtsWebPage(entities);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = simpleDateFormat.parse("2026-08-13 00:00:00");
+            List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findByPriceDifferenceAndDate(priceDifference, date);
+            return this.getPriceSpurtsWebPage(entities);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private PriceSpurtsWebPage getPriceSpurtsWebPage(List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities) {
@@ -47,7 +55,7 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
             NSEPriceSpurtDetailModel nsePriceSpurtDetailModel = this.transformEntity(nsePriceSpurtDetailEntity);
 
             List<NSEPriceSpurtDetailModel> historyModels = new ArrayList<>();
-            List<NSEPriceSpurtDetailEntity> histories = this.nsePriceSpurtDetailRepository.findPriceSpurtDetailsForASymbol(symbol);
+            List<NSEPriceSpurtDetailEntity> histories = this.nsePriceSpurtDetailRepository.findBySymbol(symbol);
             histories = histories.stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getCreatedDate)).toList();
 
             for (NSEPriceSpurtDetailEntity history : histories) {

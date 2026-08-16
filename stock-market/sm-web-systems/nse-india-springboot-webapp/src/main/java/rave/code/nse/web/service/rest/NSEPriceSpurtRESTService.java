@@ -18,7 +18,7 @@ public class NSEPriceSpurtRESTService<MarketOnOpenWebPage> extends AbstractNSEPr
 
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
-        return this.nsePriceSpurtDetailRepository.findDistinctOpenPricePriceSpurtDetails();
+        return this.nsePriceSpurtDetailRepository.findDistinctNSEPricePriceSpurtDetails();
     }
 
     @Override

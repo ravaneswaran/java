@@ -16,7 +16,7 @@ public abstract class AbstractNSEPriceSpurtService<W> extends AbstractNSEService
 
     @Override
     public List<NSEPriceSpurtDetailEntity> getEntities() {
-        return this.nsePriceSpurtDetailRepository.findDistinctOpenPricePriceSpurtDetails();
+        return this.nsePriceSpurtDetailRepository.findDistinctNSEPricePriceSpurtDetails();
     }
 
     public NSEPriceSpurtDetailModel transformEntity(NSEPriceSpurtDetailEntity nsePriceSpurtDetailEntity) {
