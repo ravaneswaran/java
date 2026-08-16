@@ -28,10 +28,6 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.findByDate(new Date());
     }
 
-    public List<NSEPriceSpurtDetailEntity> findBySymbol(String symbol) {
-        return this.findBySymbolAndDate(symbol, new Date());
-    }
-
     public List<NSEPriceSpurtDetailEntity> findDistinctNSEPricePriceSpurtDetailsByOpenPriceRange(int lowerOpenPrice, int upperOpenPrice) {
         return this.findByOpenPriceRangeAndDate(lowerOpenPrice, upperOpenPrice, new Date());
     }
@@ -40,10 +36,14 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         return this.findByPercentageChangeRangeAndDate(lowerPercentageChange, upperPercentageChange, new Date());
     }
 
+    public List<NSEPriceSpurtDetailEntity> findBySymbol(String symbol) {
+        return this.findBySymbolAndDate(symbol, new Date());
+    }
+
     /**
      * Method to find list of distinct NSEPriceSpurtDetailEntity on a particular day
      *
-     * @param date  :- criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
+     * @param date :- criteria to filter out NSEPriceSpurtDetailEntity on a day from time 00:00:00 - 23:59:00, if the date is null then today will be in effect
      * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
      **/
     public List<NSEPriceSpurtDetailEntity> findByDate(Date date) {
