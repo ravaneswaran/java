@@ -12,6 +12,14 @@
         <table>
             <tbody>
             <tr>
+                <td class="trade-popup-container-stock-td-left">Prev Close</td>
+                <td class="trade-popup-container-stock-td-right" th:text="${history.previousClosePrice}"></td>
+            </tr>
+            <tr>
+                <td th:class="${history.ltpBackgroundCss}" >LTP</td>
+                <td th:class="${history.ltpBackgroundCss}" th:text="${history.lastTradedPrice}"></td>
+            </tr>
+            <tr>
                 <td class="trade-popup-container-stock-td-left">Open Price</td>
                 <td class="trade-popup-container-stock-td-right" th:text="${history.openPrice}"></td>
             </tr>
@@ -22,14 +30,6 @@
             <tr>
                 <td class="trade-popup-container-stock-td-left">Low Price</td>
                 <td class="trade-popup-container-stock-td-right" th:text="${history.lowPrice}"></td>
-            </tr>
-            <tr>
-                <td th:class="${history.ltpBackgroundCss}" >LTP</td>
-                <td th:class="${history.ltpBackgroundCss}" th:text="${history.lastTradedPrice}"></td>
-            </tr>
-            <tr>
-                <td class="trade-popup-container-stock-td-left">Prev Close</td>
-                <td class="trade-popup-container-stock-td-right" th:text="${history.previousClosePrice}"></td>
             </tr>
             <tr>
                 <td class="trade-popup-container-stock-td-left">% Change</td>

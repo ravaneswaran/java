@@ -11,6 +11,14 @@
                         <table>
                             <tbody>
                             <tr>
+                                <td class="td-left">Prev Close</td>
+                                <td class="td-right" th:text="${stock.previousClosePrice}"></td>
+                            </tr>
+                            <tr>
+                                <td class="td-left">LTP</td>
+                                <td class="td-right" th:text="${stock.lastTradedPrice}"></td>
+                            </tr>
+                            <tr>
                                 <td class="td-left">Open Price</td>
                                 <td class="td-right" th:text="${stock.openPrice}"></td>
                             </tr>
@@ -21,14 +29,6 @@
                             <tr>
                                 <td class="td-left">Low Price</td>
                                 <td class="td-right" th:text="${stock.lowPrice}"></td>
-                            </tr>
-                            <tr>
-                                <td class="td-left">LTP</td>
-                                <td class="td-right" th:text="${stock.lastTradedPrice}"></td>
-                            </tr>
-                            <tr>
-                                <td class="td-left">Prev Close</td>
-                                <td class="td-right" th:text="${stock.previousClosePrice}"></td>
                             </tr>
                             <tr>
                                 <td class="td-left">% Change</td>

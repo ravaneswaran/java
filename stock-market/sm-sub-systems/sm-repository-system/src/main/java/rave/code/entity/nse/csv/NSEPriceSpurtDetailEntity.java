@@ -34,6 +34,36 @@ public class NSEPriceSpurtDetailEntity extends AbstractNSECSVEntity implements C
     @Column(name = "ca")
     private Date CA;
 
+    public NSEPriceSpurtDetailEntity(){
+        super();
+    }
+
+    /**
+     * Constructor introduced for the query
+     *
+     * @param symbol :- string
+     * @param createdDate :- java.uti.date
+     */
+    public NSEPriceSpurtDetailEntity(String symbol, Date createdDate) {
+        super();
+        this.symbol = symbol;
+        this.createdDate = createdDate;
+    }
+
+    public NSEPriceSpurtDetailEntity(String id, String symbol, double openPrice, double highPrice, double lowPrice, double lastTradedPrice, double previousClosePrice, double percentageChange, int volume,  Date createdDate) {
+        super();
+        this.id = id;
+        this.symbol = symbol;
+        this.openPrice = openPrice;
+        this.highPrice = highPrice;
+        this.lowPrice = lowPrice;
+        this.lastTradedPrice = lastTradedPrice;
+        this.previousClosePrice = previousClosePrice;
+        this.percentageChange = percentageChange;
+        this.volume = volume;
+        this.createdDate = createdDate;
+    }
+
     public NSEStockBaseEntity getNseStockBaseEntity() {
         return nseStockBaseEntity;
     }

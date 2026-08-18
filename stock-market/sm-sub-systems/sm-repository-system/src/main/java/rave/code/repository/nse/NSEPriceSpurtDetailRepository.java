@@ -4,8 +4,10 @@ import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
 import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import javax.persistence.criteria.*;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -149,35 +151,35 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         String toDateString = simpleDateFormatWithoutTime.format(date);
         String toDateStartTimeString = String.format("%s %s", toDateString, "00:00:00");
         String toDateEndTimeString = String.format("%s %s", toDateString, "23:59:00");
-
-        /*try {
+        try {
             Date fromDate = simpleDateFormatWithTime.parse(toDateStartTimeString);
             Date toDate = simpleDateFormatWithTime.parse(toDateEndTimeString);
-
             CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
             CriteriaQuery<NSEPriceSpurtDetailEntity> criteriaQuery = criteriaBuilder.createQuery(NSEPriceSpurtDetailEntity.class);
             Root<NSEPriceSpurtDetailEntity> root = criteriaQuery.from(NSEPriceSpurtDetailEntity.class);
 
-            // Creating a subquery
-            Subquery<LocalDateTime> subquery = criteriaQuery.subquery(LocalDateTime.class);
-            Root<NSEPriceSpurtDetailEntity> subRoot = subquery.from(NSEPriceSpurtDetailEntity.class);
-            Expression<LocalDateTime> createdDateExpression = subRoot.<LocalDateTime>get("createdDate");
-            subquery.select(criteriaBuilder.greatest(createdDateExpression)).where(criteriaBuilder.equal(subRoot.get("symbol"), root.get("symbol"))
-                    , criteriaBuilder.lessThanOrEqualTo(subRoot.get("openPrice"), new BigDecimal("500"))
-                    , criteriaBuilder.between(subRoot.get("createdDate"), fromDate, toDate)
-                    , criteriaBuilder.greaterThanOrEqualTo(criteriaBuilder.diff(subRoot.get("lastTradedPrice"), subRoot.get("openPrice")), criteriaBuilder.literal((double) priceDifference)));
+            Path<String> id = root.<String>get("id");
+            Path<String> symbol = root.<String>get("symbol");
+            Path<Double> openPrice = root.<Double>get("openPrice");
+            Path<Double> highPrice = root.<Double>get("highPrice");
+            Path<Double> lowPrice = root.<Double>get("lowPrice");
+            Path<Double> lastTradedPrice = root.<Double>get("lastTradedPrice");
+            Path<Double> previousClosePrice = root.<Double>get("previousClosePrice");
+            Path<Double> percentageChange = root.<Double>get("percentageChange");
+            Path<Integer> volume = root.<Integer>get("volume");
+            Path<Date> createdDate = root.<Date>get("createdDate");
 
-            Predicate createdDatePredicate = criteriaBuilder.equal(root.get("createdDate"), subquery);
-            Order lastTradedPriceOrder = criteriaBuilder.asc(root.get("lastTradedPrice"));
-            criteriaQuery.select(root).where(createdDatePredicate).orderBy(lastTradedPriceOrder);
-
+            //criteriaQuery.multiselect(id, symbol, openPrice, highPrice, lowPrice, lastTradedPrice, previousClosePrice, percentageChange, volume, criteriaBuilder.greatest(createdDate).alias("maxCreatedDate"));
+            criteriaQuery.multiselect(symbol, criteriaBuilder.greatest(createdDate).alias("maxCreatedDate"));
+            criteriaQuery.where(criteriaBuilder.greaterThanOrEqualTo(criteriaBuilder.diff(root.get("lastTradedPrice"), root.get("openPrice")), criteriaBuilder.literal((double) priceDifference)), criteriaBuilder.between(createdDate, fromDate, toDate));
+            criteriaQuery.groupBy(symbol);
             return this.getEntityManager().createQuery(criteriaQuery).getResultList();
         } catch (ParseException parseException) {
             LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
             return List.of();
-        }*/
+        }
 
-        StringBuilder queryBuilder = new StringBuilder();
+        /*StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT t.* FROM nse_price_spurt_detail t INNER JOIN ( SELECT symbol, MAX(created_date) AS max_created_date FROM nse_price_spurt_detail WHERE open_price <= 500 AND created_date BETWEEN");
         queryBuilder.append(" ");
         queryBuilder.append("'").append(toDateStartTimeString).append("'");
@@ -193,7 +195,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
         JavaUtilLogMessage javaUtilLogMessage = new JavaUtilLogMessage(queryBuilder.toString());
         LOGGER.info(javaUtilLogMessage.getDecoratedLogMessage());
 
-        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();
+        return this.getEntityManager().createNativeQuery(queryBuilder.toString(), NSEPriceSpurtDetailEntity.class).getResultList();*/
     }
 
     /**

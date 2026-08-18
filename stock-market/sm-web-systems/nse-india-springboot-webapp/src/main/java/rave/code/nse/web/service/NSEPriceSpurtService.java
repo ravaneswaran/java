@@ -34,14 +34,8 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     }
 
     public PriceSpurtsWebPage getPriceDifferenceWebPage(int priceDifference) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Date date = simpleDateFormat.parse("2026-08-13 00:00:00");
-            List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findByPriceDifferenceAndDate(priceDifference, date);
-            return this.getPriceSpurtsWebPage(entities);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findByPriceDifferenceAndDate(priceDifference, null);
+        return this.getPriceSpurtsWebPage(entities);
     }
 
     private PriceSpurtsWebPage getPriceSpurtsWebPage(List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities) {
