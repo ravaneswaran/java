@@ -11,8 +11,9 @@ public class StockMarketDate {
     private static final Logger LOGGER = Logger.getLogger(StockMarketDate.class.getName());
     private static StockMarketDate STOCK_MARKET_DATE_INSTANCE = null;
 
-    private final long regularSessionInMinutes;
+    private long regularSessionInMinutes;
     private Date businessDate;
+
 
     private StockMarketDate() throws ParseException {
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,6 +49,27 @@ public class StockMarketDate {
 
     public Date now() {
         return new Date();
+    }
+
+    public long getNumberOfMinutesElapsedFrom_09_15_To_13_30() {
+        try {
+            SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormatWitTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            Date now = this.now();
+            String dateWithoutTime = simpleDateFormatWithoutTime.format(now);
+            Date at0915 = simpleDateFormatWitTime.parse(String.format("%s 09:15:00", dateWithoutTime));
+            Date at1330 = simpleDateFormatWitTime.parse(String.format("%s 13:30:00", dateWithoutTime));
+
+            if (now.getTime() >= at0915.getTime() && now.getTime() <= at1330.getTime()) {
+                return now.getTime() - at0915.getTime();
+            } else {
+                return at1330.getTime() - at0915.getTime();
+            }
+        } catch (ParseException parseException) {
+            LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+            return 0L;
+        }
     }
 
     public Date moveNumberOfBusinessDaysInPast(int noOfDays) {

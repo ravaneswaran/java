@@ -4,8 +4,10 @@ import org.springframework.stereotype.Service;
 import rave.code.data.model.web.nse.NSEPriceSpurtDetailModel;
 import rave.code.data.model.web.nse.page.PriceSpurtsWebPage;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.tech.analysis.Candle;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,6 +52,11 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
             List<NSEPriceSpurtDetailModel> historyModels = new ArrayList<>();
             List<NSEPriceSpurtDetailEntity> histories = this.nsePriceSpurtDetailRepository.findBySymbol(symbol);
+            long noOfRegularSessionMinutes = StockMarketDate.getInstance().getNumberOfMinutesElapsedFrom_09_15_To_13_30();
+            DecimalFormat decimalFormat = new DecimalFormat();
+            decimalFormat.setMaximumFractionDigits(2);
+            double participationPercentage = (histories.size() * 1.0 / noOfRegularSessionMinutes) * 100;
+            nsePriceSpurtDetailModel.setBackgroundGradiantCss("background: linear-gradient(90deg, rgba(97, 242, 157, 1) 0%, rgba(0, 0, 0, 1) " + participationPercentage + "%, rgba(53, 56, 57, 1) 100%)");
             histories = histories.stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getCreatedDate)).toList();
 
             for (NSEPriceSpurtDetailEntity history : histories) {

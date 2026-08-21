@@ -11,6 +11,7 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
     private String minuteMomentumCss;
     private String at;
     private String ltpBackgroundCss;
+    private String backgroundGradiantCss;
     private List<NSEPriceSpurtDetailModel> history;
 
     public double getHighPrice() {
@@ -79,5 +80,13 @@ public class NSEPriceSpurtDetailModel extends NSEStockModel {
 
     public String getMinuteMomentumCss() {
         return this.minuteMomentumCss;
+    }
+
+    public String getBackgroundGradiantCss() {
+        return backgroundGradiantCss;
+    }
+
+    public void setBackgroundGradiantCss(String backgroundGradiantCss) {
+        this.backgroundGradiantCss = backgroundGradiantCss;
     }
 }
