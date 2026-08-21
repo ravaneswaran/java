@@ -6,6 +6,7 @@ import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.entity.nse.technical.NSEExponentialMovingAverageDetailEntity;
 import rave.code.entity.nse.technical.NSESimpleMovingAverageDetailEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.repository.nse.NSEDayPriceDetailRepository;
 import rave.code.repository.nse.NSEExponentialMovingAverageDetailRepository;
@@ -76,7 +77,7 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
                     } else {
                         LOGGER.info(String.format("updating the old Simple Moving Average for the stock %s", nseStockBaseEntity.getSymbol()));
                         nseSimpleMovingAverageDetailEntity.setNewEntity(false);
-                        nseSimpleMovingAverageDetailEntity.setModifiedDate(new Date());
+                        nseSimpleMovingAverageDetailEntity.setModifiedDate(StockMarketDate.getInstance().now());
                     }
                     nseSimpleMovingAverageDetailEntity.setSMA5D(simpleMovingAverageFor5Days);
                     nseSimpleMovingAverageDetailEntity.setSMA10D(simpleMovingAverageFor10Days);
@@ -93,7 +94,7 @@ public class NSEXXXMovingAverageDetailEntityMakerJob extends AbstractQuartzJob {
                     } else {
                         LOGGER.info(String.format("updating the old Exponential Moving Average for the stock %s", nseStockBaseEntity.getSymbol()));
                         nseExponentialMovingAverageDetailEntity.setNewEntity(false);
-                        nseExponentialMovingAverageDetailEntity.setModifiedDate(new Date());
+                        nseExponentialMovingAverageDetailEntity.setModifiedDate(StockMarketDate.getInstance().now());
                     }
                     nseExponentialMovingAverageDetailEntity.setNseStockBaseEntity(nseStockBaseEntity);
                     nseExponentialMovingAverageDetailEntity.setEMA5D(exponentialMovingAverageFor5Days);

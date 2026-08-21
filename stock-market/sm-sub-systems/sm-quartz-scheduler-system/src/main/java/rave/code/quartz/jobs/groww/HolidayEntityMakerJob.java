@@ -4,6 +4,7 @@ import org.quartz.JobExecutionException;
 import rave.code.data.model.web.external.groww.HolidayModel;
 import rave.code.data.parser.html.groww.HolidayListParser;
 import rave.code.entity.groww.HolidayEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.jobs.AbstractWebPageEntityMakerJob;
 import rave.code.repository.groww.HolidayRepository;
 import rave.code.utility.log.JavaUtilLogDecor;
@@ -36,7 +37,7 @@ public class HolidayEntityMakerJob extends AbstractWebPageEntityMakerJob<Holiday
             entity.setHoliday(growwHolidayModel.getDay());
             entity.setDescription(growwHolidayModel.getDescription());
 
-            Date toDate = new Date();
+            Date toDate = StockMarketDate.getInstance().now();
             entity.setCreatedDate(toDate);
             entity.setModifiedDate(toDate);
             entity.setCreatedBy("SYSTEM");

@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import rave.code.entity.quartz.QuartzJobDetailEntity;
 import rave.code.entity.quartz.QuartzTriggerEntity;
 import rave.code.entity.quartz.id.QuartzTriggerId;
+import rave.code.java.date.StockMarketDate;
 
 import java.util.Date;
 
@@ -27,7 +28,7 @@ public class TestQuartzTrigger extends TestCase {
     public static QuartzTriggerEntity createQuartzTriggerEntity(){
         QuartzTriggerId quartzTriggerId = new QuartzTriggerId();
         quartzTriggerId.setTriggerGroup("BLOB_TRIGGERS");
-        quartzTriggerId.setTriggerName("TEST_BLOB_TRIGGER_"+new Date().getTime());
+        quartzTriggerId.setTriggerName("TEST_BLOB_TRIGGER_"+ StockMarketDate.getInstance().now().getTime());
         quartzTriggerId.setSchedulerName("STOCK_MARKET_SCHEDULER");
 
         QuartzTriggerEntity quartzTriggerEntity = new QuartzTriggerEntity();

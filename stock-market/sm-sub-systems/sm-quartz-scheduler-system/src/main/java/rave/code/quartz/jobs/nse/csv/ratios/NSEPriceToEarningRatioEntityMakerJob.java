@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.nse.csv.ratios;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEPriceToEarningRatioDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.process.SubProcess;
 import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEPriceToEarningRatioDetailRepository;
@@ -30,7 +31,7 @@ public class NSEPriceToEarningRatioEntityMakerJob extends AbstractNSECSVEntityMa
     public NSEPriceToEarningRatioEntityMakerJob() {
         super("");
         this.setDownloadPageUrl("https://www.nseindia.com/all-reports");
-        this.initialize(new Date());
+        this.initialize(StockMarketDate.getInstance().now());
     }
 
     private void initialize(Date date) {

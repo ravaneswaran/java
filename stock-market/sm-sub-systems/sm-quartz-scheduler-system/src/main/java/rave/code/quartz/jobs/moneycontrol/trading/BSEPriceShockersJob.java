@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.trading;
 import rave.code.data.model.web.external.moneycontrol.PriceShockerModel;
 import rave.code.data.parser.html.moneycontrol.BSEPriceShockersParser;
 import rave.code.entity.bse.BSEPriceShockerEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSEPriceShockerRepository;
 
 import java.text.NumberFormat;
@@ -172,7 +173,7 @@ public class BSEPriceShockersJob extends AbstractTradingEntityMakerJob<PriceShoc
                 bsePriceShockerEntity.setDisplacedMovingAverage200D(String.valueOf(0.00));
             }
 
-            Date toDate = new Date();
+            Date toDate = StockMarketDate.getInstance().now();
             bsePriceShockerEntity.setCreatedDate(toDate);
             bsePriceShockerEntity.setModifiedDate(toDate);
             bsePriceShockerEntity.setCreatedBy("SYSTEM");

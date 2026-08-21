@@ -2,6 +2,7 @@ package rave.code.repository.bse;
 
 import junit.framework.TestCase;
 import rave.code.entity.bse.BSETopDividendEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSETopDividendRepository;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ public class TestBSETopDividendRepository extends TestCase {
     public void testSaveMethod() {
         BSETopDividendEntity bseTopDividendEntity = new BSETopDividendEntity();
 
-        bseTopDividendEntity.setStockName("test-company-" + new Date().getTime());
+        bseTopDividendEntity.setStockName("test-company-" + StockMarketDate.getInstance().now().getTime());
         bseTopDividendEntity.setLastPrice("23");
 
         bseTopDividendEntity.setLatestDividendPercentage("4");
@@ -19,7 +20,7 @@ public class TestBSETopDividendRepository extends TestCase {
         bseTopDividendEntity.setDividendYieldPercentage52Low("32");
         bseTopDividendEntity.setDividendYieldPercentageAtCurrent("23");
 
-        Date toDate = new Date();
+        Date toDate = StockMarketDate.getInstance().now();
         bseTopDividendEntity.setCreatedDate(toDate);
         bseTopDividendEntity.setModifiedDate(toDate);
         bseTopDividendEntity.setCreatedBy("SYSTEM");

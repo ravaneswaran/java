@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.nse.csv.bhavcopy;
 import rave.code.entity.nse.NSEDayPriceLastRunDetailEntity;
 import rave.code.entity.nse.csv.NSEDayPriceDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.process.SubProcess;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.enums.NSEStockClassification;
@@ -41,7 +42,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
     List<Date> dates = new ArrayList<>();
 
     public NSEDayPriceDetailEntityMakerJob() {
-        this(new Date());
+        this(StockMarketDate.getInstance().now());
     }
 
     public NSEDayPriceDetailEntityMakerJob(Date date) {
@@ -177,7 +178,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
             nseDayPriceDetailEntity.setTrades(lineDetails[13].trim());
             nseDayPriceDetailEntity.setHigh52Week(lineDetails[14].trim());
             nseDayPriceDetailEntity.setLow52Week(lineDetails[15].trim());
-            Date now = new Date();
+            Date now = StockMarketDate.getInstance().now();
             nseDayPriceDetailEntity.setCreatedDate(now);
             nseDayPriceDetailEntity.setModifiedDate(now);
             nseDayPriceDetailEntity.setCreatedBy("SYSTEM");
@@ -235,7 +236,7 @@ public class NSEDayPriceDetailEntityMakerJob extends AbstractCSVEntityMakerJob<L
 
     private void updateLastRun(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date now = new Date();
+        Date now = StockMarketDate.getInstance().now();
         NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = this.nseDayPriceLastRunDetailRepository.find();
         if (null == nseDayPriceLastRunDetailEntity) {
             nseDayPriceLastRunDetailEntity = new NSEDayPriceLastRunDetailEntity();

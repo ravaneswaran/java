@@ -1,5 +1,7 @@
 package rave.code.entity;
 
+import rave.code.java.date.StockMarketDate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,7 +23,7 @@ public class AbstractEntity implements Serializable {
     protected boolean newEntity;
 
     public AbstractEntity(){
-        Date now = new Date();
+        Date now = StockMarketDate.getInstance().now();
         this.setCreatedDate(now);
         this.setModifiedDate(now);
         this.setCreatedBy("SYSTEM");

@@ -1,6 +1,7 @@
 package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSETop20DetailEntity;
+import rave.code.java.date.StockMarketDate;
 
 import javax.persistence.criteria.*;
 import java.text.ParseException;
@@ -21,7 +22,7 @@ public class NSETop20DetailRepository extends AbstractNSERepositoryManager<NSETo
     public NSETop20DetailRepository() {
         super(NSETop20DetailEntity.class);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String nowString = simpleDateFormat.format(new Date());
+        String nowString = simpleDateFormat.format(StockMarketDate.getInstance().now());
         String nowStringWithOutTime = nowString.split(" ")[0];
         String today_SOS_At_09_15 = String.format("%s %s", nowStringWithOutTime, "09:15:00");
         String today_Noon_At_13_30 = String.format("%s %s", nowStringWithOutTime, "13:30:00");

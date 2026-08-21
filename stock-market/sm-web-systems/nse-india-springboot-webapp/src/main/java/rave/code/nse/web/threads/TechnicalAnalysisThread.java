@@ -1,5 +1,7 @@
 package rave.code.nse.web.threads;
 
+import rave.code.java.date.StockMarketDate;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +25,7 @@ public class TechnicalAnalysisThread<T> extends Thread {
     @Override
     public void run() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
-        System.out.println(String.format("<<<<<<<<<<<<< TechnicalAnalysisThread Created at %s with items count(%s) >>>>>>>>>>>", simpleDateFormat.format(new Date()), this.sourceData.size()));
+        System.out.println(String.format("<<<<<<<<<<<<< TechnicalAnalysisThread Created at %s with items count(%s) >>>>>>>>>>>", simpleDateFormat.format(StockMarketDate.getInstance().now()), this.sourceData.size()));
     }
 
     public static void main(String[] args) {

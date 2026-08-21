@@ -1,5 +1,7 @@
 package rave.code.java.http.client;
 
+import rave.code.java.date.StockMarketDate;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.CookieManager;
@@ -46,7 +48,7 @@ public abstract class AbstractStockMarketHttpClient {
     }
 
     public HttpResponse<Path> pathResponseOf(String url) {
-        String fileName = String.format("downloaded-file-%s.csv", new Date().getTime());
+        String fileName = String.format("downloaded-file-%s.csv", StockMarketDate.getInstance().now().getTime());
         Path destination = Paths.get(fileName);
         HttpRequest request = this.buildHttpRequest(url);
         try {

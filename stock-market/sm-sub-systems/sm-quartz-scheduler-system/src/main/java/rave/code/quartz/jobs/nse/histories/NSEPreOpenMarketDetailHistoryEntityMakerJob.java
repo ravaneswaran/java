@@ -5,6 +5,7 @@ import org.quartz.JobExecutionException;
 import rave.code.entity.nse.csv.NSEPreOpenMarketDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
 import rave.code.entity.nse.histories.NSEPreOpenMarketDetailHistoryEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.jobs.AbstractQuartzJob;
 import rave.code.repository.nse.NSEPreOpenMarketDetailHistoryRepository;
 import rave.code.repository.nse.NSEPreOpenMarketDetailRepository;
@@ -27,7 +28,7 @@ public class NSEPreOpenMarketDetailHistoryEntityMakerJob extends AbstractQuartzJ
         NSEPreOpenMarketDetailRepository nsePreOpenMarketDetailRepository = new NSEPreOpenMarketDetailRepository();
         NSEPreOpenMarketDetailHistoryRepository nsePreOpenMarketDetailHistoryRepository = new NSEPreOpenMarketDetailHistoryRepository();
         /*Date today = getDate();*/
-        List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = nsePreOpenMarketDetailRepository.findEntitiesOnADay(new Date());
+        List<NSEPreOpenMarketDetailEntity> nsePreOpenMarketDetailEntities = nsePreOpenMarketDetailRepository.findEntitiesOnADay(StockMarketDate.getInstance().now());
         List<NSEPreOpenMarketDetailHistoryEntity> historyEntities = new ArrayList<>();
         LOGGER.info(String.format("Total number of symbol is %s...", nsePreOpenMarketDetailEntities.size()));
         int size = nsePreOpenMarketDetailEntities.size();
@@ -60,7 +61,7 @@ public class NSEPreOpenMarketDetailHistoryEntityMakerJob extends AbstractQuartzJ
         try {
             return simpleDateFormat.parse("2026-08-13");
         } catch (ParseException e) {
-            return new Date();
+            return StockMarketDate.getInstance().now();
         }
     }
 

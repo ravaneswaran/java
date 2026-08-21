@@ -5,6 +5,7 @@ import org.quartz.JobExecutionException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.java.system.StockMarketSystemProperties;
 import rave.code.quartz.config.mail.ThymeleafMailConfiguration;
 import rave.code.quartz.jobs.AbstractQuartzJob;
@@ -32,11 +33,11 @@ public class NSEDailyTradeDetailsMailerJob extends AbstractQuartzJob {
 
         List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities = this.nsePriceSpurtDetailRepository.findAll();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String mailSubject = String.format("Stock Market : %s - %s", simpleDateFormat.format(new Date()), System.getProperty("nse.daily.tradeable.stock.details.subject"));
+        String mailSubject = String.format("Stock Market : %s - %s", simpleDateFormat.format(StockMarketDate.getInstance().now()), System.getProperty("nse.daily.tradeable.stock.details.subject"));
 
         Context context = new Context();
         context.setVariable("nseDailyTradeDetailMailerModels", this.transformSourceData(nsePriceSpurtDetailEntities));
-        context.setVariable("today", simpleDateFormat.format(new Date()));
+        context.setVariable("today", simpleDateFormat.format(StockMarketDate.getInstance().now()));
 
         ThymeleafMailConfiguration thymeleafMailConfiguration = new ThymeleafMailConfiguration();
         TemplateEngine templateEngine = thymeleafMailConfiguration.mailTemplateEngine();
@@ -88,8 +89,8 @@ public class NSEDailyTradeDetailsMailerJob extends AbstractQuartzJob {
     public static void sampleData(List<NSEDailyTradeDetailMailerModel> nseDailyTradeDetailMailerModels){
         NSEDailyTradeDetailMailerModel nseDailyTradeDetailMailerModel = new NSEDailyTradeDetailMailerModel();
 
-        nseDailyTradeDetailMailerModel.setId(String.valueOf(new Date().getTime()));
-        nseDailyTradeDetailMailerModel.setStockBaseId(String.valueOf(new Date().getTime()));
+        nseDailyTradeDetailMailerModel.setId(String.valueOf(StockMarketDate.getInstance().now().getTime()));
+        nseDailyTradeDetailMailerModel.setStockBaseId(String.valueOf(StockMarketDate.getInstance().now().getTime()));
         nseDailyTradeDetailMailerModel.setSymbol("ASKNOW");
         nseDailyTradeDetailMailerModel.setOpenPrice(50.50);
         nseDailyTradeDetailMailerModel.setHighPrice(52.75);

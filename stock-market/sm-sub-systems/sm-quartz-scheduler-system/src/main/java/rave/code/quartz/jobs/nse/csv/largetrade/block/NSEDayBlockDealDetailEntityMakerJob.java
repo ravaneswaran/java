@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.nse.csv.largetrade.block;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEDayBlockDealDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.jobs.nse.csv.largetrade.AbstractNSECSVLargeTradeEntityMakerJob;
 import rave.code.repository.nse.NSEDayBlockDealDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
@@ -44,7 +45,7 @@ public class NSEDayBlockDealDetailEntityMakerJob extends AbstractNSECSVLargeTrad
             CSVRecord header = sourceData.remove(0);
             LOGGER.log(Level.INFO, String.format("Skipping the header[%s]... ", header.toString()));
         }
-        Date now = new Date();
+        Date now = StockMarketDate.getInstance().now();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         String nowAsStr = simpleDateFormat.format(now);
         for (CSVRecord csvRecord : sourceData) {

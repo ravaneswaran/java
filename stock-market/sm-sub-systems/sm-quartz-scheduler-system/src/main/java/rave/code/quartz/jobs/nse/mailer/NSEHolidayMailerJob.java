@@ -5,6 +5,7 @@ import org.quartz.JobExecutionException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import rave.code.entity.groww.HolidayEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.java.system.StockMarketSystemProperties;
 import rave.code.quartz.config.mail.ThymeleafMailConfiguration;
 import rave.code.quartz.jobs.AbstractQuartzJob;
@@ -26,7 +27,7 @@ public class NSEHolidayMailerJob extends AbstractQuartzJob {
     @Override
     public void executeJob(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        Date toDate = new Date();
+        Date toDate = StockMarketDate.getInstance().now();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM dd, YYYY");
         String formattedToDate = simpleDateFormat.format(toDate);
         String mailSubject = System.getProperty("nse.holiday.remainder.mail.subject");

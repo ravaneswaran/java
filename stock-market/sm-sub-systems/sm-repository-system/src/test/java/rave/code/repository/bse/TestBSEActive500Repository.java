@@ -2,6 +2,7 @@ package rave.code.repository.bse;
 
 import junit.framework.TestCase;
 import rave.code.entity.bse.BSEActive500Entity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSEActive500Repository;
 
 import java.util.Date;
@@ -11,14 +12,14 @@ public class TestBSEActive500Repository extends TestCase {
     public void testSaveMethod() {
         BSEActive500Entity bseActive500Entity = new BSEActive500Entity();
 
-        bseActive500Entity.setStockName("test-company" + new Date().getTime());
+        bseActive500Entity.setStockName("test-company" + StockMarketDate.getInstance().now().getTime());
         bseActive500Entity.setHigh("20");
         bseActive500Entity.setLow("10");
         bseActive500Entity.setCategory("some-category");
         bseActive500Entity.setLastPrice("34.5");
         bseActive500Entity.setPercentageChange("2.1");
         bseActive500Entity.setValueInCrores("23");
-        Date toDate = new Date();
+        Date toDate = StockMarketDate.getInstance().now();
         bseActive500Entity.setCreatedDate(toDate);
         bseActive500Entity.setModifiedDate(toDate);
         bseActive500Entity.setCreatedBy("SYSTEM");

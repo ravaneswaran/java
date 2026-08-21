@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.nse.csv.shorts;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEDayShortSellDetailEntity;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEDayShortSellDetailRepository;
 import rave.code.repository.nse.NSEStockBaseRepository;
@@ -36,7 +37,7 @@ public class NSEDayShortSellDetailEntityMakerJob extends AbstractNSECSVEntityMak
     private void initialize(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate toLocalDate = LocalDate.parse(simpleDateFormat.format(new Date()), formatter);
+        LocalDate toLocalDate = LocalDate.parse(simpleDateFormat.format(StockMarketDate.getInstance().now()), formatter);
         Date toDate = Date.from(toLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
         String toDateStr = simpleDateFormat.format(toDate);
         this.setCsvDownloadUrl(String.format(this.csvDownloadUrl, toDateStr, toDateStr));

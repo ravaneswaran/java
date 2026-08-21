@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.investing;
 import rave.code.data.model.web.external.moneycontrol.CapitalGainerModel;
 import rave.code.data.parser.html.moneycontrol.BSESmallCapGainersParser;
 import rave.code.entity.bse.BSESmallCapGainerEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSESmallCapGainerRepository;
 
 import java.text.NumberFormat;
@@ -180,7 +181,7 @@ public class BSESmallCapGainerJob extends AbstractInvestingEntityMakerJob<Capita
                     moneyControlBSESmallCapGainerEntity.setVolumeWeightedAveragePrice(String.valueOf(0.00));
                 }
 
-                Date toDate = new Date();
+                Date toDate = StockMarketDate.getInstance().now();
                 moneyControlBSESmallCapGainerEntity.setCreatedDate(toDate);
                 moneyControlBSESmallCapGainerEntity.setModifiedDate(toDate);
                 moneyControlBSESmallCapGainerEntity.setCreatedBy("SYSTEM");

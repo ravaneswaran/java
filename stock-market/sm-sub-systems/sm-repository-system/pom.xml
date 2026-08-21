@@ -76,6 +76,12 @@
             <version>${hibernate-entitymanager.version}</version>
         </dependency>
         <dependency>
+            <groupId>rave.code.java.stock-market.sm-sub-systems</groupId>
+            <artifactId>sm-utility-system</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.6.18.Final</version>

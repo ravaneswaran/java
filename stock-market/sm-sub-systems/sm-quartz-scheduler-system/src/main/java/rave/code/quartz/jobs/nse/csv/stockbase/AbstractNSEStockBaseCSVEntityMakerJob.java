@@ -2,6 +2,7 @@ package rave.code.quartz.jobs.nse.csv.stockbase;
 
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.nse.csv.NSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.enums.ASCIIColorCodes;
 import rave.code.quartz.jobs.nse.csv.AbstractNSECSVEntityMakerJob;
 import rave.code.repository.nse.NSEStockBaseRepository;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
 
 public abstract class AbstractNSEStockBaseCSVEntityMakerJob extends AbstractNSECSVEntityMakerJob<List<NSEStockBaseEntity>> {
 
-    protected Date toDate = new Date();
+    protected Date toDate = StockMarketDate.getInstance().now();
     protected NSEStockBaseRepository nseStockBaseRepository = new NSEStockBaseRepository();
 
     private static final Logger LOGGER = Logger.getLogger(AbstractNSEStockBaseCSVEntityMakerJob.class.getName());

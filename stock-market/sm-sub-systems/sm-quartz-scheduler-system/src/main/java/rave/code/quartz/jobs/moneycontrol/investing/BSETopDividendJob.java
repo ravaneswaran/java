@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.investing;
 import rave.code.data.model.web.external.moneycontrol.DividendModel;
 import rave.code.data.parser.html.moneycontrol.BSETopDividendParser;
 import rave.code.entity.bse.BSETopDividendEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSETopDividendRepository;
 
 import java.text.NumberFormat;
@@ -75,7 +76,7 @@ public class BSETopDividendJob extends AbstractInvestingEntityMakerJob<DividendM
                     moneyControlBSETopDividendEntity.setDividendYieldPercentageAtCurrent(String.valueOf(0.00));
                 }
 
-                Date toDate = new Date();
+                Date toDate = StockMarketDate.getInstance().now();
                 moneyControlBSETopDividendEntity.setCreatedDate(toDate);
                 moneyControlBSETopDividendEntity.setModifiedDate(toDate);
                 moneyControlBSETopDividendEntity.setCreatedBy("SYSTEM");

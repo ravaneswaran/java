@@ -1,6 +1,7 @@
 package rave.code.quartz.jobs.bse.csv.stockbase;
 
 import rave.code.entity.bse.csv.BSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.enums.ASCIIColorCodes;
 import rave.code.quartz.jobs.AbstractCSVEntityMakerJob;
 import rave.code.repository.bse.BSEStockBaseRepository;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
 public class AbstractBSEStockBaseCSVEntityMakerJob extends AbstractCSVEntityMakerJob<List<String>, List<BSEStockBaseEntity>> {
 
     protected BSEStockBaseRepository bseStockBaseRepository = new BSEStockBaseRepository();
-    protected Date toDate = new Date();
+    protected Date toDate = StockMarketDate.getInstance().now();
 
     private static final Logger LOGGER = Logger.getLogger(AbstractBSEStockBaseCSVEntityMakerJob.class.getName());
 

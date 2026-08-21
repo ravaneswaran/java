@@ -1,5 +1,6 @@
 package rave.code.quartz.jobs.nse.csv.largetrade.block;
 
+import rave.code.java.date.StockMarketDate;
 import rave.code.utility.log.JavaUtilLogDecor;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ public class HistoricalNSEBlockDealDetailEntityMakerJob extends NSEDayBlockDealD
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate fromLocalDate = LocalDate.parse(simpleDateFormat.format(new Date()), formatter).minusDays(10);
+        LocalDate fromLocalDate = LocalDate.parse(simpleDateFormat.format(StockMarketDate.getInstance().now()), formatter).minusDays(10);
 
         Date fromDateStart = Date.from(fromLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 

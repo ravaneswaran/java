@@ -1,6 +1,7 @@
 package rave.code.java.http.client.nse;
 
 import org.brotli.dec.BrotliInputStream;
+import rave.code.java.date.StockMarketDate;
 import rave.code.java.http.client.AbstractStockMarketHttpClient;
 
 import java.io.ByteArrayInputStream;
@@ -34,7 +35,7 @@ public abstract class AbstractNationalStockExchangeHttpClient extends AbstractSt
     }
 
     public File getFile(String url) throws IOException, InterruptedException {
-        String fileName = String.format("downloaded-file-%s.csv", new Date().getTime());
+        String fileName = String.format("downloaded-file-%s.csv", StockMarketDate.getInstance().now().getTime());
         HttpResponse<InputStream> response = this.inputStreamResponseOf(url);
         if (response.statusCode() == 200) {
             byte[] body = response.body().readAllBytes();

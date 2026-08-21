@@ -1,5 +1,7 @@
 package rave.code.entity.nse.csv;
 
+import rave.code.java.date.StockMarketDate;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -42,7 +44,7 @@ public class NSEPreOpenMarketDetailEntity extends AbstractNSECSVEntity {
 
     public NSEPreOpenMarketDetailEntity(){
         this.setId(UUID.randomUUID().toString());
-        this.setBusinessDate(new Date());
+        this.setBusinessDate(StockMarketDate.getInstance().now());
     }
 
     public NSEStockBaseEntity getNseStockBaseEntity() {

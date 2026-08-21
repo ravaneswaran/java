@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.misc;
 import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 import rave.code.data.parser.html.moneycontrol.BSESensexParser;
 import rave.code.entity.bse.BSESensexEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.jobs.moneycontrol.AbstractMoneyControlEntityMakerJob;
 import rave.code.repository.bse.BSESensexRepository;
 
@@ -186,7 +187,7 @@ public class BSESensexJob extends AbstractMoneyControlEntityMakerJob<BSEGenericA
                 bseSensexEntity.setDisplacedMovingAverage200D(String.valueOf(0.00));
             }
 
-            Date toDate = new Date();
+            Date toDate = StockMarketDate.getInstance().now();
             bseSensexEntity.setCreatedDate(toDate);
             bseSensexEntity.setModifiedDate(toDate);
             bseSensexEntity.setCreatedBy("SYSTEM");

@@ -3,6 +3,7 @@ package rave.code.repository.quartz;
 import junit.framework.TestCase;
 import rave.code.entity.quartz.QuartzJobDetailEntity;
 import rave.code.entity.quartz.id.QuartzJobDetailId;
+import rave.code.java.date.StockMarketDate;
 
 import java.util.Date;
 
@@ -20,13 +21,13 @@ public class TestQuartzJobDetail extends TestCase {
 
         QuartzJobDetailId quartzJobDetailId = new QuartzJobDetailId();
         quartzJobDetailId.setSchedulerName("STOCK_MARKET_SCHEDULER");
-        quartzJobDetailId.setJobName("TEST_JOB_"+new Date().getTime());
+        quartzJobDetailId.setJobName("TEST_JOB_"+ StockMarketDate.getInstance().now().getTime());
         quartzJobDetailId.setJobGroup("TEST_JOBS");
 
         QuartzJobDetailEntity quartzJobDetailEntity = new QuartzJobDetailEntity();
         quartzJobDetailEntity.setQuartzJobDetailId(quartzJobDetailId);
         quartzJobDetailEntity.setDescription("TEST_DESCRIPTION");
-        quartzJobDetailEntity.setJobClassName("TestClass_"+new Date().getTime());
+        quartzJobDetailEntity.setJobClassName("TestClass_"+StockMarketDate.getInstance().now().getTime());
         quartzJobDetailEntity.setIsDurable("1");
         quartzJobDetailEntity.setIsNonConcurrent("0");
         quartzJobDetailEntity.setIsUpdateData("0");

@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.bse.csv.bhavcopy;
 import org.apache.commons.csv.CSVRecord;
 import rave.code.entity.bse.csv.BSEDayPriceDetailEntity;
 import rave.code.entity.bse.csv.BSEStockBaseEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.quartz.enums.DailyPriceListDownloadLink;
 import rave.code.quartz.jobs.AbstractEntityMakerJob;
 import rave.code.repository.bse.BSEDayPriceDetailRepository;
@@ -35,7 +36,7 @@ public class BSEDayPriceDetailEntityMakerJob extends AbstractEntityMakerJob<List
     private Date date;
 
     public BSEDayPriceDetailEntityMakerJob() {
-        this(new Date());
+        this(StockMarketDate.getInstance().now());
     }
 
     public BSEDayPriceDetailEntityMakerJob(Date date) {

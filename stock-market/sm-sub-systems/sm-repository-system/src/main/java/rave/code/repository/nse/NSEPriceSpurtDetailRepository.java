@@ -1,6 +1,7 @@
 package rave.code.repository.nse;
 
 import rave.code.entity.nse.csv.NSEPriceSpurtDetailEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.utility.log.message.JavaUtilLogMessage;
 
 import javax.persistence.criteria.*;
@@ -27,19 +28,19 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
     }
 
     public List<NSEPriceSpurtDetailEntity> findDistinctNSEPricePriceSpurtDetails() {
-        return this.findByDate(new Date());
+        return this.findByDate(StockMarketDate.getInstance().now());
     }
 
     public List<NSEPriceSpurtDetailEntity> findDistinctNSEPricePriceSpurtDetailsByOpenPriceRange(int lowerOpenPrice, int upperOpenPrice) {
-        return this.findByOpenPriceRangeAndDate(lowerOpenPrice, upperOpenPrice, new Date());
+        return this.findByOpenPriceRangeAndDate(lowerOpenPrice, upperOpenPrice, StockMarketDate.getInstance().now());
     }
 
     public List<NSEPriceSpurtDetailEntity> findDistinctNSEPriceSpurtDetailsByPercentageChange(int lowerPercentageChange, int upperPercentageChange) {
-        return this.findByPercentageChangeRangeAndDate(lowerPercentageChange, upperPercentageChange, new Date());
+        return this.findByPercentageChangeRangeAndDate(lowerPercentageChange, upperPercentageChange, StockMarketDate.getInstance().now());
     }
 
     public List<NSEPriceSpurtDetailEntity> findBySymbol(String symbol) {
-        return this.findBySymbolAndDate(symbol, new Date());
+        return this.findBySymbolAndDate(symbol, StockMarketDate.getInstance().now());
     }
 
     /**
@@ -77,7 +78,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
      * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
      **/
     public List<NSEPriceSpurtDetailEntity> findByOpenPriceRangeAndDate(int lowerOpenPrice, int upperOpenPrice, Date date) {
-        date = (date == null) ? new Date() : date;
+        date = (date == null) ? StockMarketDate.getInstance().now() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
@@ -109,7 +110,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
      * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
      **/
     public List<NSEPriceSpurtDetailEntity> findByPercentageChangeRangeAndDate(int lowerPercentageChange, int upperPercentageChange, Date date) {
-        date = (date == null) ? new Date() : date;
+        date = (date == null) ? StockMarketDate.getInstance().now() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         String toDateString = simpleDateFormatWithoutTime.format(date);
 
@@ -145,7 +146,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
      * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
      **/
     public List<NSEPriceSpurtDetailEntity> findByPriceDifferenceAndDate(int priceDifference, Date date) {
-        date = (date == null) ? new Date() : date;
+        date = (date == null) ? StockMarketDate.getInstance().now() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleDateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String toDateString = simpleDateFormatWithoutTime.format(date);
@@ -206,7 +207,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
      * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
      **/
     public List<NSEPriceSpurtDetailEntity> findBySymbolAndDate(String symbol, Date date) {
-        date = (date == null) ? new Date() : date;
+        date = (date == null) ? StockMarketDate.getInstance().now() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleDateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String toDateString = simpleDateFormatWithoutTime.format(date);

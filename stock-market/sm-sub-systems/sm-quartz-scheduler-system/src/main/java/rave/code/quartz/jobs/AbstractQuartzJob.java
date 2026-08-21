@@ -4,6 +4,7 @@ import org.hibernate.dialect.pagination.LegacyOracleLimitHandler;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import rave.code.java.date.StockMarketDate;
 import rave.code.process.AbstractSubProcess;
 import rave.code.process.SubProcess;
 import rave.code.utility.log.message.JavaUtilLogMessage;
@@ -23,9 +24,9 @@ public abstract class AbstractQuartzJob extends AbstractSubProcess implements Jo
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        Date startTime = new Date();
+        Date startTime = StockMarketDate.getInstance().now();
         this.executeJob(context);
-        Date endTime = new Date();
+        Date endTime = StockMarketDate.getInstance().now();
         this.getLogger().info(this.printJobStat(startTime, endTime));
     }
 

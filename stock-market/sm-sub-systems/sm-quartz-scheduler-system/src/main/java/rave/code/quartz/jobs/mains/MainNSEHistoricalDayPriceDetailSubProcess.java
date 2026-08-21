@@ -1,6 +1,7 @@
 package rave.code.quartz.jobs.mains;
 
 import rave.code.entity.nse.NSEDayPriceLastRunDetailEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.process.SubProcessor;
 import rave.code.quartz.jobs.nse.csv.bhavcopy.NSEDayPriceDetailEntityMakerJob;
 import rave.code.repository.nse.NSEDayPriceLastRunDetailRepository;
@@ -74,7 +75,7 @@ public class MainNSEHistoricalDayPriceDetailSubProcess {
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        Date now = new Date();
+        Date now = StockMarketDate.getInstance().now();
         String nowAsString = simpleDateFormat.format(now);
         NSEDayPriceLastRunDetailRepository nseDayPriceLastRunDetailRepository = new NSEDayPriceLastRunDetailRepository();
         NSEDayPriceLastRunDetailEntity nseDayPriceLastRunDetailEntity = nseDayPriceLastRunDetailRepository.find();

@@ -3,6 +3,7 @@ package rave.code.quartz.jobs.moneycontrol.investing;
 import rave.code.data.model.web.external.moneycontrol.CapitalGainerModel;
 import rave.code.data.parser.html.moneycontrol.BSEMidCapGainersParser;
 import rave.code.entity.bse.BSEMidCapGainerEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSEMidCapGainerRepository;
 
 import java.text.NumberFormat;
@@ -181,7 +182,7 @@ public class BSEMidCapGainerJob extends AbstractInvestingEntityMakerJob<CapitalG
                     moneyControlBSEMidCapGainerEntity.setVolumeWeightedAveragePrice(String.valueOf(0.00));
                 }
 
-                Date toDate = new Date();
+                Date toDate = StockMarketDate.getInstance().now();
                 moneyControlBSEMidCapGainerEntity.setCreatedDate(toDate);
                 moneyControlBSEMidCapGainerEntity.setModifiedDate(toDate);
                 moneyControlBSEMidCapGainerEntity.setCreatedBy("SYSTEM");

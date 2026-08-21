@@ -4,6 +4,7 @@ import org.quartz.DisallowConcurrentExecution;
 import rave.code.data.model.web.external.moneycontrol.BSEGenericActiveModel;
 import rave.code.data.parser.html.moneycontrol.BSEActive500Parser;
 import rave.code.entity.bse.BSEActive500Entity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSEActive500Repository;
 
 import java.text.NumberFormat;
@@ -194,7 +195,7 @@ public class BSEActive500Job extends AbstractTradingEntityMakerJob<BSEGenericAct
                 bseActive500Entity.setDisplacedMovingAverage200D(String.valueOf(0.00));
             }
 
-            Date toDate = new Date();
+            Date toDate = StockMarketDate.getInstance().now();
             bseActive500Entity.setCreatedDate(toDate);
             bseActive500Entity.setModifiedDate(toDate);
             bseActive500Entity.setCreatedBy("SYSTEM");

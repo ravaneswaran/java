@@ -2,6 +2,7 @@ package rave.code.repository.bse;
 
 import junit.framework.TestCase;
 import rave.code.entity.bse.BSEVolumeShockerEntity;
+import rave.code.java.date.StockMarketDate;
 import rave.code.repository.bse.BSEVolumeShockerRepository;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ public class TestBSEVolumeShockerRepository extends TestCase {
     public void testSaveMethod() {
         BSEVolumeShockerEntity bseVolumeShockerEntity = new BSEVolumeShockerEntity();
 
-        bseVolumeShockerEntity.setStockName("test-company" + new Date().getTime());
+        bseVolumeShockerEntity.setStockName("test-company" + StockMarketDate.getInstance().now().getTime());
         bseVolumeShockerEntity.setSector("some-sector");
         bseVolumeShockerEntity.setCategory("some-category");
         bseVolumeShockerEntity.setLastPrice("123");
@@ -29,7 +30,7 @@ public class TestBSEVolumeShockerRepository extends TestCase {
         bseVolumeShockerEntity.setLowerCircuit("45");
         bseVolumeShockerEntity.setVolumeWeightedAveragePrice("45");
 
-        Date toDate = new Date();
+        Date toDate = StockMarketDate.getInstance().now();
         bseVolumeShockerEntity.setCreatedDate(toDate);
         bseVolumeShockerEntity.setModifiedDate(toDate);
         bseVolumeShockerEntity.setCreatedBy("SYSTEM");
