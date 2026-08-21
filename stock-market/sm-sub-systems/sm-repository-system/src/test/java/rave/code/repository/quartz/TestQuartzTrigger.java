@@ -35,7 +35,7 @@ public class TestQuartzTrigger extends TestCase {
         quartzTriggerEntity.setQuartzTriggerId(quartzTriggerId);
         quartzTriggerEntity.setTriggerState("TEST_STATE");
         quartzTriggerEntity.setTriggerType("001");
-        quartzTriggerEntity.setStartTime(new Date().getTime());
+        quartzTriggerEntity.setStartTime(StockMarketDate.getInstance().now().getTime());
 
         return quartzTriggerEntity;
     }
