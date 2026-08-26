@@ -18,6 +18,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>sm-utility-system</module>
         <module>sm-table-generation-system</module>
         <module>sm-data-model-system</module>
         <module>sm-data-parser-system</module>
@@ -25,7 +26,6 @@
         <module>sm-quartz-scheduler-system</module>
         <module>sm-ai-system</module>
         <module>sm-technical-analysis-system</module>
-        <module>sm-utility-system</module>
     </modules>
 
 </project>

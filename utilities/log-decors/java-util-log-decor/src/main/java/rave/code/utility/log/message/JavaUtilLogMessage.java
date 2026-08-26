@@ -9,9 +9,9 @@ public class JavaUtilLogMessage {
     }
 
     public String getDecoratedLogMessage() {
-        int length = this.message.length();
+        //int length = this.message.length();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("| [[[**********     ").append(this.message).append("     **********]]] |");
+        stringBuilder.append(this.message);
         int modifiedLength = stringBuilder.toString().length();
 
         String topLine = this.line(modifiedLength);
@@ -33,7 +33,7 @@ public class JavaUtilLogMessage {
             if (i == 0 || i == length - 1) {
                 stringBuilder.append("+");
             } else {
-                stringBuilder.append("-");
+                stringBuilder.append("=");
             }
         }
         return stringBuilder.toString();

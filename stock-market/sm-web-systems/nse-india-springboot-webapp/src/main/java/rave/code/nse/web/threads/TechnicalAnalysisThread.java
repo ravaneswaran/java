@@ -25,7 +25,7 @@ public class TechnicalAnalysisThread<T> extends Thread {
     @Override
     public void run() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
-        System.out.println(String.format("<<<<<<<<<<<<< TechnicalAnalysisThread Created at %s with items count(%s) >>>>>>>>>>>", simpleDateFormat.format(StockMarketDate.getInstance().now()), this.sourceData.size()));
+        //System.out.println(String.format("<<<<<<<<<<<<< TechnicalAnalysisThread Created at %s with items count(%s) >>>>>>>>>>>", simpleDateFormat.format(StockMarketDate.getInstance().now()), this.sourceData.size()));
     }
 
     public static void main(String[] args) {

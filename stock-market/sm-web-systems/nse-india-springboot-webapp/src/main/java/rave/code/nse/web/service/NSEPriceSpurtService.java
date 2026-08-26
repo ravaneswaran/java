@@ -36,8 +36,11 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
     }
 
     public PriceSpurtsWebPage getPriceDifferenceWebPage(int priceDifference) {
-        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findByPriceDifferenceAndDate(priceDifference, null);
+        StockMarketDate stockMarketDate = StockMarketDate.getInstance();
+        //stockMarketDate.moveNumberOfBusinessDaysInPast(3);
+        List<NSEPriceSpurtDetailEntity> entities = this.nsePriceSpurtDetailRepository.findByPriceDifferenceAndDate(priceDifference, stockMarketDate.getBusinessDate());
         return this.getPriceSpurtsWebPage(entities);
+
     }
 
     private PriceSpurtsWebPage getPriceSpurtsWebPage(List<NSEPriceSpurtDetailEntity> nsePriceSpurtDetailEntities) {
@@ -52,10 +55,11 @@ public class NSEPriceSpurtService extends AbstractNSEPriceSpurtService<PriceSpur
 
             List<NSEPriceSpurtDetailModel> historyModels = new ArrayList<>();
             List<NSEPriceSpurtDetailEntity> histories = this.nsePriceSpurtDetailRepository.findBySymbol(symbol);
-            long noOfRegularSessionMinutes = StockMarketDate.getInstance().getNumberOfMinutesElapsedFrom_09_15_To_13_30();
+            long noOfRegularSessionMinutes = StockMarketDate.getInstance().getNumberOfMinutesElapsedSince_09_15();
             DecimalFormat decimalFormat = new DecimalFormat();
             decimalFormat.setMaximumFractionDigits(2);
             double participationPercentage = (histories.size() * 1.0 / noOfRegularSessionMinutes) * 100;
+            participationPercentage = Double.parseDouble(decimalFormat.format(participationPercentage));
             nsePriceSpurtDetailModel.setBackgroundGradiantCss("background: linear-gradient(90deg, rgba(97, 242, 157, 1) 0%, rgba(0, 0, 0, 1) " + participationPercentage + "%, rgba(53, 56, 57, 1) 100%)");
             histories = histories.stream().sorted(Comparator.comparing(NSEPriceSpurtDetailEntity::getCreatedDate)).toList();
 

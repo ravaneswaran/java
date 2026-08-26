@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import rave.code.java.date.StockMarketDate;
 import rave.code.java.system.StockMarketSystemProperties;
 import rave.code.utility.log.JavaUtilLogDecor;
 import rave.code.utility.log.message.JavaUtilLogMessage;
@@ -15,6 +16,8 @@ import java.util.logging.Logger;
 public class NSEIndiaSpringBootWebApplication extends SpringBootServletInitializer {
 
     private static final Logger LOGGER = Logger.getLogger(NSEIndiaSpringBootWebApplication.class.getName());
+
+    public static final StockMarketDate STOCK_MARKET_DATE = StockMarketDate.getInstance();
 
     public static void main(String[] args) {
         JavaUtilLogDecor.setupLogDecor();

@@ -11,9 +11,7 @@ public class StockMarketDate {
     private static final Logger LOGGER = Logger.getLogger(StockMarketDate.class.getName());
     private static StockMarketDate STOCK_MARKET_DATE_INSTANCE = null;
 
-    private long regularSessionInMinutes;
     private Date businessDate;
-
 
     private StockMarketDate() throws ParseException {
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
@@ -21,11 +19,6 @@ public class StockMarketDate {
 
         String toDateString = simpleDateFormatWithoutTime.format(new Date());
         this.businessDate = simpleDateFormatWitTime.parse(String.format("%s 00:00:00", toDateString));
-        String dateString = simpleDateFormatWithoutTime.format(this.businessDate);
-        Date startDate = simpleDateFormatWitTime.parse(String.format("%s 09:15:00", dateString));
-        Date endDate = simpleDateFormatWitTime.parse(String.format("%s 13:30:00", dateString));
-        long differenceMillis = endDate.getTime() - startDate.getTime();
-        this.regularSessionInMinutes = differenceMillis / (60 * 1000);
     }
 
     public static StockMarketDate getInstance() {
@@ -39,10 +32,6 @@ public class StockMarketDate {
         return STOCK_MARKET_DATE_INSTANCE;
     }
 
-    public long getRegularSessionInMinutes() {
-        return this.regularSessionInMinutes;
-    }
-
     public Date getBusinessDate() {
         return this.businessDate;
     }
@@ -51,20 +40,29 @@ public class StockMarketDate {
         return new Date();
     }
 
-    public long getNumberOfMinutesElapsedFrom_09_15_To_13_30() {
+    public void reset() {
+        this.businessDate = this.now();
+    }
+
+    public String getTime() {
+        SimpleDateFormat simpleDateFormatWithoutDate = new SimpleDateFormat("HH:mm:ss");
+        return simpleDateFormatWithoutDate.format(this.now());
+    }
+
+    public long getNumberOfMinutesElapsedSince_09_15() {
         try {
             SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat simpleDateFormatWitTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-            Date now = this.now();
+            Date now = simpleDateFormatWitTime.parse(String.format("%s %s", simpleDateFormatWithoutTime.format(this.businessDate), this.getTime()));
             String dateWithoutTime = simpleDateFormatWithoutTime.format(now);
             Date at0915 = simpleDateFormatWitTime.parse(String.format("%s 09:15:00", dateWithoutTime));
             Date at1330 = simpleDateFormatWitTime.parse(String.format("%s 13:30:00", dateWithoutTime));
 
             if (now.getTime() >= at0915.getTime() && now.getTime() <= at1330.getTime()) {
-                return now.getTime() - at0915.getTime();
+                return (now.getTime() - at0915.getTime()) / (60 * 1000);
             } else {
-                return at1330.getTime() - at0915.getTime();
+                return (at1330.getTime() - at0915.getTime()) / (60 * 1000);
             }
         } catch (ParseException parseException) {
             LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
@@ -72,22 +70,37 @@ public class StockMarketDate {
         }
     }
 
-    public Date moveNumberOfBusinessDaysInPast(int noOfDays) {
-        this.businessDate = new Date(this.businessDate.getTime() - ((long) noOfDays * 24 * 60 * 60 * 1000));
-        return this.businessDate;
+    public void moveNumberOfBusinessDaysInPast(int noOfDays) {
+        Date tempDate = new Date(this.businessDate.getTime() - ((long) noOfDays * 24 * 60 * 60 * 1000));
+        SimpleDateFormat onlyTime = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat onlyDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormatWitTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = onlyDate.format(tempDate);
+        String time = onlyTime.format(this.now());
+        String dateAndTime = String.format("%s %s",date, time);
+        try{
+            this.businessDate = simpleDateFormatWitTime.parse(dateAndTime);
+        } catch (ParseException parseException){
+            LOGGER.log(Level.SEVERE, parseException.getMessage(), parseException);
+        }
     }
 
     public static void main(String[] args) {
         StockMarketDate stockMarketDate = StockMarketDate.getInstance();
-        long noOfMinutes = stockMarketDate.getRegularSessionInMinutes();
+        SimpleDateFormat simpleDateFormatWitTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = stockMarketDate.now();
+        System.out.println(simpleDateFormatWitTime.format(now));
+        stockMarketDate.moveNumberOfBusinessDaysInPast(3);
+        System.out.println(simpleDateFormatWitTime.format(stockMarketDate.getBusinessDate()));
+
+       /*Date now = stockMarketDate.now();
         Date businessDate = stockMarketDate.getBusinessDate();
         Date dateInPast = stockMarketDate.moveNumberOfBusinessDaysInPast(10);
-        SimpleDateFormat simpleDateFormatWitTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormatWitTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
 
-        System.out.println(noOfMinutes);
+        /*System.out.println(stockMarketDate.getNumberOfMinutesElapsedSince_09_15());
         System.out.println(simpleDateFormatWitTime.format(now));
         System.out.println(simpleDateFormatWitTime.format(businessDate));
-        System.out.println(simpleDateFormatWitTime.format(dateInPast));
+        System.out.println(simpleDateFormatWitTime.format(dateInPast));*/
     }
 }

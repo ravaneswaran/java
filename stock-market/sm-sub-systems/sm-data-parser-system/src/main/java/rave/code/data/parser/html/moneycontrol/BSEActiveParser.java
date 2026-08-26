@@ -49,7 +49,6 @@ public class BSEActiveParser extends HTMLSourceParser<BSEGenericActiveModel> {
 
                     /*for (int i = 0; i < tableData.size() - 1; i++) {
                         String element = tableData.get(i).toString();
-                        System.out.println(i + " ================>>>>>>> " + element);
                         Elements companyNameAnchorElements = tableData.get(0).select("a");
                         String companyName = "COMPANY-NAME : SOURCE DATA ERROR";
                         if (companyNameAnchorElements.size() > 0) {

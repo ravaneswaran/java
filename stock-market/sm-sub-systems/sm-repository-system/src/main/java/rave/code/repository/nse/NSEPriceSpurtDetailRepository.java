@@ -40,7 +40,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
     }
 
     public List<NSEPriceSpurtDetailEntity> findBySymbol(String symbol) {
-        return this.findBySymbolAndDate(symbol, StockMarketDate.getInstance().now());
+        return this.findBySymbolAndDate(symbol, StockMarketDate.getInstance().getBusinessDate());
     }
 
     /**
@@ -146,7 +146,7 @@ public class NSEPriceSpurtDetailRepository extends AbstractNSERepositoryManager<
      * @return List of NSEPriceSpurtDetailEntity and returns empty list when the criteria based on the parameters does not match
      **/
     public List<NSEPriceSpurtDetailEntity> findByPriceDifferenceAndDate(int priceDifference, Date date) {
-        date = (date == null) ? StockMarketDate.getInstance().now() : date;
+        date = (date == null) ? StockMarketDate.getInstance().getBusinessDate() : date;
         SimpleDateFormat simpleDateFormatWithoutTime = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat simpleDateFormatWithTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String toDateString = simpleDateFormatWithoutTime.format(date);
